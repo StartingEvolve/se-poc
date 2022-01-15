@@ -17,5 +17,7 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [require('@tailwindcss/typography'), require('@tailwindcss/forms'), require('@tailwindcss/line-clamp')],
+  plugins: [require('@tailwindcss/typography'), require('@tailwindcss/forms')({
+    strategy: "class"
+  }), require('@tailwindcss/line-clamp')],
 }
