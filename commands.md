@@ -58,3 +58,13 @@ Add imports to styles.scss
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 ```
+
+### Material-angular
+
+```
+ng add @angular/material
+```
+
+## Serverless
+
+https://github.com/angular/angularfire/blob/master/docs/install-and-setup.md

@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "angular-fire-e40b7": {
+      "hosting": {
+        "se-poc": [
+          "angular-fire-e40b7"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "angular-fire-e40b7"
+  }
+}

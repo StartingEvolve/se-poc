@@ -6,3 +6,8 @@
 <p class="mat-display-2">Test</p>
 <mat-icon>settings</mat-icon>
 <mat-icon>help</mat-icon>
+<ul>
+    <li class="text" *ngFor="let item of items | async">
+        {{item.name}}
+    </li>
+</ul>
