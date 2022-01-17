@@ -132,9 +132,21 @@
             "firebaseProject": "angular-fire-e40b7",
             "firebaseHostingSite": "angular-fire-e40b7"
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }
   },
-  "defaultProject": "se-poc"
+  "defaultProject": "se-poc",
+  "cli": {
+    "defaultCollection": "@angular-eslint/schematics"
+  }
 }
