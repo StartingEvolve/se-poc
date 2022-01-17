@@ -12,7 +12,7 @@ const materials = [
 
 @NgModule({
   declarations: [],
-  imports: [materials],
-  exports: [materials]
+  imports: [...materials],
+  exports: [...materials]
 })
 export class MaterialUiModule { }
