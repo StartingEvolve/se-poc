@@ -47,7 +47,6 @@ jobs:
         uses: actions/download-artifact@master
         with:
           name: dist
-          path: dist/se-poc
       - name: Deploy to Staging Env Firebase
         uses: w9jds/firebase-action@master
         with:
