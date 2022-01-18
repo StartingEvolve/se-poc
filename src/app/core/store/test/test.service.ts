@@ -1,18 +1,26 @@
 import { Injectable } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ObservableStore } from '@codewithdan/observable-store';
 import { of } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Test } from './test';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TestService extends ObservableStore<Test> {
-  constructor() {
+  constructor(private store: AngularFirestore) {
     super({ trackStateHistory: true, logStateChanges: true });
-    const initialState = {
-      message: 'Yaw o zineb zahiya'
-    };
-    this.setState(initialState, TestStoreActions.InitializeState);
+    store
+      .collection<{ name: string }>('items')
+      .valueChanges({ idField: 'zhou' })
+      .subscribe((items) => {
+        console.log(items);
+        const initialState = {
+          message: items[0].name
+        };
+        this.setState(initialState, TestStoreActions.InitializeState);
+      });
   }
   get() {
     const message = this.getState().message;

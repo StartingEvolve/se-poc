@@ -12,11 +12,11 @@ import { Test } from './core/store/test/test';
 })
 export class AppComponent implements OnInit {
   subs: Subscription = new Subscription();
-  message: string = 'Test';
+  message: string;
   title = 'se-poc';
   items: Observable<any>;
   constructor(private store: AngularFirestore, private ts: TestService) {
-    this.items = store.collection('items').valueChanges();
+    this.items = store.collection('items').valueChanges({ idField: 'Test' });
   }
   ngOnInit() {
     this.subs.add(
