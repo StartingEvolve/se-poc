@@ -6,13 +6,13 @@ const { EnvironmentPlugin } = require("webpack");
 module.exports = {
   plugins: [
     new EnvironmentPlugin([
-      SE_API_KEY,
-      SE_AUTH_DOMAIN,
-      SE_PROJECT_ID,
-      SE_STORAGE_BUCKET,
-      SE_MESSAGING_SENDER_ID,
-      SE_APP_ID,
-      SE_MEASUREMENT_ID
+      'SE_API_KEY',
+      'SE_AUTH_DOMAIN',
+      'SE_PROJECT_ID',
+      'SE_STORAGE_BUCKET',
+      'SE_MESSAGING_SENDER_ID',
+      'SE_APP_ID',
+      'SE_MEASUREMENT_ID'
     ])
   ]
 };
