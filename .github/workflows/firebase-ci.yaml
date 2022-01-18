@@ -13,7 +13,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: "16"
-          cache: 'npm' #A simple way to cache dependencies between workflows
+       #A simple way to cache dependencies between workflows
        #I found a better an action that already supports firebase
 #      - name: Install Firebase Suite
 #        run: npm install -g firebase-tools
