@@ -1,9 +1,9 @@
 #Todo (zack): Refactor the steps into separate jobs to optimize the build time
 on:
   push:
-    branches: [develop]
+    branches: [develop,SET-11-ci-cd-pipeline]
   pull_request:
-    branches: [develop]
+    branches: [develop,SET-11-ci-cd-pipeline]
 jobs:
   build:
     name: Build
