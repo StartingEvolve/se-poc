@@ -1,3 +1,3 @@
 export interface Test {
-    message: string | null
+  message: string | null;
 }

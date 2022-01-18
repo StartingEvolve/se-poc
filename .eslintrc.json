@@ -38,16 +38,9 @@
             "type": "attribute"
           }
         ],
-        "sort-imports": [
-          "error",
-          {
-            "ignoreCase": false,
-            "ignoreDeclarationSort": false,
-            "ignoreMemberSort": false,
-            "memberSyntaxSortOrder": ["none", "all", "multiple", "single"],
-            "allowSeparatedGroups": false
-          }
-        ]
+        //TODO (zack): Activate these rules on CI build
+        "no-unused-vars": "off",
+        "no-undef": "off"
       }
     },
     {

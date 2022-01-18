@@ -15,4 +15,4 @@ const materials = [
   imports: [...materials],
   exports: [...materials]
 })
-export class MaterialUiModule { }
+export class MaterialUiModule {}
