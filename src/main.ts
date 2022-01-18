@@ -1,3 +1,4 @@
+//Todo (zack) : Optimize the build (current : 985.kB -> target : 500kB)
 import { enableProdMode } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
