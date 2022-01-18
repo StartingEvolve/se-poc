@@ -27,7 +27,7 @@ jobs:
         uses: actions/upload-artifact@master
         with:
           name: dist
-          path: dist
+          path: dist/se-poc
         env:
           SE_API_KEY: ${{ secrets.STAGE_API_KEY }}
           SE_AUTH_DOMAIN: ${{ secrets.STAGE_AUTH_DOMAIN }}
@@ -47,7 +47,7 @@ jobs:
         uses: actions/download-artifact@master
         with:
           name: dist
-          path: dist
+          path: dist/se-poc
       - name: Deploy to Staging Env Firebase
         uses: w9jds/firebase-action@master
         with:
