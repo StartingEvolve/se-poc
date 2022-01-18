@@ -39,8 +39,6 @@
         "build": {
           "builder": "@angular-builders/custom-webpack:browser",
           "options": {
-            "path": "./custom-webpack.config.js",
-            "replaceDuplicatePlugins": true,
             "outputPath": "dist/se-poc",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -54,7 +52,11 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "customWebpackConfig": {
+              "path": "./custom-webpack.config.js",
+              "replaceDuplicatePlugins": true
+            }
           },
           "configurations": {
             "production": {
