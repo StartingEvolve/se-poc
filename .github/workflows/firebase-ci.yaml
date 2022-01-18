@@ -47,7 +47,11 @@ jobs:
         uses: actions/download-artifact@master
         with:
           name: dist
+<<<<<<< HEAD
           path: dist/dist/se-poc
+=======
+          path: ./dist/se-poc
+>>>>>>> ae6af221e0560f0b349a1755b365e17f65301fbc
       - name: Deploy to Staging Env Firebase
         uses: w9jds/firebase-action@master
         with:
