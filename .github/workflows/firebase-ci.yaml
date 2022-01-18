@@ -24,10 +24,10 @@ jobs:
       - name: Build
         run: ng build
       - name: Archive Production Artifact
-          uses: actions/upload-artifact@master
-          with:
-            name: dist
-            path: dist
+        uses: actions/upload-artifact@master
+        with:
+          name: dist
+          path: dist
         env:
           SE_API_KEY: ${{ secrets.STAGE_API_KEY }}
           SE_AUTH_DOMAIN: ${{ secrets.STAGE_AUTH_DOMAIN }}
