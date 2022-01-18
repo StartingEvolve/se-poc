@@ -37,7 +37,7 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-builders/custom-webpack:browser",
           "options": {
             "outputPath": "dist/se-poc",
             "index": "src/index.html",
@@ -52,7 +52,11 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "customWebpackConfig": {
+              "path": "./custom-webpack.config.js",
+              "replaceDuplicatePlugins": true
+            }
           },
           "configurations": {
             "production": {
@@ -71,7 +75,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "with": "src/environments/environment.stage.ts"
                 }
               ],
               "outputHashing": "all"

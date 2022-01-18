@@ -9,6 +9,7 @@ import { SharedModule } from './shared/shared.module';
 import { environment } from 'src/environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { CoreModule } from './core/core.module';
+import firebase from 'firebase/compat';
 
 @NgModule({
   declarations: [AppComponent],
