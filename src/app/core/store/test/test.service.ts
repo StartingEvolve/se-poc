@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ObservableStore } from '@codewithdan/observable-store';
 import { of } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { Test } from './test';
 
 @Injectable({
