@@ -1,5 +1,6 @@
 export const environment = {
   production: true,
+  useEmulators: false,
   firebase: {
     apiKey: process.env.SE_API_KEY,
     authDomain: process.env.SE_AUTH_DOMAIN,
