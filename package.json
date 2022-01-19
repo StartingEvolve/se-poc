@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "migrate": "scripts/migrate.ps1",
+    "migrate": "@powershell -NoProfile -ExecutionPolicy Unrestricted -Command scripts/migrate.ps1",
     "emulate": "firebase emulators:start --import migrations/v1",
     "start": "ng serve -o",
     "build": "ng build",
