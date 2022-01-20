@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialUiModule } from './material-ui/material-ui.module';
-import { MatButtonModule } from '@angular/material/button';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [],
   imports: [CommonModule, MaterialUiModule],
-  exports: [MaterialUiModule]
+  exports: [MaterialUiModule, TranslateModule]
 })
 export class SharedModule {}

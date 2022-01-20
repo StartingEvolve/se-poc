@@ -68,3 +68,10 @@ ng add @angular/material
 ## Serverless
 
 https://github.com/angular/angularfire/blob/master/docs/install-and-setup.md
+
+## Translate Service
+
+```
+npm install @ngx-translate/core@13.0.0 --save
+npm install @ngx-translate/http-loader@6.0.0 --save
+```
