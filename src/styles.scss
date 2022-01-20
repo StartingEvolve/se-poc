@@ -47,3 +47,9 @@ body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
+
+.firebase-emulator-warning {
+  // hide the warning banner as AngularFire doesn't support the 'disableWarnings' option
+  display: none;
+}
+
