@@ -4,7 +4,7 @@ import { Observable, Subscription } from 'rxjs';
 import { TestService } from './core/store/test/test.service';
 
 @Component({
-  selector: 'app-root',
+  selector: 'se-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
