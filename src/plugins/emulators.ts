@@ -4,6 +4,7 @@ import { USE_EMULATOR as USE_FIRESTORE_EMULATOR } from '@angular/fire/compat/fir
 import { USE_EMULATOR as USE_FUNCTIONS_EMULATOR } from '@angular/fire/compat/functions';
 
 export const emulatorProviders = [
+  //Todo (zack) : Port emulator's URLs to env var
   //Pay heed to the inconsistency of the provided URL, this is due to angularfire v7 breaking changes
   //You can read more about it here : https://github.com/angular/angularfire/blob/master/docs/version-7-upgrade.md
   {
