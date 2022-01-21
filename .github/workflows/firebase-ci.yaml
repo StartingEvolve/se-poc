@@ -3,7 +3,7 @@ on:
   push:
     branches: [SET-66-migrate-to-angular-13]
   pull_request:
-    branches: [develop]
+    branches: [develop,develop-v13]
 jobs:
   build:
     name: Build
