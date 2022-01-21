@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialUiModule } from './material-ui/material-ui.module';
-import { MatButtonModule } from '@angular/material/button';
+import { TranslateModule } from '@ngx-translate/core';
+import { LanguagePickerWebComponent } from './components/language-picker-web/language-picker-web.component';
 
 @NgModule({
-  declarations: [],
-  imports: [CommonModule, MaterialUiModule],
-  exports: [MaterialUiModule]
+  declarations: [LanguagePickerWebComponent],
+  imports: [CommonModule, MaterialUiModule, TranslateModule],
+  exports: [MaterialUiModule, TranslateModule, LanguagePickerWebComponent]
 })
 export class SharedModule {}

@@ -1,0 +1,11 @@
+{
+    "TEST":
+    {
+        "HELLO":"hello"
+    },
+    "SHARED":
+    {
+        "FR":"French",
+        "EN":"English"
+    }
+} 
