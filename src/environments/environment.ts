@@ -5,7 +5,6 @@
 export const environment = {
   production: false,
   useEmulators: true,
-  TAILWIND_MODE: 'build',
   firebase: {
     apiKey: 'AIzaSyC3aZjZB-XU6OE39sdfQXY7MMCydj6MXBU',
     authDomain: 'angular-fire-e40b7.firebaseapp.com',

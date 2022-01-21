@@ -30,7 +30,8 @@
       "dom"
     ],
     "typeRoots": [ "node_modules/@types" ],
-    "types": [ "node" ]
+    "types": [ "node" ],
+    "skipLibCheck": true
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
