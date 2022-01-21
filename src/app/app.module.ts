@@ -18,12 +18,24 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { FeatureExampleModule } from './features/feature-example/feature-example.module';
 
+import { MatTableModule } from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon';
+import { PrototypeComponent } from './prototype/prototype/prototype.component';
+import { Example1Component } from './prototype/example1/example1.component';
+import { Example2Component } from './prototype/example2/example2.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent,
+    PrototypeComponent,
+    Example1Component,
+    Example2Component
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -42,7 +54,10 @@ export function createTranslateLoader(http: HttpClient) {
         deps: [HttpClient]
       }
     }),
-    FeatureExampleModule
+    FeatureExampleModule,
+    MatTableModule,
+    MatIconModule,
+    MatPaginatorModule
   ],
   providers: [...emulatorProviders],
   bootstrap: [AppComponent]

@@ -5,11 +5,11 @@ import { TranslateService } from '@ngx-translate/core';
 import { TestService } from '@core/store/test/test.service';
 
 @Component({
-  selector: 'se-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  selector: 'se-example1',
+  templateUrl: './example1.component.html',
+  styleUrls: ['./example1.component.scss']
 })
-export class AppComponent implements OnInit {
+export class Example1Component implements OnInit {
   buttonDisplay: boolean = true;
   subs: Subscription = new Subscription();
   message: string;

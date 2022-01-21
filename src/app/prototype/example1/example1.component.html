@@ -1,0 +1,12 @@
+<p>example1 works!</p>
+<input type="password" class="form-input" placeholder="text" />
+<input matInput type="text" />
+<button mat-button color="primary">Primary</button>
+
+<p class="mat-display-2">{{ message }}</p>
+<button mat-button class="btn" (click)="ClickHandle()">Click</button>
+<ul>
+  <li class="text" *ngFor="let item of items | async">
+    {{ item.name }}
+  </li>
+</ul>
