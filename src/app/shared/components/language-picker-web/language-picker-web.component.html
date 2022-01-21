@@ -1,5 +1,8 @@
 <div class="container">
-  <div (click)="toggleLanguageMenu()" class="kelwa">
+  <div
+    (click)="toggleLanguageMenu()"
+    class="flex w-screen px-4 py-2 items-center justify-start hover:bg-amber-500 cursor-pointer;"
+  >
     <button
       type="button"
       class="icon-btn"
@@ -8,11 +11,7 @@
       aria-haspopup="true"
     >
       <span class="sr-only">Open language menu</span>
-      <img
-        class="w-[120px] h-6 rounded-full"
-        src="/assets/flags/fr.png"
-        alt=""
-      />
+      <img class="w-8 h-8 rounded-full" src="/assets/flags/fr.png" alt="" />
     </button>
     <img
       *ngIf="!showLanguageMenu"

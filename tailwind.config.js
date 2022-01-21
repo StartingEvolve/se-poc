@@ -1,10 +1,10 @@
-/* eslint-env es6 */
 const colors = require('tailwindcss/colors')
 module.exports = {
   content: [
-    './src/**/*.{html,ts}',
-  ]
-  ,
+    './src/app/shared/components/**/*.{html,ts}',
+  ],
+
+  mode: 'jit',
   theme: {
     extend: {
       colors: {
