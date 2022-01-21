@@ -1,4 +1,4 @@
-import { environment } from 'src/environments/environment';
+import { environment } from '@environments/environment';
 import { USE_EMULATOR as USE_AUTH_EMULATOR } from '@angular/fire/compat/auth';
 import { USE_EMULATOR as USE_FIRESTORE_EMULATOR } from '@angular/fire/compat/firestore';
 import { USE_EMULATOR as USE_FUNCTIONS_EMULATOR } from '@angular/fire/compat/functions';
