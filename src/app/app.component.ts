@@ -27,7 +27,7 @@ export class AppComponent implements OnInit {
         if (state) {
           this.message = state.message;
           if (this.message == 'Bruh') {
-            this.tr.use('fr');
+            this.tr.setDefaultLang('fr');
           }
         }
       })

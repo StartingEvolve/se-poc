@@ -6,7 +6,7 @@ import { LanguagePickerWebComponent } from './components/language-picker-web/lan
 
 @NgModule({
   declarations: [LanguagePickerWebComponent],
-  imports: [CommonModule, MaterialUiModule],
+  imports: [CommonModule, MaterialUiModule, TranslateModule],
   exports: [MaterialUiModule, TranslateModule, LanguagePickerWebComponent]
 })
 export class SharedModule {}

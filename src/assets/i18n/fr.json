@@ -2,6 +2,12 @@
     "TEST":
     {
         "HELLO":"Bonjour"
+    },
+    "SHARED":
+    {
+        "FR":"Français",
+        "EN":"Anglais"
     }
+    
     
 }

@@ -1,8 +1,29 @@
 .container {
-  @apply ml-3 relative;
-}
-.icon-btn {
-  @apply bg-white rounded-full flex text-sm;
+  @apply ml-40 relative;
+  .select-lg {
+    @apply flex w-14 px-2 py-2 items-center justify-around cursor-pointer hover:bg-gray-50;
+    .icon-btn {
+      @apply bg-white rounded-full flex text-sm cursor-pointer;
+      .flag {
+        @apply w-4 h-4 rounded-full;
+      }
+    }
+    .chevron {
+      @apply w-4 h-4 rounded-full cursor-pointer;
+    }
+  }
+  .menu {
+    @apply origin-top-left absolute -left-10 mt-2 w-20 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none;
+    .menu-item {
+      @apply flex items-center justify-between px-2 py-2 text-xs text-gray-700 cursor-pointer hover:bg-gray-50;
+      .image {
+        @apply w-4 h-4 rounded-full;
+      }
+      .text {
+        @apply w-[2.8rem] text-left;
+      }
+    }
+  }
 }
 <<<<<<< HEAD
 
