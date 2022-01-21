@@ -1,3 +1,4 @@
+/* eslint-env es6 */
 const colors = require('tailwindcss/colors')
 module.exports = {
   content: [
