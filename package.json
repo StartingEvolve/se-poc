@@ -5,7 +5,7 @@
     "ng": "ng",
     "migrate": "@powershell -NoProfile -ExecutionPolicy Unrestricted -Command scripts/migrate.ps1",
     "emulate": "firebase emulators:start --import migrations/v1",
-    "launch": "ng serve -o",
+    "start": "ng serve -o",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
