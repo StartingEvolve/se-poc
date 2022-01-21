@@ -4,9 +4,8 @@ module.exports = {
   mode: 'jit',
   content: [
     './src/**/*.{html,ts}',
-    './src/app/shared/components/**/*.{html,ts}'
-  ]
-  ,
+    './src/app/shared/components/**/*.{html,ts}',
+  ],
   theme: {
     extend: {
       colors: {
