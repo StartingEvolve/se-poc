@@ -1,0 +1,112 @@
+.header {
+  @apply z-50 fixed w-screen transition-all delay-75 md:bg-transparent md:shadow-none bg-white shadow;
+  .container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+    .container-fluid {
+      @apply flex justify-between h-14;
+      .principal {
+        @apply flex justify-between w-4/5;
+        .logo {
+          @apply flex-shrink-0 flex items-center cursor-pointer;
+          .mobile {
+            @apply block lg:hidden h-8 w-auto;
+          }
+          .web {
+            @apply hidden lg:block h-8 w-auto;
+          }
+        }
+        .nav-items {
+          @apply hidden md:ml-6 md:flex md:space-x-4;
+          .default {
+            @apply h-14 border-transparent text-gray-500 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium;
+            &:hover {
+              @apply border-green-300 text-green-500 cursor-pointer;
+            }
+          }
+          .active {
+            @apply border-green-500 text-green-500;
+            &:hover {
+              @apply border-green-500 text-green-500;
+            }
+          }
+        }
+      }
+      .special-right {
+        @apply h-14 hidden md:ml-6 md:flex md:items-center justify-items-center;
+        .profile-dropdowm {
+          @apply ml-3 relative;
+        }
+        .special-button {
+          @apply bg-orange-600 px-5 py-2 rounded-md text-white focus:hover:bg-orange-500;
+        }
+      }
+      .mobile-button {
+        @apply -mr-2 flex items-center md:hidden;
+        .btn {
+          @apply inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-green-100;
+        }
+      }
+    }
+  }
+  .mobile-menu {
+    @apply md:hidden;
+  }
+}
+.header-scrolled {
+  @apply shadow bg-white;
+}
+.profile-pic {
+  @apply bg-white rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500;
+}
+.profile-menu {
+  @apply origin-top-right absolute right-24 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none;
+  .menu-item {
+    @apply block px-4 py-2 text-sm text-gray-700 cursor-pointer hover:bg-gray-100;
+    .nav-items-mobile {
+      @apply pt-2 pb-3 space-y-1;
+    }
+  }
+}
+
+.active_mobile {
+  @apply bg-green-50 border-green-300 text-green-500 block pl-3 pr-4 py-2 border-l-4 text-base font-medium cursor-pointer;
+}
+.default_mobile {
+  @apply border-transparent text-gray-500  block pl-3 pr-4 py-2 border-l-4 text-base font-medium cursor-pointer;
+  &:hover {
+    @apply bg-gray-50 border-gray-300 text-gray-700;
+  }
+}
+.profile-dropdowm-mobile {
+  @apply pt-4 pb-3 border-t border-gray-200;
+  .container {
+    @apply flex items-center px-4;
+    .profile-pic {
+      @apply flex-shrink-0;
+      .pic {
+        @apply h-10 w-10 rounded-full;
+      }
+    }
+    .profile-infos {
+      @apply ml-3;
+      .profile-name {
+        @apply text-base font-medium text-gray-800;
+      }
+      .profile-email {
+        @apply text-sm font-medium text-gray-500;
+      }
+    }
+    .toggle-button {
+      @apply ml-auto flex-shrink-0 bg-white p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none;
+    }
+  }
+  .profile-item {
+    @apply block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100 cursor-pointer;
+  }
+}
+.get-started {
+  @apply pt-4  pb-3 border-t border-gray-200;
+  .special-button {
+    @apply bg-orange-600 h-3/4 rounded-md px-2 py-1  text-white w-[30%] ml-[35%] mx-auto focus:hover:bg-orange-500 text-center;
+  }
+}
