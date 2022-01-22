@@ -68,3 +68,10 @@ ng add @angular/material
 ## Serverless
 
 https://github.com/angular/angularfire/blob/master/docs/install-and-setup.md
+
+## Create a feature 
+### generate feature module with routing 
+```
+ng g m features/<feature-name> --routing
+```
+### Add the necessary imports into module SharedModule and LayoutModule  must be added in all features 

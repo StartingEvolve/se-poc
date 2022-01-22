@@ -7,6 +7,19 @@
     {
         "FR":"Français",
         "EN":"Anglais"
+    },
+    "LAYOUT":
+    {
+        "HOME":"Accueil",
+        "ARTICLES":"Articles",
+        "FORMATIONS":"Formations",
+        "ADVICES":"Conseil",
+        "BECOME_PARTNER":"Devenir prestataire",
+        "LOGIN":"Se connecter",
+        "JOIN":"S'inscrire",
+        "PROFILE":"Votre profil",
+        "SETTINGS":"Paramétres",
+        "LOGOUT":"Se déconnecter"
     }
 
 } 

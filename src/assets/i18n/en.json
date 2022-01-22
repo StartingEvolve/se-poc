@@ -7,5 +7,18 @@
     {
         "FR":"French",
         "EN":"English"
+    },
+    "LAYOUT":
+    {
+        "HOME":"Home",
+        "ARTICLES":"Articles",
+        "FORMATIONS":"Courses",
+        "ADVICES":"Advices",
+        "BECOME_PARTNER":"Become a Partner",
+        "LOGIN":"Sign in",
+        "JOIN":"Get Started",
+        "PROFILE":"Your profile",
+        "SETTINGS":"Settings",
+        "LOGOUT":"Sign out"
     }
 } 

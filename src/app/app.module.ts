@@ -17,6 +17,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { FeatureExampleModule } from './features/feature-example/feature-example.module';
+import { LayoutModule } from './layout/layout.module';
 
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
@@ -42,6 +43,7 @@ export function createTranslateLoader(http: HttpClient) {
     BrowserAnimationsModule,
     SharedModule,
     CoreModule,
+    LayoutModule,
     //Todo (zack): Migrate to AngularFire v7 with modular API
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
