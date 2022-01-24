@@ -8,6 +8,11 @@ const routes: Routes = [
       import('./features/feature-example/feature-example.module').then(
         (m) => m.FeatureExampleModule
       )
+  },
+  {
+    path: '',
+    loadChildren: () =>
+      import('./features/auth/auth.module').then((m) => m.AuthModule)
   }
 ];
 

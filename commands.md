@@ -73,5 +73,6 @@ https://github.com/angular/angularfire/blob/master/docs/install-and-setup.md
 ### generate feature module with routing 
 ```
 ng g m features/<feature-name> --routing
+ng g c features/<feature-name> 
 ```
 ### Add the necessary imports into module SharedModule and LayoutModule  must be added in all features 

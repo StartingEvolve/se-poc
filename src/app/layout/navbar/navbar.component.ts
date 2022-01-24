@@ -40,11 +40,6 @@ export class NavbarComponent {
         name: 'BECOME_PARTNER',
         active: false,
         to: '/start_partnership'
-      },
-      {
-        name: 'LOGIN',
-        active: false,
-        to: '/login'
       }
     ];
     this.profileItems = [
@@ -61,9 +56,6 @@ export class NavbarComponent {
         to: '/Logout'
       }
     ];
-    if (this.isAuthenticated) {
-      this.navItems = this.navItems.filter((item) => item.name != 'LOGIN');
-    }
   }
   setActive(index: number): void {
     this.navItems.forEach((item, ind) => {
@@ -79,7 +71,7 @@ export class NavbarComponent {
   @HostListener('window:scroll', ['$event'])
   onWindowScroll() {
     let element = document.querySelector('.header') as HTMLElement;
-    if (window.pageYOffset > element.clientHeight + 10) {
+    if (window.pageYOffset > element.clientHeight / 2.0) {
       element.classList.add('header-scrolled');
     } else {
       element.classList.remove('header-scrolled');
