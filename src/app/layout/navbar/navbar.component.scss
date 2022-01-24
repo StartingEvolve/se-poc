@@ -5,7 +5,7 @@
     .container-fluid {
       @apply flex justify-between h-14;
       .principal {
-        @apply flex justify-between w-4/5;
+        @apply flex justify-between w-4/6;
         .logo {
           @apply flex-shrink-0 flex items-center cursor-pointer;
           .mobile {
@@ -42,7 +42,7 @@
       }
       .mobile-button {
         @apply -mr-2 flex items-center md:hidden;
-        .btn {
+        .button {
           @apply inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-green-100;
         }
       }
@@ -105,8 +105,26 @@
   }
 }
 .get-started {
-  @apply pt-4  pb-3 border-t border-gray-200;
-  .special-button {
-    @apply bg-orange-600 h-3/4 rounded-md px-2 py-1  text-white w-[30%] ml-[35%] mx-auto focus:hover:bg-orange-500 text-center;
+  @apply border-t border-gray-200 pb-10 pt-2;
+  .signin {
+    @apply w-full flex items-center justify-center px-4 py-2 border border-transparent shadow-sm text-base font-medium text-white bg-green-500 hover:bg-green-600;
+  }
+  .signup {
+    @apply mt-6 text-center text-base font-medium text-gray-500;
+    .link {
+      @apply text-indigo-600 hover:text-green-500;
+    }
+  }
+}
+.special-button {
+  @apply bg-orange-600 h-3/4 rounded-md px-2 py-1  text-white w-[30%] ml-[35%] mx-auto focus:hover:bg-orange-500 text-center;
+}
+.buttons {
+  @apply hidden md:flex items-center justify-end md:flex-1 lg:w-0;
+  .signin {
+    @apply whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900;
+  }
+  .signup {
+    @apply ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-green-500 hover:bg-green-600;
   }
 }

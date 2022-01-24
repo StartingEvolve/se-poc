@@ -2,8 +2,8 @@
   <div class="container">
     <div class="container-fluid">
       <div class="principal">
-        <div class="logo">
-          <img class="mobile" src="/assets/img/Logo-small.png" alt="Workflow" />
+        <div class="logo" routerLink="/">
+          <img class="mobile" src="/assets/img/Logo-small.svg" alt="Workflow" />
           <img class="web" src="/assets/img/Logo.png" alt="Workflow" />
         </div>
         <div class="nav-items">
@@ -54,9 +54,17 @@
             </div>
           </div>
         </div>
-        <button *ngIf="!isAuthenticated" class="special-button">
+        <!-- <button *ngIf="!isAuthenticated" class="special-button">
           {{ 'LAYOUT.JOIN' | translate }}
-        </button>
+        </button> -->
+        <div class="buttons" *ngIf="!isAuthenticated">
+          <a href="#" class="signin" routerLink="/signin">
+            {{ 'LAYOUT.LOGIN' | translate }}
+          </a>
+          <a href="#" class="signup">
+            {{ 'LAYOUT.JOIN' | translate }}
+          </a>
+        </div>
         <se-language-picker-web></se-language-picker-web>
       </div>
       <div class="mobile-button">
@@ -64,7 +72,7 @@
         <button
           type="button"
           (click)="toggleMenu()"
-          class="btn"
+          class="button"
           aria-controls="mobile-menu"
           aria-expanded="false"
         >
@@ -125,7 +133,18 @@
       </div>
     </div>
     <div *ngIf="!isAuthenticated" class="get-started">
-      <button class="special-button">{{ 'LAYOUT.JOIN' | translate }}</button>
+      <a href="#" class="signin" routerLink="/signin">
+        {{ 'LAYOUT.LOGIN' | translate }}
+      </a>
+      <p class="signup">
+        {{ 'LAYOUT.EXISTS' | translate }}
+        <a href="#" class="link">
+          {{ 'LAYOUT.JOIN' | translate }}
+        </a>
+      </p>
     </div>
+    <!-- <div *ngIf="!isAuthenticated" class="get-started">
+      <button class="special-button">{{ 'LAYOUT.JOIN' | translate }}</button>
+    </div> -->
   </div>
 </header>
