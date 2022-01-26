@@ -33,6 +33,16 @@
         "PLACEHOLDER2":"Medical first aid guide",
         "PLACEHOLDER3":"Legal advice",
         "EXAMPLE":"Eg. ",
-        "BLABLA":"La formation professionnelle permet aux adultes de se former à un métier et de développer de nouvelles compétences tout au long de leur carrière. Quel que soit votre âge, votre niveau d’études ou votre situation, vous pouvez accéder à la formation continue pour atteindre vos objectifs."
+        "BLABLA":"Professional training allows adults to train for a job and develop new skills throughout their career.Whatever your age, level of education or situation, you can access continuing education to achieve your goals.",
+        "SIGNINMESSAGE":"Sign in to your account",
+        "NOACCOUNT":"You don't have an account ?",
+        "JOIN":"Get Started",
+        "SIGNINWITH":"Sign in with",
+        "ORCONTINUE":"Or continue with",
+        "EMAIL":"Email address",
+        "PASSWORD":"Password",
+        "REMEMBERME":"Remember me",
+        "FORGOTPASSWORD":"Forgot your password",
+        "SIGNIN":"Sign in"
     }
 } 

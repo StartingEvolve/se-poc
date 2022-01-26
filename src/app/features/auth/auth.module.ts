@@ -7,9 +7,21 @@ import { LandingPageComponent } from './views/landing-page/landing-page.componen
 import { LayoutModule } from '@se/layout/layout.module';
 import { AuthComponent } from './auth.component';
 import { SigninComponent } from './views/signin/signin.component';
+import { ForgotPasswordComponent } from './views/forgot-password/forgot-password.component';
+import { VerifyEmailComponent } from './views/verify-email/verify-email.component';
+import { SignupComponent } from './views/signup/signup.component';
+import { DashboardComponent } from './views/dashboard/dashboard.component';
 
 @NgModule({
-  declarations: [LandingPageComponent, AuthComponent, SigninComponent],
+  declarations: [
+    LandingPageComponent,
+    AuthComponent,
+    SigninComponent,
+    ForgotPasswordComponent,
+    VerifyEmailComponent,
+    SignupComponent,
+    DashboardComponent
+  ],
   imports: [CommonModule, AuthRoutingModule, SharedModule, LayoutModule]
 })
 export class AuthModule {}

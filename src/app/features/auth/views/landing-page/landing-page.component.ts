@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
+import { AuthService } from '@se/core/services/auth.service';
 
 @Component({
   selector: 'se-landing-page',
@@ -8,9 +10,30 @@ import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 })
 export class LandingPageComponent implements OnInit {
   sp: any;
-  constructor(private ts: TranslateService) {
+  flagDropdown: boolean = false;
+  activeItem: string;
+  dropDownItems: { name: string; icon: string }[];
+  constructor(
+    private ts: TranslateService,
+    private as: AuthService,
+    private afStore: AngularFirestore
+  ) {
+    this.dropDownItems = [
+      {
+        name: 'ARTICLES',
+        icon: 'article.svg'
+      },
+      {
+        name: 'FORMATIONS',
+        icon: 'formation.svg'
+      },
+      {
+        name: 'ADVICES',
+        icon: 'advice.svg'
+      }
+    ];
+    this.activeItem = 'ARTICLES';
     this.ts.onDefaultLangChange.subscribe((lang) => {
-      console.log(lang);
       this.sp.kill();
       this.sp = new SuperPlaceholder({
         placeholders: [
@@ -40,9 +63,29 @@ export class LandingPageComponent implements OnInit {
     });
     this.sp.init();
   }
+  toggleDropdown() {
+    this.flagDropdown = !this.flagDropdown;
+  }
+  setActiveItem(name: string) {
+    this.toggleDropdown();
+    this.activeItem = name;
+  }
+  signin() {
+    this.as
+      .loginUser('saaderraz99@gmail.com', 'SE300799')
+      .then((result) => console.log(result))
+      .catch((error) => {
+        console.log('This is an error');
+        console.log(error);
+      });
+    // this.as.signupUser({
+    //   email: 'saaderraz@gmail.com',
+    //   password: 'SE300799',
+    //   displayName: 'Saad Errazgouni'
+    // });
+  }
 }
 export function SuperPlaceholder(options) {
-  console.log(options);
   this.options = options;
   this.element = options.element;
   this.placeholderIdx = 0;
@@ -51,12 +94,15 @@ export function SuperPlaceholder(options) {
   this.setPlaceholder = function () {
     let placeholder = options.placeholders[this.placeholderIdx];
     var placeholderChunk = placeholder.substring(0, this.charIdx + 1);
-    document
-      .querySelector(this.element)
-      .setAttribute(
+    const element = document.querySelector(this.element);
+    if (element !== null) {
+      element.setAttribute(
         'placeholder',
         this.options.preText + ' ' + placeholderChunk
       );
+    } else {
+      this.kill();
+    }
   };
 
   this.onTickReverse = function (afterReverse) {
@@ -103,6 +149,5 @@ export function SuperPlaceholder(options) {
 
   this.kill = function () {
     clearInterval(this.intervalId);
-    return;
   };
 }

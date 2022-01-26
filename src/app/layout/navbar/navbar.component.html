@@ -20,7 +20,7 @@
       </div>
       <div class="special-right">
         <!-- Profile dropdown -->
-        <div *ngIf="isAuthenticated" class="profile-dropdown">
+        <div *ngIf="user.isLoggedIn" class="profile-dropdown">
           <div>
             <button
               type="button"
@@ -48,6 +48,7 @@
           >
             <div
               *ngFor="let profileItem of profileItems; index as indexOfelement"
+              (click)="logout(indexOfelement)"
               class="menu-item"
             >
               {{ 'LAYOUT.' + profileItem.name | translate }}
@@ -57,7 +58,7 @@
         <!-- <button *ngIf="!isAuthenticated" class="special-button">
           {{ 'LAYOUT.JOIN' | translate }}
         </button> -->
-        <div class="buttons" *ngIf="!isAuthenticated">
+        <div class="buttons" *ngIf="!user.isLoggedIn">
           <a href="#" class="signin" routerLink="/signin">
             {{ 'LAYOUT.LOGIN' | translate }}
           </a>
@@ -96,7 +97,7 @@
         {{ 'LAYOUT.' + navItem.name | translate }}
       </div>
     </div>
-    <div *ngIf="isAuthenticated" class="profile-dropdowm-mobile">
+    <div *ngIf="user.isLoggedIn" class="profile-dropdowm-mobile">
       <div class="container">
         <div class="profile-pic">
           <img
@@ -126,13 +127,14 @@
       <div *ngIf="showProfileMenu" class="mt-3 space-y-1">
         <div
           *ngFor="let profileItem of profileItems; index as indexOfelement"
+          (click)="logout(indexOfelement)"
           class="profile-item"
         >
           {{ 'LAYOUT.' + profileItem.name | translate }}
         </div>
       </div>
     </div>
-    <div *ngIf="!isAuthenticated" class="get-started">
+    <div *ngIf="!user.isLoggedIn" class="get-started">
       <a href="#" class="signin" routerLink="/signin">
         {{ 'LAYOUT.LOGIN' | translate }}
       </a>

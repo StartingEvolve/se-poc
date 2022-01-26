@@ -1,5 +1,9 @@
 import { Component, HostListener } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Observable } from '@firebase/util';
 import { TranslateService } from '@ngx-translate/core';
+import { AuthService } from '@se/core/services/auth.service';
+import { AuthStore, UserInterface } from '@se/core/store/auth/auth.store';
 import { NavItem } from '@se/shared/types/nav-item';
 import { ProfileItem } from '@se/shared/types/profile-item';
 
@@ -9,12 +13,16 @@ import { ProfileItem } from '@se/shared/types/profile-item';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
-  isAuthenticated: boolean = false;
   showProfileMenu: boolean = false;
+  user: UserInterface;
   showMenu: boolean = false;
   navItems: NavItem[];
   profileItems: ProfileItem[];
-  constructor(private ts: TranslateService) {
+  constructor(
+    private ts: TranslateService,
+    private as: AuthService,
+    private aStore: AuthStore
+  ) {
     this.navItems = [
       {
         name: 'HOME',
@@ -56,6 +64,9 @@ export class NavbarComponent {
         to: '/Logout'
       }
     ];
+    this.aStore.stateChanged.subscribe((state) => {
+      this.user = state;
+    });
   }
   setActive(index: number): void {
     this.navItems.forEach((item, ind) => {
@@ -75,6 +86,12 @@ export class NavbarComponent {
       element.classList.add('header-scrolled');
     } else {
       element.classList.remove('header-scrolled');
+    }
+  }
+  logout(index: number): void {
+    if (this.profileItems[index].name == 'LOGOUT') {
+      this.toggleMenu();
+      this.as.logoutUser();
     }
   }
 }
