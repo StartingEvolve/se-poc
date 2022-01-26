@@ -50,7 +50,6 @@ export class SigninComponent implements OnInit {
   }
   loginUser() {
     // show the progress indicator as we start the Firebase login process
-    this.loginForm.get('email').errors;
     if (this.loginForm.invalid) {
       this.showErrors = true;
       return;

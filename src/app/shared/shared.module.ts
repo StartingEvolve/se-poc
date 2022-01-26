@@ -7,9 +7,10 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StepperComponent } from './components/stepper/stepper.component';
-const components = [LanguagePickerWebComponent];
+const components = [LanguagePickerWebComponent, StepperComponent];
+
 @NgModule({
-  declarations: [components, StepperComponent],
+  declarations: [...components],
   imports: [
     CommonModule,
     MaterialUiModule,

@@ -53,7 +53,7 @@ export class AuthService {
       })
       .catch((error): any => {
         console.log('Auth Service: signup error', error);
-        if (error.code) return { isValid: false, message: error.message };
+        if (error.code) return { isValid: false, code: error.code };
       });
   }
   resetPassword(email: string): Promise<any> {

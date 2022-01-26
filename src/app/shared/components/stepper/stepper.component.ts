@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'se-stepper',
@@ -6,5 +7,5 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./stepper.component.scss']
 })
 export class StepperComponent {
-  constructor() {}
+  constructor(private ts: TranslateService) {}
 }

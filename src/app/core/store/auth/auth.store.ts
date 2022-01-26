@@ -40,7 +40,15 @@ export class AuthStore extends ObservableStore<UserInterface> {
       }
     });
   }
+  reset() {
+    const newState = {
+      isLoggedIn: false,
+      user: null
+    };
+    this.setState(newState, AuthStoreActions.LogoutState);
+  }
 }
 export enum AuthStoreActions {
-  InitializeState = 'Initialize state'
+  InitializeState = 'Initialize state',
+  LogoutState = 'Logout State'
 }
