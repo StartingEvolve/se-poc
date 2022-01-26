@@ -71,18 +71,27 @@ export class LandingPageComponent implements OnInit {
     this.activeItem = name;
   }
   signin() {
-    this.as
-      .loginUser('saaderraz99@gmail.com', 'SE300799')
-      .then((result) => console.log(result))
-      .catch((error) => {
-        console.log('This is an error');
-        console.log(error);
-      });
-    // this.as.signupUser({
-    //   email: 'saaderraz@gmail.com',
-    //   password: 'SE300799',
-    //   displayName: 'Saad Errazgouni'
-    // });
+    // this.as
+    //   .loginUser('saaderraz99@gmail.com', 'SE300799')
+    //   .then((result) => console.log(result))
+    //   .catch((error) => {
+    //     console.log('This is an error');
+    //     console.log(error);
+    //   });
+    this.as.signupUser({
+      email: 'saaderraz@gmail.com',
+      password: 'SE300799',
+      displayName: 'Saad Errazgouni'
+    });
+  }
+  doSomethingWeird() {
+    this.afStore.doc('/users/saad.errazgouni99@gmail.com').set({
+      accountType: 'test',
+      displayName: 't',
+      displayName_lower: 't',
+      email: 't',
+      email_lower: 't'
+    });
   }
 }
 export function SuperPlaceholder(options) {
