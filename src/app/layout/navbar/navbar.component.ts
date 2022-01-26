@@ -14,7 +14,7 @@ import { ProfileItem } from '@se/shared/types/profile-item';
 })
 export class NavbarComponent {
   showProfileMenu: boolean = false;
-  user: UserInterface;
+  userState: UserInterface;
   showMenu: boolean = false;
   navItems: NavItem[];
   profileItems: ProfileItem[];
@@ -65,12 +65,12 @@ export class NavbarComponent {
       }
     ];
     this.aStore.stateChanged.subscribe((state) => {
-      this.user = state;
+      this.userState = state;
     });
   }
   setActive(index: number): void {
     this.navItems.forEach((item, ind) => {
-      item.active = ind == index ? true : false;
+      item.active = ind == index;
     });
   }
   toggleMenu(): void {

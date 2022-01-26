@@ -5,6 +5,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 const materials = [
   MatInputModule,
@@ -13,7 +14,8 @@ const materials = [
   MatIconModule,
   MatTableModule,
   MatIconModule,
-  MatPaginatorModule
+  MatPaginatorModule,
+  MatProgressBarModule
 ];
 
 @NgModule({

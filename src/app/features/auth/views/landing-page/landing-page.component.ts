@@ -110,6 +110,7 @@ export function SuperPlaceholder(options) {
         this.options.preText + ' ' + placeholderChunk
       );
     } else {
+      //todo (zack) : investigate superplaceholder flickering on lang change  https://codepen.io/joelewis/pen/ePOrmV
       this.kill();
     }
   };

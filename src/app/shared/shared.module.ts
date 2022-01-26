@@ -6,9 +6,10 @@ import { LanguagePickerWebComponent } from './components/language-picker-web/lan
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { StepperComponent } from './components/stepper/stepper.component';
 const components = [LanguagePickerWebComponent];
 @NgModule({
-  declarations: [components],
+  declarations: [components, StepperComponent],
   imports: [
     CommonModule,
     MaterialUiModule,
