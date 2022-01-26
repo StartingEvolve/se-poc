@@ -7,7 +7,7 @@ import { Test } from './test';
 @Injectable({
   providedIn: 'root'
 })
-export class TestService extends ObservableStore<Test> {
+export class TestStore extends ObservableStore<Test> {
   constructor(private store: AngularFirestore) {
     super({ trackStateHistory: true, logStateChanges: true });
     store

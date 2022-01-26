@@ -29,7 +29,6 @@ export class LanguagePickerWebComponent {
       }
     ];
     this.activePath = this.lgItems.find((item) => item.active == true).path;
-    console.log(this.activePath);
   }
   fetchNewActiveLanguage(param: string): void {
     this.lgItems.forEach((item) => (item.active = item.name == param));

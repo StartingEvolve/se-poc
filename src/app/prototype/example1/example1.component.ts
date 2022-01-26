@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable, Subscription } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
-import { TestService } from '@core/store/test/test.service';
+import { TestStore } from '@se/core/store/test/test.store';
 
 @Component({
   selector: 'se-example1',
@@ -17,7 +17,7 @@ export class Example1Component implements OnInit {
   items: Observable<any>;
   constructor(
     private store: AngularFirestore,
-    private ts: TestService,
+    private ts: TestStore,
     private tr: TranslateService
   ) {
     this.items = store.collection('items').valueChanges({ idField: 'Test' });

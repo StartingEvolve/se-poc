@@ -1,0 +1,160 @@
+<main class="lg:relative lg:min-h-[600px]">
+  <div
+    class="mx-auto max-w-7xl w-full pt-16 pb-20 text-center lg:py-18 lg:text-left"
+  >
+    <div class="px-4 lg:w-1/2 sm:px-8 xl:pr-16">
+      <h1
+        class="text-2xl tracking-tight font-extrabold text-gray-900 sm:text-4xl md:text-5xl lg:text-4xl xl:text-4xl"
+      >
+        <span class="block lg:inline">XXX XXX prestations </span>
+        <span class="block text-green-500 lg:inline"
+          >et forcèment la vôtre</span
+        >
+      </h1>
+      <div class="flex items-center">
+        <div class="min-w-0 flex-1 lg:px-0 xl:col-span-6">
+          <div
+            class="flex items-center py-4 md:max-w-3xl md:mx-auto lg:max-w-none lg:mx-0 xl:px-0"
+          >
+            <div class="w-full">
+              <label for="search" class="sr-only">Quick search</label>
+              <div class="relative">
+                <div
+                  class="pointer-events-none absolute inset-y-0 left-0 pl-3 flex items-center"
+                >
+                  <!-- Heroicon name: solid/search -->
+                  <svg
+                    class="h-5 w-5 text-gray-400"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </div>
+                <input
+                  autocomplete="off"
+                  name="search"
+                  class="rounded-tl-md rounded-bl-md shadow block w-full bg-white py-2 pl-10 text-sm placeholder-gray-500 focus:outline-none focus:text-gray-900 focus:placeholder-gray-400 sm:text-sm"
+                  id="dynamic-placeholder"
+                  type="text"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- TODO (bobbhy) UX Improvement -->
+        <!-- <div class="min-w-[70px] border-r-gray-300 md:min-w-[150px] border-l-2">
+                    <select id="location" name="location"
+                        class="block w-full pl-3 py-[9.2px] rounded-tr-md rounded-br-md shadow border-gray-300 text-sm focus:outline-none sm:text-sm">
+                        <option>{{ 'AUTH.ARTICLES' | translate }}</option>
+                        <option selected>{{ 'AUTH.FORMATIONS' | translate }}</option>
+                        <option>{{ 'AUTH.ADVICES' | translate }}</option>
+                    </select>
+                </div> -->
+        <div class="relative inline-block text-left">
+          <div>
+            <button
+              (click)="toggleDropdown()"
+              type="button"
+              class="inline-flex justify-center w-full rounded-tr-md rounded-br-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none"
+              id="menu-button"
+              aria-expanded="true"
+              aria-haspopup="true"
+            >
+              {{ 'AUTH.' + activeItem | translate }}
+              <img
+                *ngIf="flagDropdown"
+                class="-mr-1 ml-2 h-5 w-5"
+                src="/assets/icons/chevron-up.svg"
+                alt=""
+              />
+              <img
+                *ngIf="!flagDropdown"
+                class="-mr-1 ml-2 h-5 w-5"
+                src="/assets/icons/chevron-down.svg"
+                alt=""
+              />
+            </button>
+          </div>
+
+          <!--
+                    Dropdown menu, show/hide based on menu state.
+                
+                    Entering: "transition ease-out duration-100"
+                      From: "transform opacity-0 scale-95"
+                      To: "transform opacity-100 scale-100"
+                    Leaving: "transition ease-in duration-75"
+                      From: "transform opacity-100 scale-100"
+                      To: "transform opacity-0 scale-95"
+                  -->
+          <div
+            *ngIf="flagDropdown"
+            class="origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none"
+            role="menu"
+            aria-orientation="vertical"
+            aria-labelledby="menu-button"
+            tabindex="-1"
+          >
+            <div *ngFor="let item of dropDownItems" class="py-1" role="none">
+              <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
+              <div
+                (click)="setActiveItem(item.name)"
+                class="text-gray-700 group flex items-center px-4 py-2 text-sm cursor-pointer"
+                role="menuitem"
+                tabindex="-1"
+                id="menu-item-0"
+              >
+                <!-- Heroicon name: solid/pencil-alt -->
+                <img
+                  class="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500"
+                  src="{{ '/assets/icons/' + item.icon }}"
+                />
+                {{ 'AUTH.' + item.name | translate }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- placeholder="{{'AUTH.SEARCH'|translate}}" -->
+      <p
+        class="mt-3 text-justify max-w-md mx-auto text-lg text-gray-500 sm:text-xl md:mt-5 md:max-w-3xl"
+      >
+        {{ 'AUTH.BLABLA' | translate }}
+      </p>
+      <div class="mt-10 sm:flex sm:justify-center lg:justify-start">
+        <div class="rounded-md shadow">
+          <a
+            (click)="signin()"
+            class="w-full flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-green-500 hover:bg-green-600 md:py-4 md:text-xl md:px-10"
+          >
+            Get started
+          </a>
+        </div>
+        <div class="mt-3 rounded-md shadow sm:mt-0 sm:ml-3">
+          <a
+            (click)="doSomethingWeird()"
+            href=" #"
+            class="w-full flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-green-600 bg-white hover:bg-gray-50 md:py-4 md:text-xl md:px-10"
+          >
+            Live demo
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="relative w-full h-64 sm:h-72 md:h-96 lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 lg:h-full"
+  >
+    <img
+      class="absolute inset-0 w-full h-full object-cover"
+      src="/assets/img/landing.jfif"
+      alt=""
+    />
+  </div>
+</main>

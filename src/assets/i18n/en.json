@@ -7,5 +7,42 @@
     {
         "FR":"French",
         "EN":"English"
+    },
+    "LAYOUT":
+    {
+        "HOME":"Home",
+        "ARTICLES":"Articles",
+        "FORMATIONS":"Courses",
+        "ADVICES":"Advices",
+        "BECOME_PARTNER":"Become a Partner",
+        "LOGIN":"Sign in",
+        "JOIN":"Get Started",
+        "PROFILE":"Your profile",
+        "SETTINGS":"Settings",
+        "LOGOUT":"Sign out",
+        "EXISTS":"Are you already subscribed? "
+    },
+    "AUTH":
+    {
+        "SEARCH":"Quick Search",
+        "HOME":"Home",
+        "ARTICLES":"Articles",
+        "FORMATIONS":"Courses",
+        "ADVICES":"Advices",
+        "PLACEHOLDER1":"English for professionals",
+        "PLACEHOLDER2":"Medical first aid guide",
+        "PLACEHOLDER3":"Legal advice",
+        "EXAMPLE":"Eg. ",
+        "BLABLA":"Professional training allows adults to train for a job and develop new skills throughout their career.Whatever your age, level of education or situation, you can access continuing education to achieve your goals.",
+        "SIGNINMESSAGE":"Sign in to your account",
+        "NOACCOUNT":"You don't have an account ?",
+        "JOIN":"Get Started",
+        "SIGNINWITH":"Sign in with",
+        "ORCONTINUE":"Or continue with",
+        "EMAIL":"Email address",
+        "PASSWORD":"Password",
+        "REMEMBERME":"Remember me",
+        "FORGOTPASSWORD":"Forgot your password",
+        "SIGNIN":"Sign in"
     }
 } 

@@ -17,7 +17,12 @@ const routes: Routes = [
     component: PrototypeComponent
   },
   { path: 'prototype/example1', component: Example1Component },
-  { path: 'prototype/example2', component: Example2Component }
+  { path: 'prototype/example2', component: Example2Component },
+  {
+    path: '',
+    loadChildren: () =>
+      import('./features/auth/auth.module').then((m) => m.AuthModule)
+  }
 ];
 
 @NgModule({

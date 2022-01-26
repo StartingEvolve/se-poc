@@ -1,0 +1,233 @@
+<!-- <div class="md:p-10 flex justify-center">
+    <div class="card bg-white w-full md:shadow lg:w-2/3 md:w-3/4 rounded-md  flex md:flex-row">
+        <div
+            class="h-1/2 p-2 py-8 border-gray-300 border-b-[1px] md:border-r-[1px] md:border-b-0 min-h-[300px] w-screen md:w-1/2 md:h-full">
+            <div class="content min-h-[240px]  flex flex-col  ">
+                <div class="flex justify-center">
+                    <img class="h-8" src="/assets/img/Logo.png" alt="logo">
+                </div>
+                <p class="text-center text-sm text-gray-400 my-4">Me connecter avec mon compte StartingEvolve</p>
+                <button class="lg:w-1/2 md:h-2/5 btn btn-primary btn-sm self-center">Se connecter</button>
+            </div>
+
+        </div>
+        <div class="h-1/2 p-2 w-screen md:w-1/2 md:h-full bg-[#f0f0f0] ">
+
+        </div>
+
+    </div>
+</div> -->
+<div class="min-h-screen bg-white flex">
+  <div
+    class="flex-1 flex flex-col justify-start md:justify-center py-20 md:py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24"
+  >
+    <div class="mx-auto w-full max-w-sm lg:w-96">
+      <div>
+        <img
+          routerLink="/"
+          class="h-12 w-auto cursor-pointer"
+          src="/assets/img/Logo.png"
+          alt="Workflow"
+        />
+        <h2
+          class="mt-6 text-2xl md:text-3xl font-bold md:font-extrabold text-gray-900"
+        >
+          {{ 'AUTH.SIGNINMESSAGE' | translate }}
+        </h2>
+        <p class="mt-2 text-sm text-gray-600">
+          {{ 'AUTH.NOACCOUNT' | translate }}
+          <a
+            routerLink="/"
+            class="font-medium text-green-500 hover:text-green-600"
+          >
+            {{ 'AUTH.JOIN' | translate }}
+          </a>
+        </p>
+      </div>
+
+      <div class="mt-8">
+        <div>
+          <div>
+            <p class="text-sm font-medium text-gray-700">
+              {{ 'AUTH.SIGNINWITH' | translate }}
+            </p>
+
+            <div class="mt-1 grid grid-cols-3 gap-3">
+              <div>
+                <a
+                  href="#"
+                  class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
+                >
+                  <span class="sr-only"
+                    >{{ 'AUTH.SIGNINWITH' | translate }} Google</span
+                  >
+                  <img
+                    class="w-5 h-5"
+                    src="/assets/icons/google.svg"
+                    alt=""
+                    srcset=""
+                  />
+                </a>
+              </div>
+
+              <div>
+                <a
+                  href="#"
+                  class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
+                >
+                  <span class="sr-only"
+                    >{{ 'AUTH.SIGNINWITH' | translate }} Facebook</span
+                  >
+                  <img
+                    class="w-5 h-5"
+                    src="/assets/icons/facebook.svg"
+                    alt=""
+                    srcset=""
+                  />
+                </a>
+              </div>
+
+              <div>
+                <a
+                  href="#"
+                  class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
+                >
+                  <span class="sr-only"
+                    >{{ 'AUTH.SIGNINWITH' | translate }} Twitter</span
+                  >
+                  <img
+                    class="w-5 h-5"
+                    src="/assets/icons/twitter.svg"
+                    alt=""
+                    srcset=""
+                  />
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-6 relative">
+            <div class="absolute inset-0 flex items-center" aria-hidden="true">
+              <div class="w-full border-t border-gray-300"></div>
+            </div>
+            <div class="relative flex justify-center text-sm">
+              <span class="px-2 bg-white text-gray-500">
+                {{ 'AUTH.ORCONTINUE' | translate }}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-6">
+          <form action="#" method="POST" class="space-y-6">
+            <div>
+              <label
+                for="email"
+                class="block text-sm font-medium text-gray-700"
+              >
+                {{ 'AUTH.EMAIL' | translate }}
+              </label>
+              <div class="mt-1 relative">
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  autocomplete="email"
+                  class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+                  [class.error]="emailError.is"
+                />
+                <div
+                  *ngIf="emailError.is"
+                  class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none"
+                >
+                  <img class="h-5 w-5" src="/assets/icons/error.svg" alt="" />
+                </div>
+              </div>
+              <p
+                *ngIf="emailError.is"
+                class="mt-2 text-sm text-red-600"
+                id="email-error"
+              >
+                Your password must be less than 4 characters.
+              </p>
+            </div>
+
+            <div class="space-y-1">
+              <label
+                for="password"
+                class="block text-sm font-medium text-gray-700"
+              >
+                {{ 'AUTH.PASSWORD' | translate }}
+              </label>
+              <div class="mt-1 relative">
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  autocomplete="current-password"
+                  [class.error]="passwordError.is"
+                  class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+                />
+                <div
+                  *ngIf="passwordError.is"
+                  class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none"
+                >
+                  <img class="h-5 w-5" src="/assets/icons/error.svg" alt="" />
+                </div>
+              </div>
+              <p
+                *ngIf="passwordError.is"
+                class="mt-2 text-sm text-red-600"
+                id="email-error"
+              >
+                Your password must be less than 4 characters.
+              </p>
+            </div>
+
+            <div class="flex items-center justify-between">
+              <div class="flex items-center">
+                <input
+                  id="remember_me"
+                  name="remember_me"
+                  type="checkbox"
+                  class="h-4 w-4 text-green-500 focus:ring-green-400 border-gray-300 rounded"
+                />
+                <label
+                  for="remember_me"
+                  class="ml-2 block text-sm text-gray-900"
+                >
+                  {{ 'AUTH.REMEMBERME' | translate }}
+                </label>
+              </div>
+
+              <div class="text-sm">
+                <a
+                  href="#"
+                  class="font-medium text-green-500 hover:text-green-600"
+                >
+                  {{ 'AUTH.FORGOTPASSWORD' | translate }}
+                </a>
+              </div>
+            </div>
+
+            <div>
+              <button
+                type="submit"
+                class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+              >
+                {{ 'AUTH.SIGNIN' | translate }}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hidden lg:block relative w-0 flex-1">
+    <img
+      class="absolute inset-0 h-full object-cover"
+      src="/assets/img/women.jpg"
+      alt=""
+    />
+  </div>
+</div>

@@ -12,18 +12,19 @@ import { CoreModule } from '@core/core.module';
 
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { FeatureExampleModule } from './features/feature-example/feature-example.module';
+import { LayoutModule } from './layout/layout.module';
 
-import { MatTableModule } from '@angular/material/table';
-import { MatIconModule } from '@angular/material/icon';
 import { PrototypeComponent } from './prototype/prototype/prototype.component';
 import { Example1Component } from './prototype/example1/example1.component';
 import { Example2Component } from './prototype/example2/example2.component';
-import { MatPaginatorModule } from '@angular/material/paginator';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -42,9 +43,13 @@ export function createTranslateLoader(http: HttpClient) {
     BrowserAnimationsModule,
     SharedModule,
     CoreModule,
+    LayoutModule,
     //Todo (zack): Migrate to AngularFire v7 with modular API
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
+    AngularFireAuthModule,
+    AngularFireDatabaseModule,
+    AngularFireStorageModule,
     HttpClientModule,
     TranslateModule.forRoot({
       defaultLanguage: 'en',
@@ -54,10 +59,7 @@ export function createTranslateLoader(http: HttpClient) {
         deps: [HttpClient]
       }
     }),
-    FeatureExampleModule,
-    MatTableModule,
-    MatIconModule,
-    MatPaginatorModule
+    FeatureExampleModule
   ],
   providers: [...emulatorProviders],
   bootstrap: [AppComponent]
