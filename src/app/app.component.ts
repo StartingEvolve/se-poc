@@ -23,13 +23,6 @@ export class AppComponent implements OnInit {
   ) {}
   ngOnInit() {
     this.tr.setDefaultLang('en');
-    this.subs.add(
-      this.ts.stateChanged.subscribe((state) => {
-        if (state) {
-          console.log(state);
-        }
-      })
-    );
   }
   ClickHandle() {
     // this.ts.changeValue();

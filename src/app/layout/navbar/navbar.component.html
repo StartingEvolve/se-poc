@@ -20,7 +20,7 @@
       </div>
       <div class="special-right">
         <!-- Profile dropdown -->
-        <div *ngIf="user.isLoggedIn" class="profile-dropdown">
+        <div *ngIf="userState?.isLoggedIn" class="profile-dropdown">
           <div>
             <button
               type="button"
@@ -55,14 +55,11 @@
             </div>
           </div>
         </div>
-        <!-- <button *ngIf="!isAuthenticated" class="special-button">
-          {{ 'LAYOUT.JOIN' | translate }}
-        </button> -->
-        <div class="buttons" *ngIf="!user.isLoggedIn">
+        <div class="buttons" *ngIf="!userState?.isLoggedIn">
           <a href="#" class="signin" routerLink="/signin">
             {{ 'LAYOUT.LOGIN' | translate }}
           </a>
-          <a href="#" class="signup">
+          <a routerLink="/signup" class="signup">
             {{ 'LAYOUT.JOIN' | translate }}
           </a>
         </div>
@@ -97,7 +94,7 @@
         {{ 'LAYOUT.' + navItem.name | translate }}
       </div>
     </div>
-    <div *ngIf="user.isLoggedIn" class="profile-dropdowm-mobile">
+    <div *ngIf="userState?.isLoggedIn" class="profile-dropdowm-mobile">
       <div class="container">
         <div class="profile-pic">
           <img
@@ -134,13 +131,13 @@
         </div>
       </div>
     </div>
-    <div *ngIf="!user.isLoggedIn" class="get-started">
+    <div *ngIf="!userState?.isLoggedIn" class="get-started">
       <a href="#" class="signin" routerLink="/signin">
         {{ 'LAYOUT.LOGIN' | translate }}
       </a>
       <p class="signup">
         {{ 'LAYOUT.EXISTS' | translate }}
-        <a href="#" class="link">
+        <a routerLink="signup" class="link">
           {{ 'LAYOUT.JOIN' | translate }}
         </a>
       </p>

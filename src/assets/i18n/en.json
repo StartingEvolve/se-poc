@@ -34,6 +34,7 @@
         "PLACEHOLDER3":"Legal advice",
         "EXAMPLE":"Eg. ",
         "BLABLA":"Professional training allows adults to train for a job and develop new skills throughout their career.Whatever your age, level of education or situation, you can access continuing education to achieve your goals.",
+        "BLABLA2":"and necessarily yours",
         "SIGNINMESSAGE":"Sign in to your account",
         "NOACCOUNT":"You don't have an account ?",
         "JOIN":"Get Started",
@@ -43,6 +44,34 @@
         "PASSWORD":"Password",
         "REMEMBERME":"Remember me",
         "FORGOTPASSWORD":"Forgot your password",
-        "SIGNIN":"Sign in"
+        "SIGNIN":"Sign in",
+        "NOT_VALID_EMAIL":"Email not valid",
+        "REQUIRED_EMAIL":"Email is required",
+        "REQUIRED_PASSWORD":"Password is required",
+        "SIGNUPMESSAGE":"Sign up to your account",
+        "WITHACCOUNT":"You already have an account ?",
+        "FIRSTNAME":"First name",
+        "LASTNAME":"Last name",
+        "CONFIRMPASSWORD":"Confirm password",
+        "REGISTER":"Register",
+        "PASSWORD_PATTERN":"Your password must contain at least 8 characters, and include uppercase letters, lowercase letters and numbers.",
+        "REQUIRED_FIRSTNAME":"First name is required ",
+        "REQUIRED_LASTNAME":"Last name is required",
+        "REQUIRED_CONFIRMPASSWORD":"Confirm password is required",
+        "MAX_FIRSTNAME":"First name must not exceed 15 characters",
+        "MIN_FIRSTNAME":"First name must have at least 3 characters",
+        "MAX_LASTNAME":"Last name must not exceed 15 characters",
+        "MIN_LASTNAME":"Last name must have at least 3 characters",
+        "MUSTMATCH":"Confirm password must match password",
+        "AGREE":"I agree to the",
+        "TERMSOFUSER":"Terms of Use",
+        "AND":"and the",
+        "PRIVACYPOLICY":"Privacy policy",
+        "OF":"of StartingEvolve"
+    },
+    "FIREBASE":{
+        "auth/user-not-found":"User not found",
+        "auth/wrong-password":"Password incorrect",
+        "auth/email-already-in-use":"this email is already in use"
     }
 } 

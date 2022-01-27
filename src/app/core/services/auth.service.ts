@@ -29,7 +29,7 @@ export class AuthService {
         console.log('Auth Service: login error...');
         console.log('error code', error.code);
         console.log('error', error);
-        if (error.code) return { isValid: false, message: error.message };
+        if (error.code) return { isValid: false, code: error.code };
       });
   }
 
@@ -53,7 +53,7 @@ export class AuthService {
       })
       .catch((error): any => {
         console.log('Auth Service: signup error', error);
-        if (error.code) return { isValid: false, message: error.message };
+        if (error.code) return { isValid: false, code: error.code };
       });
   }
   resetPassword(email: string): Promise<any> {
@@ -77,7 +77,7 @@ export class AuthService {
     return this.afAuth
       .signOut()
       .then(() => {
-        this.router.navigate(['/home']); // when we log the user out, navigate them to home
+        this.router.navigate(['/']); // when we log the user out, navigate them to home
       })
       .catch((error) => {
         console.log('Auth Service: logout error...');

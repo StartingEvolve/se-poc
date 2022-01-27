@@ -1,1 +1,308 @@
-<p>signup works!</p>
+<!--
+  This example requires Tailwind CSS v2.0+ 
+  
+  This example requires some changes to your config:
+  
+  ```
+  // tailwind.config.js
+  module.exports = {
+    // ...
+    plugins: [
+      // ...
+      require('@tailwindcss/forms'),
+    ]
+  }
+  ```
+-->
+<div class="min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+  <div
+    class="sm:mx-auto flex flex-col items-center sm:w-full sm:max-w-md md:max-w-xl"
+  >
+    <img
+      routerLink="/"
+      class="h-12 w-auto cursor-pointer"
+      src="/assets/img/Logo.png"
+      alt="Workflow"
+    />
+    <h2 class="mt-2 text-center text-3xl font-extrabold text-gray-900">
+      {{ 'AUTH.SIGNUPMESSAGE' | translate }}
+    </h2>
+    <p class="mt-2 text-center text-sm text-gray-600">
+      {{ 'AUTH.WITHACCOUNT' | translate }}
+      <a href="#" class="font-medium text-green-600 hover:text-green-500">
+        {{ 'AUTH.SIGNIN' | translate }}
+      </a>
+    </p>
+  </div>
+
+  <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md md:max-w-xl">
+    <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+      <form
+        class="space-y-6"
+        [formGroup]="signupForm"
+        (ngSubmit)="registerUser()"
+      >
+        <div
+          class="space-y-6 md:space-y-0 flex flex-col md:flex-row justify-between"
+        >
+          <div>
+            <label
+              for="firstName"
+              class="block text-sm font-medium text-gray-700"
+            >
+              {{ 'AUTH.FIRSTNAME' | translate }}
+            </label>
+            <div class="mt-1 relative">
+              <input
+                formControlName="firstName"
+                id="firstName"
+                name="firstName"
+                type="text"
+                autocomplete="off"
+                [class.error]="checkError('firstName')"
+                class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+              />
+              <div
+                *ngIf="checkError('firstName')"
+                class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none"
+              >
+                <img class="h-5 w-5" src="/assets/icons/error.svg" alt="" />
+              </div>
+            </div>
+            <p
+              *ngIf="checkError('firstName')"
+              class="mt-2 text-sm text-red-600"
+              id="email-error"
+            >
+              {{ getFirstNameErrors() | translate }}
+            </p>
+          </div>
+          <div>
+            <label
+              for="lastName"
+              class="block text-sm font-medium text-gray-700"
+            >
+              {{ 'AUTH.LASTNAME' | translate }}
+            </label>
+            <div class="mt-1 relative">
+              <input
+                formControlName="lastName"
+                [class.error]="checkError('lastName')"
+                id="lastName"
+                name="lastName"
+                type="text"
+                autocomplete="off"
+                class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+              />
+              <div
+                *ngIf="checkError('lastName')"
+                class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none"
+              >
+                <img class="h-5 w-5" src="/assets/icons/error.svg" alt="" />
+              </div>
+            </div>
+            <p
+              *ngIf="checkError('lastName')"
+              class="mt-2 text-sm text-red-600"
+              id="email-error"
+            >
+              {{ getLastNameErrors() | translate }}
+            </p>
+          </div>
+        </div>
+        <div>
+          <label for="email" class="block text-sm font-medium text-gray-700">
+            {{ 'AUTH.EMAIL' | translate }}
+          </label>
+          <div class="mt-1 relative">
+            <input
+              formControlName="email"
+              id="email"
+              name="email"
+              type="email"
+              autocomplete="email"
+              [class.error]="checkError('email')"
+              class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+            />
+            <div
+              *ngIf="checkError('email')"
+              class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none"
+            >
+              <img class="h-5 w-5" src="/assets/icons/error.svg" alt="" />
+            </div>
+          </div>
+          <p
+            *ngIf="checkError('email')"
+            class="mt-2 text-sm text-red-600"
+            id="email-error"
+          >
+            {{ getEmailErrors() | translate }}
+          </p>
+        </div>
+
+        <div>
+          <label for="password" class="block text-sm font-medium text-gray-700">
+            {{ 'AUTH.PASSWORD' | translate }}
+          </label>
+          <div class="mt-1 relative">
+            <input
+              formControlName="password"
+              id="password"
+              name="password"
+              type="password"
+              autocomplete="current-password"
+              class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+              [class.error]="checkError('password')"
+            />
+          </div>
+          <p
+            *ngIf="checkError('password')"
+            class="mt-2 text-sm text-red-600"
+            id="email-error"
+          >
+            {{ getPasswordErrors() | translate }}
+          </p>
+        </div>
+
+        <div>
+          <label
+            for="confirmPassword"
+            class="block text-sm font-medium text-gray-700"
+          >
+            {{ 'AUTH.CONFIRMPASSWORD' | translate }}
+          </label>
+          <div class="mt-1 relative">
+            <input
+              formControlName="confirmPassword"
+              id="confirmPassword"
+              name="confirmPassword"
+              type="password"
+              autocomplete="current-password"
+              [class.error]="checkError('confirmPassword')"
+              class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+            />
+            <div
+              *ngIf="checkError('confirmPassword')"
+              class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none"
+            >
+              <img class="h-5 w-5" src="/assets/icons/error.svg" alt="" />
+            </div>
+          </div>
+          <p
+            *ngIf="checkError('confirmPassword')"
+            class="mt-2 text-sm text-red-600"
+            id="email-error"
+          >
+            {{ getConfirmPasswordErrors() | translate }}
+          </p>
+        </div>
+        <div class="flex items-center">
+          <input
+            id="remember_me"
+            name="remember_me"
+            type="checkbox"
+            formControlName="checkbox"
+            class="h-4 w-4 text-green-500 focus:ring-green-400 border-gray-300 rounded"
+          />
+          <label
+            for="remember_me"
+            class="ml-2 block text-sm text-gray-900"
+            [class.check]="checkError('checkbox')"
+          >
+            {{ 'AUTH.AGREE' | translate
+            }}<span class="text-green-500 font-semibold">{{
+              'AUTH.TERMSOFUSER' | translate
+            }}</span>
+            {{ 'AUTH.AND' | translate }}
+            <span class="text-green-500 font-semibold">{{
+              'AUTH.PRIVACYPOLICY' | translate
+            }}</span>
+            {{ 'AUTH.OF' | translate }}
+          </label>
+        </div>
+        <div
+          *ngIf="firebaseErrorCode !== undefined"
+          class="p-2 bg-red-100 rounded-md text-center"
+        >
+          <span class="text-md text-red-600">{{
+            firebaseErrorCode | translate
+          }}</span>
+        </div>
+        <div>
+          <button
+            type="submit"
+            [class.disabled]="isLoading"
+            class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+          >
+            {{ 'AUTH.REGISTER' | translate }}
+          </button>
+        </div>
+      </form>
+
+      <div class="mt-6">
+        <div class="relative">
+          <div class="absolute inset-0 flex items-center">
+            <div class="w-full border-t border-gray-300"></div>
+          </div>
+          <div class="relative flex justify-center text-sm">
+            <span class="px-2 bg-white text-gray-500">
+              {{ 'AUTH.ORCONTINUE' | translate }}
+            </span>
+          </div>
+        </div>
+
+        <div class="mt-6 grid grid-cols-3 gap-3">
+          <div>
+            <a
+              href="#"
+              class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
+            >
+              <span class="sr-only"
+                >{{ 'AUTH.SIGNINWITH' | translate }} Google</span
+              >
+              <img
+                class="w-5 h-5"
+                src="/assets/icons/google.svg"
+                alt=""
+                srcset=""
+              />
+            </a>
+          </div>
+          <div>
+            <a
+              href="#"
+              class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
+            >
+              <span class="sr-only"
+                >{{ 'AUTH.SIGNINWITH' | translate }} Facebook</span
+              >
+              <img
+                class="w-5 h-5"
+                src="/assets/icons/facebook.svg"
+                alt=""
+                srcset=""
+              />
+            </a>
+          </div>
+
+          <div>
+            <a
+              href="#"
+              class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
+            >
+              <span class="sr-only"
+                >{{ 'AUTH.SIGNINWITH' | translate }} Twitter</span
+              >
+              <img
+                class="w-5 h-5"
+                src="/assets/icons/twitter.svg"
+                alt=""
+                srcset=""
+              />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
