@@ -47,11 +47,32 @@
         "SIGNIN":"Sign in",
         "NOT_VALID_EMAIL":"Addresse email invalide",
         "REQUIRED_EMAIL":"Addresse email nécessaire",
-        "REQUIRED_PASSWORD":"Mot de passe nécessaire"
+        "REQUIRED_PASSWORD":"Mot de passe nécessaire",
+        "SIGNUPMESSAGE":"Inscrivez-vous à votre compte",
+        "WITHACCOUNT":"Avez vous déjà un compte ?",
+        "FIRSTNAME":"Prenom",
+        "LASTNAME":"Nom",
+        "CONFIRMPASSWORD":"Confirmez votre mot de passe",
+        "REGISTER":"S'inscrire",
+        "PASSWORD_PATTERN":"Votre mot de passe doit contenir au moins 8 caractères, et inclure des lettres majuscules, des lettres minuscules, des chiffres et des caractères spéciaux.",
+        "REQUIRED_FIRSTNAME":"Le prénom est requis ",
+        "REQUIRED_LASTNAME":"Le nom est requis",
+        "REQUIRED_CONFIRMPASSWORD":"Confirmation du mot de passe est requis",
+        "MAX_FIRSTNAME":"Le prénom ne doit pas dépasser 15 caractères",
+        "MIN_FIRSTNAME":"Le prénom doit comporter au moins 3 caractères",
+        "MAX_LASTNAME":"Le nom ne doit pas dépasser 15 caractères",
+        "MIN_LASTNAME":"Le nom doit comporter au moins 3 caractères",
+        "MUSTMATCH":"Confirmation du mot de passe doit correspondre au mot de passe",
+        "AGREE":"je suis d'accord avec les ",
+        "TERMSOFUSER":"Conditions d'utilisation",
+        "AND":"et la",
+        "PRIVACYPOLICY":"Politique de confidentialité",
+        "OF":"de StartingEvolve"
     },
     "FIREBASE":{
         "auth/user-not-found":"Utilisateur introuvable",
-        "auth/wrong-password":"Mot de passe incorrect"
+        "auth/wrong-password":"Mot de passe incorrect",
+        "auth/email-already-in-use":"this email is already in use"
     }
 
 } 
