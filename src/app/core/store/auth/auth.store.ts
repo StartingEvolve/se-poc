@@ -36,7 +36,9 @@ export class AuthStore extends ObservableStore<UserInterface> {
             this.setState(initialState, AuthStoreActions.UpdateState);
           });
       } else {
-        this.docsubscription.unsubscribe();
+        if (this.docsubscription) {
+          this.docsubscription.unsubscribe();
+        }
         const initialState = {
           isLoggedIn: false,
           user: null

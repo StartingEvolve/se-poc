@@ -29,7 +29,7 @@ export class AuthGuard implements CanActivate {
     | UrlTree {
     return new Promise((resolve, reject) => {
       this.as.stateChanged.subscribe((userState) => {
-        if (userState.isLoggedIn) {
+        if (userState?.isLoggedIn) {
           if (!userState.isEmailVerified) {
             this.router.navigate(['/verify-email']);
           }
