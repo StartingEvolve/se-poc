@@ -92,11 +92,7 @@ export class NavbarComponent {
     if (this.profileItems[index].name == 'LOGOUT') {
       this.toggleMenu();
       this.as.logoutUser().then((result) => {
-        if (result == null) {
-          this.aStore.reset();
-        } else {
-          console.log(result);
-        }
+        console.log(result);
       });
     }
   }

@@ -3,8 +3,10 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ObservableStore } from '@codewithdan/observable-store';
 import { UserDocument } from '@se/shared/types/user-document';
+import { Subscription } from 'rxjs';
 export interface UserInterface {
   isLoggedIn: boolean;
+  isEmailVerified?: boolean;
   user: UserDocument;
 }
 
@@ -12,6 +14,7 @@ export interface UserInterface {
   providedIn: 'root'
 })
 export class AuthStore extends ObservableStore<UserInterface> {
+  docsubscription: Subscription;
   constructor(
     private afAuth: AngularFireAuth,
     private afStore: AngularFirestore
@@ -21,34 +24,30 @@ export class AuthStore extends ObservableStore<UserInterface> {
       // set up a subscription to always know the login status of the user
       if (user) {
         let emailLower = user.email.toLowerCase();
-        this.afStore
+        this.docsubscription = this.afStore
           .doc<UserDocument>('users/' + emailLower)
           .valueChanges()
           .subscribe((data) => {
             const initialState = {
               isLoggedIn: true,
+              isEmailVerified: user.emailVerified ?? false,
               user: data
             };
-            this.setState(initialState, AuthStoreActions.InitializeState);
+            this.setState(initialState, AuthStoreActions.UpdateState);
           });
       } else {
+        this.docsubscription.unsubscribe();
         const initialState = {
           isLoggedIn: false,
           user: null
         };
-        this.setState(initialState, AuthStoreActions.InitializeState);
+
+        this.setState(initialState, AuthStoreActions.InitialState);
       }
     });
   }
-  reset() {
-    const newState = {
-      isLoggedIn: false,
-      user: null
-    };
-    this.setState(newState, AuthStoreActions.LogoutState);
-  }
 }
 export enum AuthStoreActions {
-  InitializeState = 'Initialize state',
-  LogoutState = 'Logout State'
+  InitialState = 'Initial state',
+  UpdateState = 'Update State'
 }
