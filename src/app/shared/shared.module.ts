@@ -7,7 +7,12 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StepperComponent } from './components/stepper/stepper.component';
-const components = [LanguagePickerWebComponent, StepperComponent];
+import { CarouselComponent } from './components/carousel/carousel.component';
+const components = [
+  LanguagePickerWebComponent,
+  StepperComponent,
+  CarouselComponent
+];
 
 @NgModule({
   declarations: [...components],

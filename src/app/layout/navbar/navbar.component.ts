@@ -1,6 +1,4 @@
 import { Component, HostListener } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { Observable } from '@firebase/util';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from '@se/core/services/auth.service';
 import { AuthStore, UserInterface } from '@se/core/store/auth/auth.store';
@@ -92,9 +90,7 @@ export class NavbarComponent {
     if (this.profileItems[index].name == 'LOGOUT') {
       this.toggleMenu();
       this.as.logoutUser().then((result) => {
-        if (result !== null) {
-          console.log(result);
-        }
+        console.log(result);
       });
     }
   }
