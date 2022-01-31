@@ -37,8 +37,7 @@
       "prefix": "se",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
-//          "builder": "@angular-builders/custom-webpack:browser",
+          "builder": "@angular-builders/custom-webpack:browser",
           "options": {
             "outputPath": "dist/se-poc",
             "index": "src/index.html",
@@ -56,10 +55,10 @@
               "src/styles.scss"
             ],
             "scripts": [],
-//            "customWebpackConfig": {
-//              "path": "./custom-webpack.config.js",
-//              "replaceDuplicatePlugins": true
-//            },
+            "customWebpackConfig": {
+              "path": "./custom-webpack.config.js",
+              "replaceDuplicatePlugins": true
+            },
             "serviceWorker": true,
             "ngswConfigPath": "ngsw-config.json"
           },
