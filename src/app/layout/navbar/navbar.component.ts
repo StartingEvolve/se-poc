@@ -91,6 +91,7 @@ export class NavbarComponent {
   logout(index: number): void {
     if (this.profileItems[index].name == 'LOGOUT') {
       this.toggleMenu();
+      this.toggleProfileMenu();
       this.as.logoutUser();
     }
   }
