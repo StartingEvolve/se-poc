@@ -56,10 +56,10 @@
           </div>
         </div>
         <div class="buttons" *ngIf="!userState?.isLoggedIn">
-          <a href="#" class="signin" routerLink="/signin">
+          <a (click)="toggleMenu()" class="signin" routerLink="/signin">
             {{ 'LAYOUT.LOGIN' | translate }}
           </a>
-          <a routerLink="/signup" class="signup">
+          <a (click)="toggleMenu()" routerLink="/signup" class="signup">
             {{ 'LAYOUT.JOIN' | translate }}
           </a>
         </div>
@@ -132,12 +132,12 @@
       </div>
     </div>
     <div *ngIf="!userState?.isLoggedIn" class="get-started">
-      <a href="#" class="signin" routerLink="/signin">
+      <a (click)="toggleMenu()" class="signin" routerLink="/signin">
         {{ 'LAYOUT.LOGIN' | translate }}
       </a>
       <p class="signup">
         {{ 'LAYOUT.EXISTS' | translate }}
-        <a routerLink="signup" class="link">
+        <a (click)="toggleMenu()" routerLink="signup" class="link">
           {{ 'LAYOUT.JOIN' | translate }}
         </a>
       </p>
