@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 import { AuthService } from '@se/core/services/auth.service';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Component({
   selector: 'se-landing-page',
@@ -142,15 +143,10 @@ export class LandingPageComponent implements OnInit {
     });
   }
   doSomethingWeird() {
-    this.afStore.doc('/users/saad.errazgouni99@gmail.com').set({
-      accountType: 'test',
-      displayName: 't',
-      displayName_lower: 't',
-      email: 't',
-      email_lower: 't'
-    });
+    this.as.logoutUser();
   }
 }
+
 export function SuperPlaceholder(options) {
   this.options = options;
   this.element = options.element;
