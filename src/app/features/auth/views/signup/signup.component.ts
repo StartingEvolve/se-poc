@@ -68,7 +68,7 @@ export class SignupComponent implements OnInit {
     const fullName =
       this.trimAndCapitalize(this.signupForm.value.firstName) +
       ' ' +
-      this.trimAndCapitalize(this.signupForm.value.firstName);
+      this.trimAndCapitalize(this.signupForm.value.lastName);
     this.aService
       .signupUser({
         password: this.signupForm.value.password,
@@ -80,7 +80,7 @@ export class SignupComponent implements OnInit {
         if (result == null) {
           // null is success, false means there was an error
           console.log('Registering ...');
-          this.router.navigate(['/signin']); // when the user is logged in, navigate them to dashboard
+          console.log('Ok'); // when the user is logged in, navigate them to dashboard
         } else if (result.isValid == false) {
           console.log('Register error', result);
           this.firebaseErrorCode = 'FIREBASE.' + result.code;

@@ -23,3 +23,11 @@
   @apply text-white;
   transition: 0.5s;
 }
+.loader-container {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: black;
+  opacity: 0.8;
+  z-index: 10000000;
+}

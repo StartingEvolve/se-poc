@@ -23,7 +23,6 @@ export class AuthService {
       .signInWithEmailAndPassword(email, password)
       .then(() => {
         console.log('Auth Service: loginUser: success');
-        this.router.navigate(['/dashboard']);
       })
       .catch((error): any => {
         console.log('Auth Service: login error...');
@@ -38,7 +37,6 @@ export class AuthService {
       .createUserWithEmailAndPassword(user.email, user.password)
       .then((result) => {
         let emailLower = user.email.toLowerCase();
-
         this.afStore
           .doc('/users/' + emailLower) // on a successful signup, create a document in 'users' collection with the new user's info
           .set({
@@ -48,7 +46,6 @@ export class AuthService {
             email: user.email,
             email_lower: emailLower
           });
-
         result.user.sendEmailVerification(); // immediately send the user a verification email
       })
       .catch((error): any => {

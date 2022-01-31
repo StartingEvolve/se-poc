@@ -1,7 +1,12 @@
 <!-- <button class="protobtn" *ngIf="buttonDisplay" routerLink="prototype">
   <mat-icon>lightbulb</mat-icon>Prototypes<mat-icon class="closeprotobtn" (click)="hide()">highlight_off</mat-icon>
 </button> -->
-<router-outlet></router-outlet>
+<div class="min-h-full">
+  <router-outlet></router-outlet>
+  <div *ngIf="ls.isLoading | async" class="loader-container">
+    <mat-spinner style="top: 50%; left: 50%"></mat-spinner>
+  </div>
+</div>
 
 <!-- <input type="password" class="form-input" placeholder="text" />
 <input matInput type="text" />

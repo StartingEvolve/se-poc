@@ -11,7 +11,7 @@ import { ProfileItem } from '@se/shared/types/profile-item';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
-  showProfileMenu: boolean = false;
+  showProfileMenu: boolean;
   userState: UserInterface;
   showMenu: boolean = false;
   navItems: NavItem[];
@@ -21,6 +21,8 @@ export class NavbarComponent {
     private as: AuthService,
     private aStore: AuthStore
   ) {
+    this.showProfileMenu = false;
+    this.showMenu = false;
     this.navItems = [
       {
         name: 'HOME',
