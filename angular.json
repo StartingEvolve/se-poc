@@ -37,7 +37,8 @@
       "prefix": "se",
       "architect": {
         "build": {
-          "builder": "@angular-builders/custom-webpack:browser",
+          "builder": "@angular-devkit/build-angular:browser",
+//          "builder": "@angular-builders/custom-webpack:browser",
           "options": {
             "outputPath": "dist/se-poc",
             "index": "src/index.html",
@@ -47,17 +48,18 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/manifest.json"
             ],
             "styles": [
               "src/custom-theme.scss",
               "src/styles.scss"
             ],
             "scripts": [],
-            "customWebpackConfig": {
-              "path": "./custom-webpack.config.js",
-              "replaceDuplicatePlugins": true
-            },
+//            "customWebpackConfig": {
+//              "path": "./custom-webpack.config.js",
+//              "replaceDuplicatePlugins": true
+//            },
             "serviceWorker": true,
             "ngswConfigPath": "ngsw-config.json"
           },
