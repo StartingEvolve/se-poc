@@ -62,7 +62,6 @@ export class SigninComponent implements OnInit {
         if (result == null) {
           // null is success, false means there was an error
           console.log('logging in...');
-          this.router.navigate(['/dashboard']); // when the user is logged in, navigate them to dashboard
         } else if (result.isValid == false) {
           console.log('login error', result);
           this.firebaseErrorCode = 'FIREBASE.' + result.code;

@@ -67,7 +67,9 @@
         "TERMSOFUSER":"Conditions d'utilisation",
         "AND":"et la",
         "PRIVACYPOLICY":"Politique de confidentialité",
-        "OF":"de StartingEvolve"
+        "OF":"de StartingEvolve",
+        "SUBMIT":"Soumir",
+        "RESETMESSAGE":"Réinitialisation du mot de passe"
     },
     "FIREBASE":{
         "auth/user-not-found":"Utilisateur introuvable",
