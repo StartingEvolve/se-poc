@@ -7,6 +7,13 @@
     <mat-spinner style="top: 50%; left: 50%"></mat-spinner>
   </div>
 </div>
+<button class="protobtn" *ngIf="buttonDisplay" routerLink="prototype">
+  <mat-icon>lightbulb</mat-icon>Prototypes<mat-icon
+    class="closeprotobtn"
+    (click)="hide()"
+    >highlight_off</mat-icon
+  >
+</button>
 
 <!-- <input type="password" class="form-input" placeholder="text" />
 <input matInput type="text" />
@@ -22,4 +29,5 @@
   </li>
 </ul>
 <se-language-picker-web></se-language-picker-web>
-<router-outlet></router-outlet> -->
+<router-outlet></router-outlet>
+-->
