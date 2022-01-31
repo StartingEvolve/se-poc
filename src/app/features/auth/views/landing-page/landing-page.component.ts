@@ -92,7 +92,9 @@ export class LandingPageComponent implements OnInit {
     ];
     this.activeItem = 'ARTICLES';
     this.ts.onDefaultLangChange.subscribe((lang) => {
-      this.sp.kill();
+      this.sp.clearChange();
+      this.sp.clearTimersOnLangChange();
+
       this.sp = new SuperPlaceholder({
         placeholders: [
           this.ts.instant('AUTH.PLACEHOLDER1'),
@@ -164,7 +166,7 @@ export function SuperPlaceholder(options) {
       );
     } else {
       //todo (zack) : investigate superplaceholder flickering on lang change  https://codepen.io/joelewis/pen/ePOrmV
-      this.kill();
+      this.clearChange();
     }
   };
 
@@ -180,7 +182,6 @@ export function SuperPlaceholder(options) {
   };
 
   this.goReverse = function () {
-    clearInterval(this.intervalId);
     this.intervalId = setInterval(
       this.onTickReverse.bind(this, function () {
         this.charIdx = 0;
@@ -198,7 +199,8 @@ export function SuperPlaceholder(options) {
     var placeholder = options.placeholders[this.placeholderIdx];
     if (this.charIdx === placeholder.length) {
       // end of a placeholder sentence reached
-      setTimeout(this.goReverse.bind(this), this.options.stay);
+      clearInterval(this.intervalId);
+      this.timeoutId = setTimeout(this.goReverse.bind(this), this.options.stay);
     }
 
     this.setPlaceholder();
@@ -210,7 +212,11 @@ export function SuperPlaceholder(options) {
     this.intervalId = setInterval(this.onTick.bind(this), this.options.speed);
   };
 
-  this.kill = function () {
+  this.clearChange = function () {
     clearInterval(this.intervalId);
+  };
+
+  this.clearTimersOnLangChange = function () {
+    clearTimeout(this.timeoutId);
   };
 }
