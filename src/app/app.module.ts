@@ -25,6 +25,7 @@ import { LayoutModule } from './layout/layout.module';
 import { PrototypeComponent } from './prototype/prototype/prototype.component';
 import { Example1Component } from './prototype/example1/example1.component';
 import { Example2Component } from './prototype/example2/example2.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -59,7 +60,13 @@ export function createTranslateLoader(http: HttpClient) {
         deps: [HttpClient]
       }
     }),
-    FeatureExampleModule
+    FeatureExampleModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the app is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    })
   ],
   providers: [...emulatorProviders],
   bootstrap: [AppComponent]
