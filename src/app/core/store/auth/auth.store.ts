@@ -20,6 +20,8 @@ export class AuthStore extends ObservableStore<UserInterface> {
     private afStore: AngularFirestore
   ) {
     super({ trackStateHistory: true, logStateChanges: true });
+    //Context : See here https://ensak.notion.site/Optimization-Refactoring-Ideas-b716a74fd7f94ee2a496a3db46320214
+    //Todo (zack): Decouple Snapshot listeners from our stores, preferably we would have a gateway orchestrating subscription (listens)
     this.afAuth.onAuthStateChanged((user) => {
       // set up a subscription to always know the login status of the user
       if (user) {
@@ -37,6 +39,7 @@ export class AuthStore extends ObservableStore<UserInterface> {
           });
       } else {
         if (this.docsubscription) {
+          //Make sure unsubscribe to avoid unexpected behaviors, this why having a subscription orchestrator (a fancy name for a garbage collector) would be ideal
           this.docsubscription.unsubscribe();
         }
         const initialState = {

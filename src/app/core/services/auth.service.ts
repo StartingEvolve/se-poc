@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
-import { UserData } from '@shared/types/user-data';
-import { throws } from 'assert';
 import firebase from 'firebase/compat/app';
 
 @Injectable({
@@ -16,7 +14,7 @@ export class AuthService {
     private afStore: AngularFirestore
   ) {}
   loginWithGoogle() {
-    this.afAuth.signInWithPopup(new firebase.auth.GithubAuthProvider());
+    this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
   }
   loginUser(email: string, password: string): Promise<any> {
     return this.afAuth

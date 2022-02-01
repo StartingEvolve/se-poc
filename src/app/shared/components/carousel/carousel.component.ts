@@ -1,4 +1,3 @@
-import { ThisReceiver } from '@angular/compiler';
 import {
   Component,
   ViewChild,

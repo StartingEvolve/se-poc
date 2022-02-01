@@ -1,6 +1,19 @@
-#Todo (zack): Refactor the steps into separate jobs to optimize the build time
+#Todo (zack): Optimize worflow (save ci run time)
+# -> Possibilities :
+# - Refactor the steps into separate jobs to optimize the build time
+# - Publish a container w/ pre-installed npm dependencies
+# - Find a way to cache angular builds
 on:
   push:
+    # Context : We don't have the feature of protected branches
+    # The workflow we're aiming for :
+    # - No one have direct commit access to develop branch
+    # - The only way to contribute to `develop` is by merging pull requests
+    # - The merge must be guarded by prior CI checks
+    # -> We want to trigger workflows on develop [pull requests,push]
+    # by skipping push runs coming from merged pull requests
+    #Todo (zack) : Research on the internals of Git workflow builders
+    #https://github.community/t/trigger-workflow-only-on-pull-request-merge/17359
     branches: [SET-66-migrate-to-angular-13]
   pull_request:
     branches: [develop,develop-v13]
@@ -48,6 +61,7 @@ jobs:
         with:
           name: dist
           path: ./dist/se-poc
+          #Todo (zack) : Optimize deploy bundles to minimize firebase cost
       - name: Deploy to Staging Env Firebase
         uses: w9jds/firebase-action@master
         with:

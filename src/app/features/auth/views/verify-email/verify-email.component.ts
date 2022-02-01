@@ -3,6 +3,7 @@ import { AuthStore, UserInterface } from '@se/core/store/auth/auth.store';
 import { Router } from '@angular/router';
 import { AuthService } from '@se/core/services/auth.service';
 
+//Todo (zack) : improve UI by removing clutter -> height = viewport w/ navbar | footer
 @Component({
   selector: 'se-verify-email',
   templateUrl: './verify-email.component.html',

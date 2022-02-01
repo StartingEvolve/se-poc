@@ -24,13 +24,13 @@ import {
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { FeatureExampleModule } from './features/feature-example/feature-example.module';
-import { LayoutModule } from './layout/layout.module';
+import { LayoutModule } from '@layout/layout.module';
 
 import { PrototypeComponent } from './prototype/prototype/prototype.component';
 import { Example1Component } from './prototype/example1/example1.component';
 import { Example2Component } from './prototype/example2/example2.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { InterceptorService } from './core/services/interceptor.service';
+import { InterceptorService } from '@core/services/interceptor.service';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');

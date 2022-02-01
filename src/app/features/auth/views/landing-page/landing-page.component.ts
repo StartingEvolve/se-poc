@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from '@se/core/services/auth.service';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Component({
   selector: 'se-landing-page',
@@ -149,6 +148,7 @@ export class LandingPageComponent implements OnInit {
   }
 }
 
+//Todo (zack) : Convert to ES6 & Refactor -> destination : Utility functions
 export function SuperPlaceholder(options) {
   this.options = options;
   this.element = options.element;
@@ -165,7 +165,6 @@ export function SuperPlaceholder(options) {
         this.options.preText + ' ' + placeholderChunk
       );
     } else {
-      //todo (zack) : investigate superplaceholder flickering on lang change  https://codepen.io/joelewis/pen/ePOrmV
       this.clearChange();
     }
   };
