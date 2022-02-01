@@ -33,6 +33,7 @@ import { Example2Component } from './prototype/example2/example2.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { InterceptorService } from '@core/services/interceptor.service';
 import { ArticleComponent } from './features/article/article.component';
+import { ArticleprototypeComponent } from './prototype/articleprototype/articleprototype.component';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -44,7 +45,8 @@ export function createTranslateLoader(http: HttpClient) {
     PrototypeComponent,
     Example1Component,
     Example2Component,
-    ArticleComponent
+    ArticleComponent,
+    ArticleprototypeComponent
   ],
   imports: [
     BrowserModule,
