@@ -6,7 +6,6 @@ import { Example2Component } from './prototype/example2/example2.component';
 import { PrototypeComponent } from './prototype/prototype/prototype.component';
 
 const routes: Routes = [
-  { path: 'article', component: ArticleComponent },
   {
     path: 'test',
     loadChildren: () =>
@@ -20,6 +19,8 @@ const routes: Routes = [
   },
   { path: 'prototype/example1', component: Example1Component },
   { path: 'prototype/example2', component: Example2Component },
+  { path: 'article', component: ArticleComponent },
+  { path: 'article/:articleId', component: ArticleComponent },
   {
     path: '',
     loadChildren: () =>
