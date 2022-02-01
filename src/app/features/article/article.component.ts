@@ -12,26 +12,25 @@ export interface ArticleObject {
 const articles: ArticleObject[] = [
   {
     id: '1',
-    title: 'JavaScript for Beginners',
-    mainImage:
-      'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=facearea&w=1310&h=873&q=80&facepad=3',
+    title: 'Datamining avec python',
+    mainImage: 'https://picsum.photos/1400/1000',
     content: ''
   },
   {
     id: '2',
-    title: 'Datamining with Python',
+    title: "Qu'est-ce qu'un titre professionnel ?",
     mainImage: 'https://picsum.photos/1400/1000',
     content: ''
   },
   {
     id: '3',
-    title: 'Zabba',
+    title: 'Comment devenir technicien son',
     mainImage: 'https://picsum.photos/1400/1000',
     content: ''
   },
   {
     id: '4',
-    title: 'Bruh',
+    title: '22 métiers qui recrutent pour une reconversion en 2022',
     mainImage: 'https://picsum.photos/1400/1000',
     content: ''
   }
