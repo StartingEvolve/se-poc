@@ -59,12 +59,4 @@ export class ArticleComponent implements OnInit {
         ]
     )[0];
   }
-
-  logUrl() {
-    console.log(
-      window.location.href.split('/')[
-        window.location.href.split('/').length - 1
-      ]
-    );
-  }
 }
