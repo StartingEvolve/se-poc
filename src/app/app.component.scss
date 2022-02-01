@@ -2,15 +2,11 @@
   @apply py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-400;
 }
 .protobtn {
-  @apply flex w-40 h-10 rounded-full text-gray-100 font-medium align-middle px-3 py-2 justify-center;
+  @apply flex w-40 h-10 rounded-full text-gray-100 align-middle px-3 py-2 justify-center fixed z-50 bottom-8 right-12;
+  font-weight: 430;
   transition: 0.5s;
   background-color: #6854c4;
-  align-items: center;
-  justify-content: center;
-  position: fixed;
-  bottom: 2rem;
-  right: 3rem;
-  z-index: 50;
+  font-family: Poppins;
 }
 .protobtn:hover {
   background-color: #7b6bc5;

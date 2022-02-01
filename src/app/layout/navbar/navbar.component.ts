@@ -32,7 +32,7 @@ export class NavbarComponent {
       {
         name: 'ARTICLES',
         active: false,
-        to: '/articles'
+        to: '/article'
       },
       {
         name: 'FORMATIONS',
