@@ -25,6 +25,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { FeatureExampleModule } from './features/feature-example/feature-example.module';
 import { LayoutModule } from '@layout/layout.module';
+import { MatTableModule } from '@angular/material/table';
 
 import { PrototypeComponent } from './prototype/prototype/prototype.component';
 import { Example1Component } from './prototype/example1/example1.component';
@@ -52,6 +53,7 @@ export function createTranslateLoader(http: HttpClient) {
     SharedModule,
     CoreModule,
     LayoutModule,
+    MatTableModule,
     //Todo (zack): Migrate to AngularFire v7 with modular API
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,

@@ -6,7 +6,15 @@ import { Example2Component } from './prototype/example2/example2.component';
 import { PrototypeComponent } from './prototype/prototype/prototype.component';
 
 const routes: Routes = [
+  {
+    path: 'prototype',
+    component: PrototypeComponent
+  },
+  { path: 'prototype/example1', component: Example1Component },
+  { path: 'prototype/example2', component: Example2Component },
+
   { path: 'article', component: ArticleComponent },
+  { path: 'article/:articleId', component: ArticleComponent },
   {
     path: 'test',
     loadChildren: () =>
@@ -14,14 +22,6 @@ const routes: Routes = [
         (m) => m.FeatureExampleModule
       )
   },
-  {
-    path: 'prototype',
-    component: PrototypeComponent
-  },
-  { path: 'prototype/example1', component: Example1Component },
-  { path: 'prototype/example2', component: Example2Component },
-  { path: 'article', component: ArticleComponent },
-  { path: 'article/:articleId', component: ArticleComponent },
   {
     path: '',
     loadChildren: () =>
