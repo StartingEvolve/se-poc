@@ -2,12 +2,7 @@ table{
   width: 100%;
 }
 .protolink{
-  background-color: #7b6bc5;
-  border-radius: 100%;
-  width: 100%;
-  padding:5px 15px;
-  border:none;
-  cursor: pointer;
+  @apply bg-green-500 rounded-full w-full py-1 px-4 border-0 cursor-pointer;
 }
 .protolink:focus{
   outline:none;

@@ -16,6 +16,11 @@ const ELEMENT_DATA: PrototypeElement[] = [
     name: 'Example2',
     description: 'Example2 WORKS LMAO',
     link: '/prototype/example2'
+  },
+  {
+    name: 'Article Component',
+    description: 'Description du composant Article',
+    link: '/prototype/articleproto'
   }
 ];
 

@@ -1,7 +1,7 @@
 .header {
   @apply z-50 fixed w-screen transition-all delay-75  bg-white shadow;
   .container {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+    @apply max-w-full mx-auto px-4 sm:px-6 lg:px-8;
     .container-fluid {
       @apply flex justify-between h-14;
       .principal {

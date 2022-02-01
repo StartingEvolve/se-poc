@@ -25,12 +25,15 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { FeatureExampleModule } from './features/feature-example/feature-example.module';
 import { LayoutModule } from '@layout/layout.module';
+import { MatTableModule } from '@angular/material/table';
 
 import { PrototypeComponent } from './prototype/prototype/prototype.component';
 import { Example1Component } from './prototype/example1/example1.component';
 import { Example2Component } from './prototype/example2/example2.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { InterceptorService } from '@core/services/interceptor.service';
+import { ArticleComponent } from './features/article/article.component';
+import { ArticleprototypeComponent } from './prototype/articleprototype/articleprototype.component';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -41,7 +44,9 @@ export function createTranslateLoader(http: HttpClient) {
     AppComponent,
     PrototypeComponent,
     Example1Component,
-    Example2Component
+    Example2Component,
+    ArticleComponent,
+    ArticleprototypeComponent
   ],
   imports: [
     BrowserModule,
@@ -50,6 +55,7 @@ export function createTranslateLoader(http: HttpClient) {
     SharedModule,
     CoreModule,
     LayoutModule,
+    MatTableModule,
     //Todo (zack): Migrate to AngularFire v7 with modular API
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
