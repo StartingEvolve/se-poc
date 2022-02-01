@@ -50,6 +50,7 @@ export class ArticleComponent implements OnInit {
 
   ngOnInit(): void {
     // this.article = articles[Math.floor(Math.random() * articles.length)];
+    window.scrollTo(0, 0);
     this.article = articles.filter(
       (e) =>
         e.id ==
