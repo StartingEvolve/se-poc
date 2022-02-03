@@ -19,7 +19,7 @@
           <tbody>
             <tr>
               <td class="p-5">
-                <h1>Hi {{ userState.user?.displayName }},</h1>
+                <h1>Hi {{ userState?.user?.displayName }},</h1>
                 <p class="mt-3">
                   Please verify that your email address is
                   <span class="text-indigo-700">{{
@@ -33,7 +33,7 @@
                 >
                 <a
                   (click)="resendEmailVerification()"
-                  class="block w-full max-w-[300px] bg-[#20DA9C] rounded-sm text-white text-base py-3 px-0 mt-[20px] mx-auto"
+                  class="cursor-pointer block w-full max-w-[300px] bg-[#20DA9C] rounded-sm text-white text-base py-3 px-0 mt-[20px] mx-auto"
                   >Resend verification</a
                 >
               </td>

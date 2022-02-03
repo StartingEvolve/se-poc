@@ -66,7 +66,13 @@ export class AuthService {
       });
   }
   resendEmailVerification(email: string): Promise<any> {
-    return this.afAuth.sendPasswordResetEmail(email);
+    return this.getCurrentUser()
+      .then((result) => {
+        result.sendEmailVerification();
+      })
+      .catch((error): any => {
+        if (error.code) return { isValid: false, code: error.code };
+      });
   }
   logoutUser(): Promise<void> {
     return this.afAuth
