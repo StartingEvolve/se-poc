@@ -26,10 +26,6 @@ export class VerifyEmailComponent {
   resendEmailVerification() {
     this.aService
       .resendEmailVerification(this.userState.user.email_lower)
-      .then((result) => {
-        if (result) {
-          console.log(result.code);
-        }
-      });
+      .then((result) => {});
   }
 }
