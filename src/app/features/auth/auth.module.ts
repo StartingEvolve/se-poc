@@ -13,6 +13,7 @@ import { SignupComponent } from './views/signup/signup.component';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { ArticleCarouselComponent } from './components/article-carousel/article-carousel.component';
 import { ArticleCarouselItemComponent } from './components/article-carousel-item/article-carousel-item.component';
+import { CoursesComponent } from './views/courses/courses.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ArticleCarouselItemComponent } from './components/article-carousel-item
     SignupComponent,
     DashboardComponent,
     ArticleCarouselComponent,
-    ArticleCarouselItemComponent
+    ArticleCarouselItemComponent,
+    CoursesComponent
   ],
   imports: [CommonModule, AuthRoutingModule, SharedModule, LayoutModule]
 })

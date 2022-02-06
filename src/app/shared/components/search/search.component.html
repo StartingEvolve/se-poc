@@ -1,0 +1,187 @@
+<!-- This example requires Tailwind CSS v2.0+ -->
+<div class="max-w-7xl w-full mx-auto sm:px-6 lg:px-8 pt-6 pb-2">
+  <div class="shadow-lg border border-gray-300">
+    <div
+      class="w-full flex flex-col lg:flex-row justify-between border-b-[2px] border-gray-300"
+    >
+      <div class="relative w-full lg:w-[70%]">
+        <div
+          class="pointer-events-none absolute inset-y-0 left-0 pl-3 flex items-center"
+        >
+          <!-- Heroicon name: solid/search -->
+          <svg
+            class="h-5 w-5 text-gray-400"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </div>
+        <input
+          autocomplete="off"
+          name="search"
+          placeholder="What are you looking for?"
+          class="h-14 shadow block w-full bg-white py-2 pl-10 text-sm placeholder-gray-500 focus:outline-none focus:text-gray-900 focus:placeholder-gray-400 sm:text-sm"
+          id="search"
+          type="text"
+        />
+      </div>
+      <div
+        class="relative w-full lg:w-[30%] bg-white lg:border-l-2 lg:border-t-0 border-t-2"
+      >
+        <div
+          class="pointer-events-none absolute inset-y-0 left-0 pl-3 flex items-center"
+        >
+          <img
+            src="/assets/icons/location.svg"
+            class="h-5 w-5"
+            alt=""
+            srcset=""
+          />
+        </div>
+        <input
+          autocomplete="off"
+          name="search"
+          placeholder="Where?"
+          class="h-14 shadow block w-full bg-white py-2 pl-10 lg:w-full lg:border-0 text-sm placeholder-gray-500 focus:outline-none focus:text-gray-900 focus:placeholder-gray-400 sm:text-sm"
+          id="search"
+          type="text"
+        />
+        <div
+          (click)="toggleIsFiltersMobile()"
+          class="absolute md:right-5 sm:right-4 top-3 right-4 inset-y-0 lg:hidden"
+        >
+          <mat-icon class="text-2xl">filter_alt</mat-icon>
+        </div>
+      </div>
+    </div>
+    <div
+      class="w-full bg-white relative h-12 hidden lg:flex justify-start p-4 items-center space-x-4"
+    >
+      <se-dropdown
+        *ngFor="let filter of filters"
+        [filter]="filter"
+        (toggleDropdownEvent)="toggleDropdownById($event)"
+        (toggleOptionEvent)="toggleOptionById($event)"
+        (resetFilterEvent)="resetFilterById($event)"
+      >
+      </se-dropdown>
+
+      <!-- <img class="cursor-pointer lg:block hidden absolute right-1" src="/assets/icons/delete.svg" alt=""
+                srcset=""> -->
+    </div>
+    <div
+      *ngIf="currentOptions.length !== 0"
+      class="bg-gray-300 relative flex items-center space-x-1 lg:space-x-6 pl-4 h-12"
+    >
+      <h2>Filters :</h2>
+      <div class="flex items-center space-x-1 pl-4 h-12">
+        <div
+          *ngFor="let currentOption of currentOptions"
+          class="relative p-1 pl-2 pr-5 text-xs bg-gray-200 rounded-full"
+        >
+          {{ currentOption.label | translate }}
+          <span
+            (click)="removeOption(currentOption.id, currentOption.value)"
+            class="absolute inset-y-0 right-[-8px] flex items-center pr-2 cursor-pointer"
+          >
+            <mat-icon class="absolute right-0 top-1 text-xs hover:text-gray-500"
+              >close</mat-icon
+            >
+          </span>
+        </div>
+      </div>
+      <mat-icon
+        (click)="resetCurrentOptions()"
+        class="cursor-pointer lg:block hidden absolute right-1"
+        color="warn"
+        >delete</mat-icon
+      >
+    </div>
+  </div>
+</div>
+<!--
+      Mobile filter dialog
+
+      Off-canvas filters for mobile, show/hide based on off-canvas filters state.
+    -->
+<div
+  *ngIf="isFiltersMobile"
+  class="fixed inset-0 flex z-[10000] lg:hidden"
+  role="dialog"
+  aria-modal="true"
+>
+  <!--
+        Off-canvas menu overlay, show/hide based on off-canvas menu state.
+
+        Entering: "transition-opacity ease-linear duration-300"
+          From: "opacity-0"
+          To: "opacity-100"
+        Leaving: "transition-opacity ease-linear duration-300"
+          From: "opacity-100"
+          To: "opacity-0"
+      -->
+  <div
+    (click)="toggleIsFiltersMobile()"
+    class="fixed inset-0 bg-black bg-opacity-25"
+    aria-hidden="true"
+  ></div>
+
+  <!--
+        Off-canvas menu, show/hide based on off-canvas menu state.
+
+        Entering: "transition ease-in-out duration-300 transform"
+          From: "translate-x-full"
+          To: "translate-x-0"
+        Leaving: "transition ease-in-out duration-300 transform"
+          From: "translate-x-0"
+          To: "translate-x-full"
+      -->
+  <div
+    class="ml-auto relative overflow-x-hidden md:max-w-xs w-full h-full bg-white shadow-xl py-4 pb-12 flex flex-col overflow-y-auto border-b-2 border-gray-500"
+  >
+    <div class="px-4 flex items-center justify-between">
+      <h2 class="text-lg font-medium text-gray-900">Filters</h2>
+      <button
+        type="button"
+        (click)="toggleIsFiltersMobile()"
+        class="-mr-2 w-10 h-10 bg-white p-2 rounded-md flex items-center justify-center text-gray-400"
+      >
+        <span class="sr-only">Close menu</span>
+        <!-- Heroicon name: outline/x -->
+        <svg
+          class="h-6 w-6"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 18L18 6M6 6l12 12"
+          />
+        </svg>
+      </button>
+    </div>
+
+    <h3 class="sr-only">Categories</h3>
+
+    <se-dropdown
+      *ngFor="let filter of filters"
+      [filter]="filter"
+      (toggleDropdownEvent)="toggleDropdownById($event)"
+      (toggleOptionEvent)="toggleOptionById($event)"
+      (resetFilterEvent)="resetFilterById($event)"
+    >
+    </se-dropdown>
+  </div>
+</div>
