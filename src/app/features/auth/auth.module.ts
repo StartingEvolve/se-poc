@@ -11,6 +11,7 @@ import { ForgotPasswordComponent } from './views/forgot-password/forgot-password
 import { VerifyEmailComponent } from './views/verify-email/verify-email.component';
 import { SignupComponent } from './views/signup/signup.component';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
+import { CoursesComponent } from './views/courses/courses.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { DashboardComponent } from './views/dashboard/dashboard.component';
     ForgotPasswordComponent,
     VerifyEmailComponent,
     SignupComponent,
-    DashboardComponent
+    DashboardComponent,
+    CoursesComponent
   ],
   imports: [CommonModule, AuthRoutingModule, SharedModule, LayoutModule]
 })
