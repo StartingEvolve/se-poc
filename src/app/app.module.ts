@@ -34,6 +34,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { InterceptorService } from '@core/services/interceptor.service';
 import { ArticleComponent } from './features/article/article.component';
 import { ArticleprototypeComponent } from './prototype/articleprototype/articleprototype.component';
+import { CarouselComponent } from './prototype/carousel/carousel.component';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -46,7 +47,8 @@ export function createTranslateLoader(http: HttpClient) {
     Example1Component,
     Example2Component,
     ArticleComponent,
-    ArticleprototypeComponent
+    ArticleprototypeComponent,
+    CarouselComponent
   ],
   imports: [
     BrowserModule,
