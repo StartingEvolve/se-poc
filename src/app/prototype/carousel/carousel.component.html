@@ -33,7 +33,7 @@
     <div *ngFor="let item of carouselItems; let i = index">
       <div
         class="rounded shadow-lg carousel-item"
-        routerLink="../article/{{ item.articleId }}"
+        (click)="navigateToArticle(item.articleId)"
       >
         <img
           class="w-full rounded"
