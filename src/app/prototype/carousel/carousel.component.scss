@@ -1,0 +1,68 @@
+%carousel-btn {
+  @apply cursor-pointer absolute top-[175px] text-center ease-in-out duration-500 md:top-[238px] z-10 text-[#898989] translate-y-[15%] rounded-lg;
+
+  &:hover {
+    transition: ease-in-out 0.4s;
+  }
+}
+
+.carousel-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+
+  .carousel-next-btn {
+    right: 0;
+    @extend %carousel-btn
+  }
+
+  .carousel-prev-btn {
+    left: 0;
+    @extend %carousel-btn
+  }
+}
+
+.carousel-inner {
+  position: relative;
+  display: flex;
+  width: 100%;
+  overflow: hidden;
+
+  .carousel-item {
+    @apply p-3 md:w-[400px] md:h-[500px] cursor-pointer;
+  }
+}
+
+
+.d-none {
+  display: none;
+}
+
+/* mixin for multiline */
+.block-with-text {
+  overflow: hidden;
+  position: relative;
+  line-height: 1.2em;
+  max-height: 6em;
+  text-align: justify;
+  margin-right: -1em;
+  padding-right: 1em;
+
+  &:before {
+    content: '...';
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    right: 0;
+    width: 1em;
+    height: 1em;
+    margin-top: 0.2em;
+    background: white;
+  }
+}
+
