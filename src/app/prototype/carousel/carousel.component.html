@@ -29,11 +29,11 @@
       </button>
     </span>
   </div>
-  <div #ArticleCarousel class="carousel-inner p-5 article-slider">
+  <div #CarouselInner class="carousel-inner p-5 article-slider">
     <div *ngFor="let item of carouselItems; let i = index">
       <div
         class="rounded shadow-lg carousel-item"
-        (click)="navigateToArticle(item.articleId)"
+        (mousedown)="setCarouselItemId(item.articleId)"
       >
         <img
           class="w-full rounded"

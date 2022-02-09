@@ -1,7 +1,18 @@
-import { Component, Input, Inject, OnInit, OnDestroy } from '@angular/core';
+import {
+  Component,
+  Input,
+  Inject,
+  OnInit,
+  OnDestroy,
+  ViewChild,
+  ElementRef,
+  AfterViewInit
+} from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { Router } from '@angular/router';
 import TinySliderConfig from '@vendors/tiny-slider/tiny-slider.config';
+import { fromEvent, timer } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 export interface Script {
   scriptUrl: string;
@@ -19,8 +30,11 @@ export interface ThirdPartyLibrary {
   styleUrls: ['./carousel.component.scss']
 })
 //Todo (zack): Refactor the component behavior into a webworker & create a scripts service
-export class CarouselComponent implements OnInit, OnDestroy {
+export class CarouselComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() carouselItems: any[];
+  @ViewChild('CarouselInner') carouselInnerElem: ElementRef;
+  carouselItemId: string;
+
   tinySliderConfig: any;
   scripts: Script[];
   libConfig: ThirdPartyLibrary;
@@ -101,8 +115,29 @@ export class CarouselComponent implements OnInit, OnDestroy {
     ];
   }
 
+  setCarouselItemId(itemId: string) {
+    this.carouselItemId = itemId;
+  }
+
   ngOnInit() {
     this.loadAPI();
+  }
+
+  ngAfterViewInit() {
+    const mousedown$ = fromEvent(
+      this.carouselInnerElem.nativeElement,
+      'mousedown'
+    );
+
+    //Ignore drag events that trigger a click
+    const mouseup$ = fromEvent(this.carouselInnerElem.nativeElement, 'mouseup');
+
+    mousedown$.subscribe(() => {
+      const clickTimer$ = timer(100);
+      mouseup$
+        .pipe(takeUntil(clickTimer$))
+        .subscribe((e) => this.navigateToArticle(this.carouselItemId));
+    });
   }
 
   //Todo (zack) : Separate mouse clicks with drag events
