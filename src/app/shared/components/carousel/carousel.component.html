@@ -1,37 +1,39 @@
-<div
-  (window:resize)="onResize()"
-  id="carousel-container"
-  class="carousel-container slide-in-top"
->
-  <span
-    id="carousel-prev-btn"
-    (click)="onCarouselArrowClick('left')"
-    class="carousel-prev-btn"
-  >
-    <button
-      type="button"
-      class="inline-flex items-center p-2 border border-transparent rounded-full shadow-sm text-black bg-white hover:bg-gray-300 focus:outline-none"
+<div id="carousel-container" class="carousel-container slide-in-top">
+  <div id="carousel-controls">
+    <span
+      id="carousel-prev-btn"
+      class="prev carousel-prev-btn"
+      data-controls="prev"
+      aria-controls="customize"
+      tabindex="-1"
     >
-      <img src="/assets/icons/chevron-left.svg" alt="" srcset="" />
-    </button>
-  </span>
-  <span
-    id="carousel-next-btn"
-    (click)="onCarouselArrowClick('right')"
-    class="carousel-next-btn"
-  >
-    <button
-      type="button"
-      class="inline-flex items-center p-2 border border-transparent rounded-full shadow-sm text-black bg-white hover:bg-gray-300 focus:outline-none"
+      <button
+        type="button"
+        class="inline-flex items-center p-2 border border-transparent rounded-full shadow-sm text-black bg-white hover:bg-gray-300 focus:outline-none"
+      >
+        <img src="/assets/icons/chevron-left.svg" alt="" srcset="" />
+      </button>
+    </span>
+    <span
+      id="carousel-next-btn"
+      class="next carousel-next-btn"
+      data-controls="next"
+      aria-controls="customize"
+      tabindex="-1"
     >
-      <img src="/assets/icons/chevron-right.svg" alt="" srcset="" />
-    </button>
-  </span>
-  <div #CarouselInner class="carousel-inner p-5">
+      <button
+        type="button"
+        class="inline-flex items-center p-2 border border-transparent rounded-full shadow-sm text-black bg-white hover:bg-gray-300 focus:outline-none"
+      >
+        <img src="/assets/icons/chevron-right.svg" alt="" srcset="" />
+      </button>
+    </span>
+  </div>
+  <div #CarouselInner class="carousel-inner p-5 article-slider">
     <div *ngFor="let item of carouselItems; let i = index">
       <div
         class="rounded shadow-lg carousel-item"
-        routerLink="../article/{{ item.articleId }}"
+        (mousedown)="setCarouselItemId(item.articleId)"
       >
         <img
           class="w-full rounded"
