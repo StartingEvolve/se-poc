@@ -1,11 +1,11 @@
 export default class TinySliderConfig {
-  constructor() {
-    this.slider = this.init();
+  constructor(container) {
+    this.slider = this.init(container);
   }
 
-  init() {
+  init(container) {
     return window.tns({
-      container: '.article-slider',
+      container: '.' + container + '-slider',
       slideBy: 1,
       controlsContainer: '#carousel-controls',
       mouseDrag: true,

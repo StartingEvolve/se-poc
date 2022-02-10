@@ -47,7 +47,11 @@ export class VendorService {
   }
 
   //Subscribe to component specific vendor changes
-  watchVendorChanges(libraryNames: string[], configCallback: Function) {
+  watchVendorChanges(
+    scope: any,
+    libraryNames: string[],
+    configCallback: Function
+  ) {
     return this.venStore.stateChanged.subscribe((state) => {
       if (
         state.libraries.length &&
@@ -55,7 +59,7 @@ export class VendorService {
           .filter((v) => libraryNames.includes(v.name))
           .every((v) => v.resources.script.isLoaded === true)
       ) {
-        const configMap = configCallback.apply(this);
+        const configMap = configCallback.apply(scope);
         this.vendors.forEach((v) => {
           if (configMap.get(v.name)) {
             v.resources.config.configObjects = configMap.get(v.name);

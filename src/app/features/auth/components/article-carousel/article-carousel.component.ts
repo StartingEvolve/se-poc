@@ -13,6 +13,14 @@ import {
 export class ArticleCarouselComponent implements Carousel {
   @Input() carouselItems: Article[];
   @ViewChild('Carousel') carouselComponent: CarouselComponent;
+  carouselMetaData: { container: string; route: string };
+
+  constructor() {
+    this.carouselMetaData = {
+      container: 'article',
+      route: 'article'
+    };
+  }
 
   setCarouselItemId(itemId: string) {
     console.log(itemId);

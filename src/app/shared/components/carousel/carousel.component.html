@@ -29,7 +29,10 @@
       </button>
     </span>
   </div>
-  <div #CarouselInner class="carousel-inner p-5 article-slider">
+  <div
+    #CarouselInner
+    class="carousel-inner p-5 {{ carouselMetaData.route }}-slider"
+  >
     <ng-content></ng-content>
   </div>
 </div>

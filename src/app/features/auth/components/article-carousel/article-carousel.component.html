@@ -1,4 +1,4 @@
-<se-carousel #Carousel>
+<se-carousel #Carousel [carouselMetaData]="carouselMetaData">
   <ng-container *ngFor="let item of carouselItems; let i = index">
     <div (mousedown)="setCarouselItemId(item.articleId)">
       <se-article-carousel-item [articleItem]="item"></se-article-carousel-item>

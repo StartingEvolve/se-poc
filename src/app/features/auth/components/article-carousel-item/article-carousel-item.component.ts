@@ -15,11 +15,4 @@ export interface Article {
 export class ArticleCarouselItemComponent {
   @Input() articleItem: Article;
   //No need for global state since the depth of the tree is shallow
-  @Output() setItemIdRequest = new EventEmitter<string>();
-
-  setItemId(articleId: string) {
-    this.setItemIdRequest.emit(articleId);
-  }
-
-  constructor() {}
 }
