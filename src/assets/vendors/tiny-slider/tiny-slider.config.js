@@ -13,6 +13,7 @@ export default class TinySliderConfig {
       nav: false,
       autoplayButtonOutput: false,
       swipeAngle: false,
+      preventScrollOnTouch: 'force',
       responsive: {
         350: {
           items: 1,
@@ -27,5 +28,9 @@ export default class TinySliderConfig {
 
   destroy() {
     this.slider.destroy();
+  }
+
+  rebuild() {
+    return this.slider.rebuild();
   }
 }
