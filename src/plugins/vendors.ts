@@ -7,7 +7,10 @@ export const vendors = [
         isLoaded: false
       },
       style: '../../assets/vendors/tiny-slider/tiny-slider.min.css',
-      config: '../../assets/vendors/tiny-slider/tiny-slider.config.js'
+      config: {
+        configUrl: '../../assets/vendors/tiny-slider/tiny-slider.config.js',
+        configObjects: []
+      }
     }
   }
 ];

@@ -6,21 +6,24 @@ export default class TinySliderConfig {
   init() {
     return window.tns({
       container: '.article-slider',
-      items: 2,
       slideBy: 1,
       controlsContainer: '#carousel-controls',
       mouseDrag: true,
+      loop: false,
       nav: false,
+      gutter: 50,
       autoplayButtonOutput: false,
       swipeAngle: false,
       preventScrollOnTouch: 'force',
       responsive: {
         350: {
           items: 1,
-          edgePadding: 30
+          edgePadding: 30,
+          fixedWidth: 300
         },
         500: {
-          items: 3
+          items: 3,
+          fixedWidth: 400
         }
       }
     });

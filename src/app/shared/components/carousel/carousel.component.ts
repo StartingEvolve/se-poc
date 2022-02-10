@@ -1,19 +1,22 @@
 import {
   Component,
-  Input,
   OnInit,
   OnDestroy,
   ViewChild,
   ElementRef,
   AfterViewInit
 } from '@angular/core';
-import { OnVendorChangeConfig } from '@core/store/vendor/vendor.store';
+import { Config, OnVendorChangeConfig } from '@core/store/vendor/vendor.store';
 import { Router } from '@angular/router';
 import { fromEvent, Subscription, timer } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { VendorService } from '@core/services/vendor.service';
 
 import TinySliderConfig from '@vendors/tiny-slider/tiny-slider.config';
+
+export interface Carousel {
+  setCarouselItemId(itemId: string): void;
+}
 
 @Component({
   selector: 'se-carousel',
@@ -23,11 +26,10 @@ import TinySliderConfig from '@vendors/tiny-slider/tiny-slider.config';
 export class CarouselComponent
   implements OnInit, AfterViewInit, OnDestroy, OnVendorChangeConfig
 {
-  @Input() carouselItems: any[];
   @ViewChild('CarouselInner') carouselInnerElem: ElementRef;
   carouselItemId: string;
   mouseEvent: any = {};
-  tinySliderConfig: any = {};
+  configurations: Config;
 
   //Todo (zack) : Load component dynamically with view containers
   private readonly libraries: string[];
@@ -35,13 +37,16 @@ export class CarouselComponent
 
   constructor(private router: Router, private venService: VendorService) {
     this.libraries = ['tiny-slider'];
+    this.venService.getConfigObjects(this.libraries).then((config) => {
+      this.configurations = config;
+    });
   }
 
   setCarouselItemId(itemId: string) {
     this.carouselItemId = itemId;
   }
 
-  navigateToArticle(articleId: string) {
+  navigateToItem(articleId: string) {
     this.router.navigate(['article', articleId]);
   }
 
@@ -58,12 +63,24 @@ export class CarouselComponent
       const clickTimer$ = timer(100);
       this.mouseEvent.mouseupSub = mouseup$
         .pipe(takeUntil(clickTimer$))
-        .subscribe(() => this.navigateToArticle(this.carouselItemId));
+        .subscribe(() => {
+          console.log('nav ', this.carouselItemId);
+          if (this.mouseEvent.mouseupSub)
+            this.mouseEvent.mouseupSub.unsubscribe();
+          if (this.carouselItemId) {
+            this.navigateToItem(this.carouselItemId);
+          }
+          // } else {
+          //   setTimeout(() => this.navigateToItem(this.carouselItemId), 50);
+          // }
+        });
     });
   }
 
   seOnVendorChangeConfig() {
-    this.tinySliderConfig = new TinySliderConfig();
+    const configMap = new Map();
+    configMap.set('tiny-slider', [new TinySliderConfig()]);
+    return configMap;
   }
 
   ngOnInit() {
@@ -86,9 +103,8 @@ export class CarouselComponent
   ngOnDestroy() {
     if (this.mouseEvent.mousedownSub)
       this.mouseEvent.mousedownSub.unsubscribe();
-    if (this.mouseEvent.mouseupSub) this.mouseEvent.mouseupSub.unsubscribe();
     if (this.storeSub) this.storeSub.unsubscribe();
 
-    this.tinySliderConfig.destroy();
+    this.configurations.get('tiny-slider')[0].destroy();
   }
 }

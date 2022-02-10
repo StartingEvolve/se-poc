@@ -85,6 +85,7 @@ export function createTranslateLoader(http: HttpClient) {
     ...emulatorProviders,
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }
   ],
+  exports: [CarouselComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

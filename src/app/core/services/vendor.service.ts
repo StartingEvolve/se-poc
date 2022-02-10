@@ -1,6 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import {
+  Config,
   Script,
   ThirdPartyLibrary,
   VendorStore
@@ -54,7 +55,13 @@ export class VendorService {
           .filter((v) => libraryNames.includes(v.name))
           .every((v) => v.resources.script.isLoaded === true)
       ) {
-        configCallback.apply(this);
+        const configMap = configCallback.apply(this);
+        this.vendors.forEach((v) => {
+          if (configMap.get(v.name)) {
+            v.resources.config.configObjects = configMap.get(v.name);
+          }
+        });
+        console.log(this.vendors);
       }
     });
   }
@@ -102,5 +109,23 @@ export class VendorService {
 
   getVendorsByName(libraryNames: string[]) {
     return this.vendors.filter((vendor) => libraryNames.includes(vendor.name));
+  }
+
+  //Hacky way to decouple components from the service and the store
+  getConfigObjects(libraryNames: string[]): Promise<Config> {
+    return new Promise((resolve, reject) => {
+      const interval = setInterval(() => {
+        if (this.venStore.checkAllLoadedLibraries(libraryNames)) {
+          const configMap = new Map();
+          this.getVendorsByName(libraryNames).forEach((v) => {
+            configMap.set(v.name, v.resources.config.configObjects);
+          });
+          console.log(configMap);
+          clearInterval(interval);
+          resolve(configMap);
+        }
+      }, 100);
+      //Todo: (zack) : handle rejection
+    });
   }
 }

@@ -10,8 +10,10 @@ import { Injectable } from '@angular/core';
 export declare interface OnVendorChangeConfig {
   //A callback method that is invoked immediately after vendor Changes are emitted
   //This enables you to inject your custom configuration for the libraries you use in your component
-  seOnVendorChangeConfig(): void;
+  seOnVendorChangeConfig(): Config;
 }
+
+export type Config = Map<string, any[]>;
 
 export interface Script {
   scriptUrl: string;
@@ -23,7 +25,10 @@ export interface ThirdPartyLibrary {
   resources: {
     script: Script;
     style?: string;
-    config?: string;
+    config?: {
+      configUrl: string;
+      configObjects: Object[];
+    };
   };
 }
 
@@ -95,6 +100,14 @@ export class VendorStore extends ObservableStore<VendorState> {
   getLibrary(libraryName: string) {
     let state = this.getState();
     return state.libraries.filter((lib) => lib.name === libraryName);
+  }
+
+  //Todo (zack) : refactor later
+  checkAllLoadedLibraries(libraryNames: string[]) {
+    let state = this.getState();
+    return state.libraries
+      .filter((lib) => libraryNames.includes(lib.name))
+      .every((lib) => lib.resources.script.isLoaded);
   }
 
   //Todo (zack): unlink CSS stylesheets
