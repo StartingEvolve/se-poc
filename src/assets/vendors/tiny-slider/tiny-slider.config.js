@@ -14,7 +14,7 @@ export default class TinySliderConfig {
       gutter: 50,
       autoplayButtonOutput: false,
       swipeAngle: false,
-      preventScrollOnTouch: 'force',
+      preventScrollOnTouch: 'auto',
       responsive: {
         350: {
           items: 1,

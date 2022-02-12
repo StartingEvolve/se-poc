@@ -14,7 +14,6 @@ import { takeUntil } from 'rxjs/operators';
 import { VendorService } from '@core/services/vendor.service';
 
 import TinySliderConfig from '@vendors/tiny-slider/tiny-slider.config';
-import { context } from '@shared/helpers/decorators';
 
 export interface Carousel {
   setCarouselItemId(itemId: string): void;
