@@ -44,7 +44,7 @@ export class AuthStore extends ObservableStore<UserInterface> {
       } else {
         if (this.docsubscription) {
           //Make sure unsubscribe to avoid unexpected behaviors, this why having a subscription orchestrator (a fancy name for a garbage collector) would be ideal
-          // this.docsubscription.unsubscribe();
+          this.docsubscription.unsubscribe();
         }
         const initialState = {
           isLoggedIn: false,
