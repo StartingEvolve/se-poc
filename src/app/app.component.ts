@@ -2,16 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable, Subscription } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
-import { AuthStore } from './core/store/auth/auth.store';
-import {
-  Event,
-  NavigationCancel,
-  NavigationEnd,
-  NavigationError,
-  NavigationStart,
-  Router
-} from '@angular/router';
-import { LoaderService } from './core/services/loader.service';
+import { AuthStore } from '@core/store/auth/auth.store';
+import { LoaderService } from '@core/services/loader.service';
 
 @Component({
   selector: 'se-root',
@@ -31,12 +23,11 @@ export class AppComponent implements OnInit {
     private tr: TranslateService,
     public ls: LoaderService
   ) {}
+
   ngOnInit() {
     this.tr.setDefaultLang('en');
   }
-  ClickHandle() {
-    // this.ts.changeValue();
-  }
+
   hide() {
     this.buttonDisplay = false;
   }

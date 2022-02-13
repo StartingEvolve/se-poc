@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import firebase from 'firebase/compat/app';
+import { DatabaseSerice } from '@core/adapters/database/database';
 
 @Injectable({
   providedIn: 'root'
@@ -11,11 +11,13 @@ export class AuthService {
   constructor(
     private router: Router,
     private afAuth: AngularFireAuth,
-    private afStore: AngularFirestore
+    private afStore: DatabaseSerice
   ) {}
+
   loginWithGoogle() {
     this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
   }
+
   loginUser(email: string, password: string): Promise<any> {
     return this.afAuth
       .signInWithEmailAndPassword(email, password)
@@ -36,6 +38,7 @@ export class AuthService {
       .then((result) => {
         let emailLower = user.email.toLowerCase();
         this.afStore
+          .getDatabase()
           .doc('/users/' + emailLower) // on a successful signup, create a document in 'users' collection with the new user's info
           .set({
             accountType: 'endUser',
@@ -51,6 +54,7 @@ export class AuthService {
         if (error.code) return { isValid: false, code: error.code };
       });
   }
+
   resetPassword(email: string): Promise<any> {
     return this.afAuth
       .sendPasswordResetEmail(email)
@@ -65,6 +69,7 @@ export class AuthService {
         if (error.code) return error;
       });
   }
+
   resendEmailVerification(email: string): Promise<any> {
     return this.getCurrentUser()
       .then((result) => {
@@ -74,6 +79,7 @@ export class AuthService {
         if (error.code) return { isValid: false, code: error.code };
       });
   }
+
   logoutUser(): Promise<void> {
     return this.afAuth
       .signOut()
@@ -87,9 +93,11 @@ export class AuthService {
         if (error.code) return error;
       });
   }
+
   setUserInfo(payload: object) {
     console.log('Auth Service: saving user info...');
     this.afStore
+      .getDatabase()
       .collection('users')
       .add(payload)
       .then(function (res) {
@@ -97,6 +105,7 @@ export class AuthService {
         console.log(res);
       });
   }
+
   getCurrentUser() {
     return this.afAuth.currentUser; // returns user object for logged-in users, otherwise returns null
   }

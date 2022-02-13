@@ -86,7 +86,7 @@ export class VendorService {
       const script = document.createElement('script');
       script.src = scriptUrl;
       script.type = 'text/javascript';
-      //Loading scripts asynchronously since there are no dependencies between libs in the current spec
+      //Loading scripts asynchronously since there are no dependencies between libs in the current version specs
       script.async = true;
       //Avoid race conditions in Window global variables
       script.onload = () => {
