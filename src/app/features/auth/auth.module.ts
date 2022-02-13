@@ -12,6 +12,8 @@ import { VerifyEmailComponent } from './views/verify-email/verify-email.componen
 import { SignupComponent } from './views/signup/signup.component';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { CoursesComponent } from './views/courses/courses.component';
+import { ArticleCarouselComponent } from './components/article-carousel/article-carousel.component';
+import { ArticleCarouselItemComponent } from './components/article-carousel-item/article-carousel-item.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { CoursesComponent } from './views/courses/courses.component';
     VerifyEmailComponent,
     SignupComponent,
     DashboardComponent,
-    CoursesComponent
+    CoursesComponent,
+    ArticleCarouselComponent,
+    ArticleCarouselItemComponent
   ],
   imports: [CommonModule, AuthRoutingModule, SharedModule, LayoutModule]
 })

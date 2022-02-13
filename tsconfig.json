@@ -11,6 +11,7 @@
       "@layout/*": ["app/layout/*"],
       "@shared/*": ["app/shared/*"],
       "@views/*": ["app/views/*"],
+      "@vendors/*": ["assets/vendors/*"],
     },
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
