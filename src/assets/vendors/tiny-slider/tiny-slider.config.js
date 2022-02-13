@@ -1,25 +1,29 @@
 export default class TinySliderConfig {
-  constructor() {
-    this.slider = this.init();
+  constructor(container) {
+    this.slider = this.init(container);
   }
 
-  init() {
+  init(container) {
     return window.tns({
-      container: '.article-slider',
-      items: 2,
+      container: '.' + container + '-slider',
       slideBy: 1,
       controlsContainer: '#carousel-controls',
       mouseDrag: true,
+      loop: false,
       nav: false,
+      gutter: 50,
       autoplayButtonOutput: false,
       swipeAngle: false,
+      preventScrollOnTouch: 'auto',
       responsive: {
         350: {
           items: 1,
-          edgePadding: 30
+          edgePadding: 30,
+          fixedWidth: 300
         },
         500: {
-          items: 3
+          items: 3,
+          fixedWidth: 400
         }
       }
     });
@@ -27,5 +31,9 @@ export default class TinySliderConfig {
 
   destroy() {
     this.slider.destroy();
+  }
+
+  rebuild() {
+    return this.slider.rebuild();
   }
 }

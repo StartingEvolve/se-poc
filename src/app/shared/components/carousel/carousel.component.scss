@@ -11,9 +11,6 @@
   overflow: hidden;
 }
 
-.carousel-inner .carousel-item {
-  @apply p-3 md:w-[400px] md:h-[500px] cursor-pointer w-[300px] h-[375px];
-}
 
 .carousel-container .carousel-next-btn,
 .carousel-container .carousel-prev-btn {
@@ -31,32 +28,4 @@
 .carousel-container .carousel-prev-btn:hover,
 .carousel-container .carousel-next-btn:hover {
   transition: ease-in-out 0.4s;
-}
-.d-none {
-  display: none;
-}
-/* mixin for multiline */
-.block-with-text {
-  overflow: hidden;
-  position: relative;
-  line-height: 1.2em;
-  max-height: 6em;
-  text-align: justify;
-  margin-right: -1em;
-  padding-right: 1em;
-}
-.block-with-text:before {
-  content: '...';
-  position: absolute;
-  right: 0;
-  bottom: 0;
-}
-.block-with-text:after {
-  content: '';
-  position: absolute;
-  right: 0;
-  width: 1em;
-  height: 1em;
-  margin-top: 0.2em;
-  background: white;
 }

@@ -2,11 +2,12 @@ import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TestStore } from './store/test/test.store';
 import { AuthStore } from './store/auth/auth.store';
+import { VendorStore } from './store/vendor/vendor.store';
 
 @NgModule({
   declarations: [],
   imports: [CommonModule],
-  providers: [TestStore, AuthStore]
+  providers: [TestStore, AuthStore, VendorStore]
 })
 export class CoreModule {
   constructor(
