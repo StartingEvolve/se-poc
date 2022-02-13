@@ -24,6 +24,7 @@ interface CarouselMetaData {
   container: string;
 }
 
+//Todo (zack) : add the ability to toggle carousel buttons on item changes
 @Component({
   selector: 'se-carousel',
   templateUrl: './carousel.component.html',

@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+// import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ObservableStore } from '@codewithdan/observable-store';
 import { UserDocument } from '@se/shared/types/user-document';
 import { Subscription } from 'rxjs';
+import { DatabaseSerice } from '@core/adapters/database/database';
+
 export interface UserInterface {
   isLoggedIn: boolean;
   isEmailVerified?: boolean;
@@ -15,9 +17,10 @@ export interface UserInterface {
 })
 export class AuthStore extends ObservableStore<UserInterface> {
   docsubscription: Subscription;
+
   constructor(
     private afAuth: AngularFireAuth,
-    private afStore: AngularFirestore
+    private afStore: DatabaseSerice
   ) {
     super({ trackStateHistory: true, logStateChanges: true });
     //Context : See here https://ensak.notion.site/Optimization-Refactoring-Ideas-b716a74fd7f94ee2a496a3db46320214
@@ -27,6 +30,7 @@ export class AuthStore extends ObservableStore<UserInterface> {
       if (user) {
         let emailLower = user.email.toLowerCase();
         this.docsubscription = this.afStore
+          .getDatabase()
           .doc<UserDocument>('users/' + emailLower)
           .valueChanges()
           .subscribe((data) => {
@@ -40,7 +44,7 @@ export class AuthStore extends ObservableStore<UserInterface> {
       } else {
         if (this.docsubscription) {
           //Make sure unsubscribe to avoid unexpected behaviors, this why having a subscription orchestrator (a fancy name for a garbage collector) would be ideal
-          this.docsubscription.unsubscribe();
+          // this.docsubscription.unsubscribe();
         }
         const initialState = {
           isLoggedIn: false,
@@ -52,6 +56,7 @@ export class AuthStore extends ObservableStore<UserInterface> {
     });
   }
 }
+
 export enum AuthStoreActions {
   InitialState = 'Initial state',
   UpdateState = 'Update State'

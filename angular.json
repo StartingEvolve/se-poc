@@ -61,7 +61,10 @@
               "replaceDuplicatePlugins": true
             },
             "serviceWorker": true,
-            "ngswConfigPath": "ngsw-config.json"
+            "ngswConfigPath": "ngsw-config.json",
+            "allowedCommonJsDependencies": [
+              "lodash.isEqual"
+            ]
           },
           "configurations": {
             "production": {
