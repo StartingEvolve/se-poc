@@ -8,14 +8,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StepperComponent } from './components/stepper/stepper.component';
 import { CarouselComponent } from './components/carousel/carousel.component';
+import { SearchComponent } from './components/search/search.component';
+import { DropdownComponent } from './components/dropdown/dropdown.component';
 const components = [
   LanguagePickerWebComponent,
   StepperComponent,
-  CarouselComponent
+  CarouselComponent,
+  SearchComponent
 ];
 
 @NgModule({
-  declarations: [...components],
+  declarations: [...components, DropdownComponent],
   imports: [
     CommonModule,
     MaterialUiModule,

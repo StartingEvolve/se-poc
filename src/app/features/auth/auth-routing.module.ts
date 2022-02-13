@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '@se/core/services/auth.guard';
 import { AuthComponent } from './auth.component';
+import { CoursesComponent } from './views/courses/courses.component';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { ForgotPasswordComponent } from './views/forgot-password/forgot-password.component';
 import { LandingPageComponent } from './views/landing-page/landing-page.component';
@@ -30,6 +31,10 @@ const routes: Routes = [
       {
         path: 'verify-email',
         component: VerifyEmailComponent
+      },
+      {
+        path: 'courses',
+        component: CoursesComponent
       }
     ]
   },

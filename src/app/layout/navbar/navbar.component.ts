@@ -32,12 +32,12 @@ export class NavbarComponent {
       {
         name: 'ARTICLES',
         active: false,
-        to: '/article'
+        to: '/articles'
       },
       {
         name: 'FORMATIONS',
         active: false,
-        to: '/formations'
+        to: '/courses'
       },
       {
         name: 'ADVICES',
