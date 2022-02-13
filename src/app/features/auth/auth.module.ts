@@ -11,6 +11,7 @@ import { ForgotPasswordComponent } from './views/forgot-password/forgot-password
 import { VerifyEmailComponent } from './views/verify-email/verify-email.component';
 import { SignupComponent } from './views/signup/signup.component';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
+import { CoursesComponent } from './views/courses/courses.component';
 import { ArticleCarouselComponent } from './components/article-carousel/article-carousel.component';
 import { ArticleCarouselItemComponent } from './components/article-carousel-item/article-carousel-item.component';
 import { CoursesComponent } from './views/courses/courses.component';
@@ -24,6 +25,7 @@ import { CoursesComponent } from './views/courses/courses.component';
     VerifyEmailComponent,
     SignupComponent,
     DashboardComponent,
+    CoursesComponent,
     ArticleCarouselComponent,
     ArticleCarouselItemComponent,
     CoursesComponent
