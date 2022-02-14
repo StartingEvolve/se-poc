@@ -66,7 +66,7 @@ export function createTranslateLoader(http: HttpClient) {
     AngularFireStorageModule,
     HttpClientModule,
     TranslateModule.forRoot({
-      defaultLanguage: 'en',
+      defaultLanguage: 'fr',
       loader: {
         provide: TranslateLoader,
         useFactory: createTranslateLoader,
