@@ -62,30 +62,31 @@ export class NavbarComponent implements OnInit {
     }
   }
   ngOnInit(): void {
+    //Variables that depend on input must be initialized on the Init lifecycle hook
     this.navItems = [
       {
         name: 'HOME',
-        active: this.activeId == 0 ? true : false,
+        active: this.activeId == 0,
         to: '/'
       },
       {
         name: 'ARTICLES',
-        active: this.activeId == 1 ? true : false,
+        active: this.activeId == 1,
         to: '/articles'
       },
       {
         name: 'FORMATIONS',
-        active: this.activeId == 2 ? true : false,
+        active: this.activeId == 2,
         to: '/courses'
       },
       {
         name: 'ADVICES',
-        active: this.activeId == 3 ? true : false,
+        active: this.activeId == 3,
         to: '/advices'
       },
       {
         name: 'BECOME_PARTNER',
-        active: this.activeId == 4 ? true : false,
+        active: this.activeId == 4,
         to: '/start_partnership'
       }
     ];
