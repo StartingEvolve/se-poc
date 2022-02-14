@@ -160,6 +160,6 @@
   },
   "defaultProject": "se-poc",
   "cli": {
-    "defaultCollection": "@angular-eslint/schematics"
+    "defaultCollection": "@startingevolve/schematics"
   }
 }
