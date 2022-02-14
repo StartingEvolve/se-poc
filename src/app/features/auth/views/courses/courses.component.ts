@@ -8,6 +8,7 @@ import { CourseData } from '@se/core/store/search-course/search-courses.store';
 })
 export class CoursesComponent {
   courses: CourseData[];
+  routeId: number = 2;
   constructor() {
     this.courses = [
       {
