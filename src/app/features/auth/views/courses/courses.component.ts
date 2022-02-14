@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CourseData } from '../../components/course-card/course-card.component';
+import { CourseData } from '@se/core/store/search-course/search-courses.store';
 
 @Component({
   selector: 'se-courses',
