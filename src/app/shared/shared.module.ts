@@ -10,15 +10,19 @@ import { StepperComponent } from './components/stepper/stepper.component';
 import { CarouselComponent } from './components/carousel/carousel.component';
 import { SearchComponent } from './components/search/search.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
+import { TruncatePipe } from './pipes/truncate.pipe';
+import { PaginationComponent } from './components/pagination/pagination.component';
 const components = [
   LanguagePickerWebComponent,
   StepperComponent,
   CarouselComponent,
-  SearchComponent
+  SearchComponent,
+  PaginationComponent,
+  DropdownComponent
 ];
 
 @NgModule({
-  declarations: [...components, DropdownComponent],
+  declarations: [...components, TruncatePipe],
   imports: [
     CommonModule,
     MaterialUiModule,
@@ -35,6 +39,7 @@ const components = [
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    TruncatePipe,
     ...components
   ]
 })

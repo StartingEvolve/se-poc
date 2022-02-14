@@ -12,7 +12,6 @@ import { LoaderService } from '@core/services/loader.service';
 })
 export class AppComponent implements OnInit {
   buttonDisplay: boolean = true;
-  subs: Subscription = new Subscription();
   message: string;
   title = 'se-poc';
   items: Observable<any>;

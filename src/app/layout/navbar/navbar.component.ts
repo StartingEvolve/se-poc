@@ -72,6 +72,9 @@ export class NavbarComponent {
     this.navItems.forEach((item, ind) => {
       item.active = ind == index;
     });
+    this.showProfileMenu = false;
+    this.showMenu = false;
+    window.scrollTo(0, 0);
   }
   toggleMenu(): void {
     this.showMenu = !this.showMenu;
