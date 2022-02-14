@@ -31,12 +31,12 @@ const routes: Routes = [
       {
         path: 'verify-email',
         component: VerifyEmailComponent
-      },
-      {
-        path: 'courses',
-        component: CoursesComponent
       }
     ]
+  },
+  {
+    path: 'courses',
+    component: CoursesComponent
   },
   {
     path: 'signin',
