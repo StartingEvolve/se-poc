@@ -1,4 +1,5 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from '@se/core/services/auth.service';
 import { AuthStore, UserInterface } from '@se/core/store/auth/auth.store';
@@ -10,7 +11,8 @@ import { ProfileItem } from '@se/shared/types/profile-item';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
+  @Input() activeId: number;
   showProfileMenu: boolean;
   userState: UserInterface;
   showMenu: boolean = false;
@@ -19,62 +21,23 @@ export class NavbarComponent {
   constructor(
     private ts: TranslateService,
     private as: AuthService,
-    private aStore: AuthStore
+    private aStore: AuthStore,
+    private router: Router
   ) {
     this.showProfileMenu = false;
     this.showMenu = false;
-    this.navItems = [
-      {
-        name: 'HOME',
-        active: true,
-        to: '/'
-      },
-      {
-        name: 'ARTICLES',
-        active: false,
-        to: '/articles'
-      },
-      {
-        name: 'FORMATIONS',
-        active: false,
-        to: '/courses'
-      },
-      {
-        name: 'ADVICES',
-        active: false,
-        to: '/advices'
-      },
-      {
-        name: 'BECOME_PARTNER',
-        active: false,
-        to: '/start_partnership'
-      }
-    ];
-    this.profileItems = [
-      {
-        name: 'PROFILE',
-        to: '/Profile'
-      },
-      {
-        name: 'SETTINGS',
-        to: '/Setting'
-      },
-      {
-        name: 'LOGOUT',
-        to: '/Logout'
-      }
-    ];
     this.aStore.stateChanged.subscribe((state) => {
       this.userState = state;
     });
   }
-  setActive(index: number): void {
+  setActive(index: number, to: string): void {
     this.navItems.forEach((item, ind) => {
       item.active = ind == index;
     });
     this.showProfileMenu = false;
     this.showMenu = false;
     window.scrollTo(0, 0);
+    this.router.navigate([to]);
   }
   toggleMenu(): void {
     this.showMenu = !this.showMenu;
@@ -97,5 +60,48 @@ export class NavbarComponent {
       this.toggleProfileMenu();
       this.as.logoutUser();
     }
+  }
+  ngOnInit(): void {
+    this.navItems = [
+      {
+        name: 'HOME',
+        active: this.activeId == 0 ? true : false,
+        to: '/'
+      },
+      {
+        name: 'ARTICLES',
+        active: this.activeId == 1 ? true : false,
+        to: '/articles'
+      },
+      {
+        name: 'FORMATIONS',
+        active: this.activeId == 2 ? true : false,
+        to: '/courses'
+      },
+      {
+        name: 'ADVICES',
+        active: this.activeId == 3 ? true : false,
+        to: '/advices'
+      },
+      {
+        name: 'BECOME_PARTNER',
+        active: this.activeId == 4 ? true : false,
+        to: '/start_partnership'
+      }
+    ];
+    this.profileItems = [
+      {
+        name: 'PROFILE',
+        to: '/Profile'
+      },
+      {
+        name: 'SETTINGS',
+        to: '/Setting'
+      },
+      {
+        name: 'LOGOUT',
+        to: '/Logout'
+      }
+    ];
   }
 }

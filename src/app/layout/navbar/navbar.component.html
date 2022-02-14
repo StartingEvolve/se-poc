@@ -9,10 +9,9 @@
         <div class="nav-items">
           <div
             *ngFor="let navItem of navItems; index as indexOfelement"
-            [routerLink]="[navItem.to]"
             class="default"
             [class.active]="navItem.active"
-            (click)="setActive(indexOfelement)"
+            (click)="setActive(indexOfelement, navItem.to)"
           >
             {{ 'LAYOUT.' + navItem.name | translate }}
           </div>
@@ -86,10 +85,9 @@
     <div class="nav-items-mobile">
       <div
         *ngFor="let navItem of navItems; index as indexOfelement"
-        [routerLink]="[navItem.to]"
         [class.default_mobile]="!navItem.active"
         [class.active_mobile]="navItem.active"
-        (click)="setActive(indexOfelement)"
+        (click)="setActive(indexOfelement, navItem.to)"
       >
         {{ 'LAYOUT.' + navItem.name | translate }}
       </div>

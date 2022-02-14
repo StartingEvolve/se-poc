@@ -31,6 +31,10 @@ const routes: Routes = [
       {
         path: 'verify-email',
         component: VerifyEmailComponent
+      },
+      {
+        path: 'articles',
+        component: SignupComponent
       }
     ]
   },
