@@ -1,10 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  AfterViewInit,
+  ViewChild,
+  OnDestroy
+} from '@angular/core';
+import { fromEvent, Observable, Subscription } from 'rxjs';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  filter,
+  tap
+} from 'rxjs/operators';
 export interface dropdownOption {
   value: string;
   label: string;
   isChecked: boolean;
 }
-export interface filter {
+export interface Filter {
   id: number;
   name: string;
   isOpen: boolean;
@@ -21,10 +34,12 @@ export interface currentOption {
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss']
 })
-export class SearchComponent {
-  filters: filter[];
+export class SearchComponent implements AfterViewInit, OnDestroy {
+  filters: Filter[];
+  EventSubscription: Subscription;
   currentOptions: currentOption[];
   isFiltersMobile: boolean;
+  @ViewChild('input') input: ElementRef;
   constructor() {
     this.isFiltersMobile = false;
     this.currentOptions = [];
@@ -69,6 +84,18 @@ export class SearchComponent {
         ]
       }
     ];
+  }
+  ngAfterViewInit(): void {
+    this.EventSubscription = fromEvent(this.input.nativeElement, 'keyup')
+      .pipe(
+        filter(Boolean),
+        debounceTime(250),
+        distinctUntilChanged(),
+        tap((text) => {
+          console.log(this.input.nativeElement.value);
+        })
+      )
+      .subscribe();
   }
   toggleDropdownById(id: number) {
     this.filters.forEach((item, ind) => {
@@ -128,5 +155,8 @@ export class SearchComponent {
   }
   toggleIsFiltersMobile() {
     this.isFiltersMobile = !this.isFiltersMobile;
+  }
+  ngOnDestroy(): void {
+    this.EventSubscription.unsubscribe();
   }
 }
