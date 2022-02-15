@@ -23,6 +23,10 @@ export interface CourseData {
   isEligible?: boolean;
   duration?: string;
   deadline?: string;
+  author?: string[];
+  companyLogo?: string;
+  rating?: number;
+  ratersNumber?: number;
 }
 
 @Injectable({

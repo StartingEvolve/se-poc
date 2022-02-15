@@ -40,3 +40,6 @@ body {
   // hide the warning banner as AngularFire doesn't support the 'disableWarnings' option
   display: none;
 }
+mark {
+  @apply bg-transparent text-indigo-700 font-bold;
+}

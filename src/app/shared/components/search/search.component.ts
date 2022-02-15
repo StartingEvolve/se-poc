@@ -3,7 +3,8 @@ import {
   ElementRef,
   AfterViewInit,
   ViewChild,
-  OnDestroy
+  OnDestroy,
+  OnInit
 } from '@angular/core';
 import { DatabaseSerice } from '@se/core/adapters/database/database';
 import { timeStamp } from 'console';
@@ -38,24 +39,44 @@ export interface currentOption {
   label: string;
 }
 
+export interface LocationSearchHit {
+  document: {
+    Code_postal: string;
+    Nom_commune: string;
+    id: string;
+  };
+  highlights?: {
+    field: string;
+    matchedToken: string[];
+    snippet: string;
+  }[];
+  text_match?: number;
+}
+
+export interface LocationSearchResult {
+  found: number;
+  hits: any[];
+}
+
 @Component({
   selector: 'se-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss']
 })
 export class SearchComponent
-  implements AfterViewInit, OnDestroy, OnVendorChangeConfig
+  implements AfterViewInit, OnDestroy, OnVendorChangeConfig, OnInit
 {
   filters: Filter[];
   EventSubscription: Subscription;
   currentOptions: currentOption[];
   isFiltersMobile: boolean;
   searchLoaded: boolean;
-  results: any;
+  isSelected: boolean = false;
+  locationSearchResults: LocationSearchResult;
   configurations: Config;
   private storeSub: Subscription;
   private readonly libraries: string[];
-  @ViewChild('input') input: ElementRef;
+  @ViewChild('locationInput') locationInput: ElementRef;
   constructor(private db: DatabaseSerice, private venService: VendorService) {
     this.libraries = ['typesense'];
     this.venService.getConfigObjects(this.libraries).then((config) => {
@@ -106,6 +127,9 @@ export class SearchComponent
       }
     ];
   }
+  ngOnInit(): void {
+    this.venService.use(this.libraries);
+  }
   seOnVendorChangeConfig() {
     const configMap = new Map();
     configMap.set('typesense', [new TypesenseConfig()]);
@@ -121,29 +145,40 @@ export class SearchComponent
       this.seOnVendorChangeConfig
     );
 
-    this.EventSubscription = fromEvent(this.input.nativeElement, 'keyup')
+    this.EventSubscription = fromEvent(
+      this.locationInput.nativeElement,
+      'keyup'
+    )
       .pipe(
         filter(Boolean),
-        debounceTime(250),
+        debounceTime(200),
         distinctUntilChanged(),
         tap((text) => {
-          if (this.input.nativeElement.value === '') {
+          if (this.locationInput.nativeElement.value === '') {
             this.searchLoaded = false;
+            this.isSelected = false;
           } else {
             let search = {
-              q: 'Cal',
-              query_by: 'Nom_commune'
+              q: this.locationInput.nativeElement.value,
+              query_by: 'Nom_commune,Code_postal',
+              per_page: 5
             };
-            setTimeout(() => {
-              this.configurations
-                .get('typesense')[0]
-                .collections('france')
-                .documents()
-                .search(search)
-                .then(function (searchResults) {
-                  console.log(searchResults);
-                });
-            }, 1000);
+            this.configurations
+              .get('typesense')[0]
+              .getClient()
+              .collections('france')
+              .documents()
+              .search(search)
+              .then((searchResults) => {
+                this.locationSearchResults = searchResults;
+                if (this.locationSearchResults.found === 0) {
+                  this.searchLoaded = false;
+                  this.isSelected = false;
+                } else {
+                  this.searchLoaded = true;
+                  this.isSelected = false;
+                }
+              });
           }
         })
       )
@@ -183,6 +218,13 @@ export class SearchComponent
         filter.isOpen = false;
       }
     });
+  }
+  setSearchValue(value: string) {
+    console.log(value);
+    this.locationInput.nativeElement.value = value;
+    this.locationInput.nativeElement.blur();
+    this.searchLoaded = false;
+    this.isSelected = true;
   }
   resetFilterById(id: number) {
     this.filters
