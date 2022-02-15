@@ -32,6 +32,7 @@ export class DropdownComponent implements DoCheck {
   @Output() toggleOptionEvent = new EventEmitter<{
     id: number;
     value: string;
+    isMobile: boolean;
   }>();
   @Output() resetFilterEvent = new EventEmitter<number>();
   number: number;
@@ -39,8 +40,8 @@ export class DropdownComponent implements DoCheck {
   toggleDropdown(id: number) {
     this.toggleDropdownEvent.emit(id);
   }
-  toggleOption(id: number, value: string) {
-    this.toggleOptionEvent.emit({ id, value });
+  toggleOption(id: number, value: string, isMobile: boolean) {
+    this.toggleOptionEvent.emit({ id, value, isMobile });
   }
   resetFilter(id: number) {
     this.resetFilterEvent.emit(id);

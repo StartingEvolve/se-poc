@@ -12,5 +12,19 @@ export const vendors = [
         configObjects: []
       }
     }
+  },
+  {
+    name: 'typesense',
+    resources: {
+      script: {
+        scriptUrl: '../../assets/vendors/typesense/typesense.min.js',
+        isLoaded: false
+      },
+      style: '../../assets/vendors/tiny-slider/tiny-slider.min.css',
+      config: {
+        configUrl: '../../assets/vendors/typesense/typesense.config.js',
+        configObjects: []
+      }
+    }
   }
 ];
