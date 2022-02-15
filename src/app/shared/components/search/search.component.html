@@ -30,7 +30,6 @@
           class="h-14 shadow block w-full bg-white py-2 pl-10 text-sm placeholder-gray-500 focus:outline-none focus:text-gray-900 focus:placeholder-gray-400 sm:text-sm"
           id="search"
           type="text"
-          #input
         />
       </div>
       <div
@@ -53,6 +52,7 @@
           class="h-14 shadow block w-full bg-white py-2 pl-10 lg:w-full lg:border-0 text-sm placeholder-gray-500 focus:outline-none focus:text-gray-900 focus:placeholder-gray-400 sm:text-sm"
           id="search"
           type="text"
+          #input
         />
         <div
           (click)="toggleIsFiltersMobile()"
@@ -60,6 +60,79 @@
         >
           <mat-icon class="text-2xl">filter_alt</mat-icon>
         </div>
+        <ul
+          *ngIf="searchLoaded"
+          class="origin-top-right shadow absolute right-0 z-50 bg-white border border-gray-100 w-full lg:mt-0"
+        >
+          <li
+            class="pl-8 pr-2 py-1 border-b-2 border-gray-100 relative cursor-pointer hover:bg-yellow-50 hover:text-gray-900"
+          >
+            <svg
+              class="absolute w-4 h-4 left-2 top-2"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            C<b>al</b>ais - France
+          </li>
+          <li
+            class="pl-8 pr-2 py-1 border-b-2 border-gray-100 relative cursor-pointer hover:bg-yellow-50 hover:text-gray-900"
+          >
+            <svg
+              class="absolute w-4 h-4 left-2 top-2"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            C<b>al</b>da - France
+          </li>
+          <li
+            class="pl-8 pr-2 py-1 border-b-2 border-gray-100 relative cursor-pointer hover:bg-yellow-50 hover:text-gray-900"
+          >
+            <svg
+              class="absolute w-4 h-4 left-2 top-2"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            B<b>al</b>not sur laigne - France
+          </li>
+          <li
+            class="pl-8 pr-2 py-1 border-gray-100 relative cursor-pointer hover:bg-yellow-50 hover:text-gray-900"
+          >
+            <svg
+              class="absolute w-4 h-4 left-2 top-2"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            G<b>al</b>dd resort - France
+          </li>
+        </ul>
       </div>
     </div>
     <div

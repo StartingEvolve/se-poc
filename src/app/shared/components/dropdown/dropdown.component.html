@@ -65,7 +65,7 @@
           *ngFor="let option of filter.options"
           class="relative cursor-pointer font-medium text-gray-900 block px-4 py-2 text-sm hover:bg-gray-100"
           [class.active]="option.isChecked"
-          (click)="toggleOption(filter.id, option.value)"
+          (click)="toggleOption(filter.id, option.value, false)"
           role="menuitem"
           tabindex="-1"
           id="menu-item-0"
@@ -123,12 +123,10 @@
     <div *ngIf="filter.isOpen">
       <div
         *ngFor="let option of filter.options"
-        class="py-4"
-        [class.active]="option.isChecked"
-        (click)="toggleOption(filter.id, option.value)"
+        (click)="toggleOption(filter.id, option.value, true)"
         role="menuitem"
         tabindex="-1"
-        class="flex items-center w-full"
+        class="flex items-center py-2"
       >
         <input
           id="filter-mobile-color-0"
@@ -136,7 +134,7 @@
           value="white"
           type="checkbox"
           [checked]="option.isChecked"
-          class="w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
+          class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
         />
         <label
           for="filter-mobile-color-0"

@@ -5,6 +5,8 @@ import {
   ViewChild,
   OnDestroy
 } from '@angular/core';
+import { DatabaseSerice } from '@se/core/adapters/database/database';
+import { timeStamp } from 'console';
 import { fromEvent, Observable, Subscription } from 'rxjs';
 import {
   debounceTime,
@@ -12,6 +14,13 @@ import {
   filter,
   tap
 } from 'rxjs/operators';
+import { VendorService } from '@core/services/vendor.service';
+import {
+  Config,
+  OnVendorChangeConfig
+} from '@se/core/store/vendor/vendor.store';
+import TypesenseConfig from '@vendors/typesense/typesense.config';
+
 export interface dropdownOption {
   value: string;
   label: string;
@@ -34,13 +43,25 @@ export interface currentOption {
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss']
 })
-export class SearchComponent implements AfterViewInit, OnDestroy {
+export class SearchComponent
+  implements AfterViewInit, OnDestroy, OnVendorChangeConfig
+{
   filters: Filter[];
   EventSubscription: Subscription;
   currentOptions: currentOption[];
   isFiltersMobile: boolean;
+  searchLoaded: boolean;
+  results: any;
+  configurations: Config;
+  private storeSub: Subscription;
+  private readonly libraries: string[];
   @ViewChild('input') input: ElementRef;
-  constructor() {
+  constructor(private db: DatabaseSerice, private venService: VendorService) {
+    this.libraries = ['typesense'];
+    this.venService.getConfigObjects(this.libraries).then((config) => {
+      this.configurations = config;
+    });
+
     this.isFiltersMobile = false;
     this.currentOptions = [];
     this.filters = [
@@ -85,14 +106,45 @@ export class SearchComponent implements AfterViewInit, OnDestroy {
       }
     ];
   }
+  seOnVendorChangeConfig() {
+    const configMap = new Map();
+    configMap.set('typesense', [new TypesenseConfig()]);
+    return configMap;
+  }
   ngAfterViewInit(): void {
+    //It's important to subscribe at the right lifecycle hook, as a rule of thumb when loading
+    //scripts that interacts with the DOM, subscription must trigger the configuration only after
+    //the View is initialized (Component DOM data structure is built)
+    this.storeSub = this.venService.watchVendorChanges(
+      this,
+      this.libraries,
+      this.seOnVendorChangeConfig
+    );
+
     this.EventSubscription = fromEvent(this.input.nativeElement, 'keyup')
       .pipe(
         filter(Boolean),
         debounceTime(250),
         distinctUntilChanged(),
         tap((text) => {
-          console.log(this.input.nativeElement.value);
+          if (this.input.nativeElement.value === '') {
+            this.searchLoaded = false;
+          } else {
+            let search = {
+              q: 'Cal',
+              query_by: 'Nom_commune'
+            };
+            setTimeout(() => {
+              this.configurations
+                .get('typesense')[0]
+                .collections('france')
+                .documents()
+                .search(search)
+                .then(function (searchResults) {
+                  console.log(searchResults);
+                });
+            }, 1000);
+          }
         })
       )
       .subscribe();
@@ -103,7 +155,7 @@ export class SearchComponent implements AfterViewInit, OnDestroy {
       else item.isOpen = false;
     });
   }
-  toggleOptionById(object: { id: number; value: string }) {
+  toggleOptionById(object: { id: number; value: string; isMobile: boolean }) {
     this.filters
       .find((x) => x.id === object.id)
       .options.forEach((item) => {
@@ -114,7 +166,6 @@ export class SearchComponent implements AfterViewInit, OnDestroy {
               value: item.value,
               label: item.label
             });
-            console.log(this.currentOptions);
           } else {
             this.currentOptions = this.currentOptions.filter(
               (item) => item.id != object.id || item.value != object.value
@@ -124,7 +175,13 @@ export class SearchComponent implements AfterViewInit, OnDestroy {
         }
       });
     this.filters.forEach((filter) => {
-      filter.isOpen = false;
+      if (object.isMobile) {
+        if (filter.id !== object.id) {
+          filter.isOpen = false;
+        }
+      } else {
+        filter.isOpen = false;
+      }
     });
   }
   resetFilterById(id: number) {
