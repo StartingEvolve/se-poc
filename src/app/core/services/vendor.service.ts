@@ -73,9 +73,7 @@ export class VendorService {
   __loadBulkScripts(scriptUrls: string[]) {
     if (scriptUrls) {
       const promises: any[] = [];
-      this.vendors.forEach((vendor) =>
-        promises.push(this.__loadScript(vendor.resources.script.scriptUrl))
-      );
+      scriptUrls.forEach((script) => promises.push(this.__loadScript(script)));
       return Promise.all(promises);
     }
     return null;
@@ -100,13 +98,14 @@ export class VendorService {
   __loadStyle(styleUrls: string[]) {
     if (styleUrls) {
       const head = this.document.getElementsByTagName('head')[0];
-
       for (let s of styleUrls) {
-        const style = this.document.createElement('link');
-        style.id = 'article-carousel';
-        style.rel = 'stylesheet';
-        style.href = s;
-        head.appendChild(style);
+        if (s !== '') {
+          const style = this.document.createElement('link');
+          style.id = 'article-carousel';
+          style.rel = 'stylesheet';
+          style.href = s;
+          head.appendChild(style);
+        }
       }
     }
   }
