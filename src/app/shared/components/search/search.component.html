@@ -74,7 +74,7 @@
               [innerHTML]="
                 hit.highlights[0].field === 'Nom_commune'
                   ? hit.highlights[0].snippet
-                  : hit.document.Nom_commune
+                  : (hit.document.Nom_commune | sanitizeHtml)
               "
             ></span>
             -
@@ -82,7 +82,7 @@
               [innerHTML]="
                 hit.highlights[0].field === 'Code_postal'
                   ? hit.highlights[0].snippet
-                  : hit.document.Code_postal
+                  : (hit.document.Code_postal | sanitizeHtml)
               "
             ></span>
           </li>
