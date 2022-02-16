@@ -12,6 +12,7 @@ import { SearchComponent } from './components/search/search.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { TruncatePipe } from './pipes/truncate.pipe';
 import { PaginationComponent } from './components/pagination/pagination.component';
+import { SanitizeHtmlPipe } from './pipes/sanitize-html.pipe';
 const components = [
   LanguagePickerWebComponent,
   StepperComponent,
@@ -22,7 +23,7 @@ const components = [
 ];
 
 @NgModule({
-  declarations: [...components, TruncatePipe],
+  declarations: [...components, TruncatePipe, SanitizeHtmlPipe],
   imports: [
     CommonModule,
     MaterialUiModule,
