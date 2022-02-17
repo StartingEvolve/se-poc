@@ -1,0 +1,20 @@
+<div class="border-b border-gray-200">
+  <div class="-mb-px flex overflow-x-auto md:px-10">
+    <div
+      *ngFor="let tab of tabs"
+      (click)="selectTab(tab)"
+      [class.active]="tab.active"
+      class="cursor-pointer border-transparent text-gray-500 hover:text-gray-700 justify-between hover:border-gray-300 flex items-center py-3 px-2 border-b-2 font-medium text-sm space-x-2"
+    >
+      <img
+        class="max-w-none text-gray-400 h-5 w-5"
+        [class.imgActive]="tab.active"
+        [src]="'/assets/icons/' + tab.image"
+        alt=""
+        srcset=""
+      />
+      <div>{{ tab.title }}</div>
+    </div>
+  </div>
+</div>
+<ng-content> </ng-content>

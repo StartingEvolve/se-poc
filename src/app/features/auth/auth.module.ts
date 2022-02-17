@@ -15,6 +15,10 @@ import { CoursesComponent } from './views/courses/courses.component';
 import { ArticleCarouselComponent } from './components/article-carousel/article-carousel.component';
 import { ArticleCarouselItemComponent } from './components/article-carousel-item/article-carousel-item.component';
 import { CourseCardComponent } from './components/course-card/course-card.component';
+import { CourseComponent } from './views/course/course.component';
+import { ReviewsComponent } from './components/reviews/reviews.component';
+import { OverviewComponent } from './components/overview/overview.component';
+import { IntructorsComponent } from './components/intructors/intructors.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +33,11 @@ import { CourseCardComponent } from './components/course-card/course-card.compon
     ArticleCarouselComponent,
     ArticleCarouselItemComponent,
     CoursesComponent,
-    CourseCardComponent
+    CourseCardComponent,
+    CourseComponent,
+    ReviewsComponent,
+    OverviewComponent,
+    IntructorsComponent
   ],
   imports: [CommonModule, AuthRoutingModule, SharedModule, LayoutModule]
 })

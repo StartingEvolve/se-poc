@@ -1,0 +1,130 @@
+<div class="select-none min-h-screen bg-white">
+  <div class="relative w-full bg-gradient-1 text-white">
+    <se-breadcrumbs></se-breadcrumbs>
+    <div
+      class="h-full min-h-[250px] mx-auto px-3 py-6 md:py-12 2xl:w-[1512px] xl:w-[1256px] lg:w-[1000px] md:w-[744px] sm:w-[616px] text-left"
+    >
+      <div class="flex flex-wrap -mx-3">
+        <div class="w-full relative px-3 md:w-[50%] space-y-4">
+          <div
+            class="lg:text-5xl xl:text-4xl md:text-3xl sm:text-2xl text-xl mb-4"
+          >
+            Python for Everybody Specialization
+          </div>
+          <div class="lg:text-base md:text-sm text-xs">
+            Learn to Program and Analyze Data with Python. Develop programs to
+            gather, clean, analyze, and visualize data.
+          </div>
+          <div class="flex space-x-1">
+            <se-stars [note]="4.8"></se-stars>
+            <div class="cursor-pointer ml-2 font-semibold">4.8</div>
+            <div class="cursor-pointer text-gray-300 hover:text-white">
+              185,330 ratings
+            </div>
+          </div>
+          <div
+            class="flex flex-wrap-reverse items-center md:space-x-4 md:space-y-0 space-y"
+          >
+            <div class="w-full flex items-center space-x-4 md:w-fit">
+              <button
+                type="button"
+                class="profile-pic"
+                id="user-menu-button"
+                aria-expanded="false"
+                aria-haspopup="true"
+              >
+                <span class="sr-only">Open user menu</span>
+                <img
+                  class="h-8 w-8 rounded-full"
+                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixqx=7qwKjEp7Xv&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                  alt=""
+                />
+              </button>
+              <div class="cursor-pointer hover:underline">
+                Charles Russell Severance
+              </div>
+            </div>
+            <div
+              class="text-xs p-1 mb-2 md:m-0 font-semibold rounded-md bg-green-500 border-white border-2"
+            >
+              Top instructeur
+            </div>
+          </div>
+          <div><span class="font-bold">1,219,498</span> already rolled</div>
+          <div>
+            <p>Offered by:</p>
+            <img
+              class="cursor-pointer"
+              src="https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://s3.amazonaws.com/coursera_assets/xdp/umich.svg?auto=format%2Ccompress&dpr=1&h=70"
+              alt="logo-provider"
+            />
+          </div>
+        </div>
+        <div
+          class="text-black w-full flex relative p-3 min-h-[250px] md:w-[50%] space-y-4"
+        >
+          <div
+            class="bg-green-400 shadow rounded-sm xl:w-[80%] xl:h-[70%] lg:w-[100%] md:w-[100%] md:h-[85%] w-[95%] h-full"
+          >
+            <div
+              class="h-full w-full mt-5 py-6 px-8 bg-white space-y-6 flex flex-col items-center"
+            >
+              <p class="text-center xl:text-xl text-lg font-semibold">
+                Commencer dès Aujourd'hui !
+              </p>
+              <p class="lg:text-center text-lg">
+                Demandez plus d'informations sur cette formation
+              </p>
+              <div class="xl:flex hidden py-6">
+                <button
+                  class="bg-green-500 w-full text-white active:bg-emerald-600 font-bold uppercase text-base px-8 py-3 rounded shadow-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                  type="button"
+                >
+                  Je m'informe
+                </button>
+                <!-- <button
+                                    class="text-emerald-500 bg-transparent border border-solid border-emerald-500 hover:bg-emerald-500 hover:text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                    type="button">
+                                    Inscrivez-vous maintenant
+                                </button> -->
+              </div>
+              <div class="xl:hidden w-[90%] flex flex-col py-6">
+                <button
+                  class="bg-green-500 w-full text-white active:bg-green-600 font-bold uppercase text-base px-8 py-3 rounded shadow-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                  type="button"
+                >
+                  Je m'informe
+                </button>
+                <!-- <button
+                                    class="text-emerald-500 w-full bg-transparent border border-solid border-emerald-500 hover:bg-emerald-500 hover:text-white active:bg-emerald-600 font-bold uppercase px-8 py-3 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                    type="button">
+                                    S'inscrire
+                                </button> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <se-tabs (returnActiveId)="getTabId($event)">
+    <se-tab
+      *ngFor="let tab of tabs"
+      [id]="tab.id"
+      [title]="tab.title"
+      [image]="tab.image"
+    ></se-tab>
+  </se-tabs>
+  <div
+    [ngSwitch]="activeTabId"
+    class="feed h-full min-h-[250px] mx-auto px-3 2xl:w-[1512px] xl:w-[1256px] lg:w-[1000px] md:w-[744px] sm:w-[616px] text-left"
+  >
+    <se-overview *ngSwitchCase="1"></se-overview>
+    <div *ngSwitchCase="2">objectifs</div>
+    <div *ngSwitchCase="3">prerquis</div>
+    <div *ngSwitchCase="4">programme</div>
+    <se-intructors *ngSwitchCase="5">instructeurs</se-intructors>
+    <div *ngSwitchCase="6">certifications</div>
+    <se-reviews *ngSwitchCase="7"></se-reviews>
+  </div>
+</div>

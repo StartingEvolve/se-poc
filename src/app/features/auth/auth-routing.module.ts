@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '@se/core/services/auth.guard';
 import { AuthComponent } from './auth.component';
+import { CourseComponent } from './views/course/course.component';
 import { CoursesComponent } from './views/courses/courses.component';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { ForgotPasswordComponent } from './views/forgot-password/forgot-password.component';
@@ -35,7 +36,8 @@ const routes: Routes = [
       {
         path: 'articles',
         component: SignupComponent
-      }
+      },
+      { path: 'course/:uuid', component: CourseComponent }
     ]
   },
   {
