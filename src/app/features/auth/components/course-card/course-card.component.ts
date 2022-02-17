@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CourseData } from '@se/core/store/search-course/search-courses.store';
 
 @Component({
