@@ -26,6 +26,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { FeatureExampleModule } from './features/feature-example/feature-example.module';
 import { LayoutModule } from '@layout/layout.module';
 import { MatTableModule } from '@angular/material/table';
+import { NgAisModule } from 'angular-instantsearch';
 
 import { PrototypeComponent } from './prototype/prototype/prototype.component';
 import { Example1Component } from './prototype/example1/example1.component';
@@ -35,6 +36,12 @@ import { InterceptorService } from '@core/services/interceptor.service';
 import { ArticleComponent } from './features/article/article.component';
 import { ArticleprototypeComponent } from './prototype/articleprototype/articleprototype.component';
 import { CarouselComponent } from './prototype/carousel/carousel.component';
+import { CourseSearchUiComponent } from './prototype/course-search-ui/course-search-ui.component';
+import { SnippetComponent } from './prototype/course-search-ui/snippet.component';
+import { RatingMenuComponent } from '@se/prototype/course-search-ui/rating-menu.component';
+import { SearchBoxComponent } from '@se/prototype/course-search-ui/searchbox.component';
+import { CourseCardComponent } from '@se/prototype/course-search-ui/course-card.component';
+import { PaginationComponent } from '@se/prototype/course-search-ui/pagination.component';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -48,7 +55,13 @@ export function createTranslateLoader(http: HttpClient) {
     Example2Component,
     ArticleComponent,
     ArticleprototypeComponent,
-    CarouselComponent
+    CarouselComponent,
+    CourseSearchUiComponent,
+    SnippetComponent,
+    RatingMenuComponent,
+    SearchBoxComponent,
+    CourseCardComponent,
+    PaginationComponent
   ],
   imports: [
     BrowserModule,
@@ -79,13 +92,14 @@ export function createTranslateLoader(http: HttpClient) {
       // Register the ServiceWorker as soon as the app is stable
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
-    })
+    }),
+    NgAisModule.forRoot()
   ],
   providers: [
     ...emulatorProviders,
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }
   ],
-  exports: [CarouselComponent],
+  exports: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

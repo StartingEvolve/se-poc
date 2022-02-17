@@ -13,6 +13,8 @@ import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { TruncatePipe } from './pipes/truncate.pipe';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { SanitizeHtmlPipe } from './pipes/sanitize-html.pipe';
+import { LogPipe } from './pipes/log.pipe';
+
 const components = [
   LanguagePickerWebComponent,
   StepperComponent,
@@ -22,8 +24,10 @@ const components = [
   DropdownComponent
 ];
 
+const pipes = [TruncatePipe, LogPipe, SanitizeHtmlPipe];
+
 @NgModule({
-  declarations: [...components, TruncatePipe, SanitizeHtmlPipe],
+  declarations: [...components, TruncatePipe, SanitizeHtmlPipe, LogPipe],
   imports: [
     CommonModule,
     MaterialUiModule,
@@ -40,7 +44,7 @@ const components = [
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    TruncatePipe,
+    ...pipes,
     ...components
   ]
 })

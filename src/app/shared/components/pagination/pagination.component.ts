@@ -1,9 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import {
   SearchCourses,
   SearchCoursesStore
 } from '@se/core/store/search-course/search-courses.store';
-import { Subscription } from 'rxjs';
 
 export interface PaginationData {
   current_page: number;
@@ -12,6 +11,7 @@ export interface PaginationData {
   last_page_url: string;
   to: number;
 }
+
 @Component({
   selector: 'se-pagination',
   templateUrl: './pagination.component.html',
@@ -20,13 +20,17 @@ export interface PaginationData {
 export class PaginationComponent {
   @Input() data: PaginationData;
   scState: SearchCourses;
+
   constructor(private scStore: SearchCoursesStore) {
     this.scStore.stateChanged.subscribe((state) => {
       this.scState = state;
     });
   }
+
   prev() {}
+
   next() {}
+
   goto(i: number) {
     console.log(i);
   }

@@ -12,7 +12,8 @@ export interface SearchCourses {
   to: number;
   data: CourseData[];
 }
-export interface CourseData {
+
+export interface CourseData extends Highlighted {
   title: string;
   description: string;
   image: string;
@@ -27,6 +28,12 @@ export interface CourseData {
   companyLogo?: string;
   rating?: number;
   ratersNumber?: number;
+}
+
+export interface Highlighted {
+  _highlightResult?: {};
+  label?: string;
+  highlighted?: string;
 }
 
 @Injectable({
@@ -49,6 +56,7 @@ export class SearchCoursesStore extends ObservableStore<SearchCourses> {
     this.setState(initialState, SearchCoursesStoreActions.InitializeState);
   }
 }
+
 export enum SearchCoursesStoreActions {
   InitializeState = 'Initialize state',
   ChangeState = 'Change state message to bruh'

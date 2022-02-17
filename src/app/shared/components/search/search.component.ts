@@ -22,7 +22,7 @@ import {
 } from '@se/core/store/vendor/vendor.store';
 import TypesenseConfig from '@vendors/typesense/typesense.config';
 
-export interface dropdownOption {
+export interface DropdownOption {
   value: string;
   label: string;
   isChecked: boolean;
@@ -31,9 +31,9 @@ export interface Filter {
   id: number;
   name: string;
   isOpen: boolean;
-  options: dropdownOption[];
+  options: DropdownOption[];
 }
-export interface currentOption {
+export interface CurrentOption {
   id: number;
   value: string;
   label: string;
@@ -68,7 +68,7 @@ export class SearchComponent
 {
   filters: Filter[];
   EventSubscription: Subscription;
-  currentOptions: currentOption[];
+  currentOptions: CurrentOption[];
   isFiltersMobile: boolean;
   searchLoaded: boolean;
   isSelected: boolean = false;
@@ -170,6 +170,7 @@ export class SearchComponent
               .documents()
               .search(search)
               .then((searchResults) => {
+                console.log(searchResults);
                 this.locationSearchResults = searchResults;
                 if (this.locationSearchResults.found === 0) {
                   this.searchLoaded = false;
