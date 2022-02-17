@@ -42,6 +42,8 @@ import { RatingMenuComponent } from '@se/prototype/course-search-ui/rating-menu.
 import { SearchBoxComponent } from '@se/prototype/course-search-ui/searchbox.component';
 import { CourseCardComponent } from '@se/prototype/course-search-ui/course-card.component';
 import { PaginationComponent } from '@se/prototype/course-search-ui/pagination.component';
+import { RefinementListComponent } from '@se/prototype/course-search-ui/refinement-list.component';
+import { ClearRefinementsComponent } from '@se/prototype/course-search-ui/clear-refinements.component';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -61,7 +63,9 @@ export function createTranslateLoader(http: HttpClient) {
     RatingMenuComponent,
     SearchBoxComponent,
     CourseCardComponent,
-    PaginationComponent
+    PaginationComponent,
+    RefinementListComponent,
+    ClearRefinementsComponent
   ],
   imports: [
     BrowserModule,

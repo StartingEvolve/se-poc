@@ -9,6 +9,7 @@ interface CourseData extends Highlighted {
   price?: string;
   location?: {
     address?: string;
+    commune?: string;
     region?: string;
     zipCode?: string;
   };

@@ -26,13 +26,14 @@ const randomArrayValue = (array) => {
 };
 
 const randomNumber = (upto) => {
-  return Math.floor(Math.random() * upto + 1);
+  return Math.floor(Math.random() * (upto + 1));
 };
 
 const formatDuration = (maxDuration) => {
-  const duration = randomNumber(maxDuration);
+  let duration = randomNumber(maxDuration);
   const durationText = randomArrayValue(_duration);
 
+  duration = duration === 0 ? duration + 1 : duration;
   if (durationText !== 'mois') {
     return duration > 1
       ? duration + ' ' + durationText + 's'
@@ -98,7 +99,7 @@ fs.readFile('data/france.json', 'utf-8', (err, _cities) => {
   cities = JSON.parse(_cities.toString());
 
   // print JSON object
-  console.log(cities);
+  // console.log(cities);
 
   const data = JSON.stringify(generateCourseData(100));
 

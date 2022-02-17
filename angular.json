@@ -160,6 +160,6 @@
   },
   "defaultProject": "se-poc",
   "cli": {
-    "defaultCollection": ""
+    "defaultCollection": "@startingevolve/schematics"
   }
 }
