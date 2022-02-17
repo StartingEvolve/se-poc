@@ -15,13 +15,21 @@ import { PaginationComponent } from './components/pagination/pagination.componen
 import { SanitizeHtmlPipe } from './pipes/sanitize-html.pipe';
 import { LogPipe } from './pipes/log.pipe';
 
+import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
+import { StarsComponent } from './components/stars/stars.component';
+import { TabsComponent } from './components/tabs/tabs.component';
+import { TabComponent } from './components/tab/tab.component';
 const components = [
   LanguagePickerWebComponent,
   StepperComponent,
   CarouselComponent,
   SearchComponent,
   PaginationComponent,
-  DropdownComponent
+  DropdownComponent,
+  BreadcrumbsComponent,
+  StarsComponent,
+  TabComponent,
+  TabsComponent
 ];
 
 const pipes = [TruncatePipe, LogPipe, SanitizeHtmlPipe];

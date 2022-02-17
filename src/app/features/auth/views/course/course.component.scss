@@ -1,0 +1,12 @@
+.bg-gradient-1 {
+  @apply bg-gradient-to-r from-cyan-600 to-green-400;
+}
+
+// .bg-gradient-1 {
+//   background: linear-gradient(
+//     175deg,
+//     #0891b2,
+//     #4ade80 78%,
+//     #fff calc(78% + 1px)
+//   );
+// }

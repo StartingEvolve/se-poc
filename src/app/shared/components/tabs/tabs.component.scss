@@ -1,0 +1,7 @@
+.active {
+  @apply border-green-400 text-green-500;
+}
+.imgActive {
+  filter: invert(77%) sepia(43%) saturate(378%) hue-rotate(93deg)
+    brightness(88%) contrast(83%);
+}

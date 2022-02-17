@@ -18,7 +18,7 @@
         .nav-items {
           @apply hidden md:ml-6 md:flex md:space-x-4;
           .default {
-            @apply h-14 border-transparent text-gray-500 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium;
+            @apply h-14 border-transparent text-gray-500 inline-flex items-center px-1 pt-1 border-b-2 lg:text-sm text-[12px] font-medium;
             &:hover {
               @apply border-green-300 text-green-500 cursor-pointer;
             }
