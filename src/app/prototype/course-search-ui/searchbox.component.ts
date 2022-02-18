@@ -25,6 +25,7 @@ import connectSearchBox, {
 import { RefinementListComponent } from '@se/prototype/course-search-ui/refinement-list.component';
 import { Filter, FilterStore } from '@core/store/filter/filter.store';
 import { filter } from 'rxjs/operators';
+import Timeout = NodeJS.Timeout;
 
 interface CurrentOption {
   id: number;
@@ -213,6 +214,7 @@ export class SearchBoxComponent
   @ViewChild('vcMobile', { read: ViewContainerRef }) vcMobile: ViewContainerRef;
   @ViewChild('tpl') tpl: TemplateRef<any>;
   @ViewChildren('Filter') filtersList: QueryList<RefinementListComponent>;
+  containerKillSwtich: any[] = [];
   public state: SearchBoxWidgetDescription['renderState'] = {
     clear(): void {},
     isSearchStalled: false,
@@ -331,18 +333,31 @@ export class SearchBoxComponent
     this.filterStore.updateFilters(this.filters);
   }
 
+  //Todo (zack): Fix view insertion conflict when toggle is called with a fast rate
   toggleIsFiltersMobile() {
     this.isFiltersMobile = !this.isFiltersMobile;
+    if (!this.containerKillSwtich.length) {
+      this.containerKillSwtich.forEach((id: Timeout, index) => {
+        if (id) {
+          clearTimeout(id);
+          this.containerKillSwtich.splice(index, 1);
+        }
+      });
+    }
     if (this.isFiltersMobile) {
       this.vcDesktop.detach(this.vcDesktop.indexOf(this.view));
-      setTimeout(() => {
-        this.view = this.vcMobile.insert(this.view);
-      }, 1000);
+      this.containerKillSwtich.push(
+        setTimeout(() => {
+          this.view = this.vcMobile.insert(this.view);
+        }, 500)
+      );
     } else {
       this.vcMobile.detach(this.vcMobile.indexOf(this.view));
-      setTimeout(() => {
-        this.view = this.vcDesktop.insert(this.view);
-      }, 1000);
+      this.containerKillSwtich.push(
+        setTimeout(() => {
+          this.view = this.vcDesktop.insert(this.view);
+        }, 500)
+      );
     }
   }
 
