@@ -38,12 +38,14 @@ import { ArticleprototypeComponent } from './prototype/articleprototype/articlep
 import { CarouselComponent } from './prototype/carousel/carousel.component';
 import { CourseSearchUiComponent } from './prototype/course-search-ui/course-search-ui.component';
 import { SnippetComponent } from './prototype/course-search-ui/snippet.component';
-import { RatingMenuComponent } from '@se/prototype/course-search-ui/rating-menu.component';
 import { SearchBoxComponent } from '@se/prototype/course-search-ui/searchbox.component';
 import { CourseCardComponent } from '@se/prototype/course-search-ui/course-card.component';
 import { PaginationComponent } from '@se/prototype/course-search-ui/pagination.component';
 import { RefinementListComponent } from '@se/prototype/course-search-ui/refinement-list.component';
 import { ClearRefinementsComponent } from '@se/prototype/course-search-ui/clear-refinements.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { SearchAutocompleteBoxComponent } from '@se/prototype/course-search-ui/search-autocomplete-box.component';
+import { HeadlessRefinementComponent } from '@se/prototype/course-search-ui/headless-refinement.component';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -60,12 +62,13 @@ export function createTranslateLoader(http: HttpClient) {
     CarouselComponent,
     CourseSearchUiComponent,
     SnippetComponent,
-    RatingMenuComponent,
     SearchBoxComponent,
     CourseCardComponent,
     PaginationComponent,
     RefinementListComponent,
-    ClearRefinementsComponent
+    ClearRefinementsComponent,
+    SearchAutocompleteBoxComponent,
+    HeadlessRefinementComponent
   ],
   imports: [
     BrowserModule,
@@ -97,7 +100,8 @@ export function createTranslateLoader(http: HttpClient) {
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
     }),
-    NgAisModule.forRoot()
+    NgAisModule.forRoot(),
+    MatAutocompleteModule
   ],
   providers: [
     ...emulatorProviders,

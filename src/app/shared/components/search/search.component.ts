@@ -7,8 +7,7 @@ import {
   OnInit
 } from '@angular/core';
 import { DatabaseSerice } from '@se/core/adapters/database/database';
-import { timeStamp } from 'console';
-import { fromEvent, Observable, Subscription } from 'rxjs';
+import { fromEvent, Subscription } from 'rxjs';
 import {
   debounceTime,
   distinctUntilChanged,
@@ -27,12 +26,14 @@ export interface DropdownOption {
   label: string;
   isChecked: boolean;
 }
+
 export interface Filter {
   id: number;
   name: string;
   isOpen: boolean;
   options: DropdownOption[];
 }
+
 export interface CurrentOption {
   id: number;
   value: string;
@@ -56,6 +57,7 @@ export interface LocationSearchHit {
 export interface LocationSearchResult {
   found: number;
   hits: any[];
+  grouped_hits?: any[];
 }
 
 @Component({
@@ -77,6 +79,7 @@ export class SearchComponent
   private storeSub: Subscription;
   private readonly libraries: string[];
   @ViewChild('locationInput') locationInput: ElementRef;
+
   constructor(private db: DatabaseSerice, private venService: VendorService) {
     this.libraries = ['typesense'];
     this.venService.getConfigObjects(this.libraries).then((config) => {
@@ -127,14 +130,17 @@ export class SearchComponent
       }
     ];
   }
+
   ngOnInit(): void {
     this.venService.use(this.libraries);
   }
+
   seOnVendorChangeConfig() {
     const configMap = new Map();
     configMap.set('typesense', [new TypesenseConfig()]);
     return configMap;
   }
+
   ngAfterViewInit(): void {
     //It's important to subscribe at the right lifecycle hook, as a rule of thumb when loading
     //scripts that interacts with the DOM, subscription must trigger the configuration only after
@@ -185,12 +191,14 @@ export class SearchComponent
       )
       .subscribe();
   }
+
   toggleDropdownById(id: number) {
     this.filters.forEach((item, ind) => {
       if (item.id === id) item.isOpen = !item.isOpen;
       else item.isOpen = false;
     });
   }
+
   toggleOptionById(object: { id: number; value: string; isMobile: boolean }) {
     this.filters
       .find((x) => x.id === object.id)
@@ -220,6 +228,7 @@ export class SearchComponent
       }
     });
   }
+
   setSearchValue(value: string) {
     console.log(value);
     this.locationInput.nativeElement.value = value;
@@ -227,12 +236,14 @@ export class SearchComponent
     this.searchLoaded = false;
     this.isSelected = true;
   }
+
   resetFilterById(id: number) {
     this.filters
       .find((x) => x.id === id)
       .options.forEach((x) => (x.isChecked = false));
     this.currentOptions = this.currentOptions.filter((item) => item.id != id);
   }
+
   resetCurrentOptions() {
     this.currentOptions = [];
     this.filters.forEach((filter) => {
@@ -242,6 +253,7 @@ export class SearchComponent
       });
     });
   }
+
   removeOption(id: number, value: string) {
     this.currentOptions = this.currentOptions.filter(
       (item) => item.id != id || item.value != value
@@ -253,9 +265,11 @@ export class SearchComponent
       filter.isOpen = false;
     });
   }
+
   toggleIsFiltersMobile() {
     this.isFiltersMobile = !this.isFiltersMobile;
   }
+
   ngOnDestroy(): void {
     this.EventSubscription.unsubscribe();
   }

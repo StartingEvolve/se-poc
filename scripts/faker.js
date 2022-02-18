@@ -68,7 +68,8 @@ const generateCourseData = (number) => {
   let courses = [];
   let city = undefined;
   while (number >= 0) {
-    city = randomArrayValue(cities);
+    //Generating up to 100 since our city's db is incomplete in Firebase
+    city = cities[randomNumber(100)];
     const course = {
       id: faker.datatype.uuid(),
       title: faker.lorem.sentence(6),

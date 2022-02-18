@@ -100,7 +100,7 @@ interface Highlighted {
                     clip-rule="evenodd"
                   />
                 </svg>
-                {{ data.learningMode }}
+                {{ data.learningMode }} | {{ data['location.region'] }}
               </p>
               <p
                 *ngIf="data?.duration"

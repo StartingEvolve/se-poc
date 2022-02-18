@@ -10,7 +10,8 @@ import {
   ViewContainerRef,
   TemplateRef,
   AfterViewInit,
-  ViewRef
+  ViewRef,
+  EventEmitter
 } from '@angular/core';
 import {
   NgAisInstantSearch,
@@ -99,16 +100,14 @@ const parseNumberInput = (input?: number | string): number => {
                 srcset=""
               />
             </div>
-            <input
-              autocomplete="off"
-              name="search"
-              placeholder="Where?"
-              [class.selectedValue]="isSelected"
-              class="h-14 shadow block w-full bg-white py-2 pl-10 lg:w-full lg:border-0 text-sm placeholder-gray-500 focus:outline-none focus:text-gray-900 focus:placeholder-gray-400 sm:text-sm mt-1 lg:mt-0"
-              id="search"
-              type="text"
-              #locationInput
-            />
+
+            <se-headless-refinement [RefineEvent]="RefineParentEvent">
+              <ng-template>
+                <se-search-auto-box
+                  (RefineEvent)="forwardEvent($event)"
+                ></se-search-auto-box>
+              </ng-template>
+            </se-headless-refinement>
             <div
               (click)="toggleIsFiltersMobile()"
               class="absolute md:right-5 sm:right-4 top-3 right-4 inset-y-0 lg:hidden"
@@ -121,16 +120,6 @@ const parseNumberInput = (input?: number | string): number => {
           class="w-full bg-white relative h-12 hidden lg:flex justify-start p-4 items-center space-x-4"
         >
           <ng-container #vcDesktop></ng-container>
-          <!--          <ng-container *ngFor="let filter of filters">-->
-          <!--            <se-refinement-list-->
-          <!--              #Filter-->
-          <!--              [filter]="filter"-->
-          <!--              (toggleDropdownEvent)="toggleDropdownById($event)"-->
-          <!--              (toggleOptionEvent)="toggleOptionById($event)"-->
-          <!--              (resetFilterEvent)="resetFilterById($event)"-->
-          <!--            >-->
-          <!--            </se-refinement-list>-->
-          <!--          </ng-container>-->
         </div>
         <div
           *ngIf="currentOptions.length !== 0"
@@ -235,6 +224,8 @@ export class SearchBoxComponent
   currentOptions: CurrentOption[];
   isFiltersMobile: boolean;
   isSelected: boolean = false;
+
+  RefineParentEvent: EventEmitter<any> = new EventEmitter();
 
   view: ViewRef;
 
@@ -353,5 +344,9 @@ export class SearchBoxComponent
         this.view = this.vcDesktop.insert(this.view);
       }, 1000);
     }
+  }
+
+  forwardEvent(value: any) {
+    this.RefineParentEvent.next(value);
   }
 }

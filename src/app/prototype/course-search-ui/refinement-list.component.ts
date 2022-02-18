@@ -171,6 +171,7 @@ export class RefinementListComponent
     isMobile: boolean;
   }>();
   @Output() resetFilterEvent = new EventEmitter<number>();
+
   number: number;
   public state: RefinementListWidgetDescription['renderState'] = {
     items: [],
