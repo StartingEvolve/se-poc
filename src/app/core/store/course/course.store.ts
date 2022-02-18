@@ -4,7 +4,7 @@ import { CourseInfo, CourseService } from '@core/services/course.service';
 
 export interface CourseState {
   // courses: CourseInfo[];
-  course: CourseInfo[];
+  course: CourseInfo;
 }
 
 @Injectable({

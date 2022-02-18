@@ -13,10 +13,6 @@ export class CoursesComponent {
   courseInfo: any;
 
   constructor(private courseStore: CourseStore) {
-    this.courseStore.getCourseById('01608c45-16dc-4681-891d-5d7aae5855cd');
-    this.courseInfo = this.courseStore.stateChanged.subscribe((value) => {
-      console.log(value);
-    });
     this.courses = [
       {
         title: 'Les bases indispensables de la programmation : Algorithmique',

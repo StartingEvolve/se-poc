@@ -1,8 +1,4 @@
 import { Component, Input } from '@angular/core';
-import {
-  SearchCourses,
-  SearchCoursesStore
-} from '@se/core/store/search-course/search-courses.store';
 
 export interface PaginationData {
   current_page: number;
@@ -19,13 +15,8 @@ export interface PaginationData {
 })
 export class PaginationComponent {
   @Input() data: PaginationData;
-  scState: SearchCourses;
 
-  constructor(private scStore: SearchCoursesStore) {
-    this.scStore.stateChanged.subscribe((state) => {
-      this.scState = state;
-    });
-  }
+  constructor() {}
 
   prev() {}
 

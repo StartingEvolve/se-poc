@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { CourseData } from '@se/core/store/search-course/search-courses.store';
+import { CourseData } from '@core/store/course/search-courses.store';
 
 @Component({
   selector: 'se-course-card',
@@ -8,5 +8,6 @@ import { CourseData } from '@se/core/store/search-course/search-courses.store';
 })
 export class CourseCardComponent {
   @Input() data: CourseData;
+
   constructor() {}
 }

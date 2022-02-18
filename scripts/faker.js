@@ -28,7 +28,7 @@ const randomArrayValue = (array) => {
 };
 
 const randomNumber = (from = 0, upto) => {
-  return Math.floor(Math.random() * (upto + 1) + from);
+  return Math.floor(Math.random() * (upto + 1 - from) + from);
 };
 
 const formatDuration = (maxDuration) => {
@@ -128,18 +128,18 @@ const generateCourseInfoData = (cities, number) => {
   };
 
   const generateArticle = () => {
-    return `<h2>${faker.commerce.productDescription()}</h2><p>${faker.lorem.paragraphs(
+    return `<h2 class="text-gray-800 text-2xl lg:text-3xl font-bold sm:text-left text-center mb-4 md:mb-6">${faker.commerce.productDescription()}</h2><p>${faker.lorem.paragraphs(
       2,
       '<br/>\n'
-    )}</p><h2>About us</h2><p>${faker.lorem.paragraphs(
-      1,
+    )}</p><br/><h2 class="text-gray-800 text-2xl lg:text-3xl font-bold sm:text-left text-center mb-4 md:mb-6">About us</h2><br/><p>${faker.lorem.paragraphs(
+      2,
       '<br/>\n'
-    )}</p>,<img src="${faker.image.abstract(
+    )}</p><br/><img src="${faker.image.abstract(
       640,
       480,
       true
-    )}" alt="Girl in a jacket" width="500" height="600"><p>${faker.lorem.paragraphs(
-      2,
+    )}" alt="Girl in a jacket" width="500" height="600"><br/><p>${faker.lorem.paragraphs(
+      4,
       '<br/>\n'
     )}</p>`;
   };
@@ -154,7 +154,7 @@ const generateCourseInfoData = (cities, number) => {
     const course = {
       id: id,
       title: faker.lorem.sentence(6),
-      description: faker.commerce.productDescription(),
+      description: faker.lorem.paragraph(5),
       image: faker.image.business(640, 480, true),
       public: randomArrayValue(_public),
       price: faker.commerce.price(50, 200),
@@ -171,7 +171,7 @@ const generateCourseInfoData = (cities, number) => {
       id: id,
       title: faker.lorem.sentence(6),
       image: faker.image.business(640, 480, true),
-      description: faker.commerce.productDescription(),
+      description: course.description,
       goals: ['Under Construction'],
       prerequisites: ['Under construction'],
       program: ['Under construction'],
@@ -186,16 +186,18 @@ const generateCourseInfoData = (cities, number) => {
       ],
       overview: {
         article: generateArticle(),
-        public_admitted: [randomArrayValue(_public), randomArrayValue(_public)],
+        public_admitted: [randomArrayValue(_public)],
         price: {
           value: faker.commerce.price(200, 9000, 0),
           new_value: null,
-          currency: randomArrayValue(['$', '€'])
+          currency: randomArrayValue(['$'])
         },
         eligibility: randomArrayValue(_eligibility),
         start_date:
           randomNumber(1, 30) +
+          ' ' +
           faker.date.month() +
+          ' ' +
           randomArrayValue(['2022', '2023']),
         location: {
           address: faker.address.streetAddress(),
@@ -209,14 +211,19 @@ const generateCourseInfoData = (cities, number) => {
       organisation: {
         id: faker.datatype.uuid(),
         name: faker.company.companyName(),
-        image: faker.image.business(640, 480, true)
+        image: `https://pigment.github.io/fake-logos/logos/medium/color/${randomNumber(
+          1,
+          11
+        )}.png`
       },
       reviews: {
         global_score: randomNumber(2, 5),
-        total: randomNumber(50),
+        total: randomNumber(5000, 200000),
         date:
           randomNumber(1, 30) +
+          ' ' +
           faker.date.month() +
+          ' ' +
           randomArrayValue(['2022', '2021', '2020', '2019']),
         data: generateReviews(randomNumber(1, 5))
       },

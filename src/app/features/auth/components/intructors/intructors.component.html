@@ -16,6 +16,7 @@
       <div *ngFor="let instructor of data">
         <div class="relative pb-56 mb-4 rounded shadow lg:pb-64">
           <img
+            *ngIf="instructor?.image"
             class="absolute object-cover w-full h-full rounded"
             [src]="instructor.image"
             alt="Person"
@@ -32,10 +33,16 @@
           </div>
         </div>
         <div class="flex flex-col sm:text-center">
-          <p class="cursor-pointer text-lg font-bold hover:underline">
+          <p
+            *ngIf="instructor?.full_name"
+            class="cursor-pointer text-lg font-bold hover:underline"
+          >
             {{ instructor.full_name }}
           </p>
-          <p class="mb-5 text-sm text-gray-800">
+          <p
+            *ngIf="instructor?.role_description"
+            class="mb-5 text-sm text-gray-800"
+          >
             {{ instructor.role_description }}
           </p>
         </div>
