@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CourseData } from '@se/core/store/search-course/search-courses.store';
+import { CourseStore } from '@core/store/course/course.store';
 
 @Component({
   selector: 'se-courses',
@@ -9,7 +10,13 @@ import { CourseData } from '@se/core/store/search-course/search-courses.store';
 export class CoursesComponent {
   courses: CourseData[];
   routeId: number = 2;
-  constructor() {
+  courseInfo: any;
+
+  constructor(private courseStore: CourseStore) {
+    this.courseStore.getCourseById('01608c45-16dc-4681-891d-5d7aae5855cd');
+    this.courseInfo = this.courseStore.stateChanged.subscribe((value) => {
+      console.log(value);
+    });
     this.courses = [
       {
         title: 'Les bases indispensables de la programmation : Algorithmique',
