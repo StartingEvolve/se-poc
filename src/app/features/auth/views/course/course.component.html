@@ -1,4 +1,4 @@
-<div class="select-none min-h-screen bg-white">
+<div class="min-h-screen bg-white">
   <div class="relative w-full bg-gradient-1 text-white">
     <se-breadcrumbs></se-breadcrumbs>
     <div
@@ -7,64 +7,77 @@
       <div class="flex flex-wrap -mx-3">
         <div class="w-full relative px-3 md:w-[50%] space-y-4">
           <div
-            class="lg:text-5xl xl:text-4xl md:text-3xl sm:text-2xl text-xl mb-4"
+            class="lg:text-4xl xl:text-4xl md:text-3xl sm:text-2xl text-2xl mb-4"
+            *ngIf="courseInfo?.title"
           >
-            Python for Everybody Specialization
+            {{ courseInfo.title }}
           </div>
-          <div class="lg:text-base md:text-sm text-xs">
-            Learn to Program and Analyze Data with Python. Develop programs to
-            gather, clean, analyze, and visualize data.
+          <div
+            class="lg:text-base font-extralight md:text-sm text-xs"
+            *ngIf="courseInfo?.description"
+          >
+            {{ courseInfo.description }}
           </div>
-          <div class="flex space-x-1">
-            <se-stars [note]="4.8"></se-stars>
-            <div class="cursor-pointer ml-2 font-semibold">4.8</div>
+          <div class="flex space-x-1" *ngIf="courseInfo?.reviews">
+            <se-stars [note]="courseInfo?.reviews.global_score"></se-stars>
+            <div class="cursor-pointer ml-2 font-semibold">
+              {{ courseInfo.reviews.global_score }}
+            </div>
             <div class="cursor-pointer text-gray-300 hover:text-white">
-              185,330 ratings
+              {{ courseInfo.reviews.total | number }} ratings
             </div>
           </div>
           <div
+            *ngFor="let instructor of courseInfo.instructors"
             class="flex flex-wrap-reverse items-center md:space-x-4 md:space-y-0 space-y"
           >
             <div class="w-full flex items-center space-x-4 md:w-fit">
               <button
+                *ngIf="instructor?.image"
                 type="button"
                 class="profile-pic"
                 id="user-menu-button"
                 aria-expanded="false"
                 aria-haspopup="true"
               >
-                <span class="sr-only">Open user menu</span>
+                <span class="sr-only">Open user profile</span>
                 <img
                   class="h-8 w-8 rounded-full"
-                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixqx=7qwKjEp7Xv&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                  [src]="instructor.image"
                   alt=""
                 />
               </button>
               <div class="cursor-pointer hover:underline">
-                Charles Russell Severance
+                {{ instructor.full_name }}
               </div>
             </div>
             <div
+              *ngIf="instructor.top_instructor"
               class="text-xs p-1 mb-2 md:m-0 font-semibold rounded-md bg-green-500 border-white border-2"
             >
               Top instructeur
             </div>
           </div>
-          <div><span class="font-bold">1,219,498</span> already rolled</div>
-          <div>
-            <p>Offered by:</p>
+        </div>
+        <div
+          class="w-full flex flex-col md:justify-start items-center justify-center relative p-3 min-h-[250px] md:w-[50%] space-y-4"
+        >
+          <!-- <div><span class="font-bold">1,219,498</span> already rolled</div> -->
+          <div class="md:px-4 self-start" *ngIf="courseInfo?.organisation">
+            <p>
+              Offert par:
+              <span class="cursor-pointer hover:underline font-semibold">{{
+                courseInfo.organisation.name
+              }}</span>
+            </p>
             <img
-              class="cursor-pointer"
-              src="https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://s3.amazonaws.com/coursera_assets/xdp/umich.svg?auto=format%2Ccompress&dpr=1&h=70"
+              class="cursor-pointer px-4 py-2"
+              [src]="courseInfo.organisation.image"
               alt="logo-provider"
             />
           </div>
-        </div>
-        <div
-          class="text-black w-full flex relative p-3 min-h-[250px] md:w-[50%] space-y-4"
-        >
           <div
-            class="bg-green-400 shadow rounded-sm xl:w-[80%] xl:h-[70%] lg:w-[100%] md:w-[100%] md:h-[85%] w-[95%] h-full"
+            class="text-black bg-green-400 shadow rounded-sm max-h-[350px] xl:w-[80%] xl:h-[70%] lg:w-[100%] md:w-[100%] md:h-[85%] w-[95%] h-full"
           >
             <div
               class="h-full w-full mt-5 py-6 px-8 bg-white space-y-6 flex flex-col items-center"
@@ -75,7 +88,7 @@
               <p class="lg:text-center text-lg">
                 Demandez plus d'informations sur cette formation
               </p>
-              <div class="xl:flex hidden py-6">
+              <div class="xl:flex pt-[30%] hidden py-6">
                 <button
                   class="bg-green-500 w-full text-white active:bg-emerald-600 font-bold uppercase text-base px-8 py-3 rounded shadow-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                   type="button"
@@ -119,12 +132,17 @@
     [ngSwitch]="activeTabId"
     class="feed h-full min-h-[250px] mx-auto pb-4 px-3 2xl:w-[1512px] xl:w-[1256px] lg:w-[1000px] md:w-[744px] sm:w-[616px] text-left"
   >
-    <se-overview *ngSwitchCase="1"></se-overview>
-    <div *ngSwitchCase="2">objectifs</div>
-    <div *ngSwitchCase="3">prerquis</div>
-    <div *ngSwitchCase="4">programme</div>
-    <se-intructors *ngSwitchCase="5">instructeurs</se-intructors>
-    <div *ngSwitchCase="6">certifications</div>
-    <se-reviews *ngSwitchCase="7"></se-reviews>
+    <se-overview *ngSwitchCase="1" [data]="courseInfo?.overview"></se-overview>
+    <se-goals *ngSwitchCase="2" [data]="courseInfo?.goals"> </se-goals>
+    <se-prerequisites *ngSwitchCase="3" [data]="courseInfo?.prerequisites">
+    </se-prerequisites>
+    <se-program *ngSwitchCase="4" [data]="courseInfo?.program"></se-program>
+    <se-intructors *ngSwitchCase="5" [data]="courseInfo?.instructors"
+      >instructeurs</se-intructors
+    >
+    <se-certifications *ngSwitchCase="6" [data]="courseInfo?.certifications"
+      >certifications
+    </se-certifications>
+    <se-reviews *ngSwitchCase="7" [data]="courseInfo?.reviews"></se-reviews>
   </div>
 </div>

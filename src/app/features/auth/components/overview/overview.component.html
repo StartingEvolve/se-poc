@@ -94,54 +94,68 @@
     <div class="border-t border-gray-200">
       <dl>
         <div
+          *ngIf="data?.public_admitted"
           class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
         >
           <dt class="text-sm font-medium text-gray-500">Public admis</dt>
           <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-            <div>- Salarié en poste</div>
-            <div>- Demandeur d’emploi</div>
-            <div>- Entreprise</div>
-            <div>- Étudiant</div>
+            <div *ngFor="let item of data?.public_admitted">- {{ item }}</div>
           </dd>
         </div>
-        <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <div
+          *ngIf="data?.price"
+          class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
+        >
           <dt class="text-sm font-medium text-gray-500">Prix</dt>
           <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-            $31,688 – $42,262 USD
+            <span *ngIf="data.price?.new_value" class="text-green-500">
+              {{ data.price.new_value }}{{ data.price.currency }} </span
+            ><span [class.newPrice]="data.price?.new_value"
+              >{{ data.price.value }}{{ data.price.currency }}&nbsp;</span
+            >
             <div
+              *ngIf="data?.eligibility !== ''"
               class="cursor-pointer text-xs p-1 mb-2 md:m-0 text-white rounded-md bg-black border-white border-2 inline-block"
             >
-              Finançable CPF
+              Finançable {{ data.eligibility }}
             </div>
           </dd>
         </div>
         <div
+          *ngIf="data?.start_date"
           class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
         >
           <dt class="text-sm font-medium text-gray-500">Date de début</dt>
           <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-            6 à 36 mois
+            {{ data.start_date }}
           </dd>
         </div>
         <div
+          *ngIf="data?.duration"
           class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
         >
           <dt class="text-sm font-medium text-gray-500">Durée</dt>
           <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-            6 à 36 mois
-          </dd>
-        </div>
-        <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-          <dt class="text-sm font-medium text-gray-500">Type d'enseignement</dt>
-          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-            À distance
+            {{ data.duration }}
           </dd>
         </div>
         <div
+          *ngIf="data?.learning_mode"
+          class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
+        >
+          <dt class="text-sm font-medium text-gray-500">Type d'enseignement</dt>
+          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+            {{ data.learning_mode }}
+          </dd>
+        </div>
+        <div
+          *ngIf="data?.success_rate"
           class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
         >
           <dt class="text-sm font-medium text-gray-500">Taux de réussite</dt>
-          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">90%</dd>
+          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+            {{ data.success_rate }}
+          </dd>
         </div>
       </dl>
     </div>

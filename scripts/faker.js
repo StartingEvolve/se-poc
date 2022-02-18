@@ -82,7 +82,7 @@ const generateCourseData = (number) => {
         region: city['Nom_commune'],
         zipCode: city['Code_postal'].toString()
       },
-      learningMode: randomArrayValue(_learningMode),
+      learning_mode: randomArrayValue(_learningMode),
       eligibility: randomArrayValue(_eligibility),
       duration: formatDuration(6)
     };
