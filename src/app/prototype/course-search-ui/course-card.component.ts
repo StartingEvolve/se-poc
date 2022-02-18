@@ -9,6 +9,7 @@ interface CourseData extends Highlighted {
   price?: string;
   location?: {
     address?: string;
+    commune?: string;
     region?: string;
     zipCode?: string;
   };
@@ -99,7 +100,7 @@ interface Highlighted {
                     clip-rule="evenodd"
                   />
                 </svg>
-                {{ data.learningMode }}
+                {{ data.learningMode }} | {{ data['location.region'] }}
               </p>
               <p
                 *ngIf="data?.duration"

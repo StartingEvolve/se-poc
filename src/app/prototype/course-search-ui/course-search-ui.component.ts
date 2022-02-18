@@ -27,7 +27,6 @@ const typesenseInstantsearchAdapter = new TypesenseInstantSearchAdapter({
   }
 });
 const searchClient = typesenseInstantsearchAdapter.searchClient;
-
 @Component({
   selector: 'se-course-search-ui',
   templateUrl: './course-search-ui.component.html',

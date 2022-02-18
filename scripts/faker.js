@@ -26,13 +26,14 @@ const randomArrayValue = (array) => {
 };
 
 const randomNumber = (upto) => {
-  return Math.floor(Math.random() * upto + 1);
+  return Math.floor(Math.random() * (upto + 1));
 };
 
 const formatDuration = (maxDuration) => {
-  const duration = randomNumber(maxDuration);
+  let duration = randomNumber(maxDuration);
   const durationText = randomArrayValue(_duration);
 
+  duration = duration === 0 ? duration + 1 : duration;
   if (durationText !== 'mois') {
     return duration > 1
       ? duration + ' ' + durationText + 's'
@@ -67,7 +68,8 @@ const generateCourseData = (number) => {
   let courses = [];
   let city = undefined;
   while (number >= 0) {
-    city = randomArrayValue(cities);
+    //Generating up to 100 since our city's db is incomplete in Firebase
+    city = cities[randomNumber(100)];
     const course = {
       id: faker.datatype.uuid(),
       title: faker.lorem.sentence(6),
@@ -98,7 +100,7 @@ fs.readFile('data/france.json', 'utf-8', (err, _cities) => {
   cities = JSON.parse(_cities.toString());
 
   // print JSON object
-  console.log(cities);
+  // console.log(cities);
 
   const data = JSON.stringify(generateCourseData(100));
 
