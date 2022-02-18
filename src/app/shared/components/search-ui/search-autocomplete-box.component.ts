@@ -61,7 +61,12 @@ import TypesenseConfig from '@vendors/typesense/typesense.config';
           "
         ></span>
       </li>
-    </ul>`
+    </ul>`,
+  styles: [
+    '.selectedValue {\n' +
+      '  @apply text-indigo-600 font-bold text-lg;\n' +
+      '}\n'
+  ]
 })
 export class SearchAutocompleteBoxComponent
   implements AfterViewInit, OnDestroy, OnVendorChangeConfig, OnInit

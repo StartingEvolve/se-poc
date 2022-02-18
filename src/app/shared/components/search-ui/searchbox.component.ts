@@ -208,10 +208,6 @@ export class SearchBoxComponent
   extends TypedBaseWidget<SearchBoxWidgetDescription, SearchBoxConnectorParams>
   implements OnInit, AfterViewInit
 {
-  @ViewChild('vcDesktop', { read: ViewContainerRef })
-  vcDesktop: ViewContainerRef;
-  @ViewChild('vcMobile', { read: ViewContainerRef }) vcMobile: ViewContainerRef;
-  @ViewChild('tpl') tpl: TemplateRef<any>;
   @ViewChildren('Filter') filtersList: QueryList<RefinementListComponent>;
   containerKillSwtich: any[] = [];
   public state: SearchBoxWidgetDescription['renderState'] = {
@@ -228,6 +224,11 @@ export class SearchBoxComponent
 
   RefineParentEvent: EventEmitter<any> = new EventEmitter();
 
+  //Loading components dynamically to switch between desktop and mobile views without losing consistency (view state)
+  @ViewChild('vcDesktop', { read: ViewContainerRef })
+  vcDesktop: ViewContainerRef;
+  @ViewChild('vcMobile', { read: ViewContainerRef }) vcMobile: ViewContainerRef;
+  @ViewChild('tpl') tpl: TemplateRef<any>;
   view: ViewRef;
 
   constructor(
@@ -241,10 +242,6 @@ export class SearchBoxComponent
     super('SearchBox');
     this.currentOptions = [];
     this.filters = this.filterStore.getFilters();
-    // filterStore.stateChanged.subscribe((filterState) => {
-    //   console.log(filterState);
-    //   this.filters = filterState.filters;
-    // });
   }
 
   public ngOnInit() {
@@ -360,6 +357,8 @@ export class SearchBoxComponent
     }
   }
 
+  //A cool way to forward events from ng-template child to its container
+  //https://stackoverflow.com/a/57435270/11420791
   forwardEvent(value: any) {
     this.RefineParentEvent.next(value);
   }

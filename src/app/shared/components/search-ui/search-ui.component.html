@@ -7,14 +7,18 @@
     }"
   >
   </ais-configure>
-
   <se-searchbox></se-searchbox>
-  <ais-hits>
-    <ng-template let-hits="hits">
-      <div class="w-full flex flex-col items-center justify-center space-y-2">
-        <se-course-card *ngFor="let hit of hits" [data]="hit"></se-course-card>
-      </div>
-    </ng-template>
-  </ais-hits>
+  <div>
+    <ais-hits>
+      <ng-template let-hits="hits">
+        <div class="w-full flex flex-col items-center justify-center space-y-2">
+          <se-course-card
+            *ngFor="let hit of hits"
+            [data]="hit"
+          ></se-course-card>
+        </div>
+      </ng-template>
+    </ais-hits>
+  </div>
   <se-pagination-box></se-pagination-box>
 </ais-instantsearch>

@@ -106,7 +106,12 @@ import connectPagination, {
         </nav>
       </div>
     </div>
-  </div>`
+  </div>`,
+  styles: [
+    '.active {\n' +
+      '  @apply z-10 bg-indigo-50 border-indigo-500 text-indigo-600;\n' +
+      '}\n'
+  ]
 })
 export class PaginationComponent
   extends TypedBaseWidget<
