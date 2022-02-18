@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'se-intructors',
@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./intructors.component.scss']
 })
 export class IntructorsComponent {
+  @Input() data: any;
   constructor() {}
 }

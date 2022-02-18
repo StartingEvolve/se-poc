@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'se-reviews',
@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./reviews.component.scss']
 })
 export class ReviewsComponent {
+  @Input() data: any;
   constructor() {}
 }

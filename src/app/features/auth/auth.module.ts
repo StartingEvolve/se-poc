@@ -19,6 +19,10 @@ import { CourseComponent } from './views/course/course.component';
 import { ReviewsComponent } from './components/reviews/reviews.component';
 import { OverviewComponent } from './components/overview/overview.component';
 import { IntructorsComponent } from './components/intructors/intructors.component';
+import { GoalsComponent } from './components/goals/goals.component';
+import { PrerequisitesComponent } from './components/prerequisites/prerequisites.component';
+import { ProgramComponent } from './components/program/program.component';
+import { CertificationsComponent } from './components/certifications/certifications.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +41,11 @@ import { IntructorsComponent } from './components/intructors/intructors.componen
     CourseComponent,
     ReviewsComponent,
     OverviewComponent,
-    IntructorsComponent
+    IntructorsComponent,
+    GoalsComponent,
+    PrerequisitesComponent,
+    ProgramComponent,
+    CertificationsComponent
   ],
   imports: [CommonModule, AuthRoutingModule, SharedModule, LayoutModule]
 })

@@ -1,0 +1,46 @@
+<div class="bg-white sm:py-8 lg:py-12">
+  <div class="max-w-screen-xl px-4 md:px-8 mx-auto">
+    <!-- text - start -->
+    <div class="mb-10 md:mb-16">
+      <h2
+        class="text-gray-800 text-2xl lg:text-3xl font-bold text-center mb-4 md:mb-6"
+      >
+        Certification
+      </h2>
+    </div>
+    <!-- text - end -->
+
+    <div class="w-full flex flex-col items-center justify-center space-y-2">
+      <div
+        *ngFor="let certificate of data"
+        class="sm:max-w-6xl border-gray-300 border cursor-pointer bg-white shadow-lg rounded overflow-hidden m-4 sm:flex"
+      >
+        <div
+          [ngStyle]="{ 'background-image': 'url(' + certificate.image + ')' }"
+          class="h-48 border-b-gray-500 border-b-2 sm:border-b-0 sm:border-r-2 sm:border-r-gray-300 bg-image sm:h-auto sm:w-48 md:w-64 flex-none bg-cover bg-center rounded-tl rounded-tr md:rounded-tr-none md:rounded-bl text-center overflow-hidden"
+        ></div>
+
+        <!-- card-content -->
+        <div
+          class="px-2 min-h-[200px] sm:w-[400px] md:w-[500px] lg:w-[800px] block hover:bg-gray-50"
+        >
+          <div
+            class="px-4 py-2 sm:px-6 h-full space-y-2 flex justify-evenly flex-col"
+          >
+            <div class="flex items-center justify-between">
+              <p class="text-base md:text-xl font-medium text-indigo-600">
+                {{ certificate?.name }}
+              </p>
+            </div>
+            <p
+              *ngIf="certificate?.description"
+              class="mb-4 text-grey-dark text-sm"
+            >
+              {{ certificate.description }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
