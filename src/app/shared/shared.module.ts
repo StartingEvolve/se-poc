@@ -19,6 +19,7 @@ import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.compo
 import { StarsComponent } from './components/stars/stars.component';
 import { TabsComponent } from './components/tabs/tabs.component';
 import { TabComponent } from './components/tab/tab.component';
+
 const components = [
   LanguagePickerWebComponent,
   StepperComponent,
@@ -35,7 +36,7 @@ const components = [
 const pipes = [TruncatePipe, LogPipe, SanitizeHtmlPipe];
 
 @NgModule({
-  declarations: [...components, TruncatePipe, SanitizeHtmlPipe, LogPipe],
+  declarations: [...components, ...pipes],
   imports: [
     CommonModule,
     MaterialUiModule,

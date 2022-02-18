@@ -169,8 +169,8 @@ const generateCourseInfoData = (cities, number) => {
     };
     const courseInfo = {
       id: id,
-      title: faker.lorem.sentence(6),
-      image: faker.image.business(640, 480, true),
+      title: course.title,
+      image: course.image,
       description: course.description,
       goals: ['Under Construction'],
       prerequisites: ['Under construction'],
@@ -186,13 +186,13 @@ const generateCourseInfoData = (cities, number) => {
       ],
       overview: {
         article: generateArticle(),
-        public_admitted: [randomArrayValue(_public)],
+        public_admitted: [course.public],
         price: {
-          value: faker.commerce.price(200, 9000, 0),
+          value: course.price,
           new_value: null,
           currency: randomArrayValue(['$'])
         },
-        eligibility: randomArrayValue(_eligibility),
+        eligibility: course.eligibility,
         start_date:
           randomNumber(1, 30) +
           ' ' +
@@ -200,12 +200,12 @@ const generateCourseInfoData = (cities, number) => {
           ' ' +
           randomArrayValue(['2022', '2023']),
         location: {
-          address: faker.address.streetAddress(),
+          address: course.address,
           region: city['Nom_commune'],
           zip_code: city['Code_postal'].toString()
         },
-        duration: formatDuration(6),
-        learning_mode: randomArrayValue(_learningMode),
+        duration: course.duration,
+        learning_mode: course.learningMode,
         success_rate: randomNumber(70, 95) + '%'
       },
       organisation: {

@@ -23,6 +23,7 @@ import { GoalsComponent } from './components/goals/goals.component';
 import { PrerequisitesComponent } from './components/prerequisites/prerequisites.component';
 import { ProgramComponent } from './components/program/program.component';
 import { CertificationsComponent } from './components/certifications/certifications.component';
+import { SearchUiModule } from '@shared/components/search-ui/search-ui.module';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,12 @@ import { CertificationsComponent } from './components/certifications/certificati
     ProgramComponent,
     CertificationsComponent
   ],
-  imports: [CommonModule, AuthRoutingModule, SharedModule, LayoutModule]
+  imports: [
+    CommonModule,
+    AuthRoutingModule,
+    SharedModule,
+    LayoutModule,
+    SearchUiModule
+  ]
 })
 export class AuthModule {}

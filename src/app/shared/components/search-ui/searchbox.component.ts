@@ -22,9 +22,8 @@ import connectSearchBox, {
   SearchBoxWidgetDescription,
   SearchBoxConnectorParams
 } from 'instantsearch.js/es/connectors/search-box/connectSearchBox';
-import { RefinementListComponent } from '@se/prototype/course-search-ui/refinement-list.component';
+import { RefinementListComponent } from '@shared/components/search-ui/refinement-list.component';
 import { Filter, FilterStore } from '@core/store/filter/filter.store';
-import { filter } from 'rxjs/operators';
 import Timeout = NodeJS.Timeout;
 
 interface CurrentOption {

@@ -6,7 +6,6 @@ import { Example1Component } from './prototype/example1/example1.component';
 import { Example2Component } from './prototype/example2/example2.component';
 import { CarouselComponent } from '@se/prototype/carousel/carousel.component';
 import { PrototypeComponent } from './prototype/prototype/prototype.component';
-import { CourseSearchUiComponent } from '@se/prototype/course-search-ui/course-search-ui.component';
 
 const routes: Routes = [
   {
@@ -16,7 +15,7 @@ const routes: Routes = [
   { path: 'prototype/example1', component: Example1Component },
   { path: 'prototype/example2', component: Example2Component },
   { path: 'prototype/carousel', component: CarouselComponent },
-  { path: 'prototype/search', component: CourseSearchUiComponent },
+  // { path: 'prototype/search', component: CourseSearchUiComponent },
   { path: 'prototype/articleproto', component: ArticleprototypeComponent },
   { path: 'article', component: ArticleComponent },
   { path: 'article/:articleId', component: ArticleComponent },
