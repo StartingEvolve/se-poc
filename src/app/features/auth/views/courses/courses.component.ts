@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { CourseData } from '@se/core/store/search-course/search-courses.store';
+import { CourseData } from '@core/store/course/search-courses.store';
+import { CourseStore } from '@core/store/course/course.store';
 
 @Component({
   selector: 'se-courses',
@@ -9,7 +10,9 @@ import { CourseData } from '@se/core/store/search-course/search-courses.store';
 export class CoursesComponent {
   courses: CourseData[];
   routeId: number = 2;
-  constructor() {
+  courseInfo: any;
+
+  constructor(private courseStore: CourseStore) {
     this.courses = [
       {
         title: 'Les bases indispensables de la programmation : Algorithmique',

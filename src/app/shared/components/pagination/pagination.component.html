@@ -1,19 +1,16 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
 <div
-  *ngIf="scState?.to"
   class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6"
 >
   <div class="flex-1 flex justify-between sm:hidden">
     <button
       (click)="prev()"
-      [disabled]="scState?.current_page === 1"
       class="disabled:text-gray-300 disabled:bg-gray-200 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
     >
       Previous
     </button>
     <button
       (click)="next()"
-      [disabled]="scState?.current_page === scState?.last_page"
       class="disabled:text-gray-300 disabled:bg-gray-200 ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
     >
       Next
@@ -21,15 +18,7 @@
   </div>
   <div class="px-4 hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
     <div>
-      <p class="text-sm text-gray-700">
-        Showing
-        <span class="font-medium">{{ scState?.from }}</span>
-        to
-        <span class="font-medium">{{ scState?.to }}</span>
-        of
-        <span class="font-medium">{{ scState?.total }}</span>
-        results
-      </p>
+      <p class="text-sm text-gray-700">Showing to of results</p>
     </div>
     <div>
       <nav
@@ -44,7 +33,6 @@
           <!-- Heroicon name: solid/chevron-left -->
           <svg
             class="h-5 w-5"
-            [class.text-gray-200]="scState?.current_page === 1"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
             fill="currentColor"
@@ -59,14 +47,9 @@
         </button>
         <!-- Current: "", Default: "bg-white border-gray-300 text-gray-500 hover:bg-gray-50" -->
         <button
-          *ngFor="let item of [].constructor(scState?.last_page); let i = index"
           aria-current="page"
-          (click)="goto(i + 1)"
           class="relative inline-flex items-center px-4 py-2 border text-sm font-medium"
-          [class.active]="scState?.current_page === i + 1"
-        >
-          {{ i + 1 }}
-        </button>
+        ></button>
         <button
           button
           (click)="next()"
@@ -76,7 +59,6 @@
           <!-- Heroicon name: solid/chevron-right -->
           <svg
             class="h-5 w-5"
-            [class.text-gray-200]="scState?.current_page === scState?.last_page"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
             fill="currentColor"

@@ -28,7 +28,7 @@
             </div>
           </div>
           <div
-            *ngFor="let instructor of courseInfo.instructors"
+            *ngFor="let instructor of courseInfo?.instructors"
             class="flex flex-wrap-reverse items-center md:space-x-4 md:space-y-0 space-y"
           >
             <div class="w-full flex items-center space-x-4 md:w-fit">
@@ -58,11 +58,6 @@
               Top instructeur
             </div>
           </div>
-        </div>
-        <div
-          class="w-full flex flex-col md:justify-start items-center justify-center relative p-3 min-h-[250px] md:w-[50%] space-y-4"
-        >
-          <!-- <div><span class="font-bold">1,219,498</span> already rolled</div> -->
           <div class="md:px-4 self-start" *ngIf="courseInfo?.organisation">
             <p>
               Offert par:
@@ -71,13 +66,17 @@
               }}</span>
             </p>
             <img
-              class="cursor-pointer px-4 py-2"
+              class="cursor-pointer px-4 py-2 h-24 w-48 object-fill"
               [src]="courseInfo.organisation.image"
               alt="logo-provider"
             />
           </div>
+        </div>
+        <div
+          class="w-full flex flex-col md:justify-start items-center justify-center relative p-3 min-h-[250px] md:w-[50%] space-y-4"
+        >
           <div
-            class="text-black bg-green-400 shadow rounded-sm max-h-[350px] xl:w-[80%] xl:h-[70%] lg:w-[100%] md:w-[100%] md:h-[85%] w-[95%] h-full"
+            class="text-black bg-green-400 shadow rounded-sm max-h-[400px] min-h-[300px] xl:w-[80%] xl:h-[70%] lg:w-[100%] md:w-[100%] md:h-[85%] w-[95%] h-full"
           >
             <div
               class="h-full w-full mt-5 py-6 px-8 bg-white space-y-6 flex flex-col items-center"
@@ -88,18 +87,13 @@
               <p class="lg:text-center text-lg">
                 Demandez plus d'informations sur cette formation
               </p>
-              <div class="xl:flex pt-[30%] hidden py-6">
+              <div class="xl:flex pt-[10%] hidden py-6">
                 <button
                   class="bg-green-500 w-full text-white active:bg-emerald-600 font-bold uppercase text-base px-8 py-3 rounded shadow-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                   type="button"
                 >
                   Je m'informe
                 </button>
-                <!-- <button
-                                    class="text-emerald-500 bg-transparent border border-solid border-emerald-500 hover:bg-emerald-500 hover:text-white active:bg-emerald-600 font-bold uppercase text-xs px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                                    type="button">
-                                    Inscrivez-vous maintenant
-                                </button> -->
               </div>
               <div class="xl:hidden w-[90%] flex flex-col py-6">
                 <button
@@ -108,11 +102,6 @@
                 >
                   Je m'informe
                 </button>
-                <!-- <button
-                                    class="text-emerald-500 w-full bg-transparent border border-solid border-emerald-500 hover:bg-emerald-500 hover:text-white active:bg-emerald-600 font-bold uppercase px-8 py-3 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                                    type="button">
-                                    S'inscrire
-                                </button> -->
               </div>
             </div>
           </div>
@@ -133,13 +122,13 @@
     class="feed h-full min-h-[250px] mx-auto pb-4 px-3 2xl:w-[1512px] xl:w-[1256px] lg:w-[1000px] md:w-[744px] sm:w-[616px] text-left"
   >
     <se-overview *ngSwitchCase="1" [data]="courseInfo?.overview"></se-overview>
-    <se-goals *ngSwitchCase="2" [data]="courseInfo?.goals"> </se-goals>
+    <se-goals *ngSwitchCase="2" [data]="courseInfo?.goals"></se-goals>
     <se-prerequisites *ngSwitchCase="3" [data]="courseInfo?.prerequisites">
     </se-prerequisites>
     <se-program *ngSwitchCase="4" [data]="courseInfo?.program"></se-program>
     <se-intructors *ngSwitchCase="5" [data]="courseInfo?.instructors"
-      >instructeurs</se-intructors
-    >
+      >instructeurs
+    </se-intructors>
     <se-certifications *ngSwitchCase="6" [data]="courseInfo?.certifications"
       >certifications
     </se-certifications>
