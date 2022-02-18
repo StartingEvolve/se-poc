@@ -134,14 +134,13 @@ export class CourseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.route.paramMap.subscribe((paramMap) => {
-    //   this.uuid = paramMap.get('uuid');
-    // });
-
-    this.courseStore.getCourseById('02203318-5bf9-41b1-b3d7-47570936e76a');
-    this.storeSub = this.courseStore.stateChanged.subscribe((value) => {
-      console.log(value);
-      this.courseInfo = value.course;
+    this.route.paramMap.subscribe((paramMap) => {
+      this.uuid = paramMap.get('uuid');
+      this.courseStore.getCourseById(this.uuid);
+      this.storeSub = this.courseStore.stateChanged.subscribe((value) => {
+        console.log(value);
+        this.courseInfo = value.course;
+      });
     });
   }
 

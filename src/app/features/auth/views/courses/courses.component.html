@@ -1,11 +1,4 @@
 <se-navbar [activeId]="2"></se-navbar>
 <div class="bg-white min-h-screen pt-14">
-  <se-search></se-search>
-  <div class="w-full flex flex-col items-center justify-center space-y-2">
-    <se-course-card
-      *ngFor="let course of courses"
-      [data]="course"
-    ></se-course-card>
-  </div>
-  <se-pagination></se-pagination>
+  <se-course-search-ui></se-course-search-ui>
 </div>
