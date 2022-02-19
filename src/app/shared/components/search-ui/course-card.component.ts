@@ -151,6 +151,7 @@ export class CourseCardComponent {
   constructor(private router: Router) {}
 
   goToCourseDetails(id: string) {
+    window.scrollTo(0, 0);
     this.router.navigate(['course', id]);
   }
 }

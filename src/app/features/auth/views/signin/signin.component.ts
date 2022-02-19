@@ -6,7 +6,7 @@ import {
   ValidationErrors,
   Validators
 } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from '@se/core/services/auth.service';
 import { AuthStore, UserInterface } from '@se/core/store/auth/auth.store';
@@ -27,7 +27,10 @@ export class SigninComponent implements OnInit {
   firebaseErrorCode: string;
   userState: UserInterface;
   showErrors: boolean;
+  returnUrl: string;
+
   constructor(
+    private route: ActivatedRoute,
     private router: Router,
     private ts: TranslateService,
     private as: AuthStore,
@@ -41,10 +44,12 @@ export class SigninComponent implements OnInit {
     });
   }
   ngOnInit(): void {
+    this.returnUrl =
+      this.route.snapshot.queryParams['returnUrl'] || '/dashboard';
     this.as.stateChanged.subscribe((state) => {
       this.userState = state;
       if (this.userState?.isLoggedIn) {
-        this.router.navigate(['/dashboard']);
+        this.router.navigateByUrl(this.returnUrl);
       }
     });
   }
@@ -62,6 +67,8 @@ export class SigninComponent implements OnInit {
         if (result == null) {
           // null is success, false means there was an error
           console.log('logging in...');
+          // login successful so redirect to return url
+          this.router.navigateByUrl(this.returnUrl);
         } else if (result.isValid == false) {
           console.log('login error', result);
           this.firebaseErrorCode = 'FIREBASE.' + result.code;
