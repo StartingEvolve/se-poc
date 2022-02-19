@@ -14,9 +14,13 @@ const noop = (): void => {};
 
 @Component({
   selector: 'se-clear-refinements',
-  template: ` <mat-icon (click)="state.refine()" color="warn">
-    delete</mat-icon
-  >`
+  template: ` <mat-icon
+    class="cursor-pointer lg:block hidden absolute right-1"
+    (click)="state.refine()"
+    color="warn"
+  >
+    delete
+  </mat-icon>`
 })
 export class ClearRefinementsComponent extends TypedBaseWidget<
   ClearRefinementsWidgetDescription,

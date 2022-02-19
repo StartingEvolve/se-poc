@@ -11,6 +11,7 @@ interface DropdownOption {
 export interface Filter {
   id: number;
   name: string;
+  label: string;
   isOpen: boolean;
   options: DropdownOption[];
 }
@@ -31,6 +32,7 @@ export class FilterStore extends ObservableStore<FilterState> {
         {
           id: 1,
           name: 'public',
+          label: 'public admis',
           isOpen: false,
           options: [
             {
@@ -59,6 +61,7 @@ export class FilterStore extends ObservableStore<FilterState> {
           id: 2,
           name: 'learningMode',
           isOpen: false,
+          label: "mode d'apprentissage",
           options: [
             {
               value: 'En centre',
@@ -66,7 +69,7 @@ export class FilterStore extends ObservableStore<FilterState> {
               isChecked: false
             },
             {
-              value: 'Salarie en poste',
+              value: 'En entreprise',
               label: 'Salarie en poste',
               isChecked: false
             },
@@ -85,6 +88,7 @@ export class FilterStore extends ObservableStore<FilterState> {
         {
           id: 3,
           name: 'eligibility',
+          label: 'spécifités',
           isOpen: false,
           options: [
             {
