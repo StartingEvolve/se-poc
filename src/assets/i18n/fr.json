@@ -54,7 +54,7 @@
         "LASTNAME":"Nom",
         "CONFIRMPASSWORD":"Confirmez votre mot de passe",
         "REGISTER":"S'inscrire",
-        "PASSWORD_PATTERN":"Votre mot de passe doit contenir au moins 8 caractères, et inclure des lettres majuscules, des lettres minuscules, des chiffres et des caractères spéciaux.",
+        "PASSWORD_PATTERN":"Votre mot de passe doit contenir au moins 8 caractères, et inclure au moins une lettres majuscule, des lettres minuscule, un chiffre et un caractère spécial.",
         "REQUIRED_FIRSTNAME":"Le prénom est requis ",
         "REQUIRED_LASTNAME":"Le nom est requis",
         "REQUIRED_CONFIRMPASSWORD":"Confirmation du mot de passe est requis",

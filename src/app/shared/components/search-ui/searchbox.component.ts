@@ -124,10 +124,10 @@ const parseNumberInput = (input?: number | string): number => {
         <div
           *ngIf="currentOptions.length !== 0"
           class="bg-[#f5f5f5] relative flex items-center space-x-1 lg:space-x-6
-        pl-4 h-12"
+         py-2 pl-4"
         >
-          <h2>Filters :</h2>
-          <div class="flex items-center space-x-1 pl-4 h-12">
+          <h2>Filters</h2>
+          <div class="flex flex-wrap gap-2 items-center space-x-1 pl-4 mr-2">
             <div
               *ngFor="let currentOption of currentOptions"
               class="relative p-1 pl-2 pr-5 text-xs bg-gray-200 rounded-full"
@@ -266,6 +266,7 @@ export class SearchBoxComponent
   }
 
   toggleOptionById(object: { id: number; value: string; isMobile: boolean }) {
+    console.log(object.value);
     this.filters
       .find((x) => x.id === object.id)
       .options.forEach((it) => {

@@ -1,11 +1,9 @@
 <ais-instantsearch [config]="config">
-  <ais-configure
-    [searchParameters]="{
+  <ais-configure [searchParameters]="{
       attributesToSnippet: ['description:10'],
       snippetEllipsisText: '…',
       removeWordsIfNoResults: 'allOptional'
-    }"
-  >
+    }">
   </ais-configure>
 
   <se-searchbox></se-searchbox>

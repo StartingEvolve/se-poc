@@ -132,24 +132,22 @@ import { Filter } from '@shared/components/search/search.component';
             (click)="toggleOption(filter.id, option.value, true)"
             role="menuitem"
             tabindex="-1"
-            class="flex items-center py-2"
+            class="cursor-pointer flex items-center py-2"
           >
             <input
               *ngIf="option.label !== ''"
-              id="filter-mobile-color-0"
               name="color[]"
               value="white"
               type="checkbox"
               [checked]="option.isRefined"
               class="h-4 w-4 border-gray-300 rounded text-indigo-600 focus:ring-indigo-500"
             />
-            <label
+            <div
               *ngIf="option.label !== ''"
-              for="filter-mobile-color-0"
               class="ml-3 min-w-0 flex-1 text-gray-500"
             >
               {{ option.label }} ({{ option.count }})
-            </label>
+            </div>
           </div>
         </div>
       </div>
@@ -209,7 +207,6 @@ export class RefinementListComponent
   }
 
   toggleOption(id: number, value: string, isMobile: boolean) {
-    console.log({ id, value, isMobile });
     this.state.refine(value);
     this.toggleOptionEvent.emit({ id, value, isMobile });
   }

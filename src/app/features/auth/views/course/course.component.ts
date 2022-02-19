@@ -21,7 +21,7 @@ export class CourseComponent implements OnInit, OnDestroy {
   tabs: Tab[];
   courseInfo: CourseInfo;
   dummyCourse: CourseInfo;
-  subs: Subscription[];
+  subs: Subscription[] = []; // You must initiate array in order to push
 
   constructor(private route: ActivatedRoute, private courseStore: CourseStore) {
     this.uuid = this.route.snapshot.params['uuid'];

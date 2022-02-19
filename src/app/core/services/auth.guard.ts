@@ -21,24 +21,27 @@ export class AuthGuard implements CanActivate {
   ) {}
   canActivate(
     route: ActivatedRouteSnapshot,
-    userState: RouterStateSnapshot
+    state: RouterStateSnapshot
   ):
     | Observable<boolean | UrlTree>
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
     return new Promise((resolve, reject) => {
-      this.as.stateChanged.subscribe((userState) => {
-        if (userState?.isLoggedIn) {
-          if (!userState.isEmailVerified) {
+      this.afAuth.onAuthStateChanged((user) => {
+        if (user) {
+          if (!user.emailVerified) {
             this.router.navigate(['/verify-email']);
           }
-          // if the userState hasn't verified their email, send them to that page
+          // if the user hasn't verified their email, send them to that page
 
           resolve(true);
         } else {
           console.log('Auth Guard: userState is not logged in');
-          this.router.navigate(['/']); // a logged out userState will always be sent to home
+          // not logged in so redirect to login page with the return url and return false
+          this.router.navigate(['signin'], {
+            queryParams: { returnUrl: state.url }
+          }); // a logged out userState will always be sent to home
           resolve(false);
         }
       });

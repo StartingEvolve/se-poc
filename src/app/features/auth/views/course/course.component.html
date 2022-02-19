@@ -1,6 +1,9 @@
 <div class="min-h-screen bg-white">
   <div class="relative w-full bg-gradient-1 text-white">
-    <se-breadcrumbs></se-breadcrumbs>
+    <se-breadcrumbs
+      [type]="'Courses'"
+      [links]="[{ name: 'Développement web', url: '/xd' }]"
+    ></se-breadcrumbs>
     <div
       class="h-full min-h-[250px] mx-auto px-3 py-6 md:py-12 2xl:w-[1512px] xl:w-[1256px] lg:w-[1000px] md:w-[744px] sm:w-[616px] text-left"
     >

@@ -37,7 +37,11 @@ const routes: Routes = [
         path: 'articles',
         component: SignupComponent
       },
-      { path: 'course/:uuid', component: CourseComponent }
+      {
+        path: 'course/:uuid',
+        component: CourseComponent,
+        canActivate: [AuthGuard]
+      }
     ]
   },
   {

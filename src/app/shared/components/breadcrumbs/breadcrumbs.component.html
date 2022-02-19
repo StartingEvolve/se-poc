@@ -3,7 +3,10 @@
   <ol class="rounded-md flex md:space-x-1 space-x-2">
     <li class="flex">
       <div class="flex items-center">
-        <a href="#" class="text-white hover:text-gray-200">
+        <div
+          routerLink="/"
+          class="cursor-pointer text-white hover:text-gray-200"
+        >
           <!-- Heroicon name: solid/home -->
           <svg
             class="flex-shrink-0 md:h-5 md:w-5 w-3"
@@ -17,7 +20,7 @@
             />
           </svg>
           <span class="sr-only">Accueil</span>
-        </a>
+        </div>
       </div>
     </li>
 
@@ -33,15 +36,31 @@
         >
           <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
         </svg>
-        <a
-          href="#"
-          class="ml-2 md:text-xs text-[10px] font-bold text-white hover:text-gray-200"
-          >Formations</a
+        <div
+          *ngIf="type === 'Courses'"
+          routerLink="/courses"
+          class="cursor-pointer ml-2 md:text-xs text-[10px] font-bold text-white hover:text-gray-200"
         >
+          Formations
+        </div>
+        <div
+          *ngIf="type === 'Articles'"
+          routerLink="/articles"
+          class="cursor-pointer ml-2 md:text-xs text-[10px] font-bold text-white hover:text-gray-200"
+        >
+          Article
+        </div>
+        <div
+          *ngIf="type === 'Services'"
+          routerLink="/services"
+          class="cursor-pointer ml-2 md:text-xs text-[10px] font-bold text-white hover:text-gray-200"
+        >
+          Services
+        </div>
       </div>
     </li>
 
-    <li class="flex">
+    <li *ngFor="let link of links" class="flex">
       <div class="flex items-center">
         <svg
           class="flex-shrink-0 w-2 text-white"
@@ -53,32 +72,12 @@
         >
           <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
         </svg>
-        <a
-          href="#"
-          class="ml-2 md:text-xs text-[10px] font-bold text-white hover:text-gray-200"
-          aria-current="page"
-          >Développement</a
+        <div
+          [routerLink]="link.url"
+          class="cursor-pointer ml-2 md:text-xs text-[10px] font-bold text-white hover:text-gray-200"
         >
-      </div>
-    </li>
-    <li class="flex">
-      <div class="flex items-center">
-        <svg
-          class="flex-shrink-0 w-2 text-white"
-          viewBox="0 0 24 44"
-          preserveAspectRatio="none"
-          fill="currentColor"
-          xmlns="http://www.w3.org/2000/svg"
-          aria-hidden="true"
-        >
-          <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
-        </svg>
-        <a
-          href="#"
-          class="ml-2 md:text-xs text-[10px] font-bold text-white hover:text-gray-200"
-          aria-current="page"
-          >Développement web</a
-        >
+          {{ link.name }}
+        </div>
       </div>
     </li>
   </ol>
