@@ -70,7 +70,7 @@ export class FilterStore extends ObservableStore<FilterState> {
             },
             {
               value: 'En entreprise',
-              label: 'Salarie en poste',
+              label: 'En entreprise',
               isChecked: false
             },
             {
@@ -98,7 +98,7 @@ export class FilterStore extends ObservableStore<FilterState> {
             },
             {
               value: 'Eligible VAE',
-              label: 'Salarie en poste',
+              label: 'Eligible VAE',
               isChecked: false
             }
           ]
