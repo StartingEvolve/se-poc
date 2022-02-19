@@ -144,10 +144,7 @@ const parseNumberInput = (input?: number | string): number => {
               </span>
             </div>
           </div>
-          <div
-            class="cursor-pointer lg:block hidden absolute right-1"
-            (click)="resetCurrentOptions()"
-          >
+          <div class="mb-[2%]" (click)="resetCurrentOptions()">
             <se-clear-refinements></se-clear-refinements>
           </div>
         </div>
@@ -298,14 +295,22 @@ export class SearchBoxComponent
   }
 
   resetFilterById(id: number) {
+    this.filtersList.toArray()[id - 1];
     this.filters
       .find((x) => x.id === id)
-      .options.forEach((x) => (x.isChecked = false));
+      .options.forEach((x) => {
+        //Reset refinement of a specific filter
+        if (x.isChecked) {
+          this.filtersList.toArray()[id - 1].state.refine(x.value);
+          x.isChecked = false;
+        }
+      });
     this.currentOptions = this.currentOptions.filter((item) => item.id != id);
     this.filterStore.updateFilters(this.filters);
   }
 
   resetCurrentOptions() {
+    //Reset all refinements of all filters
     this.currentOptions = [];
     this.filters.forEach((filter) => {
       filter.isOpen = false;
@@ -317,6 +322,7 @@ export class SearchBoxComponent
   }
 
   removeOption(id: number, value: string) {
+    //Target specific refinements
     this.filtersList.toArray()[id - 1].state.refine(value);
     this.currentOptions = this.currentOptions.filter(
       (item) => item.id != id || item.value != value

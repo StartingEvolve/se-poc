@@ -19,7 +19,7 @@ import connectRefinementList, {
   RefinementListWidgetDescription,
   RefinementListConnectorParams
 } from 'instantsearch.js/es/connectors/refinement-list/connectRefinementList';
-import { Filter } from '@shared/components/search/search.component';
+import { Filter } from '@core/store/filter/filter.store';
 
 @Component({
   selector: 'se-refinement-list',
@@ -35,7 +35,7 @@ import { Filter } from '@shared/components/search/search.component';
             aria-haspopup="true"
           >
             <span (click)="toggleDropdown(filter.id)">{{
-              filter.name | translate
+              filter.label | translate
             }}</span>
             <span
               *ngIf="number"
@@ -105,7 +105,7 @@ import { Filter } from '@shared/components/search/search.component';
           aria-controls="filter-section-mobile-0"
           aria-expanded="false"
         >
-          <span>{{ filter.name | translate }}</span>
+          <span>{{ filter.label | translate }}</span>
           <span class="ml-6 flex items-center">
             <img
               *ngIf="!filter.isOpen"
