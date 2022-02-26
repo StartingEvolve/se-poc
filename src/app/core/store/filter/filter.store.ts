@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ObservableStore } from '@codewithdan/observable-store';
 import { of } from 'rxjs';
+import { NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 interface DropdownOption {
   value: string;
@@ -24,90 +26,92 @@ export interface FilterState {
   providedIn: 'root'
 })
 export class FilterStore extends ObservableStore<FilterState> {
-  constructor() {
+  currentRoute: string;
+  filters: any;
+
+  constructor(private router: Router) {
     super({ trackStateHistory: true, logStateChanges: true });
 
-    //Todo (zack): Initialize state from router
-    const initialState = {
-      filters: [
-        {
-          id: 1,
-          name: 'public',
-          label: 'public admis',
-          isOpen: false,
-          options: [
-            {
-              value: 'Etudiant',
-              label: 'Etudiant',
-              isChecked: false
-            },
-            {
-              value: 'Salarie en poste',
-              label: 'Salarie en poste',
-              isChecked: false
-            },
-            {
-              value: 'Entreprise',
-              label: 'Entreprise',
-              isChecked: false
-            },
-            {
-              value: "Demandeur d'emploi",
-              label: "Demandeur d'emploi",
-              isChecked: false
-            }
-          ]
-        },
-        {
-          id: 2,
-          name: 'learningMode',
-          isOpen: false,
-          label: "mode d'apprentissage",
-          options: [
-            {
-              value: 'En centre',
-              label: 'En centre',
-              isChecked: false
-            },
-            {
-              value: 'En entreprise',
-              label: 'En entreprise',
-              isChecked: false
-            },
-            {
-              value: 'A distance',
-              label: 'A distance',
-              isChecked: false
-            },
-            {
-              value: 'En alternance',
-              label: 'En alternance',
-              isChecked: false
-            }
-          ]
-        },
-        {
-          id: 3,
-          name: 'eligibility',
-          label: 'spécifités',
-          isOpen: false,
-          options: [
-            {
-              value: 'Eligible CPF',
-              label: 'Eligible CPF',
-              isChecked: false
-            },
-            {
-              value: 'Eligible VAE',
-              label: 'Eligible VAE',
-              isChecked: false
-            }
-          ]
-        }
-      ]
-    };
-
-    this.setState(initialState, FilterStoreActions.InitializeFilters);
+    this.filters = [
+      {
+        id: 1,
+        name: 'public',
+        label: 'public admis',
+        isOpen: false,
+        options: [
+          {
+            value: 'Etudiant',
+            label: 'Etudiant',
+            isChecked: false
+          },
+          {
+            value: 'Salarie en poste',
+            label: 'Salarie en poste',
+            isChecked: false
+          },
+          {
+            value: 'Entreprise',
+            label: 'Entreprise',
+            isChecked: false
+          },
+          {
+            value: "Demandeur d'emploi",
+            label: "Demandeur d'emploi",
+            isChecked: false
+          }
+        ]
+      },
+      {
+        id: 2,
+        name: 'learningMode',
+        isOpen: false,
+        label: "mode d'apprentissage",
+        options: [
+          {
+            value: 'En centre',
+            label: 'En centre',
+            isChecked: false
+          },
+          {
+            value: 'En entreprise',
+            label: 'En entreprise',
+            isChecked: false
+          },
+          {
+            value: 'A distance',
+            label: 'A distance',
+            isChecked: false
+          },
+          {
+            value: 'En alternance',
+            label: 'En alternance',
+            isChecked: false
+          }
+        ]
+      },
+      {
+        id: 3,
+        name: 'eligibility',
+        label: 'spécifités',
+        isOpen: false,
+        options: [
+          {
+            value: 'Eligible CPF',
+            label: 'Eligible CPF',
+            isChecked: false
+          },
+          {
+            value: 'Eligible VAE',
+            label: 'Eligible VAE',
+            isChecked: false
+          }
+        ]
+      }
+    ];
+    this.setState(
+      { filters: this.filters },
+      FilterStoreActions.InitializeFilters
+    );
   }
 
   getFiltersObservable() {
@@ -122,8 +126,23 @@ export class FilterStore extends ObservableStore<FilterState> {
     this.setState({}, FilterStoreActions.AddFilter);
   }
 
-  updateFilters(filters: Filter[]) {
-    this.setState({ filters }, FilterStoreActions.UpdateFilter);
+  updateFiltersByUrl(url: string) {
+    this.setState(
+      {
+        filters: this.filters.map((f) => {
+          return {
+            ...f,
+            options: f.options.map((option) => {
+              return {
+                ...option,
+                isChecked: url.includes(option.value)
+              };
+            })
+          };
+        })
+      },
+      FilterStoreActions.UpdateFilter
+    );
   }
 }
 
