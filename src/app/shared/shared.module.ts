@@ -19,6 +19,7 @@ import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.compo
 import { StarsComponent } from './components/stars/stars.component';
 import { TabsComponent } from './components/tabs/tabs.component';
 import { TabComponent } from './components/tab/tab.component';
+import { ChatbotComponent } from './components/chatbot/chatbot.component';
 
 const components = [
   LanguagePickerWebComponent,
@@ -30,13 +31,14 @@ const components = [
   BreadcrumbsComponent,
   StarsComponent,
   TabComponent,
+  ChatbotComponent,
   TabsComponent
 ];
 
 const pipes = [TruncatePipe, LogPipe, SanitizeHtmlPipe];
 
 @NgModule({
-  declarations: [...components, ...pipes],
+  declarations: [...components, ...pipes, ChatbotComponent],
   imports: [
     CommonModule,
     MaterialUiModule,

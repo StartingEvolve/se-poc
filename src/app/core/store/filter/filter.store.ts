@@ -27,6 +27,7 @@ export class FilterStore extends ObservableStore<FilterState> {
   constructor() {
     super({ trackStateHistory: true, logStateChanges: true });
 
+    //Todo (zack): Initialize state from router
     const initialState = {
       filters: [
         {

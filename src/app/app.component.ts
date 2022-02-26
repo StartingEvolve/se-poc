@@ -4,6 +4,7 @@ import { Observable, Subscription } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthStore } from '@core/store/auth/auth.store';
 import { LoaderService } from '@core/services/loader.service';
+import { ChatbotService } from '@core/services/chatbot.service';
 
 @Component({
   selector: 'se-root',
@@ -20,7 +21,8 @@ export class AppComponent implements OnInit {
     private store: AngularFirestore,
     private ts: AuthStore,
     private tr: TranslateService,
-    public ls: LoaderService
+    public ls: LoaderService,
+    public chatbotService: ChatbotService
   ) {}
 
   ngOnInit() {

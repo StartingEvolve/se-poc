@@ -237,6 +237,7 @@ export class SearchBoxComponent
     public filterStore: FilterStore
   ) {
     super('SearchBox');
+    //Todo (zack): They must be loaded from the filter store
     this.currentOptions = [];
     this.filters = this.filterStore.getFilters();
   }
