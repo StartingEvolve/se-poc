@@ -13,6 +13,9 @@ export class ChatbotService {
 
   constructor(private router: Router) {
     this.onBotSearchRequest();
+    setTimeout(() => {
+      this.changeLanguage();
+    }, 5000);
   }
 
   onBotSearchRequest() {
@@ -32,6 +35,11 @@ export class ChatbotService {
     this.bp.client.sendEvent({
       type: this.bp.webchatOpen ? 'hide' : 'show'
     });
+  }
+
+  //Todo(zack) fix language change bug
+  changeLanguage() {
+    this.bp.changeLanguage('fr');
   }
 
   buildRefinementUrl(domain: string, params: any) {
