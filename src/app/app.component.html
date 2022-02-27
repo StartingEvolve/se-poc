@@ -6,12 +6,13 @@
   <div *ngIf="ls.isLoading | async" class="loader-container">
     <mat-spinner style="top: 50%; left: 50%"></mat-spinner>
   </div>
+  <se-chatbot></se-chatbot>
 </div>
 
 <button class="protobtn" *ngIf="false" routerLink="prototype">
   <mat-icon>lightbulb</mat-icon>
   Prototypes
-  <mat-icon class="closeprotobtn" (click)="hide()">highlight_off </mat-icon>
+  <mat-icon class="closeprotobtn" (click)="hide()">highlight_off</mat-icon>
 </button>
 
 <!-- <input type="password" class="form-input" placeholder="text" />

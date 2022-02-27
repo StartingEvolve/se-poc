@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ObservableStore } from '@codewithdan/observable-store';
 import { of } from 'rxjs';
-import { NavigationEnd, Router } from '@angular/router';
-import { filter } from 'rxjs/operators';
 
 interface DropdownOption {
   value: string;
@@ -29,14 +27,14 @@ export class FilterStore extends ObservableStore<FilterState> {
   currentRoute: string;
   filters: any;
 
-  constructor(private router: Router) {
+  constructor() {
     super({ trackStateHistory: true, logStateChanges: true });
 
     this.filters = [
       {
         id: 1,
         name: 'public',
-        label: 'public admis',
+        label: 'Publique Admis',
         isOpen: false,
         options: [
           {
@@ -65,7 +63,7 @@ export class FilterStore extends ObservableStore<FilterState> {
         id: 2,
         name: 'learningMode',
         isOpen: false,
-        label: "mode d'apprentissage",
+        label: "Mode d'apprentissage",
         options: [
           {
             value: 'En centre',
@@ -92,7 +90,7 @@ export class FilterStore extends ObservableStore<FilterState> {
       {
         id: 3,
         name: 'eligibility',
-        label: 'spécifités',
+        label: 'Spécifités',
         isOpen: false,
         options: [
           {
