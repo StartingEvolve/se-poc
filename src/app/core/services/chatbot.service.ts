@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { fromEvent, Subscription } from 'rxjs';
-import BotpressConfig from '@vendors/botpress/botpress.config';
 import { Router } from '@angular/router';
+import BotpressConfig from '@vendors/botpress/botpress.config';
 
 @Injectable({
   providedIn: 'root'
@@ -9,10 +9,9 @@ import { Router } from '@angular/router';
 export class ChatbotService {
   searchSub: Subscription;
   locator: string;
+  bp = new BotpressConfig().getConfig();
 
   constructor(private router: Router) {
-    const bp = new BotpressConfig();
-    this.locator = 'courses[refinementList][';
     this.onBotSearchRequest();
   }
 
@@ -26,6 +25,12 @@ export class ChatbotService {
           this.buildRefinementUrl('courses', searchParams)
         );
       }
+    });
+  }
+
+  toggleBot() {
+    this.bp.client.sendEvent({
+      type: this.bp.webchatOpen ? 'hide' : 'show'
     });
   }
 

@@ -253,11 +253,15 @@ export class SearchBoxComponent
       this.filters.forEach((f) => {
         f.options.forEach((option) => {
           if (option.isChecked) {
-            this.currentOptions.push({
+            let item = {
               id: f.id,
               value: option.value,
               label: option.label
-            });
+            };
+            //Pushing unique options
+            if (this.currentOptions.indexOf(item) === -1) {
+              this.currentOptions.push(item);
+            }
           }
         });
       });

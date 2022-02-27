@@ -1,17 +1,25 @@
 export default class BotpressConfig {
   constructor() {
-    this.client = this.init();
+    this.init();
+    this.client = window.botpressWebChat;
   }
 
   init() {
-    return window.botpressWebChat.init({
+    //Init bot instance
+    window.botpressWebChat.init({
       host: 'http://localhost:3000',
-      botId: 'starting-evolve-chatbot'
+      botId: 'starting-evolve-chatbot',
+      hideWidget: true,
+      enableReset: false,
+      enableTranscriptDownload: false,
+      showConversationsButton: false,
+      locale: 'fr',
+      extraStylesheet: '/assets/modules/channel-web/se-theme.css'
     });
   }
 
-  getClient() {
-    return this.client;
+  getConfig() {
+    return { client: this.client, webchatOpen: window.webchatOpen };
   }
 
   destroy() {
