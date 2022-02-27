@@ -42,7 +42,7 @@ export class SignupComponent implements OnInit {
         password: new FormControl('', [
           Validators.required,
           Validators.pattern(
-            '(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-zd$@$!%*?&].{8,}'
+            '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$'
           )
         ]),
         confirmPassword: new FormControl('', [Validators.required]),
@@ -76,6 +76,7 @@ export class SignupComponent implements OnInit {
         displayName: fullName
       })
       .then((result) => {
+        window.scrollTo(0, 0);
         this.isLoading = false; // no matter what, when the auth service returns, we hide the progress indicator
         if (result == null) {
           // null is success, false means there was an error
