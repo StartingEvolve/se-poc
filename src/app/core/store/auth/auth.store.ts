@@ -4,7 +4,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { ObservableStore } from '@codewithdan/observable-store';
 import { UserDocument } from '@se/shared/types/user-document';
 import { Subscription } from 'rxjs';
-import { DatabaseSerice } from '@core/adapters/database/database';
+import { DatabaseService } from '@core/adapters/database/database';
 
 export interface UserInterface {
   isLoggedIn: boolean;
@@ -20,7 +20,7 @@ export class AuthStore extends ObservableStore<UserInterface> {
 
   constructor(
     private afAuth: AngularFireAuth,
-    private afStore: DatabaseSerice
+    private afStore: DatabaseService
   ) {
     super({ trackStateHistory: true, logStateChanges: true });
     //Context : See here https://ensak.notion.site/Optimization-Refactoring-Ideas-b716a74fd7f94ee2a496a3db46320214

@@ -13,7 +13,8 @@ interface IDatabase {}
 @Injectable({
   providedIn: 'root'
 })
-export class DatabaseSerice {
+export class DatabaseService {
+  //Todo: (zack) : fix lodash bug and set is not working
   constructor(private afStore: AngularFirestore) {
     afStore.doc = doc;
   }

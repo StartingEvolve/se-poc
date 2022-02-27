@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { DatabaseSerice } from '@core/adapters/database/database';
+import { DatabaseService } from '@core/adapters/database/database';
 import { Observable } from 'rxjs';
 
 export interface CourseInfo {
@@ -69,7 +69,7 @@ export interface CourseInfo {
 //See more: https://stackoverflow.com/questions/47876754/query-firestore-database-for-document-id
 //https://github.com/angular/angularfire/blob/master/docs/firestore/querying-collections.md
 export class CourseService {
-  constructor(private db: DatabaseSerice) {}
+  constructor(private db: DatabaseService) {}
 
   getCourseById(id: string): Observable<any> {
     return this.db

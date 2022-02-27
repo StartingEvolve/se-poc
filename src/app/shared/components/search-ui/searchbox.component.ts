@@ -259,12 +259,16 @@ export class SearchBoxComponent
               label: option.label
             };
             //Pushing unique options
-            if (this.currentOptions.indexOf(item) === -1) {
+            if (
+              this.currentOptions.find((el) => el.value === item.value) ===
+              undefined
+            ) {
               this.currentOptions.push(item);
             }
           }
         });
       });
+      console.log(this.currentOptions);
     });
   }
 
