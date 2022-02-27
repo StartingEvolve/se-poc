@@ -5,17 +5,22 @@ export default class BotpressConfig {
   }
 
   init() {
-    //Init bot instance
-    window.botpressWebChat.init({
-      host: 'http://localhost:3000',
+    this.config = {
+      host: 'http://134.209.132.198/',
       botId: 'starting-evolve-chatbot',
       hideWidget: true,
       enableReset: false,
       enableTranscriptDownload: false,
       showConversationsButton: false,
-      locale: 'fr',
       extraStylesheet: '/assets/modules/channel-web/se-theme.css'
-    });
+    };
+    //Init bot instance
+    window.botpressWebChat.init(this.config);
+  }
+
+  changeLanguage(locale) {
+    this.config.locale = locale;
+    window.botpressWebChat.configure(this.config);
   }
 
   getConfig() {
