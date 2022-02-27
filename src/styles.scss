@@ -2,7 +2,6 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
-@import "assets/vendors/instantsearch/algolia-min.css";
 
 html,
 body {
@@ -48,6 +47,12 @@ body {
 
 mark {
   @apply bg-transparent text-indigo-700 font-bold;
+}
+
+
+//=================== Chatbot Styles =======================
+#tchat-label + div {
+  height: 50% !important;
 }
 
 

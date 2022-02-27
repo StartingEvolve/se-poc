@@ -25,6 +25,8 @@ import connectSearchBox, {
 import { RefinementListComponent } from '@shared/components/search-ui/refinement-list.component';
 import { Filter, FilterStore } from '@core/store/filter/filter.store';
 import Timeout = NodeJS.Timeout;
+import { filter } from 'rxjs/operators';
+import { NavigationEnd, Router } from '@angular/router';
 
 interface CurrentOption {
   id: number;
@@ -214,8 +216,9 @@ export class SearchBoxComponent
     refine(value: string): void {}
   };
 
-  filters: Filter[];
-  currentOptions: CurrentOption[];
+  filters: Filter[] = [];
+  currentRoute: string;
+  currentOptions: CurrentOption[] = [];
   isFiltersMobile: boolean;
   isSelected: boolean = false;
 
@@ -234,11 +237,35 @@ export class SearchBoxComponent
     public parentIndex: NgAisIndex,
     @Inject(forwardRef(() => NgAisInstantSearch))
     public instantSearchInstance: NgAisInstantSearch,
-    public filterStore: FilterStore
+    public filterStore: FilterStore,
+    public router: Router
   ) {
     super('SearchBox');
-    this.currentOptions = [];
-    this.filters = this.filterStore.getFilters();
+    //Updating filters state from url to sync with the search ui
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
+        this.currentRoute = event.url;
+        this.filterStore.updateFiltersByUrl(decodeURI(this.currentRoute));
+      });
+    this.filterStore.stateChanged.subscribe((state) => {
+      this.filters = state.filters;
+      this.filters.forEach((f) => {
+        f.options.forEach((option) => {
+          if (option.isChecked) {
+            let item = {
+              id: f.id,
+              value: option.value,
+              label: option.label
+            };
+            //Pushing unique options
+            if (this.currentOptions.indexOf(item) === -1) {
+              this.currentOptions.push(item);
+            }
+          }
+        });
+      });
+    });
   }
 
   public ngOnInit() {
@@ -291,7 +318,6 @@ export class SearchBoxComponent
         filter.isOpen = false;
       }
     });
-    this.filterStore.updateFilters(this.filters);
   }
 
   resetFilterById(id: number) {
@@ -306,7 +332,6 @@ export class SearchBoxComponent
         }
       });
     this.currentOptions = this.currentOptions.filter((item) => item.id != id);
-    this.filterStore.updateFilters(this.filters);
   }
 
   resetCurrentOptions() {
@@ -318,7 +343,6 @@ export class SearchBoxComponent
         option.isChecked = false;
       });
     });
-    this.filterStore.updateFilters(this.filters);
   }
 
   removeOption(id: number, value: string) {
@@ -333,7 +357,6 @@ export class SearchBoxComponent
     this.filters.forEach((filter) => {
       filter.isOpen = false;
     });
-    this.filterStore.updateFilters(this.filters);
   }
 
   //Todo (zack): Fix view insertion conflict when toggle is called with a fast rate

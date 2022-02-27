@@ -46,11 +46,12 @@ export class SearchUiComponent {
 
   @ViewChild('locationInput') locationInput: ElementRef;
 
+  //Todo: (zack): Make a router state mapper for friendly search URLs
   constructor() {
     this.config = {
       indexName: 'courses',
-      searchClient
-      // routing: true
+      searchClient,
+      routing: true
     };
   }
 }
