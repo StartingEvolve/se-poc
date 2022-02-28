@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { fromEvent, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import BotpressConfig from '@vendors/botpress/botpress.config';
+import { unescapeHtml } from '@shared/helpers/strings';
 
 @Injectable({
   providedIn: 'root'
@@ -28,15 +29,17 @@ export class ChatbotService {
     }, 5000);
   }
 
-
   onBotSearchRequest(reload = false) {
     const searchParams$ = fromEvent(window, 'message');
     this.searchSub = searchParams$.subscribe((event: any) => {
       if (event.data.type === 'data') {
         const searchParams = event.data.searchParam;
-        console.log(this.buildRefinementUrl('courses', searchParams));
+        console.log(
+          unescapeHtml(this.buildRefinementUrl('courses', searchParams))
+        );
+
         this.router.navigateByUrl(
-          this.buildRefinementUrl('courses', searchParams)
+          unescapeHtml(this.buildRefinementUrl('courses', searchParams))
         );
       }
     });
