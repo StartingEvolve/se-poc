@@ -5,6 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { AuthStore } from '@core/store/auth/auth.store';
 import { LoaderService } from '@core/services/loader.service';
 import { ChatbotService } from '@core/services/chatbot.service';
+import { SwUpdate } from '@angular/service-worker';
 
 @Component({
   selector: 'se-root',
@@ -22,8 +23,30 @@ export class AppComponent implements OnInit {
     private ts: AuthStore,
     private tr: TranslateService,
     public ls: LoaderService,
-    public chatbotService: ChatbotService
-  ) {}
+    public chatbotService: ChatbotService,
+    private swUpdate: SwUpdate
+  ) {
+    //Todo (zack) : Test the caching behavior in mobile
+    if (this.swUpdate.isEnabled) {
+      this.swUpdate.activated.subscribe((upd) => {
+        window.location.reload();
+      });
+      this.swUpdate.available.subscribe(
+        (upd) => {
+          this.swUpdate.activateUpdate();
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+      this.swUpdate
+        .checkForUpdate()
+        .then(() => {})
+        .catch((error) => {
+          console.error("Couldn't check for app updates", error);
+        });
+    }
+  }
 
   ngOnInit() {
     this.ts.stateChanged.subscribe((state) => {

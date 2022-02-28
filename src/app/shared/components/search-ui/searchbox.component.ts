@@ -250,6 +250,7 @@ export class SearchBoxComponent
       });
     this.filterStore.stateChanged.subscribe((state) => {
       this.filters = state.filters;
+      this.currentOptions = [];
       this.filters.forEach((f) => {
         f.options.forEach((option) => {
           if (option.isChecked) {
