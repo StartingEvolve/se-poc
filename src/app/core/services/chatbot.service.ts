@@ -10,7 +10,7 @@ export class ChatbotService {
   searchSub: Subscription;
   bp = new BotpressConfig().getConfig();
 
-  constructor(private location: Location, private router: Router) {
+  constructor(private router: Router) {
     //Todo(zack) : Bug -> Navigation does not deliver expected search results when navigating from the same route
     //see : https://stackoverflow.com/questions/47813927/how-to-refresh-a-component-in-angular
     //https://medium.com/angular-in-depth/refresh-current-route-in-angular-512a19d58f6e

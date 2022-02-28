@@ -259,6 +259,8 @@ export class SearchBoxComponent
               label: option.label
             };
             //Pushing unique options
+            //Todo: (zack) This does not work when we have different searches
+            //Potential solution having a search history state
             if (
               this.currentOptions.find((el) => el.value === item.value) ===
               undefined
