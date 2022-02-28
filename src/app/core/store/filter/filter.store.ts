@@ -125,22 +125,28 @@ export class FilterStore extends ObservableStore<FilterState> {
   }
 
   updateFiltersByUrl(url: string) {
-    this.setState(
-      {
-        filters: this.filters.map((f) => {
-          return {
-            ...f,
-            options: f.options.map((option) => {
-              return {
-                ...option,
-                isChecked: url.includes(option.value)
-              };
-            })
-          };
-        })
-      },
-      FilterStoreActions.UpdateFilter
-    );
+    if (url === '') {
+      this.setState({
+        filters: []
+      });
+    } else {
+      this.setState(
+        {
+          filters: this.filters.map((f) => {
+            return {
+              ...f,
+              options: f.options.map((option) => {
+                return {
+                  ...option,
+                  isChecked: url.includes(option.value)
+                };
+              })
+            };
+          })
+        },
+        FilterStoreActions.UpdateFilter
+      );
+    }
   }
 }
 

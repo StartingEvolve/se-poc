@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs';
 import { DatabaseSerice } from '@core/adapters/database/database';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 
+
 export interface UserInterface {
   isLoggedIn: boolean;
   isEmailVerified?: boolean;

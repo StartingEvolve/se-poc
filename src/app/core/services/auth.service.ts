@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import firebase from 'firebase/compat/app';
-import { DatabaseSerice } from '@core/adapters/database/database';
+import { DatabaseService } from '@core/adapters/database/database';
 import {
   AngularFirestore,
   AngularFirestoreDocument
 } from '@angular/fire/compat/firestore';
 import { TranslateService } from '@ngx-translate/core';
+
 
 @Injectable({
   providedIn: 'root'

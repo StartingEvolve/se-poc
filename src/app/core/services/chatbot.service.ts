@@ -8,17 +8,28 @@ import BotpressConfig from '@vendors/botpress/botpress.config';
 })
 export class ChatbotService {
   searchSub: Subscription;
-  locator: string;
+
   bp = new BotpressConfig().getConfig();
 
   constructor(private router: Router) {
+    //Todo(zack) : Bug -> Navigation does not deliver expected search results when navigating from the same route
+    //see : https://stackoverflow.com/questions/47813927/how-to-refresh-a-component-in-angular
+    //https://medium.com/angular-in-depth/refresh-current-route-in-angular-512a19d58f6e
+    //Hotfix: changing the routing strategy, this will decrease performance since angular will start reloading routes
+    //Instead of using the same instances, I'll think about making a custom routing strategy that will only fire on search
+    //results page : https://javascript.plainenglish.io/angular-route-reuse-strategy-b5d40adce841
+    //https://github.com/angular/angular/issues/13831
+    this.router.routeReuseStrategy.shouldReuseRoute = function () {
+      return false;
+    };
     this.onBotSearchRequest();
     setTimeout(() => {
       this.changeLanguage();
     }, 5000);
   }
 
-  onBotSearchRequest() {
+
+  onBotSearchRequest(reload = false) {
     const searchParams$ = fromEvent(window, 'message');
     this.searchSub = searchParams$.subscribe((event: any) => {
       if (event.data.type === 'data') {
