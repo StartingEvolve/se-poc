@@ -69,7 +69,8 @@
         "PRIVACYPOLICY":"Politique de confidentialité",
         "OF":"de StartingEvolve",
         "SUBMIT":"Soumir",
-        "RESETMESSAGE":"Réinitialisation du mot de passe"
+        "RESETMESSAGE":"Réinitialisation du mot de passe",
+        "CALL_FOR_ACTION": "Commencer"
     },
     "FIREBASE":{
         "auth/user-not-found":"Utilisateur introuvable",

@@ -69,7 +69,8 @@
         "PRIVACYPOLICY":"Privacy policy",
         "OF":"of StartingEvolve",
         "SUBMIT":"Submit",
-        "RESETMESSAGE":"Reset your password"
+        "RESETMESSAGE":"Reset your password",
+        "CALL_FOR_ACTION": "Get Started"
     },
     "FIREBASE":{
         "auth/user-not-found":"User not found",
