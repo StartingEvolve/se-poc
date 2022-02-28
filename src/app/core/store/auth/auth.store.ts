@@ -4,7 +4,6 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { ObservableStore } from '@codewithdan/observable-store';
 import { UserDocument } from '@se/shared/types/user-document';
 import { Subscription } from 'rxjs';
-import { DatabaseSerice } from '@core/adapters/database/database';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 
