@@ -29,6 +29,9 @@ export class LanguagePickerWebComponent {
       }
     ];
     this.activePath = this.lgItems.find((item) => item.active == true).path;
+    this.ts.onDefaultLangChange.subscribe((result) => {
+      this.fetchNewActiveLanguage(result.lang);
+    });
   }
   fetchNewActiveLanguage(param: string): void {
     this.lgItems.forEach((item) => (item.active = item.name == param));

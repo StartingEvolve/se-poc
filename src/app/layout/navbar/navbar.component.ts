@@ -27,7 +27,9 @@ export class NavbarComponent implements OnInit {
     this.showProfileMenu = false;
     this.showMenu = false;
     this.aStore.stateChanged.subscribe((state) => {
-      this.userState = state;
+      if (state) {
+        this.userState = state;
+      }
     });
   }
   setActive(index: number, to: string): void {
@@ -54,11 +56,15 @@ export class NavbarComponent implements OnInit {
       element.classList.remove('header-scrolled');
     }
   }
-  logout(index: number): void {
+  setActiveProfileItem(index: number): void {
     if (this.profileItems[index].name == 'LOGOUT') {
       this.toggleMenu();
       this.toggleProfileMenu();
       this.as.logoutUser();
+    } else if (this.profileItems[index].name == 'PROFILE') {
+      this.toggleMenu();
+      this.toggleProfileMenu();
+      this.router.navigate(['profile']);
     }
   }
   ngOnInit(): void {
@@ -93,15 +99,15 @@ export class NavbarComponent implements OnInit {
     this.profileItems = [
       {
         name: 'PROFILE',
-        to: '/Profile'
+        to: '/profile'
       },
       {
         name: 'SETTINGS',
-        to: '/Setting'
+        to: '/petting'
       },
       {
         name: 'LOGOUT',
-        to: '/Logout'
+        to: '/logout'
       }
     ];
   }

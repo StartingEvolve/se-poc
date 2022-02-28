@@ -7,6 +7,7 @@ import { CoursesComponent } from './views/courses/courses.component';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { ForgotPasswordComponent } from './views/forgot-password/forgot-password.component';
 import { LandingPageComponent } from './views/landing-page/landing-page.component';
+import { ProfileComponent } from './views/profile/profile.component';
 import { SigninComponent } from './views/signin/signin.component';
 import { SignupComponent } from './views/signup/signup.component';
 import { VerifyEmailComponent } from './views/verify-email/verify-email.component';
@@ -19,6 +20,10 @@ const routes: Routes = [
       {
         path: '',
         component: LandingPageComponent
+      },
+      {
+        path: 'profile',
+        component: ProfileComponent
       },
       {
         path: 'signup',

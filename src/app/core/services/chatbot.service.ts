@@ -8,6 +8,7 @@ import BotpressConfig from '@vendors/botpress/botpress.config';
 })
 export class ChatbotService {
   searchSub: Subscription;
+
   bp = new BotpressConfig().getConfig();
 
   constructor(private router: Router) {
@@ -21,12 +22,12 @@ export class ChatbotService {
     this.router.routeReuseStrategy.shouldReuseRoute = function () {
       return false;
     };
-
     this.onBotSearchRequest();
     setTimeout(() => {
       this.changeLanguage();
     }, 5000);
   }
+
 
   onBotSearchRequest(reload = false) {
     const searchParams$ = fromEvent(window, 'message');

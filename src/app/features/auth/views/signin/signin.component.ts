@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
+import firebase from 'firebase/compat/app';
 import {
   FormControl,
   FormGroup,
@@ -44,6 +44,33 @@ export class SigninComponent implements OnInit {
     });
   }
   ngOnInit(): void {
+    window.onload = () => {
+      firebase
+        .auth()
+        .getRedirectResult()
+        .then(
+          (result) => {
+            console.log(result.additionalUserInfo.profile);
+            // user property exists; this was a redirect
+            if (result?.user) {
+              this.aService.updateUserDataByGoogle(
+                result?.user,
+                result.additionalUserInfo.profile
+              );
+              console.log('SUCCESS');
+              this.router.navigateByUrl(this.returnUrl);
+            } else {
+              // this was not a redirect;
+              // use our method to check for user
+              // in local storage
+              console.log('ERROR');
+            }
+          },
+          (error) => {
+            console.log('ERROR2');
+          }
+        );
+    };
     this.returnUrl =
       this.route.snapshot.queryParams['returnUrl'] || '/dashboard';
     this.as.stateChanged.subscribe((state) => {
@@ -87,5 +114,8 @@ export class SigninComponent implements OnInit {
       return 'AUTH.REQUIRED_PASSWORD';
     }
     return '';
+  }
+  signinWithGoogle() {
+    this.aService.googleSignin();
   }
 }

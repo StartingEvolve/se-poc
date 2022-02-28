@@ -47,6 +47,20 @@ export class LandingPageComponent implements OnInit {
           "Et si l'année 2022 était celle de votre reconversion professionnelle ? En manque d'inspiration ? Découvrez 22 métiers pour se reconvertir en 2022 !",
         img: 'metier.jpeg',
         articleId: '4'
+      },
+      {
+        title: 'Comment devenir technicien son',
+        description:
+          'Devenir technicien son ou ingénieur suppose d’avoir l’oreille musicale en plus d’un bagage technique. Roi de la console et artiste, souvent sensible à la musique, un bon ingénieur du son sait mêler technologie et sensibilité acoustique.',
+        img: 'technician.jpeg',
+        articleId: '5'
+      },
+      {
+        title: 'Datamining avec python',
+        description:
+          'Le Data mining est la pratique consistant à rechercher automatiquement de grandes quantités de données afin de découvrir des tendances et des modèles',
+        img: 'metier.jpeg',
+        articleId: '6'
       }
     ];
     this.dropDownItems = [

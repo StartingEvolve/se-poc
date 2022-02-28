@@ -35,9 +35,9 @@
 
             <div class="mt-1 grid grid-cols-3 gap-3">
               <div>
-                <a
-                  href="#"
-                  class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
+                <div
+                  (click)="signinWithGoogle()"
+                  class="cursor-pointer w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
                 >
                   <span class="sr-only"
                     >{{ 'AUTH.SIGNINWITH' | translate }} Google</span
@@ -48,12 +48,11 @@
                     alt=""
                     srcset=""
                   />
-                </a>
+                </div>
               </div>
 
               <div>
-                <a
-                  href="#"
+                <div
                   class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
                 >
                   <span class="sr-only"
@@ -65,12 +64,11 @@
                     alt=""
                     srcset=""
                   />
-                </a>
+                </div>
               </div>
 
               <div>
-                <a
-                  href="#"
+                <div
                   class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
                 >
                   <span class="sr-only"
@@ -82,7 +80,7 @@
                     alt=""
                     srcset=""
                   />
-                </a>
+                </div>
               </div>
             </div>
           </div>

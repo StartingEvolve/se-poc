@@ -1,0 +1,278 @@
+<!-- This example requires Tailwind CSS v2.0+
+
+This example requires some changes to your config:
+
+```
+// tailwind.config.js
+module.exports = {
+// ...
+plugins: [
+// ...
+require('@tailwindcss/forms'),
+]
+}
+```
+-->
+<div class="px-4">
+  <div>
+    <div class="md:grid md:grid-cols-3 md:gap-6">
+      <div class="md:col-span-1 py-4">
+        <div class="px-4 sm:px-0">
+          <h3 class="text-lg font-medium leading-6 text-gray-900">
+            Informations personnels
+          </h3>
+          <p class="mt-1 text-sm text-gray-600">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Est non,
+            omnis tempore rem porro labore in molestias! Praesentium consequatur
+            vel eos ipsa rem ratione dolore natus debitis, eius distinctio ad!
+            Rerum eligendi at consequatur officiis officia nobis delectus id
+            sequi. Totam ipsa dolor itaque doloribus, inventore atque, nam
+            pariatur quae quis sint ad repudiandae ab vero corporis dicta ipsum
+            quos.
+          </p>
+        </div>
+      </div>
+      <div class="py-6 md:border-l-2 md:col-span-2">
+        <form [formGroup]="accountForm" (ngSubmit)="submitForm()">
+          <div class="overflow-hidden">
+            <div class="px-4 py-5 bg-white sm:p-6">
+              <div class="grid grid-cols-6 gap-6">
+                <div class="col-span-6 sm:col-span-3">
+                  <label
+                    for="first_name"
+                    class="block text-sm font-medium text-gray-700"
+                    >Prénom</label
+                  >
+                  <input
+                    type="text"
+                    [formControlName]="'first_name'"
+                    name="first_name"
+                    id="first_name"
+                    autocomplete="given-name"
+                    class="mt-1 form-input focus:ring-green-500 focus:border-green-500 block w-full b sm:text-sm border-gray-300 rounded-md"
+                  />
+                </div>
+
+                <div class="col-span-6 sm:col-span-3">
+                  <label
+                    for="last_name"
+                    class="block text-sm font-medium text-gray-700"
+                    >Nom</label
+                  >
+                  <input
+                    type="text"
+                    [formControlName]="'last_name'"
+                    name="last_name"
+                    id="last_name"
+                    autocomplete="family-name"
+                    class="mt-1 form-input focus:ring-green-500 focus:border-green-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                  />
+                </div>
+                <div class="col-span-6 sm:col-span-4">
+                  <label
+                    for="email_address"
+                    class="block text-sm font-medium text-gray-700"
+                    >Adresse email</label
+                  >
+                  <input
+                    type="text"
+                    [formControlName]="'email'"
+                    name="email_address"
+                    id="email_address"
+                    autocomplete="email"
+                    class="form-input mt-1 focus:ring-green-500 focus:border-green-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                  />
+                </div>
+                <div class="col-span-6">
+                  <label
+                    for="about"
+                    class="block text-sm font-medium text-gray-700"
+                  >
+                    Bio
+                  </label>
+                  <div class="mt-1">
+                    <textarea
+                      [formControlName]="'about'"
+                      id="about"
+                      name="about"
+                      rows="3"
+                      class="form-textarea shadow-sm focus:ring-green-500 focus:border-green-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md"
+                      placeholder="Eg. Mary Jones est une assistante administrative avec huit ans d'expérience aux côtés de l'équipe de direction d'une entreprise Fortune 500..."
+                    ></textarea>
+                  </div>
+                  <p class="mt-2 text-sm text-gray-500">
+                    Une petite description de vous.
+                  </p>
+                </div>
+
+                <div class="col-span-6 sm:col-span-3">
+                  <label class="block text-sm font-medium text-gray-700">
+                    Photo
+                  </label>
+                  <div class="mt-1 flex items-center">
+                    <div *ngIf="accountForm.value.photoURL[0] !== ''">
+                      <img
+                        class="inline-block h-40 w-40 overflow-hidden bg-gray-100"
+                        [src]="accountForm.value.photoURL"
+                        [alt]="accountForm.value.first_name"
+                      />
+                    </div>
+                    <span
+                      *ngIf="accountForm.value.photoURL[0] === ''"
+                      class="inline-block h-40 w-40 rounded-full overflow-hidden bg-gray-100"
+                    >
+                      <svg
+                        class="h-full w-full text-gray-300"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z"
+                        />
+                      </svg>
+                    </span>
+                    <button
+                      type="button"
+                      (click)="uploader.click()"
+                      class="ml-5 bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                    >
+                      <input
+                        class="hidden"
+                        type="file"
+                        accept="image/*"
+                        (change)="showPreview($event)"
+                        #uploader
+                      />
+                      Changer
+                    </button>
+                  </div>
+                  <p
+                    *ngIf="fileError !== ''"
+                    class="mt-2 text-sm text-red-600"
+                    id="email-error"
+                  >
+                    {{ fileError }}
+                  </p>
+                </div>
+                <div class="sm:col-span-6 sm:block hidden"></div>
+
+                <div class="col-span-6">
+                  <label
+                    for="street_address"
+                    class="block text-sm font-medium text-gray-700"
+                  >
+                    Adresse</label
+                  >
+                  <input
+                    [formControlName]="'street_address'"
+                    type="text"
+                    name="street_address"
+                    id="street_address"
+                    autocomplete="street-address"
+                    placeholder="Eg. 87 rue de Paris"
+                    class="form-input mt-1 focus:ring-green-500 focus:border-green-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                  />
+                </div>
+
+                <div class="col-span-6 sm:col-span-3 lg:col-span-2">
+                  <label
+                    for="country"
+                    class="block text-sm font-medium text-gray-700"
+                    >Pays</label
+                  >
+                  <select
+                    [formControlName]="'country'"
+                    id="country"
+                    name="country"
+                    autocomplete="country"
+                    class="form-select mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+                  >
+                    <option
+                      [selected]="accountForm.value.country === 'France'"
+                      value="France"
+                    >
+                      France
+                    </option>
+                    <option
+                      [selected]="accountForm.value.country === 'Maroc'"
+                      value="Maroc"
+                    >
+                      Maroc
+                    </option>
+                    <option
+                      [selected]="accountForm.value.country === 'Algérie'"
+                      value="Algérie"
+                    >
+                      Algérie
+                    </option>
+                    <option
+                      [selected]="accountForm.value.country === 'Tunisie'"
+                      value="Tunisie"
+                    >
+                      Tunisie
+                    </option>
+                    <option
+                      [selected]="accountForm.value.country === 'Allemagne'"
+                      value="Allemagne"
+                    >
+                      Allemagne
+                    </option>
+                  </select>
+                </div>
+
+                <div class="col-span-6 sm:col-span-3 lg:col-span-2">
+                  <label
+                    for="city"
+                    class="block text-sm font-medium text-gray-700"
+                    >Ville</label
+                  >
+                  <input
+                    [formControlName]="'city'"
+                    type="text"
+                    name="city"
+                    id="city"
+                    placeholder="Eg. Marseille "
+                    class="form-input mt-1 focus:ring-green-500 focus:border-green-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                  />
+                </div>
+
+                <div class="col-span-6 sm:col-span-3 lg:col-span-2">
+                  <label
+                    for="zipCode"
+                    class="block text-sm font-medium text-gray-700"
+                    >Code postal</label
+                  >
+                  <input
+                    [formControlName]="'zipCode'"
+                    type="text"
+                    name="zipCode"
+                    id="zipCode"
+                    autocomplete="postal-code"
+                    placeholder="Eg. 62100"
+                    class="form-input mt-1 focus:ring-green-500 focus:border-green-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="px-4 py-3 bg-gray-50 text-right sm:px-6 space-x-4">
+              <button
+                type="button"
+                [class.disabled]="isLoading"
+                class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                [class.disabled]="isLoading"
+                class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+              >
+                Save
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
