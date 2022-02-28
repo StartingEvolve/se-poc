@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import firebase from 'firebase/compat/app';
-import { DatabaseSerice } from '@core/adapters/database/database';
+import { DatabaseService } from '@core/adapters/database/database';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,7 @@ export class AuthService {
   constructor(
     private router: Router,
     private afAuth: AngularFireAuth,
-    private afStore: DatabaseSerice
+    private afStore: DatabaseService
   ) {}
 
   loginWithGoogle() {

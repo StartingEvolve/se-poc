@@ -6,7 +6,7 @@ import {
   OnDestroy,
   OnInit
 } from '@angular/core';
-import { DatabaseSerice } from '@se/core/adapters/database/database';
+import { DatabaseService } from '@se/core/adapters/database/database';
 import { fromEvent, Subscription } from 'rxjs';
 import {
   debounceTime,
@@ -80,7 +80,7 @@ export class SearchComponent
   private readonly libraries: string[];
   @ViewChild('locationInput') locationInput: ElementRef;
 
-  constructor(private db: DatabaseSerice, private venService: VendorService) {
+  constructor(private db: DatabaseService, private venService: VendorService) {
     this.libraries = ['typesense'];
     this.venService.getConfigObjects(this.libraries).then((config) => {
       this.configurations = config;
