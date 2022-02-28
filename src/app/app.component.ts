@@ -26,7 +26,13 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.tr.setDefaultLang('fr');
+    this.ts.stateChanged.subscribe((state) => {
+      if (state?.user?.language) {
+        this.tr.setDefaultLang(state.user?.language);
+      } else {
+        this.tr.setDefaultLang('fr');
+      }
+    });
   }
 
   hide() {

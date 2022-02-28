@@ -3,6 +3,11 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import firebase from 'firebase/compat/app';
 import { DatabaseSerice } from '@core/adapters/database/database';
+import {
+  AngularFirestore,
+  AngularFirestoreDocument
+} from '@angular/fire/compat/firestore';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +16,8 @@ export class AuthService {
   constructor(
     private router: Router,
     private afAuth: AngularFireAuth,
-    private afStore: DatabaseSerice
+    private afStore: AngularFirestore,
+    private tService: TranslateService
   ) {}
 
   loginWithGoogle() {
@@ -31,6 +37,34 @@ export class AuthService {
         if (error.code) return { isValid: false, code: error.code };
       });
   }
+  async googleSignin() {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    provider.addScope('profile');
+    provider.addScope('email');
+    await this.afAuth.signInWithRedirect(provider);
+  }
+  updateUserDataByGoogle(user, profile: any) {
+    let emailLower = user.email.toLowerCase();
+    this.tService.setDefaultLang(profile.locale);
+    this.afStore
+      .doc('/users/' + emailLower) // on a successful signup, create a document in 'users' collection with the new user's info
+      .set(
+        {
+          uid: user.uid,
+          accountType: 'endUser',
+          displayName: user.displayName,
+          displayName_lower: user.displayName.toLowerCase(),
+          email: user.email,
+          email_lower: emailLower,
+          language: profile.locale
+        },
+        { merge: true }
+      );
+  }
+  updateUserData(data): Promise<any> {
+    let email_lower = data.email;
+    return this.afStore.doc('/users/' + email_lower).set(data, { merge: true });
+  }
 
   signupUser(user: any): Promise<any> {
     return this.afAuth
@@ -38,7 +72,6 @@ export class AuthService {
       .then((result) => {
         let emailLower = user.email.toLowerCase();
         this.afStore
-          .getDatabase()
           .doc('/users/' + emailLower) // on a successful signup, create a document in 'users' collection with the new user's info
           .set({
             accountType: 'endUser',
@@ -97,7 +130,6 @@ export class AuthService {
   setUserInfo(payload: object) {
     console.log('Auth Service: saving user info...');
     this.afStore
-      .getDatabase()
       .collection('users')
       .add(payload)
       .then(function (res) {

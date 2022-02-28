@@ -19,6 +19,9 @@ export class AuthComponent {
       case '/start_partnership':
         this.activeId = 4;
         break;
+      default:
+        this.activeId = -1;
+        break;
     }
   }
 }

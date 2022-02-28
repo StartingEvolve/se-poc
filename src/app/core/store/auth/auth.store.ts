@@ -5,6 +5,7 @@ import { ObservableStore } from '@codewithdan/observable-store';
 import { UserDocument } from '@se/shared/types/user-document';
 import { Subscription } from 'rxjs';
 import { DatabaseSerice } from '@core/adapters/database/database';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 export interface UserInterface {
   isLoggedIn: boolean;
@@ -20,7 +21,7 @@ export class AuthStore extends ObservableStore<UserInterface> {
 
   constructor(
     private afAuth: AngularFireAuth,
-    private afStore: DatabaseSerice
+    private afStore: AngularFirestore
   ) {
     super({ trackStateHistory: true, logStateChanges: true });
     //Context : See here https://ensak.notion.site/Optimization-Refactoring-Ideas-b716a74fd7f94ee2a496a3db46320214
@@ -30,7 +31,6 @@ export class AuthStore extends ObservableStore<UserInterface> {
       if (user) {
         let emailLower = user.email.toLowerCase();
         this.docsubscription = this.afStore
-          .getDatabase()
           .doc<UserDocument>('users/' + emailLower)
           .valueChanges()
           .subscribe((data) => {

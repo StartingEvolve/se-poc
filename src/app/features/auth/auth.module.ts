@@ -24,6 +24,7 @@ import { PrerequisitesComponent } from './components/prerequisites/prerequisites
 import { ProgramComponent } from './components/program/program.component';
 import { CertificationsComponent } from './components/certifications/certifications.component';
 import { SearchUiModule } from '@shared/components/search-ui/search-ui.module';
+import { ProfileComponent } from './views/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { SearchUiModule } from '@shared/components/search-ui/search-ui.module';
     GoalsComponent,
     PrerequisitesComponent,
     ProgramComponent,
-    CertificationsComponent
+    CertificationsComponent,
+    ProfileComponent
   ],
   imports: [
     CommonModule,
