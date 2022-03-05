@@ -9,7 +9,6 @@ import {
 } from '@angular/fire/compat/firestore';
 import { TranslateService } from '@ngx-translate/core';
 
-
 @Injectable({
   providedIn: 'root'
 })

@@ -27,6 +27,13 @@ const routes: Routes = [
       )
   },
   {
+    path: 'provider',
+    loadChildren: () =>
+      import('./features/provider/provider.module').then(
+        (m) => m.ProviderModule
+      )
+  },
+  {
     path: '',
     loadChildren: () =>
       import('./features/auth/auth.module').then((m) => m.AuthModule)
