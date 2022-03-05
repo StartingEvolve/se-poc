@@ -1,0 +1,46 @@
+<se-navbar-provider
+  [isExit]="false"
+  (goBackEvent)="goBack($event)"
+></se-navbar-provider>
+<div class="z-50 fixed top-16 w-full">
+  <div class="w-full bg-gray-200 md:h-3 h-2">
+    <div
+      class="bg-orange-300 md:h-3 h-2"
+      [style]="{ width: (currentStep * 100) / steps.length + '%' }"
+    ></div>
+  </div>
+  <div
+    class="px-2 flex items-center space-x-4 bg-white h-14 border-gray-300 border-b"
+  >
+    <div
+      class="rounded-full text-white bg-orange-300 w-10 h-10 flex items-center justify-center"
+    >
+      <div class="md:text-lg">{{ currentStep }}</div>
+    </div>
+    <div class="md:text-lg text-orange-300">
+      {{ steps[currentStep - 1] }}
+    </div>
+  </div>
+</div>
+<div class="min-h-screen pt-32">
+  <div [ngSwitch]="currentStep">
+    <se-account-informations
+      *ngSwitchCase="1"
+      (goNextEvent)="onAccountInfosChanged($event)"
+      [data]="currentObject.account"
+    >
+    </se-account-informations>
+    <se-profile-informations
+      *ngSwitchCase="2"
+      (goNextEvent)="onProfileInfosChanged($event)"
+      [data]="currentObject?.profile"
+    >
+    </se-profile-informations>
+    <se-professional-informations
+      *ngSwitchCase="3"
+      (goNextEvent)="onProfessionalInfosChanged($event)"
+      [data]="currentObject?.professional"
+    >
+    </se-professional-informations>
+  </div>
+</div>

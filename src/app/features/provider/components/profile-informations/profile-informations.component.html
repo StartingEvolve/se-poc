@@ -1,0 +1,315 @@
+<div class="mx-auto max-w-3xl py-6">
+  <form [formGroup]="accountForm" (ngSubmit)="submitForm()">
+    <div class="overflow-hidden">
+      <div class="px-4 py-5 bg-white sm:p-6">
+        <div class="grid grid-cols-6 gap-6">
+          <div class="col-span-6 sm:col-span-3">
+            <label
+              for="firtName"
+              class="relative block text-sm font-medium text-gray-700"
+              >Prénom
+              <img
+                class="absolute w-4 left-12 -top-1"
+                src="/assets/img/star.png"
+                alt="star"
+              />
+            </label>
+            <div class="mt-1 relative">
+              <input
+                type="text"
+                [formControlName]="'firstName'"
+                [class.error]="checkError('firstName')"
+                name="firtName"
+                id="firtName"
+                autocomplete="given-name"
+                placeholder="Eg. Jhon"
+                class="mt-1 form-input focus:ring-green-500 focus:border-green-500 block w-full b sm:text-sm border-gray-300 rounded-md"
+              />
+              <div
+                *ngIf="checkError('firstName')"
+                class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none"
+              >
+                <img class="h-5 w-5" src="/assets/icons/error.svg" alt="" />
+              </div>
+            </div>
+
+            <p
+              *ngIf="checkError('firstName')"
+              class="mt-2 md:max-w-[190px] text-sm text-red-600"
+              id="email-error"
+            >
+              {{ getFirstNameErrors() | translate }}
+            </p>
+          </div>
+
+          <div class="col-span-6 sm:col-span-3">
+            <label
+              for="lastName"
+              class="relative block text-sm font-medium text-gray-700"
+              >Nom
+              <img
+                class="absolute w-4 left-7 -top-1"
+                src="/assets/img/star.png"
+                alt="star"
+              />
+            </label>
+            <div class="mt-1 relative">
+              <input
+                type="text"
+                [formControlName]="'lastName'"
+                name="lastName"
+                id="lastName"
+                [class.error]="checkError('lastName')"
+                autocomplete="family-name"
+                placeholder="Eg. Doe"
+                class="mt-1 form-input focus:ring-green-500 focus:border-green-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+              />
+              <div
+                *ngIf="checkError('lastName')"
+                class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none"
+              >
+                <img class="h-5 w-5" src="/assets/icons/error.svg" alt="" />
+              </div>
+            </div>
+            <p
+              *ngIf="checkError('lastName')"
+              class="mt-2 md:max-w-[190px] text-sm text-red-600"
+              id="email-error"
+            >
+              {{ getLastNameErrors() | translate }}
+            </p>
+          </div>
+          <div class="col-span-6">
+            <label for="about" class="block text-sm font-medium text-gray-700">
+              Bio
+            </label>
+            <div class="mt-1">
+              <textarea
+                [formControlName]="'about'"
+                id="about"
+                name="about"
+                rows="3"
+                class="form-textarea shadow-sm focus:ring-green-500 focus:border-green-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md"
+                placeholder="Eg. Jhon Doe est un assistant administratif avec huit ans d'expérience aux côtés de l'équipe de direction d'une entreprise Fortune 500..."
+              ></textarea>
+            </div>
+            <p class="mt-2 text-sm text-gray-500">
+              Une petite description de vous.
+            </p>
+          </div>
+
+          <div class="col-span-6 sm:col-span-3">
+            <label class="relative block text-sm font-medium text-gray-700">
+              Photo
+              <img
+                class="absolute w-4 left-9 -top-1"
+                src="/assets/img/star.png"
+                alt="star"
+              />
+            </label>
+            <div class="mt-1 flex items-center">
+              <div *ngIf="accountForm.value.photoURL !== ''">
+                <img
+                  class="inline-block h-40 w-40 overflow-hidden bg-gray-100"
+                  [src]="accountForm.value.photoURL"
+                  [alt]="'image'"
+                />
+              </div>
+              <span
+                *ngIf="accountForm.value.photoURL === ''"
+                class="inline-block h-40 w-40 rounded-full overflow-hidden bg-gray-100"
+              >
+                <svg
+                  class="h-full w-full text-gray-300"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z"
+                  />
+                </svg>
+              </span>
+              <button
+                type="button"
+                (click)="uploader.click()"
+                class="ml-5 bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+              >
+                <input
+                  class="hidden"
+                  type="file"
+                  accept="image/*"
+                  (change)="showPreview($event)"
+                  #uploader
+                />
+                Changer
+              </button>
+            </div>
+            <p
+              *ngIf="fileError !== '' || checkError('photoURL')"
+              class="mt-2 text-sm text-red-600"
+              id="email-error"
+            >
+              {{ fileError !== '' ? fileError : getFileErrors() }}
+            </p>
+          </div>
+          <div class="col-span-6 sm:col-span-3">
+            <label
+              for="phone_number"
+              class="relative block text-sm font-medium text-gray-700"
+              >Phone Number
+              <img
+                class="absolute w-4 left-24 -top-1"
+                src="/assets/img/star.png"
+                alt="star"
+              />
+            </label>
+            <div class="mt-1 relative rounded-md shadow-sm">
+              <div class="absolute inset-y-0 left-0 flex items-center">
+                <label for="phonePrefix" class="sr-only">Phone prefix</label>
+                <select
+                  [formControlName]="'phonePrefix'"
+                  id="phonePrefix"
+                  name="country"
+                  class="form-select cursor-pointer h-full focus:ring-green-500 focus:border-green-500 py-0 pl-3 pr-7 border-transparent bg-transparent text-gray-500 sm:text-sm rounded-l-md"
+                >
+                  <option [selected]="accountForm.value.phonePrefix === '+33'">
+                    +33
+                  </option>
+                  <option [selected]="accountForm.value.phonePrefix === '+212'">
+                    +212
+                  </option>
+                  <option [selected]="accountForm.value.phonePrefix === '+1'">
+                    +1
+                  </option>
+                </select>
+              </div>
+              <input
+                type="text"
+                name="phone_number"
+                id="phone_number"
+                [formControlName]="'phone'"
+                [class.error]="checkError('phone')"
+                class="form-input focus:ring-green-500 focus:border-green-500 block w-full pl-20 sm:text-sm border-gray-300 rounded-md"
+                placeholder="E.g (0)749502912"
+              />
+              <div
+                *ngIf="checkError('phone')"
+                class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none"
+              >
+                <img class="h-5 w-5" src="/assets/icons/error.svg" alt="" />
+              </div>
+            </div>
+            <p
+              *ngIf="checkError('phone')"
+              class="mt-2 md:max-w-[190px] text-sm text-red-600"
+              id="email-error"
+            >
+              {{ getPhoneErrors() | translate }}
+            </p>
+          </div>
+          <div class="sm:col-span-6 sm:block hidden"></div>
+
+          <div class="col-span-6">
+            <label
+              for="streetAddress"
+              class="block text-sm font-medium text-gray-700"
+            >
+              Adresse</label
+            >
+            <input
+              [formControlName]="'streetAddress'"
+              type="text"
+              name="streetAddress"
+              id="streetAddress"
+              autocomplete="street-address"
+              placeholder="Eg. 87 rue de Paris"
+              class="form-input mt-1 focus:ring-green-500 focus:border-green-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+            />
+          </div>
+
+          <div class="col-span-6 sm:col-span-3 lg:col-span-2">
+            <label for="country" class="block text-sm font-medium text-gray-700"
+              >Pays</label
+            >
+            <select
+              [formControlName]="'country'"
+              id="country"
+              name="country"
+              autocomplete="country"
+              class="form-select mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+            >
+              <option
+                [selected]="accountForm.value.country === 'France'"
+                value="France"
+              >
+                France
+              </option>
+              <option
+                [selected]="accountForm.value.country === 'Maroc'"
+                value="Maroc"
+              >
+                Maroc
+              </option>
+              <option
+                [selected]="accountForm.value.country === 'Algérie'"
+                value="Algérie"
+              >
+                Algérie
+              </option>
+              <option
+                [selected]="accountForm.value.country === 'Tunisie'"
+                value="Tunisie"
+              >
+                Tunisie
+              </option>
+              <option
+                [selected]="accountForm.value.country === 'Allemagne'"
+                value="Allemagne"
+              >
+                Allemagne
+              </option>
+            </select>
+          </div>
+
+          <div class="col-span-6 sm:col-span-3 lg:col-span-2">
+            <label for="city" class="block text-sm font-medium text-gray-700"
+              >Ville</label
+            >
+            <input
+              [formControlName]="'city'"
+              type="text"
+              name="city"
+              id="city"
+              placeholder="Eg. Marseille "
+              class="form-input mt-1 focus:ring-green-500 focus:border-green-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+            />
+          </div>
+
+          <div class="col-span-6 sm:col-span-3 lg:col-span-2">
+            <label for="zipCode" class="block text-sm font-medium text-gray-700"
+              >Code postal</label
+            >
+            <input
+              [formControlName]="'zipCode'"
+              type="text"
+              name="zipCode"
+              id="zipCode"
+              autocomplete="postal-code"
+              placeholder="Eg. 62100"
+              class="form-input mt-1 focus:ring-green-500 focus:border-green-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="px-4 py-3 bg-gray-50 text-right sm:px-6 space-x-4">
+        <button
+          type="submit"
+          [class.disabled]="isLoading"
+          class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+        >
+          Suivant
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

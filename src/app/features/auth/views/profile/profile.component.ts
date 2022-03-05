@@ -32,19 +32,17 @@ export class ProfileComponent {
     this.isLoading = false;
     this.fileError = '';
     this.accountForm = new FormGroup({
-      first_name: new FormControl([
-        '',
+      first_name: new FormControl('', [
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(15)
       ]),
-      last_name: new FormControl([
-        '',
+      last_name: new FormControl('', [
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(15)
       ]),
-      email: new FormControl(['', Validators.required, Validators.email]),
+      email: new FormControl('', [Validators.required, Validators.email]),
       about: new FormControl(['']),
       phone: new FormControl(['']),
       country: new FormControl(['France']),
