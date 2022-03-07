@@ -24,9 +24,9 @@ export class ChatbotService {
       return false;
     };
     this.onBotSearchRequest();
-    setTimeout(() => {
-      this.changeLanguage();
-    }, 5000);
+    // setTimeout(() => {
+    //   this.changeLanguage();
+    // }, 5000);
   }
 
   onBotSearchRequest(reload = false) {
@@ -59,8 +59,16 @@ export class ChatbotService {
   buildRefinementUrl(domain: string, params: any) {
     let refinementUrl = `/${domain}?`;
     for (const [param, value] of Object.entries(params)) {
-      refinementUrl += `${domain}[refinementList][${param}][0]=${value}&`;
+      refinementUrl += `${domain}[refinementList][${param}][0]=${this.capitalize(
+        value
+      )}&`;
     }
     return refinementUrl;
+  }
+
+  //Todo(zack) handle value strings in the refinement url
+  capitalize(s) {
+    if (typeof s !== 'string') return '';
+    return s.charAt(0).toUpperCase() + s.slice(1);
   }
 }
