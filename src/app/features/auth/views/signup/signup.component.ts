@@ -17,6 +17,7 @@ export class SignupComponent implements OnInit {
   isLoading: boolean;
   userState: UserInterface;
   firebaseErrorCode: string;
+  validateError: boolean = false;
   constructor(
     private router: Router,
     private as: AuthStore,
@@ -59,11 +60,29 @@ export class SignupComponent implements OnInit {
       }
     });
   }
-  registerUser() {
+  async registerUser() {
     if (this.signupForm.invalid) {
       this.showErrors = true;
       return;
     }
+    //TODO refactor email validation flow
+    let flag = false;
+    await this.aService
+      .verifyEmailExistence(this.signupForm.value.email)
+      .then((res: any) => {
+        if (res.deliverability != 'DELIVERABLE') {
+          this.validateError = true;
+          flag = true;
+          return;
+        }
+        if (res.is_disposable_email == true) {
+          this.validateError = true;
+          flag = true;
+          return;
+        }
+      });
+    console.log(flag);
+    if (flag) return;
     this.isLoading = true;
     const fullName =
       this.trimAndCapitalize(this.signupForm.value.firstName) +

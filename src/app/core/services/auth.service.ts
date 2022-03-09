@@ -8,6 +8,7 @@ import {
   AngularFirestoreDocument
 } from '@angular/fire/compat/firestore';
 import { TranslateService } from '@ngx-translate/core';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,8 @@ export class AuthService {
     private router: Router,
     private afAuth: AngularFireAuth,
     private afStore: AngularFirestore,
-    private tService: TranslateService
+    private tService: TranslateService,
+    private http: HttpClient
   ) {}
 
   loginWithGoogle() {
@@ -125,6 +127,14 @@ export class AuthService {
         console.log('error', error);
         if (error.code) return error;
       });
+  }
+
+  verifyEmailExistence(email) {
+    return this.http
+      .get(
+        `https://emailvalidation.abstractapi.com/v1/?api_key=9b277276eec44d71a6e419067cf37d27&email=${email}`
+      )
+      .toPromise();
   }
 
   setUserInfo(payload: object) {

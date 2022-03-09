@@ -1,10 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'se-provider',
   templateUrl: './provider.component.html',
   styleUrls: ['./provider.component.scss']
 })
-export class ProviderComponent {
-  constructor() {}
-}
+export class ProviderComponent {}
