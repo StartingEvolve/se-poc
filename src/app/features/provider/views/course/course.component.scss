@@ -1,0 +1,22 @@
+.imgWhite {
+  filter: brightness(0) invert(1);
+}
+.settings {
+  filter: invert(74%) sepia(5%) saturate(705%) hue-rotate(179deg)
+    brightness(88%) contrast(86%);
+}
+.settings:hover {
+  filter: brightness(0) invert(1);
+}
+.back:hover img {
+  filter: brightness(0) invert(1);
+}
+.closed {
+  @apply w-12;
+}
+.closedDiv {
+  @apply pl-12;
+}
+.active {
+  @apply border-l-4 border-white;
+}
