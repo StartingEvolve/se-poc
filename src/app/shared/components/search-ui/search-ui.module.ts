@@ -10,6 +10,7 @@ import { SearchBoxComponent } from '@shared/components/search-ui/searchbox.compo
 import { NgAisModule } from 'angular-instantsearch';
 import { HeadlessRefinementComponent } from '@shared/components/search-ui/headless-refinement.component';
 import { SearchUiComponent } from '@shared/components/search-ui/search-ui.component';
+import { MultiSearchBoxComponent } from '@shared/components/search-ui/multi-search-box.component';
 
 const components = [
   ClearRefinementsComponent,
@@ -19,6 +20,7 @@ const components = [
   SearchAutocompleteBoxComponent,
   SearchBoxComponent,
   HeadlessRefinementComponent,
+  MultiSearchBoxComponent,
   SearchUiComponent
 ];
 

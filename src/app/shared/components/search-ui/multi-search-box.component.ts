@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { sanitize } from '@shared/helpers/strings';
@@ -11,28 +11,10 @@ import { sanitize } from '@shared/helpers/strings';
 export class MultiSearchBoxComponent implements OnInit {
   sp: any;
   flagDropdown: boolean = false;
-  activeItem: string;
-  dropDownItems: { name: string; route: string; icon: string }[];
+  @Input() dropDownItems: { name: string; route: string; icon: string }[];
+  @Input() activeItem: string;
 
   constructor(private ts: TranslateService, private router: Router) {
-    this.dropDownItems = [
-      {
-        name: 'ARTICLES',
-        route: 'article',
-        icon: 'article.svg'
-      },
-      {
-        name: 'FORMATIONS',
-        route: 'courses',
-        icon: 'formation.svg'
-      },
-      {
-        name: 'ADVICES',
-        route: 'advices',
-        icon: 'advice.svg'
-      }
-    ];
-    this.activeItem = 'ARTICLES';
     this.ts.onDefaultLangChange.subscribe((lang) => {
       this.sp.clearChange();
       this.sp.clearTimersOnLangChange();

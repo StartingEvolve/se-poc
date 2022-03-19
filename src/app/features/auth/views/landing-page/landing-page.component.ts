@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { TranslateService } from '@ngx-translate/core';
-import { AuthService } from '@se/core/services/auth.service';
 
 @Component({
   selector: 'se-landing-page',
@@ -13,12 +11,26 @@ export class LandingPageComponent implements OnInit {
   flagDropdown: boolean = false;
   activeItem: string;
   carouselItems: any[];
-  dropDownItems: { name: string; icon: string }[];
-  constructor(
-    private ts: TranslateService,
-    private as: AuthService,
-    private afStore: AngularFirestore
-  ) {
+  dropDownItems: { name: string; route: string; icon: string }[];
+
+  constructor(private ts: TranslateService) {
+    this.dropDownItems = [
+      {
+        name: 'ARTICLES',
+        route: 'article',
+        icon: 'article.svg'
+      },
+      {
+        name: 'FORMATIONS',
+        route: 'courses',
+        icon: 'formation.svg'
+      },
+      {
+        name: 'ADVICES',
+        route: 'advices',
+        icon: 'advice.svg'
+      }
+    ];
     this.carouselItems = [
       {
         title: 'Datamining avec python',
@@ -63,20 +75,6 @@ export class LandingPageComponent implements OnInit {
         articleId: '6'
       }
     ];
-    this.dropDownItems = [
-      {
-        name: 'ARTICLES',
-        icon: 'article.svg'
-      },
-      {
-        name: 'FORMATIONS',
-        icon: 'formation.svg'
-      },
-      {
-        name: 'ADVICES',
-        icon: 'advice.svg'
-      }
-    ];
     this.activeItem = 'ARTICLES';
     this.ts.onDefaultLangChange.subscribe((lang) => {
       this.sp.clearChange();
@@ -96,6 +94,7 @@ export class LandingPageComponent implements OnInit {
       this.sp.init();
     });
   }
+
   ngOnInit(): void {
     this.sp = new SuperPlaceholder({
       placeholders: [
@@ -110,29 +109,14 @@ export class LandingPageComponent implements OnInit {
     });
     this.sp.init();
   }
+
   toggleDropdown() {
     this.flagDropdown = !this.flagDropdown;
   }
+
   setActiveItem(name: string) {
     this.toggleDropdown();
     this.activeItem = name;
-  }
-  signin() {
-    // this.as
-    //   .loginUser('saaderraz99@gmail.com', 'SE300799')
-    //   .then((result) => console.log(result))
-    //   .catch((error) => {
-    //     console.log('This is an error');
-    //     console.log(error);
-    //   });
-    this.as.signupUser({
-      email: 'saaderraz@gmail.com',
-      password: 'SE300799',
-      displayName: 'Saad Errazgouni'
-    });
-  }
-  doSomethingWeird() {
-    this.as.logoutUser();
   }
 }
 
