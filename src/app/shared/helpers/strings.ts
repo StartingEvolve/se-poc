@@ -1,3 +1,5 @@
+import DOMPurify from 'dompurify';
+
 export function unescapeHtml(str: string) {
   const encodings = [
     '&quot;',
@@ -19,4 +21,8 @@ export function unescapeHtml(str: string) {
     return unscape;
   }
   return unescapeHtml(unscape);
+}
+
+export function sanitize(value: string): string {
+  return DOMPurify.sanitize(value);
 }

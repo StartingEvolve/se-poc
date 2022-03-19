@@ -6,6 +6,7 @@ import { Example1Component } from './prototype/example1/example1.component';
 import { Example2Component } from './prototype/example2/example2.component';
 import { CarouselComponent } from '@se/prototype/carousel/carousel.component';
 import { PrototypeComponent } from './prototype/prototype/prototype.component';
+import { MultiSearchBoxComponent } from '@se/prototype/multi-search-box/multi-search-box.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'prototype/carousel', component: CarouselComponent },
   // { path: 'prototype/search', component: CourseSearchUiComponent },
   { path: 'prototype/articleproto', component: ArticleprototypeComponent },
+  { path: 'prototype/multisearch', component: MultiSearchBoxComponent },
   { path: 'article', component: ArticleComponent },
   { path: 'article/:articleId', component: ArticleComponent },
   {

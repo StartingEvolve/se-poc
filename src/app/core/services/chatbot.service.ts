@@ -34,9 +34,6 @@ export class ChatbotService {
     this.searchSub = searchParams$.subscribe((event: any) => {
       if (event.data.type === 'data') {
         const searchParams = event.data.searchParam;
-        console.log(
-          unescapeHtml(this.buildRefinementUrl('courses', searchParams))
-        );
 
         this.router.navigateByUrl(
           unescapeHtml(this.buildRefinementUrl('courses', searchParams))
