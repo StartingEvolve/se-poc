@@ -1,0 +1,151 @@
+<!-- This example requires Tailwind CSS v2.0+ -->
+<div class="min-h-screen">
+  <nav class="fixed w-screen bg-gray-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-2">
+      <div class="flex items-center justify-between h-16">
+        <div class="flex items-center space-x-3">
+          <div
+            class="flex-shrink-0 flex items-center space-x-2 cursor-pointer text-gray-200 hover:text-white"
+          >
+            <img
+              class="block h-4 w-auto imgWhite"
+              src="/assets/icons/back.svg"
+              alt="Workflow"
+            />
+            <div class="lg:block hidden text-sm">Retour aux cours</div>
+          </div>
+          <div class="text-white">
+            <div class="flex space-x-4">
+              <div>
+                {{
+                  'Ici le titre si le titre est grand ' | truncate: [25, '...']
+                }}
+              </div>
+            </div>
+          </div>
+          <div class="bg-gray-400 text-white text-xs px-2 py-1">Brouillon</div>
+        </div>
+        <div class="sm:ml-6 sm:block">
+          <div class="flex items-center sm:space-x-6 space-x-2">
+            <button>
+              <span class="sr-only">Save</span>
+              <span
+                class="cursor-not-allowed hidden sm:block text-gray-200 hover:text-white"
+                >Sauvegarder</span
+              >
+              <img
+                src="/assets/icons/save.svg"
+                data-bs-toggle="tooltip"
+                title="Sauvegarder"
+                class="w-6 h-6 settings sm:hidden"
+                alt=""
+              />
+            </button>
+            <button>
+              <span class="sr-only">Send</span>
+              <span class="hidden sm:block text-gray-200 hover:text-white"
+                >Envoyer pour évalution</span
+              >
+              <img
+                src="/assets/icons/send.svg"
+                data-bs-toggle="tooltip"
+                title="Envoyer pour évalution"
+                class="w-6 h-6 settings sm:hidden"
+                alt=""
+                srcset=""
+              />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <aside class="fixed w-64 pt-16" [class.closed]="!isWide" aria-label="Sidebar">
+    <div class="h-screen overflow-hidden py-6 bg-gray-50 dark:bg-gray-900">
+      <ul class="relative space-y-2">
+        <span
+          (click)="toggleSidebar()"
+          *ngIf="isWide"
+          class="absolute flex items-center -top-6 right-1 -space-x-3 cursor-pointer back"
+        >
+          <img
+            class="cursor-pointer relative w-4 h-fit imgWhite"
+            src="/assets/icons/chevron-left.svg"
+            alt="Test"
+          />
+          <img
+            class="cursor-pointer relative w-4 h-fit imgWhite"
+            src="/assets/icons/chevron-left.svg"
+            alt="Test"
+          />
+        </span>
+        <span
+          (click)="toggleSidebar()"
+          *ngIf="!isWide"
+          class="absolute flex items-center -top-6 right-1 -space-x-3 cursor-pointer back"
+        >
+          <img
+            class="cursor-pointer relative w-4 h-fit imgWhite"
+            src="/assets/icons/chevron-right.svg"
+            alt="Test"
+          />
+          <img
+            class="cursor-pointer relative w-4 h-fit imgWhite"
+            src="/assets/icons/chevron-right.svg"
+            alt="Test"
+          />
+        </span>
+        <li
+          data-bs-toggle="tooltip"
+          [title]="item.name"
+          *ngFor="let item of sideBarItems"
+          (click)="selectActiveItem(item.id)"
+          class="cursor-pointer transition duration-150 ease-in-out"
+        >
+          <div
+            class="flex items-center p-2 text-base font-normal text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+            [class.active]="item.id === activeId"
+          >
+            <img
+              *ngIf="item.checked"
+              class="w-6 h-6 text-gray-500 transition duration-75 settings"
+              src="/assets/icons/checkbox_active.svg"
+              alt="Test"
+            />
+            <img
+              *ngIf="!item.checked"
+              class="w-6 h-6 text-gray-500 transition duration-75 settings"
+              src="/assets/icons/checkbox.svg"
+              alt="Test"
+            />
+            <span *ngIf="isWide" class="ml-3">{{ item.name }}</span>
+          </div>
+        </li>
+        <div
+          id="tooltip-default"
+          role="tooltip"
+          class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700"
+        >
+          Tooltip content
+          <div class="tooltip-arrow" data-popper-arrow></div>
+        </div>
+      </ul>
+    </div>
+  </aside>
+  <div class="pl-64 pt-16" [class.closedDiv]="!isWide" [ngSwitch]="activeId">
+    <se-general-informations
+      *ngSwitchCase="1"
+      [data]="sideBarItems[0]"
+    ></se-general-informations>
+    <div *ngSwitchCase="2">test</div>
+  </div>
+
+  <script type="text/javascript">
+    var tooltipTriggerList = [].slice.call(
+      document.querySelectorAll('[data-bs-toggle="tooltip"]')
+    );
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+      return new Tooltip(tooltipTriggerEl);
+    });
+  </script>
+</div>

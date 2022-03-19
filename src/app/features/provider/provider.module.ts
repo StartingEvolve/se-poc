@@ -11,6 +11,8 @@ import { IdentityComponent } from './views/identity/identity.component';
 import { AccountInformationComponent } from './components/account_informations/account_informations.component';
 import { ProfileInformationsComponent } from './components/profile-informations/profile-informations.component';
 import { ProfessionalInformationsComponent } from './components/professional-informations/professional-informations.component';
+import { CoursesComponent } from './views/course/course.component';
+import { GeneralInformationsComponent } from './components/general-informations/general-informations.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { ProfessionalInformationsComponent } from './components/professional-inf
     IdentityComponent,
     AccountInformationComponent,
     ProfileInformationsComponent,
-    ProfessionalInformationsComponent
+    ProfessionalInformationsComponent,
+    CoursesComponent,
+    GeneralInformationsComponent
   ],
   imports: [CommonModule, ProviderRoutingModule, SharedModule, LayoutModule]
 })
