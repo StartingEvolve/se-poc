@@ -20,6 +20,7 @@ import { StarsComponent } from './components/stars/stars.component';
 import { TabsComponent } from './components/tabs/tabs.component';
 import { TabComponent } from './components/tab/tab.component';
 import { ChatbotComponent } from './components/chatbot/chatbot.component';
+import { DatePickerComponent } from './components/date-picker/date-picker.component';
 
 const components = [
   LanguagePickerWebComponent,
@@ -32,13 +33,14 @@ const components = [
   StarsComponent,
   TabComponent,
   ChatbotComponent,
-  TabsComponent
+  TabsComponent,
+  DatePickerComponent
 ];
 
 const pipes = [TruncatePipe, LogPipe, SanitizeHtmlPipe];
 
 @NgModule({
-  declarations: [...components, ...pipes, ChatbotComponent],
+  declarations: [...components, ...pipes],
   imports: [
     CommonModule,
     MaterialUiModule,

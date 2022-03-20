@@ -13,6 +13,8 @@ import { ProfileInformationsComponent } from './components/profile-informations/
 import { ProfessionalInformationsComponent } from './components/professional-informations/professional-informations.component';
 import { CoursesComponent } from './views/course/course.component';
 import { GeneralInformationsComponent } from './components/general-informations/general-informations.component';
+import { GoalsComponent } from './components/goals/goals.component';
+import { QuillModule } from 'ngx-quill';
 
 @NgModule({
   declarations: [
@@ -24,8 +26,15 @@ import { GeneralInformationsComponent } from './components/general-informations/
     ProfileInformationsComponent,
     ProfessionalInformationsComponent,
     CoursesComponent,
-    GeneralInformationsComponent
+    GeneralInformationsComponent,
+    GoalsComponent
   ],
-  imports: [CommonModule, ProviderRoutingModule, SharedModule, LayoutModule]
+  imports: [
+    CommonModule,
+    ProviderRoutingModule,
+    SharedModule,
+    LayoutModule,
+    QuillModule
+  ]
 })
 export class ProviderModule {}
