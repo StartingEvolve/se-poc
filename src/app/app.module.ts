@@ -37,6 +37,7 @@ import { ArticleComponent } from './features/article/article.component';
 import { ArticleprototypeComponent } from './prototype/articleprototype/articleprototype.component';
 import { CarouselComponent } from './prototype/carousel/carousel.component';
 import { MultiSearchBoxComponent } from './prototype/multi-search-box/multi-search-box.component';
+import { QuillModule } from 'ngx-quill';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -84,7 +85,22 @@ export function createTranslateLoader(http: HttpClient) {
       // registrationStrategy: 'registerWhenStable:30000'
       registrationStrategy: 'registerImmediately'
     }),
-    NgAisModule.forRoot()
+    NgAisModule.forRoot(),
+    QuillModule.forRoot({
+      customOptions: [
+        {
+          import: 'formats/font',
+          whitelist: [
+            'mirza',
+            'roboto',
+            'aref',
+            'serif',
+            'sansserif',
+            'monospace'
+          ]
+        }
+      ]
+    })
   ],
   providers: [
     ...emulatorProviders,

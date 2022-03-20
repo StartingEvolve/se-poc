@@ -28,14 +28,14 @@ body {
   &::-webkit-scrollbar-thumb {
     background-color: #f90;
     background-image: -webkit-linear-gradient(
-        45deg,
-        rgba(255, 255, 255, 0.2) 25%,
-        transparent 25%,
-        transparent 50%,
-        rgba(255, 255, 255, 0.2) 50%,
-        rgba(255, 255, 255, 0.2) 75%,
-        transparent 75%,
-        transparent
+      45deg,
+      rgba(255, 255, 255, 0.2) 25%,
+      transparent 25%,
+      transparent 50%,
+      rgba(255, 255, 255, 0.2) 50%,
+      rgba(255, 255, 255, 0.2) 75%,
+      transparent 75%,
+      transparent
     );
   }
 }
@@ -49,10 +49,7 @@ mark {
   @apply bg-transparent text-indigo-700 font-bold;
 }
 
-
 //=================== Chatbot Styles =======================
 #tchat-label + div {
   height: 50% !important;
 }
-
-
