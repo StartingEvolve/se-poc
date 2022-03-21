@@ -88,12 +88,26 @@
         >
           <dt class="text-sm font-medium text-gray-500">Lieu</dt>
           <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-            <div *ngIf="data?.learning_mode[0] !== 'À distance'; else remote">
+            <div *ngIf="data?.learning_mode.includes('À distance')">
+              DEPUIS VOTRE DOMICILE :<br />
+              France entière
+              <br />
+            </div>
+            <div *ngIf="data?.learning_mode.includes('En entreprise')">
+              DANS VOTRE ENTREPRISE<br />
+            </div>
+            <div
+              *ngIf="
+                data?.learning_mode.includes('En centre') ||
+                data?.learning_mode.includes('En alternance')
+              "
+            >
+              DANS NOS CENTRE<br />
               <div *ngFor="let item of data?.location?.address">
                 - {{ item }}
               </div>
+              <br />
             </div>
-            <ng-template #remote> France entière </ng-template>
           </dd>
         </div>
       </dl>

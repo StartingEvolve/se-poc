@@ -27,6 +27,7 @@ import { Filter, FilterStore } from '@core/store/filter/filter.store';
 import Timeout = NodeJS.Timeout;
 import { filter } from 'rxjs/operators';
 import { NavigationEnd, Router } from '@angular/router';
+import { SearchAutocompleteBoxComponent } from '@shared/components/search-ui/search-autocomplete-box.component';
 
 interface CurrentOption {
   id: number;
@@ -106,6 +107,7 @@ const parseNumberInput = (input?: number | string): number => {
             <se-headless-refinement [RefineEvent]="RefineParentEvent">
               <ng-template>
                 <se-search-auto-box
+                  [clearRefinementEvent]="clearRefinementParentEvent"
                   (RefineEvent)="forwardEvent($event)"
                 ></se-search-auto-box>
               </ng-template>
@@ -222,7 +224,9 @@ export class SearchBoxComponent
   isFiltersMobile: boolean;
   isSelected: boolean = false;
 
+  //Todo: (zack) Refactor later
   RefineParentEvent: EventEmitter<any> = new EventEmitter();
+  clearRefinementParentEvent: EventEmitter<any> = new EventEmitter();
 
   //Loading components dynamically to switch between desktop and mobile views without losing consistency (view state)
   @ViewChild('vcDesktop', { read: ViewContainerRef })
@@ -343,6 +347,8 @@ export class SearchBoxComponent
 
   resetCurrentOptions() {
     //Reset all refinements of all filters
+    this.clearRefinementParentEvent.next('clear');
+
     this.currentOptions = [];
     this.filters.forEach((filter) => {
       filter.isOpen = false;
