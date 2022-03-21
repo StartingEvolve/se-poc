@@ -2,11 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import firebase from 'firebase/compat/app';
-import { DatabaseService } from '@core/adapters/database/database';
-import {
-  AngularFirestore,
-  AngularFirestoreDocument
-} from '@angular/fire/compat/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { TranslateService } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
 
@@ -39,12 +35,14 @@ export class AuthService {
         if (error.code) return { isValid: false, code: error.code };
       });
   }
+
   async googleSignin() {
     const provider = new firebase.auth.GoogleAuthProvider();
     provider.addScope('profile');
     provider.addScope('email');
     await this.afAuth.signInWithRedirect(provider);
   }
+
   updateUserDataByGoogle(user, profile: any) {
     let emailLower = user.email.toLowerCase();
     this.tService.setDefaultLang(profile.locale);
@@ -63,6 +61,7 @@ export class AuthService {
         { merge: true }
       );
   }
+
   updateUserData(data): Promise<any> {
     let email_lower = data.email;
     return this.afStore.doc('/users/' + email_lower).set(data, { merge: true });
