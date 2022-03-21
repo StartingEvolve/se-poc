@@ -13,7 +13,7 @@ interface CourseData extends Highlighted {
     region?: string;
     zipCode?: string;
   };
-  learningMode?: string; //Filter
+  learning_mode?: string; //Filter
   eligibility?: string; //Filter
   duration?: string; //Filter
   deadline?: string;

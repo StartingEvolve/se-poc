@@ -6,16 +6,11 @@ interface CourseData extends Highlighted {
   title: string;
   description: string;
   image: string;
-  public?: string; //Filter
-  newPrice?: string;
+  public_admitted?: string; //Filter
+  new_price?: string;
   price?: string;
-  location?: {
-    address?: string;
-    commune?: string;
-    region?: string;
-    zipCode?: string;
-  };
-  learningMode?: string; //Filter
+  location?: string[];
+  learning_mode?: string; //Filter
   eligibility?: string; //Filter
   duration?: string; //Filter
   deadline?: string;
@@ -68,7 +63,7 @@ interface Highlighted {
           <div class="pt-1 md:pt-4 sm:flex sm:justify-between">
             <div class="flex flex-wrap sm:w-[70%] space-x-2 gap-2 -m-1">
               <p
-                *ngIf="data?.public"
+                *ngIf="data?.public_admitted"
                 class="flex items-center text-sm text-gray-500 m-1"
               >
                 <!-- Heroicon name: solid/users -->
@@ -83,10 +78,10 @@ interface Highlighted {
                     d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"
                   />
                 </svg>
-                {{ data.public }}
+                {{ data.public_admitted }}
               </p>
               <p
-                *ngIf="data?.learningMode"
+                *ngIf="data?.learning_mode"
                 class="flex items-center text-sm text-gray-500 m-1"
               >
                 <!-- Heroicon name: solid/location-marker -->
@@ -103,7 +98,7 @@ interface Highlighted {
                     clip-rule="evenodd"
                   />
                 </svg>
-                {{ data.learningMode }} | {{ data['location.region'] }}
+                {{ data.learning_mode }} | {{ data['location'][0] }}
               </p>
               <p
                 *ngIf="data?.duration"
