@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-// import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ObservableStore } from '@codewithdan/observable-store';
 import { UserDocument } from '@se/shared/types/user-document';
 import { Subscription } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-
 
 export interface UserInterface {
   isLoggedIn: boolean;

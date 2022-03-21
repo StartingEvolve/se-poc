@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { DatabaseService } from '@core/adapters/database/database';
 import { Observable } from 'rxjs';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 export interface CourseInfo {
   uuid: string; // course uuid
@@ -25,21 +25,22 @@ export interface CourseInfo {
       new_value?: number;
       currency: string;
     };
-    eligibility?: string;
+    eligibility?: string[];
     start_date?: string; //We're going to deal with Date formatting later
     location?: {
-      address?: string;
+      address?: string[];
       region: string;
       zipCode: string;
     };
     duration?: string;
-    learning_mode?: string;
+    learning_mode?: string[];
     success_rate?: string;
   };
   organisation?: {
     uuid_organisation: string;
     name?: string;
     image?: string;
+    description?: string;
   };
   reviews?: {
     global_score: number;
@@ -69,12 +70,9 @@ export interface CourseInfo {
 //See more: https://stackoverflow.com/questions/47876754/query-firestore-database-for-document-id
 //https://github.com/angular/angularfire/blob/master/docs/firestore/querying-collections.md
 export class CourseService {
-  constructor(private db: DatabaseService) {}
+  constructor(private db: AngularFirestore) {}
 
   getCourseById(id: string): Observable<any> {
-    return this.db
-      .getDatabase()
-      .doc('courses_info/' + id)
-      .valueChanges();
+    return this.db.doc('courses_info/' + id).valueChanges();
   }
 }
