@@ -3,6 +3,7 @@ import {
   Component,
   ElementRef,
   EventEmitter,
+  Input,
   OnDestroy,
   OnInit,
   Output,
@@ -78,6 +79,8 @@ export class SearchAutocompleteBoxComponent
   isSelected: boolean = false;
   @ViewChild('locationInput') locationInput: ElementRef;
   @Output() RefineEvent = new EventEmitter<string>();
+  @Input()
+  clearRefinementEvent: EventEmitter<string> = new EventEmitter();
 
   private storeSub: Subscription;
   private readonly libraries: string[];
@@ -106,6 +109,11 @@ export class SearchAutocompleteBoxComponent
 
   ngOnInit(): void {
     this.venService.use(this.libraries);
+    this.clearRefinementEvent.subscribe(() => this.clearRefinement());
+  }
+
+  clearRefinement() {
+    this.locationInput.nativeElement.value = '';
   }
 
   ngAfterViewInit(): void {
