@@ -33,18 +33,18 @@ export class FilterStore extends ObservableStore<FilterState> {
     this.filters = [
       {
         id: 1,
-        name: 'public',
+        name: 'public_admitted',
         label: 'Publique Admis',
         isOpen: false,
         options: [
           {
-            value: 'Etudiant',
-            label: 'Etudiant',
+            value: 'Étudiant',
+            label: 'Étudiant',
             isChecked: false
           },
           {
-            value: 'Salarie en poste',
-            label: 'Salarie en poste',
+            value: 'Salarié en poste',
+            label: 'Salarié en poste',
             isChecked: false
           },
           {
@@ -61,7 +61,7 @@ export class FilterStore extends ObservableStore<FilterState> {
       },
       {
         id: 2,
-        name: 'learningMode',
+        name: 'learning_mode',
         isOpen: false,
         label: "Mode d'apprentissage",
         options: [
@@ -76,8 +76,8 @@ export class FilterStore extends ObservableStore<FilterState> {
             isChecked: false
           },
           {
-            value: 'A distance',
-            label: 'A distance',
+            value: 'À distance',
+            label: 'À distance',
             isChecked: false
           },
           {
@@ -94,13 +94,13 @@ export class FilterStore extends ObservableStore<FilterState> {
         isOpen: false,
         options: [
           {
-            value: 'Eligible CPF',
-            label: 'Eligible CPF',
+            value: 'Éligible CPF',
+            label: 'Éligible CPF',
             isChecked: false
           },
           {
-            value: 'Eligible VAE',
-            label: 'Eligible VAE',
+            value: 'Éligible VAE',
+            label: 'Éligible VAE',
             isChecked: false
           }
         ]

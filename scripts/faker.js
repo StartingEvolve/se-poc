@@ -1,7 +1,9 @@
 const fs = require('fs');
 const { faker } = require('@faker-js/faker');
+const latinize = require('latinize');
 
 let cities = {};
+let scraped_courses = {};
 
 let categories = {};
 
@@ -51,11 +53,15 @@ function flattenObject(ob) {
     if (!ob.hasOwnProperty(i)) continue;
 
     if (typeof ob[i] == 'object' && ob[i] !== null) {
-      let flatObject = flattenObject(ob[i]);
-      for (let x in flatObject) {
-        if (!flatObject.hasOwnProperty(x)) continue;
+      if (Array.isArray(ob[i])) {
+        toReturn[i] = ob[i];
+      } else {
+        let flatObject = flattenObject(ob[i]);
+        for (let x in flatObject) {
+          if (!flatObject.hasOwnProperty(x)) continue;
 
-        toReturn[i + '.' + x] = flatObject[x];
+          toReturn[i + '.' + x] = flatObject[x];
+        }
       }
     } else {
       toReturn[i] = ob[i];
@@ -95,7 +101,7 @@ const generateCourseData = (number) => {
   return courses;
 };
 
-const generateCourseInfoData = (cities, number) => {
+const generateCourseInfoData = (cities, scraped_courses, number) => {
   let cours_details = { course: [], courseInfo: [] };
 
   const generateReviews = (times) => {
@@ -147,126 +153,158 @@ const generateCourseInfoData = (cities, number) => {
   // let courses = [];
   let city = undefined;
   let id = '';
+  let address = [];
+  let france = [];
   while (number >= 0) {
     //Generating up to 100 since our city's db is incomplete in Firebase
-    city = cities[randomNumber(0, 100)];
+    // city = cities[randomNumber(0, 100)];
     id = faker.datatype.uuid();
-    const course = {
-      id: id,
-      title: faker.lorem.sentence(6),
-      description: faker.lorem.paragraph(5),
-      image: faker.image.business(640, 480, true),
-      public: randomArrayValue(_public),
-      price: faker.commerce.price(50, 200),
-      location: {
-        address: faker.address.streetAddress(),
-        region: city['Nom_commune'],
-        zipCode: city['Code_postal'].toString()
-      },
-      learningMode: randomArrayValue(_learningMode),
-      eligibility: randomArrayValue(_eligibility),
-      duration: formatDuration(6)
-    };
-    const courseInfo = {
-      id: id,
-      title: course.title,
-      image: course.image,
-      description: course.description,
-      goals: ['Under Construction'],
-      prerequisites: ['Under construction'],
-      program: ['Under construction'],
-      category: faker.company.bsNoun(),
-      certifications: [
-        {
-          id: faker.datatype.uuid(),
-          image: faker.image.technics(640, 480, true),
-          name: faker.company.catchPhraseDescriptor(),
-          description: faker.lorem.paragraph(3)
-        }
-      ],
-      overview: {
-        article: generateArticle(),
-        public_admitted: [course.public],
-        price: {
-          value: course.price,
-          new_value: null,
-          currency: randomArrayValue(['$'])
-        },
-        eligibility: course.eligibility,
-        start_date:
-          randomNumber(1, 30) +
-          ' ' +
-          faker.date.month() +
-          ' ' +
-          randomArrayValue(['2022', '2023']),
-        location: {
-          address: course.address,
-          region: city['Nom_commune'],
-          zip_code: city['Code_postal'].toString()
-        },
-        duration: course.duration,
-        learning_mode: course.learningMode,
-        success_rate: randomNumber(70, 95) + '%'
-      },
-      organisation: {
-        id: faker.datatype.uuid(),
-        name: faker.company.companyName(),
-        image: `https://pigment.github.io/fake-logos/logos/medium/color/${randomNumber(
-          1,
-          11
-        )}.png`
-      },
-      reviews: {
-        global_score: randomNumber(2, 5),
-        total: randomNumber(5000, 200000),
-        date:
-          randomNumber(1, 30) +
-          ' ' +
-          faker.date.month() +
-          ' ' +
-          randomArrayValue(['2022', '2021', '2020', '2019']),
-        data: generateReviews(randomNumber(1, 5))
-      },
-      instructors: generateInstructors(randomNumber(1, 3)),
-      views: {
-        count: randomNumber(5, 100)
+    address = scraped_courses[number]['overview']['location']['address']
+      .filter((e) => !e.includes('\n'))
+      .map((e) =>
+        latinize(e).toUpperCase().replace(/-/gi, ' ').replace(/'/gi, ' ')
+      );
+
+    address.forEach((e) => {
+      if (!france.find((el) => e === el)) {
+        france.push(e);
       }
-    };
-    cours_details.courseInfo.push(courseInfo);
-    cours_details.course.push(flattenObject(course));
+    });
+
+    // const course = {
+    //   id: id,
+    //   title: scraped_courses[number]['title'],
+    //   description: faker.lorem.paragraph(5),
+    //   image: faker.image.business(640, 480, true),
+    //   public_admitted: scraped_courses[number]['overview']['public_admitted'],
+    //   price: scraped_courses[number]['overview']['price']['value'],
+    //   location: address,
+    //   learning_mode: scraped_courses[number]['overview']['learning_mode'],
+    //   eligibility: scraped_courses[number]['overview']['eligibility'],
+    //   duration: scraped_courses[number]['overview']['duration']
+    // };
+    // const courseInfo = {
+    //   id: id,
+    //   title: scraped_courses[number]['title'],
+    //   image: course.image,
+    //   description: course.description,
+    //   goals: scraped_courses[number]['goals'],
+    //   prerequisites: scraped_courses[number]['prerequisites'],
+    //   program: scraped_courses[number]['program'],
+    //   category: scraped_courses[number]['category'],
+    //   certifications: scraped_courses[number]['certifications'].map(
+    //     (e, index) => {
+    //       return {
+    //         id: faker.datatype.uuid(),
+    //         image: scraped_courses[number]['certifications'][index]['image']
+    //       };
+    //     }
+    //   ),
+    //   overview: {
+    //     article: generateArticle(),
+    //     public_admitted: scraped_courses[number]['overview']['public_admitted'],
+    //     price: {
+    //       value: scraped_courses[number]['overview']['price']['value'],
+    //       new_value: null
+    //       // currency: randomArray["value"]([''])
+    //     },
+    //     eligibility: scraped_courses[number]['overview']['eligibility'],
+    //     start_date:
+    //       randomNumber(1, 30) +
+    //       ' ' +
+    //       faker.date.month() +
+    //       ' ' +
+    //       randomArrayValue(['2022', '2023']),
+    //     location: {
+    //       address: address
+    //       // region: city['Nom_commune'],
+    //       // zip_code: city['Code_postal'].toString()
+    //     },
+    //     duration: scraped_courses[number]['overview']['duration'],
+    //     learning_mode: scraped_courses[number]['overview']['learning_mode'],
+    //     success_rate: scraped_courses[number]['overview']['success_rate']
+    //   },
+    //   organisation: {
+    //     id: faker.datatype.uuid(),
+    //     name: scraped_courses[number]['organisation']['name'],
+    //     image: scraped_courses[number]['organisation']['image'],
+    //     description: scraped_courses[number]['organisation']['description']
+    //   },
+    //   reviews: {
+    //     global_score: randomNumber(2, 5),
+    //     total: randomNumber(5000, 200000),
+    //     date:
+    //       randomNumber(1, 30) +
+    //       ' ' +
+    //       faker.date.month() +
+    //       ' ' +
+    //       randomArrayValue(['2022', '2021', '2020', '2019']),
+    //     data: generateReviews(randomNumber(1, 5))
+    //   },
+    //   instructors: generateInstructors(randomNumber(1, 3)),
+    //   views: {
+    //     count: randomNumber(5, 100)
+    //   }
+    // };
+    // cours_details.courseInfo.push(courseInfo);
+    // cours_details.course.push(flattenObject(course));
     number--;
   }
-  return cours_details;
-};
 
+  // return cours_details;
+  return france;
+};
 fs.readFile('data/france.json', 'utf-8', (err, _cities) => {
   if (err) {
     throw err;
   }
   // parse JSON object
-  cities = JSON.parse(_cities.toString());
-
-  // print JSON object
-  // console.log(cities);
-
-  const courses = generateCourseInfoData(cities, 100);
-  console.log(courses);
-
-  fs.writeFile('data/courses.json', JSON.stringify(courses.course), (e) => {
-    if (e) {
-      throw e;
+  // cities = JSON.parse(_cities.toString());
+  fs.readFile('data/scraped_courses.json', 'utf-8', (err, _courses) => {
+    if (err) {
+      throw err;
     }
-    console.log('Courses data is saved');
-  });
 
-  fs.writeFile(
-    'data/courses_info.json',
-    JSON.stringify(courses.courseInfo),
-    (e) => {
-      if (e) {
-        throw e;
+    scraped_courses = JSON.parse(_courses.toString());
+    // print JSON object
+    // console.log(cities);
+
+    let courses = generateCourseInfoData('', scraped_courses, 100);
+
+    fs.writeFile(
+      'data/france_data.json',
+      JSON.stringify(
+        courses.map((e) => {
+          return {
+            Nom_commune: e,
+            Code_postal: '99999'
+          };
+        })
+      ),
+      (e) => {
+        if (e) {
+          throw e;
+        }
+        console.log('France data is saved');
       }
-      console.log("Courses' info data is saved");
-    }
-  );
+    );
+
+    // fs.writeFile('data/courses.json', JSON.stringify(courses.course), (e) => {
+    //   if (e) {
+    //     throw e;
+    //   }
+    //   console.log('Courses data is saved');
+    // });
+    //
+    // fs.writeFile(
+    //   'data/courses_info.json',
+    //   JSON.stringify(courses.courseInfo),
+    //   (e) => {
+    //     if (e) {
+    //       throw e;
+    //     }
+    //     console.log("Courses' info data is saved");
+    //   }
+    // );
+  });
 });

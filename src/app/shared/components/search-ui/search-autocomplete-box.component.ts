@@ -41,25 +41,25 @@ import TypesenseConfig from '@vendors/typesense/typesense.config';
       class="origin-top-right shadow absolute right-0 z-50 bg-white border border-gray-100 w-full lg:mt-0"
     >
       <li
-        *ngFor="let item of locationSearchResults.grouped_hits"
-        (click)="setSearchValue(item.hits[0].document['location.region'])"
+        *ngFor="let item of locationSearchResults.hits"
+        (click)="setSearchValue(item.document['Nom_commune'])"
         class="pl-8 pr-2 py-1 border-b-2 border-gray-100 relative cursor-pointer hover:bg-gray-50 hover:text-gray-900"
       >
         <span
           [innerHTML]="
-            item.hits[0].highlights[0].field === 'location.region'
-              ? item.hits[0].highlights[0].snippet
-              : (item.hits[0].document['location.region'] | sanitizeHtml)
+            item.highlights[0].field === 'Nom_commune'
+              ? item.highlights[0].snippet
+              : (item.document['Nom_commune'] | sanitizeHtml)
           "
         ></span>
-        -
-        <span
-          [innerHTML]="
-            item.hits[0].highlights[0].field === 'location.zipCode'
-              ? item.hits[0].highlights[0].snippet
-              : (item.hits[0].document['location.zipCode'] | sanitizeHtml)
-          "
-        ></span>
+        <!--        - -->
+        <!--        <span-->
+        <!--          [innerHTML]="-->
+        <!--            item.highlights[0].field === 'Code_postal'-->
+        <!--              ? item.highlights[0].snippet-->
+        <!--              : (item.document['Code_postal'] | sanitizeHtml)-->
+        <!--          "-->
+        <!--        ></span>-->
       </li>
     </ul>`,
   styles: [
@@ -133,16 +133,16 @@ export class SearchAutocompleteBoxComponent
             this.searchLoaded = false;
             this.isSelected = false;
           } else {
+            //Todo (zack) : I need to deal with multiple location fields when displaying data
             let search = {
               q: this.locationInput.nativeElement.value,
-              query_by: 'location.region,location.zipCode',
-              per_page: 5,
-              group_by: 'location.region'
+              query_by: 'Nom_commune',
+              per_page: 5
             };
             this.configurations
               .get('typesense')[0]
               .getClient()
-              .collections('courses')
+              .collections('france')
               .documents()
               .search(search)
               .then((searchResults) => {

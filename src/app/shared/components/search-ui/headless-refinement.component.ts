@@ -66,7 +66,7 @@ export class HeadlessRefinementComponent
 
   ngOnInit() {
     this.createWidget(connectRefinementList, {
-      attribute: 'location.region'
+      attribute: 'location'
     });
     super.ngOnInit();
     this.RefineEvent.subscribe((value) => this.refineSearch(value));

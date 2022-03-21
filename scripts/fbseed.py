@@ -18,7 +18,7 @@ for filename in os.listdir('data'):
 
         collectionName = filename.split('.')[0] # filename minus ext will be used as collection name
 
-        f = open('data/' + filename, 'r')
+        f = open('data/' + filename, 'r', encoding='utf8')
 
         docs = json.loads(f.read())
 
