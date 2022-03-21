@@ -3,7 +3,7 @@
     class="bg-white py-6 sm:py-8 lg:py-12 min-h-[200px] w-full 2xl:[70%] xl:w-[65%] lg:w-[60%]"
   >
     <div
-      [innerHTML]="data?.article"
+      [innerHTML]="description"
       class="max-w-screen-md px-4 md:px-8 mx-auto"
     ></div>
   </div>
@@ -70,7 +70,7 @@
         >
           <dt class="text-sm font-medium text-gray-500">Type d'enseignement</dt>
           <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-            {{ data.learning_mode }}
+            <div *ngFor="let item of data?.learning_mode">> {{ item }}</div>
           </dd>
         </div>
         <div
@@ -80,6 +80,20 @@
           <dt class="text-sm font-medium text-gray-500">Taux de réussite</dt>
           <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
             {{ data.success_rate }}
+          </dd>
+        </div>
+        <div
+          *ngIf="data?.location?.address"
+          class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
+        >
+          <dt class="text-sm font-medium text-gray-500">Lieu</dt>
+          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+            <div *ngIf="data?.learning_mode[0] !== 'À distance'; else remote">
+              <div *ngFor="let item of data?.location?.address">
+                - {{ item }}
+              </div>
+            </div>
+            <ng-template #remote> France entière </ng-template>
           </dd>
         </div>
       </dl>

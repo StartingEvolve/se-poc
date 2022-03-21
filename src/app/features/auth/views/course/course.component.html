@@ -2,7 +2,7 @@
   <div class="relative w-full bg-gradient-1 text-white">
     <se-breadcrumbs
       [type]="'Courses'"
-      [links]="[{ name: courseInfo.category, url: '/xd' }]"
+      [links]="[{ name: courseInfo?.category, url: '/xd' }]"
     ></se-breadcrumbs>
     <div
       class="h-full min-h-[250px] mx-auto px-3 py-6 md:py-12 2xl:w-[1512px] xl:w-[1256px] lg:w-[1000px] md:w-[744px] sm:w-[616px] text-left"
@@ -124,7 +124,11 @@
     [ngSwitch]="activeTabId"
     class="feed h-full min-h-[250px] mx-auto pb-4 px-3 2xl:w-[1512px] xl:w-[1256px] lg:w-[1000px] md:w-[744px] sm:w-[616px] text-left"
   >
-    <se-overview *ngSwitchCase="1" [data]="courseInfo?.overview"></se-overview>
+    <se-overview
+      *ngSwitchCase="1"
+      [data]="courseInfo?.overview"
+      [description]="courseInfo?.organisation.description"
+    ></se-overview>
     <se-goals *ngSwitchCase="2" [data]="courseInfo?.goals"></se-goals>
     <se-prerequisites *ngSwitchCase="3" [data]="courseInfo?.prerequisites">
     </se-prerequisites>

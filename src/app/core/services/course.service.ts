@@ -25,21 +25,22 @@ export interface CourseInfo {
       new_value?: number;
       currency: string;
     };
-    eligibility?: string;
+    eligibility?: string[];
     start_date?: string; //We're going to deal with Date formatting later
     location?: {
-      address?: string;
+      address?: string[];
       region: string;
       zipCode: string;
     };
     duration?: string;
-    learning_mode?: string;
+    learning_mode?: string[];
     success_rate?: string;
   };
   organisation?: {
     uuid_organisation: string;
     name?: string;
     image?: string;
+    description?: string;
   };
   reviews?: {
     global_score: number;

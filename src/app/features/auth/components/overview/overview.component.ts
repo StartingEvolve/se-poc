@@ -7,5 +7,7 @@ import { Component, Input } from '@angular/core';
 })
 export class OverviewComponent {
   @Input() data: any;
+  @Input() description: any;
+
   constructor() {}
 }
