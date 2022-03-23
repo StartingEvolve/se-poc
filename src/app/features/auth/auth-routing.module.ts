@@ -40,17 +40,9 @@ const routes: Routes = [
         component: VerifyEmailComponent
       },
       {
-        path: 'articles',
-        component: NotFoundComponent
-      },
-      {
         path: 'course/:uuid',
         component: CourseComponent,
         canActivate: [AuthGuard]
-      },
-      {
-        path: '**',
-        component: NotFoundComponent
       }
     ]
   },
@@ -65,6 +57,14 @@ const routes: Routes = [
   {
     path: 'forgot-password',
     component: ForgotPasswordComponent
+  },
+  {
+    path: 'articles',
+    component: NotFoundComponent
+  },
+  {
+    path: '**',
+    component: NotFoundComponent
   }
 ];
 
