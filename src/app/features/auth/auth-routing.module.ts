@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '@se/core/services/auth.guard';
+import { NotFoundComponent } from '@se/layout/not-found/not-found.component';
 import { AuthComponent } from './auth.component';
 import { CourseComponent } from './views/course/course.component';
 import { CoursesComponent } from './views/courses/courses.component';
@@ -40,12 +41,16 @@ const routes: Routes = [
       },
       {
         path: 'articles',
-        component: SignupComponent
+        component: NotFoundComponent
       },
       {
         path: 'course/:uuid',
         component: CourseComponent,
         canActivate: [AuthGuard]
+      },
+      {
+        path: '**',
+        component: NotFoundComponent
       }
     ]
   },
@@ -60,10 +65,6 @@ const routes: Routes = [
   {
     path: 'forgot-password',
     component: ForgotPasswordComponent
-  },
-  {
-    path: '**',
-    component: AuthComponent
   }
 ];
 

@@ -7,6 +7,7 @@ import { Example2Component } from './prototype/example2/example2.component';
 import { CarouselComponent } from '@se/prototype/carousel/carousel.component';
 import { PrototypeComponent } from './prototype/prototype/prototype.component';
 import { MultiSearchBoxComponent } from '@se/prototype/multi-search-box/multi-search-box.component';
+import { NotFoundComponent } from './layout/not-found/not-found.component';
 
 const routes: Routes = [
   {
