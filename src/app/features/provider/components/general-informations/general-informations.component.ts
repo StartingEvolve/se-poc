@@ -158,7 +158,7 @@ export class GeneralInformationsComponent implements OnInit {
         date_start: this.generalInformationsForm.value.date_start
       }),
       ...(this.generalInformationsForm.value.date_end !== '' && {
-        date_start: this.generalInformationsForm.value.date_end
+        date_end: this.generalInformationsForm.value.date_end
       }),
       learning_mode: this.generalInformationsForm.value.learning_mode
     };
