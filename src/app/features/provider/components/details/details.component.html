@@ -1,0 +1,151 @@
+<div class="min-h-screen with_image pt-12">
+  <div class="w-4/5 mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- STARTS HERE -->
+    <div class="w-full">
+      <h1 class="font-bold text-xl">Quel est votre public cible</h1>
+
+      <!-- card -->
+      <div class="flex flex-wrap -mx-2 mb-8 content-center">
+        <!-- <div class="flex flex-col sm:w-52 w-full bg-gray-50 hover:bg-gray-200 rounded-lg shadow-md m-6 overflow-hidden ">
+          <img src="/assets/img/stud.png" class="mx-auto" alt="">
+          <h2 class="text-center px-2 pb-5">Etudiants</h2>
+        </div>
+
+        <div class="flex  flex-col sm:w-52 w-full bg-gray-50 hover:bg-gray-200 rounded-lg shadow-md m-6 overflow-hidden ">
+          <img src="/assets/img/busin.png" class="mx-auto " alt="">
+          <h2 class="text-center px-2 pb-5">Salariés</h2>
+        </div>
+
+        <div class="flex flex-col sm:w-52 w-full bg-gray-50 hover:bg-gray-200 rounded-lg shadow-md m-6 overflow-hidden ">
+          <img src="/assets/img/student.png" class="mx-auto mt-10" alt="">
+          <h2 class="text-center px-2 pb-5">Demandeurs d'emploi</h2>
+        </div> -->
+
+        <div class="flex flex-wrap -mx-2 mb-8 content-center">
+          <div
+            class="flex flex-col sm:w-52 w-full bg-gray-100 hover:bg-gray-200 rounded-lg shadow-md m-6 overflow-hidden cursor-pointer"
+            [class.active]="audienceActiveItems.includes('Etudiant')"
+            (click)="addOrRemove('Etudiant')"
+          >
+            <img src="/assets/img/image.png" class="mx-auto mt-6 mb-6" alt="" />
+            <h2 class="text-center px-2 pb-3">Etudiants</h2>
+          </div>
+          <div
+            class="flex flex-col sm:w-52 w-full bg-gray-100 hover:bg-gray-200 rounded-lg shadow-md m-6 overflow-hidden cursor-pointer"
+            [class.active]="audienceActiveItems.includes('Salarié')"
+            (click)="addOrRemove('Salarié')"
+          >
+            <img
+              src="/assets/img/image2.png"
+              class="mx-auto mt-5 mb-6"
+              alt=""
+            />
+            <h2 class="text-center px-2 pb-3">Salariés</h2>
+          </div>
+          <!-- <div class="sm:flex-col md:flex-row w-full md:w-1/2 sm:ml-0 md:ml-14 lg:w-1/4 sm:px-0 md:px-2 mb-4 bg-gray-100 hover:bg-gray-200 rounded-lg cursor-pointer"> -->
+          <div
+            class="flex flex-col sm:w-52 w-full bg-gray-100 hover:bg-gray-200 rounded-lg shadow-md m-6 overflow-hidden cursor-pointer"
+            [class.active]="audienceActiveItems.includes('Demandeur d\'emploi')"
+            (click)="addOrRemove('Demandeur d\'emploi')"
+          >
+            <img
+              src="/assets/img/image3.png"
+              class="mx-auto mt-6 mb-6"
+              alt=""
+            />
+            <h2 class="text-center px-2 pb-3">Demandeur d'emploi</h2>
+          </div>
+          <div
+            class="flex flex-col sm:w-52 w-full bg-gray-100 hover:bg-gray-200 rounded-lg shadow-md m-6 overflow-hidden cursor-pointer"
+            [class.active]="audienceActiveItems.includes('Entreprise')"
+            (click)="addOrRemove('Entreprise')"
+          >
+            <img
+              src="/assets/img/image3.png"
+              class="mx-auto mt-6 mb-6"
+              alt=""
+            />
+            <h2 class="text-center px-2 pb-3">Entreprise</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="w-full">
+      <h1 class="font-bold text-xl">Mode d'apprentissage</h1>
+      <!-- card -->
+      <div class="flex flex-wrap -mx-2 mb-8">
+        <div class="flex flex-wrap -mx-2 mb-8 content-center">
+          <div
+            class="flex flex-col sm:w-52 w-full bg-gray-100 hover:bg-gray-200 rounded-lg shadow-md m-6 overflow-hidden cursor-pointer"
+            [class.active]="isActive2('div5')"
+            (click)="setActive2('div5')"
+          >
+            <img
+              src="/assets/img/image4.png"
+              class="mx-auto mt-5 mb-6"
+              alt=""
+            />
+            <h2 class="text-center px-2 pb-3">En entreprise</h2>
+          </div>
+          <!-- <div class="sm:flex-col md:flex-row w-full md:w-1/2 sm:ml-0 md:ml-14 lg:w-1/4 sm:px-0 md:px-2 mb-4 bg-gray-100 hover:bg-gray-200 rounded-lg cursor-pointer"> -->
+          <div
+            class="flex flex-col sm:w-52 w-full bg-gray-100 hover:bg-gray-200 rounded-lg shadow-md m-6 overflow-hidden cursor-pointer"
+            [class.active]="isActive2('div6')"
+            (click)="setActive2('div6')"
+          >
+            <img
+              src="/assets/img/image5.png"
+              class="mx-auto mt-6 mb-6"
+              alt=""
+            />
+            <h2 class="text-center px-2 pb-3">En centre</h2>
+          </div>
+
+          <div
+            class="flex flex-col sm:w-52 w-full bg-gray-100 hover:bg-gray-200 rounded-lg shadow-md m-6 overflow-hidden cursor-pointer"
+            [class.active]="isActive2('div7')"
+            (click)="setActive2('div7')"
+          >
+            <img
+              src="/assets/img/image5.png"
+              class="mx-auto mt-6 mb-6"
+              alt=""
+            />
+            <h2 class="text-center px-2 pb-3">En alternance</h2>
+          </div>
+
+          <div
+            class="flex flex-col sm:w-52 w-full bg-gray-100 hover:bg-gray-200 rounded-lg shadow-md m-6 overflow-hidden cursor-pointer"
+            [class.active]="isActive2('div8')"
+            (click)="setActive2('div8')"
+          >
+            <img
+              src="/assets/img/image5.png"
+              class="mx-auto mt-6 mb-6"
+              alt=""
+            />
+            <h2 class="text-center px-2 pb-3">À distance</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p *ngIf="showError" class="mt-2 text-xs text-red-600">
+      *Merci de saisir les données
+    </p>
+    <div class="px-4 py-3 text-right sm:px-6 space-x-4">
+      <button
+        (click)="goBack()"
+        class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+      >
+        Précédent
+      </button>
+      <button
+        (click)="goNext()"
+        class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+      >
+        Suivant
+      </button>
+    </div>
+  </div>
+</div>

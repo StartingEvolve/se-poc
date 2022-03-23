@@ -5,6 +5,8 @@ import { ProviderComponent } from './provider.component';
 import { StepperComponent } from './views/stepper/stepper.component';
 import { CoursesComponent } from './views/course/course.component';
 import { VerifyEmailComponent } from './views/verify-email/verify-email.component';
+import { DashboardComponent } from './views/dashboard/dashboard.component';
+import { CreateStepperComponent } from './views/create-stepper/create-stepper.component';
 
 const routes: Routes = [
   {
@@ -20,12 +22,20 @@ const routes: Routes = [
         component: StepperComponent
       },
       {
+        path: 'create',
+        component: CreateStepperComponent
+      },
+      {
         path: 'course',
         component: CoursesComponent
       },
       {
         path: 'verify',
         component: VerifyEmailComponent
+      },
+      {
+        path: 'dashboard',
+        component: DashboardComponent
       }
     ]
   }

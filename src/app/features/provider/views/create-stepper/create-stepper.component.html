@@ -1,0 +1,46 @@
+<se-navbar-provider-connected [isExit]="false"></se-navbar-provider-connected>
+
+<div class="z-50 fixed top-16 w-full">
+  <div class="w-full bg-gray-200 md:h-3 h-2">
+    <div
+      class="bg-orange-300 md:h-3 h-2"
+      [style]="{ width: (currentStep * 100) / steps.length + '%' }"
+    ></div>
+  </div>
+  <div
+    class="px-2 flex items-center space-x-4 bg-white h-14 border-gray-300 border-b"
+  >
+    <div
+      class="rounded-full text-white bg-orange-300 w-10 h-10 flex items-center justify-center"
+    >
+      <div class="md:text-lg">{{ currentStep }}</div>
+    </div>
+    <div class="md:text-lg text-orange-300">
+      {{ steps[currentStep - 1] }}
+    </div>
+  </div>
+</div>
+<div class="min-h-screen pt-32">
+  <div [ngSwitch]="currentStep">
+    <se-title-component
+      *ngSwitchCase="1"
+      (goNextEvent)="onTitleNext($event)"
+      [data]="currentObject?.title"
+    >
+    </se-title-component>
+    <se-category-component
+      *ngSwitchCase="2"
+      (goNextEvent)="onCategoryNext($event)"
+      (goBackEvent)="goBack($event)"
+      [data]="currentObject?.category"
+    >
+    </se-category-component>
+    <se-details-component
+      *ngSwitchCase="3"
+      (goNextEvent)="onDetailsNext($event)"
+      (goBackEvent)="goBack($event)"
+      [data]="currentObject?.details"
+    >
+    </se-details-component>
+  </div>
+</div>

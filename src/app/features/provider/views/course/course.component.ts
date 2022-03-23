@@ -1,5 +1,6 @@
 import { NumberSymbol } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { throws } from 'assert';
 import { generalInformationsObject } from '../../components/general-informations/general-informations.component';
 export interface sideBarItem {
@@ -21,7 +22,7 @@ export class CoursesComponent {
   activeId: number = 1;
   currentObject: currentObject;
   sideBarItems: sideBarItem[];
-  constructor() {
+  constructor(private route: ActivatedRoute) {
     this.currentObject = {};
     this.currentObject.general = Object.assign({
       title: 'Ici le titre x',
@@ -70,6 +71,9 @@ export class CoursesComponent {
         checked: false
       }
     ];
+    this.route.queryParams.subscribe((params) => {
+      this.currentObject.general = Object.assign(params);
+    });
   }
   sendGeneralInfosData(object: generalInformationsObject) {
     this.currentObject.general = Object.assign(object);
