@@ -18,6 +18,12 @@ import { QuillModule } from 'ngx-quill';
 import { OrganisationInformationsComponent } from './components/organisation-informations/organisation-informations.component';
 import { VerifyEmailComponent } from './views/verify-email/verify-email.component';
 import { ProgramComponent } from './components/program/program.component';
+import { DashboardComponent } from './views/dashboard/dashboard.component';
+import { CreateStepperComponent } from './views/create-stepper/create-stepper.component';
+import { NavbarProviderConnectedComponent } from './components/navbar-provider-connected/navbar-provider-connected.component';
+import { TitleComponent } from './components/title/title.component';
+import { CategoryComponent } from './components/category/category.component';
+import { DetailsComponent } from './components/details/details.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +39,13 @@ import { ProgramComponent } from './components/program/program.component';
     GoalsComponent,
     OrganisationInformationsComponent,
     VerifyEmailComponent,
-    ProgramComponent
+    ProgramComponent,
+    DashboardComponent,
+    CreateStepperComponent,
+    NavbarProviderConnectedComponent,
+    TitleComponent,
+    CategoryComponent,
+    DetailsComponent
   ],
   imports: [
     CommonModule,
