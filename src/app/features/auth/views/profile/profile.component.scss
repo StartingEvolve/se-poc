@@ -1,3 +1,6 @@
 .disabled {
   @apply bg-green-300 focus:ring-0 cursor-not-allowed;
 }
+.disabledCancer {
+  @apply bg-gray-200 focus:ring-0 cursor-not-allowed;
+}

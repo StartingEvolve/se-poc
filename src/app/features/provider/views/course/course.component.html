@@ -1,7 +1,7 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
 <div class="min-h-screen">
-  <nav class="fixed w-screen bg-gray-900">
-    <div class="max-w-7xl mx-auto px-4 sm:px-2">
+  <nav class="z-100 fixed w-screen bg-gray-900">
+    <div class="z-100 max-w-7xl mx-auto px-4 sm:px-2">
       <div class="flex items-center justify-between h-16">
         <div class="flex items-center space-x-3">
           <div
@@ -17,9 +17,7 @@
           <div class="text-white">
             <div class="flex space-x-4">
               <div>
-                {{
-                  'Ici le titre si le titre est grand ' | truncate: [25, '...']
-                }}
+                {{ currentObject.general.title | truncate: [25, '...'] }}
               </div>
             </div>
           </div>
@@ -28,22 +26,8 @@
         <div class="sm:ml-6 sm:block">
           <div class="flex items-center sm:space-x-6 space-x-2">
             <button>
-              <span class="sr-only">Save</span>
-              <span
-                class="cursor-not-allowed hidden sm:block text-gray-200 hover:text-white"
-                >Sauvegarder</span
-              >
-              <img
-                src="/assets/icons/save.svg"
-                data-bs-toggle="tooltip"
-                title="Sauvegarder"
-                class="w-6 h-6 settings sm:hidden"
-                alt=""
-              />
-            </button>
-            <button>
               <span class="sr-only">Send</span>
-              <span class="hidden sm:block text-gray-200 hover:text-white"
+              <span class="cursor-not-allowed hidden sm:block text-gray-300"
                 >Envoyer pour évalution</span
               >
               <img
@@ -135,9 +119,13 @@
   <div class="pl-64 pt-16" [class.closedDiv]="!isWide" [ngSwitch]="activeId">
     <se-general-informations
       *ngSwitchCase="1"
+      (generalInfosEvent)="sendGeneralInfosData($event)"
+      [generalInfosData]="currentObject.general"
       [data]="sideBarItems[0]"
-    ></se-general-informations>
+    >
+    </se-general-informations>
     <se-goals *ngSwitchCase="2" [data]="sideBarItems[1]"> </se-goals>
+    <se-program *ngSwitchCase="3" [data]="sideBarItems[1]"> </se-program>
   </div>
 
   <script type="text/javascript">

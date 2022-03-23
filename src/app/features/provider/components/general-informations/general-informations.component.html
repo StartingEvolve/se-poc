@@ -14,7 +14,7 @@
         </p>
       </div>
 
-      <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+      <div class="z-0 mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
         <div class="col-span-6 sm:col-span-4">
           <label
             for="title"
@@ -22,15 +22,25 @@
             ><span>Titre</span>
             <img class="w-3 h-fit" src="/assets/img/star2.png" alt="star"
           /></label>
-          <input
-            type="text"
-            [formControlName]="'title'"
-            name="title"
-            id="title"
-            autocomplete="organization-title"
-            placeholder="Ex : Apprendre à programmer en C++"
-            class="form-input mt-1 focus:ring-green-500 focus:border-green-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-          />
+          <div class="mt-1">
+            <input
+              type="text"
+              [formControlName]="'title'"
+              name="title"
+              id="title"
+              [class.error]="checkError('title')"
+              autocomplete="organization-title"
+              placeholder="Ex : Apprendre à programmer en C++"
+              class="form-input mt-1 focus:ring-green-500 focus:border-green-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+            />
+          </div>
+          <p
+            *ngIf="checkError('title')"
+            class="mt-2 text-sm text-red-600"
+            id="email-error"
+          >
+            {{ getTitleErrors() | translate }}
+          </p>
         </div>
         <div class="col-span-6">
           <label
@@ -44,13 +54,24 @@
             <textarea
               [formControlName]="'description'"
               id="description"
+              [class.error]="checkError('description')"
               name="description"
               rows="3"
               class="form-textarea shadow-sm focus:ring-green-500 focus:border-green-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md"
               placeholder="Ex :Débutant à programmeur - Apprenez à coder en C et C++. Acquérir une compréhension approfondie de la programmation informatique en apprenant à coder, déboguer et résoudre des problèmes complexes avec C et C++."
             ></textarea>
           </div>
-          <p class="mt-2 text-sm text-gray-500">
+          <p
+            *ngIf="checkError('description')"
+            class="mt-2 text-sm text-red-600"
+            id="email-error"
+          >
+            {{ getDescriptionErrors() | translate }}
+          </p>
+          <p
+            *ngIf="!checkError('description')"
+            class="mt-2 text-sm text-gray-500"
+          >
             Une petite description de votre formation pour attirer l'attention
             du visiteur.
           </p>
@@ -146,6 +167,13 @@
               </div>
             </div>
           </div>
+          <p
+            *ngIf="showErrors && audienceActiveItems.length === 0"
+            class="mt-2 text-sm text-red-600"
+            id="email-error"
+          >
+            Vous devez choisir au moins une audience pour votre formation
+          </p>
         </div>
         <div class="col-span-6 sm:col-span-4">
           <label
@@ -188,6 +216,10 @@
               [formControlName]="'price'"
               name="price"
               id="price"
+              (keypress)="
+                (($event.charCode >= 48 && $event.charCode <= 57) ||
+                  $event.charCode === 46 || $event.charCode === 0)
+              "
               class="form-input focus:ring-green-500 focus:border-green-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md"
               placeholder="0.00"
             />
@@ -243,13 +275,40 @@
           </label>
           <input
             type="datetime-local"
+            [class.error]="
+              generalInformationsForm.hasError('fromToDate') && showErrors
+            "
             [formControlName]="'date_end'"
             name="date_end"
             id="date_end"
             autocomplete="datetime"
             class="form-input mt-1 focus:ring-green-500 focus:border-green-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
           />
+          <p
+            *ngIf="generalInformationsForm.hasError('fromToDate') && showErrors"
+            class="mt-2 text-sm text-red-600"
+            id="email-error"
+          >
+            {{ getDateEndErrors() | translate }}
+          </p>
         </div>
+      </div>
+      <div class="px-4 py-3 bg-gray-50 text-right mr-20 sm:px-6 space-x-4">
+        <button
+          type="button"
+          [class.disabledCancel]="false"
+          (click)="cancelChanges()"
+          class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+        >
+          Cancel
+        </button>
+        <button
+          type="submit"
+          [class.disabled]="isLoading"
+          class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+        >
+          Suivant
+        </button>
       </div>
     </div>
   </div>

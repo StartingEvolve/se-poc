@@ -1,10 +1,15 @@
 import { NumberSymbol } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { throws } from 'assert';
+import { generalInformationsObject } from '../../components/general-informations/general-informations.component';
 export interface sideBarItem {
   id: number;
   name: string;
   description: string;
   checked: boolean;
+}
+export interface currentObject {
+  general?: generalInformationsObject;
 }
 @Component({
   selector: 'se-course',
@@ -14,15 +19,21 @@ export interface sideBarItem {
 export class CoursesComponent {
   isWide: boolean = true;
   activeId: number = 1;
+  currentObject: currentObject;
   sideBarItems: sideBarItem[];
   constructor() {
+    this.currentObject = {};
+    this.currentObject.general = Object.assign({
+      title: 'Ici le titre x',
+      audience: ['Entreprise']
+    });
     this.sideBarItems = [
       {
         id: 1,
         name: 'Informations génerales',
         description:
           'Les informations générales de cette formation(Ex:Titre,description...)',
-        checked: true
+        checked: false
       },
       {
         id: 2,
@@ -59,6 +70,10 @@ export class CoursesComponent {
         checked: false
       }
     ];
+  }
+  sendGeneralInfosData(object: generalInformationsObject) {
+    this.currentObject.general = Object.assign(object);
+    this.sideBarItems[0].checked = true;
   }
   toggleSidebar() {
     this.isWide = !this.isWide;

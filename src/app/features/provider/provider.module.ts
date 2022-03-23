@@ -15,6 +15,9 @@ import { CoursesComponent } from './views/course/course.component';
 import { GeneralInformationsComponent } from './components/general-informations/general-informations.component';
 import { GoalsComponent } from './components/goals/goals.component';
 import { QuillModule } from 'ngx-quill';
+import { OrganisationInformationsComponent } from './components/organisation-informations/organisation-informations.component';
+import { VerifyEmailComponent } from './views/verify-email/verify-email.component';
+import { ProgramComponent } from './components/program/program.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,10 @@ import { QuillModule } from 'ngx-quill';
     ProfessionalInformationsComponent,
     CoursesComponent,
     GeneralInformationsComponent,
-    GoalsComponent
+    GoalsComponent,
+    OrganisationInformationsComponent,
+    VerifyEmailComponent,
+    ProgramComponent
   ],
   imports: [
     CommonModule,

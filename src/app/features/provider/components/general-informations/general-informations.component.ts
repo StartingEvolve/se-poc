@@ -1,8 +1,21 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { CustomDateValidator } from '@se/shared/helpers/CustomDateValidor';
+import { CustomDateValidator } from '../../../../shared/helpers/CustomDateValidor';
 import { sideBarItem } from '../../views/course/course.component';
 
+export interface generalInformationsObject {
+  title: string;
+  description?: string;
+  category?: string;
+  audience: string[];
+  price?: {
+    currency: string;
+    value: number;
+  };
+  date_start?: string;
+  date_end?: string;
+  learning_mode?: string;
+}
 @Component({
   selector: 'se-general-informations',
   templateUrl: './general-informations.component.html',
@@ -15,6 +28,10 @@ export class GeneralInformationsComponent implements OnInit {
   audienceActiveItems: string[];
   categoryOptions: string[];
   learningModeOptions: string[];
+  isLoading: boolean;
+  initialValues: any;
+  @Output() generalInfosEvent = new EventEmitter<generalInformationsObject>();
+  @Input() generalInfosData: generalInformationsObject;
   @Input() data: sideBarItem;
   generalInformationsForm: FormGroup;
   constructor() {
@@ -62,26 +79,59 @@ export class GeneralInformationsComponent implements OnInit {
       'A distance',
       'En centre'
     ];
-    this.audienceActiveItems = [];
   }
   ngOnInit(): void {
     this.generalInformationsForm = new FormGroup(
       {
-        title: new FormControl('', [Validators.required]),
-        description: new FormControl('', [Validators.required]),
-        category: new FormControl(this.categoryOptions[0], [
-          Validators.required
-        ]),
-        currency: new FormControl('€', [Validators.required]),
-        price: new FormControl('', [Validators.required]),
-        date_start: new FormControl('', []),
-        date_end: new FormControl('', []),
-        learning_mode: new FormControl(this.learningModeOptions[0], [
-          Validators.required
-        ])
+        title: new FormControl(
+          this.generalInfosData ? this.generalInfosData.title : '',
+          [Validators.required]
+        ),
+        description: new FormControl(
+          this.generalInfosData?.description
+            ? this.generalInfosData.description
+            : '',
+          [Validators.required]
+        ),
+        category: new FormControl(
+          this.generalInfosData?.category
+            ? this.generalInfosData.category
+            : this.categoryOptions[0],
+          [Validators.required]
+        ),
+        currency: new FormControl(
+          this.generalInfosData?.price
+            ? this.generalInfosData.price.currency
+            : '€',
+          [Validators.required]
+        ),
+        price: new FormControl(
+          this.generalInfosData?.price ? this.generalInfosData.price.value : '',
+          []
+        ),
+        date_start: new FormControl(
+          this.generalInfosData?.date_start
+            ? this.generalInfosData.date_start
+            : '',
+          []
+        ),
+        date_end: new FormControl(
+          this.generalInfosData?.date_end ? this.generalInfosData.date_end : '',
+          []
+        ),
+        learning_mode: new FormControl(
+          this.generalInfosData?.learning_mode
+            ? this.generalInfosData.learning_mode
+            : this.learningModeOptions[0],
+          [Validators.required]
+        )
       },
-      CustomDateValidator.fromToDate('date_start', 'date_end')
+      {
+        validators: CustomDateValidator.fromToDate('date_start', 'date_end')
+      }
     );
+    this.audienceActiveItems = this.generalInfosData.audience;
+    this.initialValues = this.generalInformationsForm.value;
   }
   submitForm() {
     if (
@@ -91,6 +141,44 @@ export class GeneralInformationsComponent implements OnInit {
       this.showErrors = true;
       return;
     }
+    this.isLoading = true;
+    this.initialValues = this.generalInformationsForm.value;
+    const object = {
+      title: this.trimAndCapitalize(this.generalInformationsForm.value.title),
+      description: this.trim(this.generalInformationsForm.value.description),
+      category: this.generalInformationsForm.value.category,
+      audience: this.audienceActiveItems,
+      ...(this.generalInformationsForm.value.price !== '' && {
+        price: {
+          currency: this.generalInformationsForm.value.currency,
+          value: this.generalInformationsForm.value.price
+        }
+      }),
+      ...(this.generalInformationsForm.value.date_start !== '' && {
+        date_start: this.generalInformationsForm.value.date_start
+      }),
+      ...(this.generalInformationsForm.value.date_end !== '' && {
+        date_start: this.generalInformationsForm.value.date_end
+      }),
+      learning_mode: this.generalInformationsForm.value.learning_mode
+    };
+    this.generalInfosEvent.emit(object);
+    this.isLoading = false;
+  }
+  checkError(name: string): boolean {
+    return this.showErrors && this.generalInformationsForm.get(name).invalid;
+  }
+  getTitleErrors() {
+    return 'Le titre de la formation est requis';
+  }
+  getDescriptionErrors() {
+    return 'La description de la formation est requis';
+  }
+  getDateEndErrors() {
+    if (this.generalInformationsForm.hasError('fromToDate')) {
+      return 'La date de la fin de la formation doit etre superieur à la date de début';
+    }
+    return '';
   }
   toggleDropdown() {
     this.isOpen = !this.isOpen;
@@ -103,6 +191,16 @@ export class GeneralInformationsComponent implements OnInit {
     } else {
       this.audienceActiveItems.push(item);
     }
+  }
+  cancelChanges() {
+    this.generalInformationsForm.reset(this.initialValues);
+  }
+  trim(name: string): string {
+    return name.trim();
+  }
+  trimAndCapitalize(name: string): string {
+    const namex = this.trim(name);
+    return namex.substring(0, 1).toUpperCase() + namex.substring(1);
   }
 }
 export function remove(...forDeletion) {
