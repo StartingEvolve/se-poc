@@ -70,7 +70,9 @@
         "OF":"de StartingEvolve",
         "SUBMIT":"Soumir",
         "RESETMESSAGE":"Réinitialisation du mot de passe",
-        "CALL_FOR_ACTION": "Commencer"
+        "CALL_FOR_ACTION": "Commencer",
+        "REQUIRED_IMAGE":"Cette image est requise",
+        "PHONE_PATTERN":"Ce telephone doit etre de la forme (0)XXXXXXXXX"
     },
     "FIREBASE":{
         "auth/user-not-found":"Utilisateur introuvable",

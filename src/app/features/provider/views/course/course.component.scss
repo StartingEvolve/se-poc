@@ -20,3 +20,6 @@
 .active {
   @apply border-l-4 border-white;
 }
+.activeSend {
+  @apply cursor-pointer hover:text-white;
+}

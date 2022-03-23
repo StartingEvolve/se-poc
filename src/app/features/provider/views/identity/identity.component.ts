@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'se-identity',
@@ -6,5 +7,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./identity.component.scss']
 })
 export class IdentityComponent {
-  constructor() {}
+  constructor(private router: Router) {}
+  goto(isOrganisation: boolean) {
+    this.router.navigate(['provider/stepper'], {
+      queryParams: { isOrganisation: isOrganisation }
+    });
+  }
 }

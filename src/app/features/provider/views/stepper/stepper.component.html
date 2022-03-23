@@ -30,16 +30,26 @@
       [data]="currentObject.account"
     >
     </se-account-informations>
-    <se-profile-informations
-      *ngSwitchCase="2"
-      (goNextEvent)="onProfileInfosChanged($event)"
-      [data]="currentObject?.profile"
-    >
-    </se-profile-informations>
+    <div *ngSwitchCase="2">
+      <se-profile-informations
+        *ngIf="!isOrganisation"
+        (goNextEvent)="onProfileInfosChanged($event)"
+        [data]="currentObject?.profile"
+      >
+      </se-profile-informations>
+      <se-organisation-informations
+        *ngIf="isOrganisation"
+        (goNextEvent)="onOrganisationInfosChanged($event)"
+        [data]="currentObject?.organisation"
+      >
+      </se-organisation-informations>
+    </div>
+
     <se-professional-informations
       *ngSwitchCase="3"
       (goNextEvent)="onProfessionalInfosChanged($event)"
       [data]="currentObject?.professional"
+      [isOrganisation]="isOrganisation"
     >
     </se-professional-informations>
   </div>
