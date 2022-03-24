@@ -72,6 +72,10 @@ export interface CourseInfo {
 export class CourseService {
   constructor(private db: AngularFirestore) {}
 
+  getProviderById(id: string): Observable<any> {
+    return this.db.doc('providers/' + id).valueChanges();
+  }
+
   getCourseById(id: string): Observable<any> {
     return this.db.doc('courses_info/' + id).valueChanges();
   }
