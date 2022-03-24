@@ -74,6 +74,9 @@
         </svg>
         <div
           [routerLink]="link.url"
+          [queryParams]="{
+            'courses[refinementList][category][0]': link.category
+          }"
           class="cursor-pointer ml-2 md:text-xs text-[10px] font-bold text-white hover:text-gray-200"
         >
           {{ link.name }}

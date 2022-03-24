@@ -6,7 +6,8 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./breadcrumbs.component.scss']
 })
 export class BreadcrumbsComponent {
-  @Input() links: { name: string; url: string }[];
+  @Input() links: { name: string; url: string; category?: string }[];
   @Input() type: string;
+
   constructor() {}
 }
