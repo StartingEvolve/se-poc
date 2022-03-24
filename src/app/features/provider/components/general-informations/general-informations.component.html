@@ -14,7 +14,9 @@
         </p>
       </div>
 
-      <div class="z-0 mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+      <div
+        class="z-0 mt-6 grid grid-cols-1 gap-y-2 sm:gap-y-6 gap-x-4 sm:grid-cols-6"
+      >
         <div class="col-span-6 sm:col-span-4">
           <label
             for="title"
@@ -102,7 +104,7 @@
         <div class="relative col-span-6">
           <button
             type="button"
-            class="group inline-flex flex-wrap items-end justify-start text-sm font-medium text-gray-700 hover:text-gray-900"
+            class="group inline-flex flex-wrap gap-y-2 items-end justify-start text-sm font-medium text-gray-700 hover:text-gray-900"
             id="menu-button"
             aria-expanded="false"
             aria-haspopup="true"
@@ -199,7 +201,41 @@
             </option>
           </select>
         </div>
-        <div class="col-span-6 sm:col-span-4">
+        <div
+          *ngIf="generalInformationsForm.value.learning_mode === 'En centre'"
+          class="col-span-6 sm:col-span-4"
+        >
+          <label
+            for="address"
+            class="inline-flex items-end text-sm font-medium text-gray-700"
+            ><span>Adresse complete</span
+            ><img class="w-3 h-fit" src="/assets/img/star2.png" alt="star"
+          /></label>
+          <div class="mt-1">
+            <input
+              type="text"
+              [formControlName]="'address'"
+              name="address"
+              id="address"
+              [class.error]="
+                specialError && generalInformationsForm.value.address === ''
+              "
+              autocomplete="address-level1"
+              placeholder="Ex : 87 rue des 4 coins , Paris"
+              class="form-input mt-1 focus:ring-green-500 focus:border-green-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+            />
+            <p
+              *ngIf="
+                specialError && generalInformationsForm.value.address === ''
+              "
+              class="mt-2 text-sm text-red-600"
+              id="email-error"
+            >
+              L'adresse est requise
+            </p>
+          </div>
+        </div>
+        <div class="col-span-6 sm:col-span-3">
           <label for="price" class="block text-sm font-medium text-gray-700"
             >Price</label
           >
@@ -218,7 +254,8 @@
               id="price"
               (keypress)="
                 (($event.charCode >= 48 && $event.charCode <= 57) ||
-                  $event.charCode === 46 || $event.charCode === 0)
+                  $event.charCode === 46 ||
+                  $event.charCode === 0)
               "
               class="form-input focus:ring-green-500 focus:border-green-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md"
               placeholder="0.00"
@@ -252,6 +289,25 @@
               </select>
             </div>
           </div>
+        </div>
+        <div class="col-span-6 sm:col-span-3 space-x-4">
+          <label class="inline-flex items-center sm:mt-7">
+            <input
+              type="checkbox"
+              [formControlName]="'vae'"
+              class="form-checkbox h-5 w-5 text-gray-600"
+              checked
+            /><span class="ml-2 text-gray-700">Eligible VAE</span>
+          </label>
+
+          <label class="inline-flex items-center mt-3">
+            <input
+              type="checkbox"
+              [formControlName]="'cpf'"
+              class="form-checkbox h-5 w-5 text-red-600"
+              checked
+            /><span class="ml-2 text-gray-700">Eligible CPF</span>
+          </label>
         </div>
         <div class="col-span-6 sm:col-span-4">
           <label
@@ -300,7 +356,7 @@
           (click)="cancelChanges()"
           class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
         >
-          Cancel
+          Annuler
         </button>
         <button
           type="submit"

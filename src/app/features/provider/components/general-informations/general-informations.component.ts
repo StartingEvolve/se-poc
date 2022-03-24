@@ -15,6 +15,8 @@ export interface generalInformationsObject {
   date_start?: string;
   date_end?: string;
   learning_mode?: string;
+  address?: string;
+  eligibility?: string[];
 }
 @Component({
   selector: 'se-general-informations',
@@ -29,6 +31,7 @@ export class GeneralInformationsComponent implements OnInit {
   categoryOptions: string[];
   learningModeOptions: string[];
   isLoading: boolean;
+  specialError: boolean;
   initialValues: any;
   @Output() generalInfosEvent = new EventEmitter<generalInformationsObject>();
   @Input() generalInfosData: generalInformationsObject;
@@ -36,6 +39,7 @@ export class GeneralInformationsComponent implements OnInit {
   generalInformationsForm: FormGroup;
   constructor() {
     this.showErrors = false;
+    this.specialError = false;
     this.isOpen = false;
     this.aundienceItems = [
       'Entreprise',
@@ -124,6 +128,20 @@ export class GeneralInformationsComponent implements OnInit {
             ? this.generalInfosData.learning_mode
             : this.learningModeOptions[0],
           [Validators.required]
+        ),
+        address: new FormControl(
+          this.generalInfosData?.address ? this.generalInfosData.address : '',
+          []
+        ),
+        cpf: new FormControl(
+          this.generalInfosData?.eligibility &&
+            this.generalInfosData.eligibility.includes('CPF'),
+          []
+        ),
+        vae: new FormControl(
+          this.generalInfosData?.eligibility &&
+            this.generalInfosData.eligibility.includes('VAE'),
+          []
         )
       },
       {
@@ -139,6 +157,14 @@ export class GeneralInformationsComponent implements OnInit {
       this.audienceActiveItems === []
     ) {
       this.showErrors = true;
+      return;
+    }
+    if (
+      this.generalInformationsForm.value.learning_mode === 'En centre' &&
+      this.generalInformationsForm.value.address === ''
+    ) {
+      console.log('ok');
+      this.specialError = true;
       return;
     }
     this.isLoading = true;
@@ -160,7 +186,19 @@ export class GeneralInformationsComponent implements OnInit {
       ...(this.generalInformationsForm.value.date_end !== '' && {
         date_end: this.generalInformationsForm.value.date_end
       }),
-      learning_mode: this.generalInformationsForm.value.learning_mode
+      learning_mode: this.generalInformationsForm.value.learning_mode,
+      ...(this.generalInformationsForm.value.cpf != false &&
+        this.generalInformationsForm.value.vae != false && {
+          eligibility: [...['CPF', 'VAE']]
+        }),
+      ...(this.generalInformationsForm.value.vae != false &&
+        this.generalInformationsForm.value.cpf == false && {
+          eligibility: [...['VAE']]
+        }),
+      ...(this.generalInformationsForm.value.vae == false &&
+        this.generalInformationsForm.value.cpf != false && {
+          eligibility: [...['CPF']]
+        })
     };
     this.generalInfosEvent.emit(object);
     this.isLoading = false;
