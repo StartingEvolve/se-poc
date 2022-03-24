@@ -9,24 +9,28 @@ import { SearchAutocompleteBoxComponent } from '@shared/components/search-ui/sea
 import { SearchBoxComponent } from '@shared/components/search-ui/searchbox.component';
 import { NgAisModule } from 'angular-instantsearch';
 import { HeadlessRefinementComponent } from '@shared/components/search-ui/headless-refinement.component';
-import { SearchUiComponent } from '@shared/components/search-ui/search-ui.component';
+import { CourseSearchUiComponent } from '@shared/components/search-ui/course-search-ui.component';
 import { MultiSearchBoxComponent } from '@shared/components/search-ui/multi-search-box.component';
+import { ArticleSearchUiComponent } from '@shared/components/search-ui/article-search-ui.component';
+import { ArticleCardComponent } from '@shared/components/search-ui/article-card.component';
 
 const components = [
   ClearRefinementsComponent,
   CourseCardComponent,
+  ArticleCardComponent,
   PaginationComponent,
   RefinementListComponent,
   SearchAutocompleteBoxComponent,
   SearchBoxComponent,
   HeadlessRefinementComponent,
   MultiSearchBoxComponent,
-  SearchUiComponent
+  CourseSearchUiComponent,
+  ArticleSearchUiComponent
 ];
 
 @NgModule({
   declarations: [...components],
   imports: [CommonModule, SharedModule, NgAisModule],
-  exports: [...components, SearchUiComponent]
+  exports: [...components]
 })
 export class SearchUiModule {}

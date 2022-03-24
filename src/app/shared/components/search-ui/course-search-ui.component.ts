@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import TypesenseInstantSearchAdapter from 'typesense-instantsearch-adapter';
 import {
   CurrentOption,
@@ -22,8 +22,8 @@ const typesenseInstantsearchAdapter = new TypesenseInstantSearchAdapter({
   //  So you can pass any parameters supported by the search endpoint below.
   //  queryBy is required.
   additionalSearchParameters: {
-    queryBy: 'title,description',
-    perPage: 10
+    queryBy: 'title',
+    perPage: 3
   }
 });
 const searchClient = typesenseInstantsearchAdapter.searchClient;
@@ -31,11 +31,11 @@ const searchClient = typesenseInstantsearchAdapter.searchClient;
 //Todo (zack): refactor the component to adapt the search
 @Component({
   selector: 'se-course-search-ui',
-  templateUrl: './search-ui.component.html',
-  styleUrls: ['./search-ui.component.scss']
+  templateUrl: './course-search-ui.component.html'
 })
-export class SearchUiComponent {
+export class CourseSearchUiComponent {
   config: any;
+  @Input() hasLocation: boolean = false;
 
   filters: Filter[];
   currentOptions: CurrentOption[];

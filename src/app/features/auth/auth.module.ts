@@ -25,6 +25,8 @@ import { ProgramComponent } from './components/program/program.component';
 import { CertificationsComponent } from './components/certifications/certifications.component';
 import { SearchUiModule } from '@shared/components/search-ui/search-ui.module';
 import { ProfileComponent } from './views/profile/profile.component';
+import { ArticlesComponent } from './views/articles/articles.component';
+import { ArticleComponent } from '@se/features/auth/views/article/article.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,9 @@ import { ProfileComponent } from './views/profile/profile.component';
     PrerequisitesComponent,
     ProgramComponent,
     CertificationsComponent,
-    ProfileComponent
+    ProfileComponent,
+    ArticlesComponent,
+    ArticleComponent
   ],
   imports: [
     CommonModule,

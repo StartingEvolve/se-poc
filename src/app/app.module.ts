@@ -33,7 +33,6 @@ import { Example1Component } from './prototype/example1/example1.component';
 import { Example2Component } from './prototype/example2/example2.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { InterceptorService } from '@core/services/interceptor.service';
-import { ArticleComponent } from './features/article/article.component';
 import { ArticleprototypeComponent } from './prototype/articleprototype/articleprototype.component';
 import { CarouselComponent } from './prototype/carousel/carousel.component';
 import { MultiSearchBoxComponent } from './prototype/multi-search-box/multi-search-box.component';
@@ -49,7 +48,6 @@ export function createTranslateLoader(http: HttpClient) {
     PrototypeComponent,
     Example1Component,
     Example2Component,
-    ArticleComponent,
     ArticleprototypeComponent,
     CarouselComponent,
     MultiSearchBoxComponent

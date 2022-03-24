@@ -17,7 +17,8 @@ export interface Filter {
 }
 
 export interface FilterState {
-  filters: Filter[];
+  courseFilters: Filter[];
+  articleFilters: Filter[];
 }
 
 @Injectable({
@@ -25,7 +26,8 @@ export interface FilterState {
 })
 export class FilterStore extends ObservableStore<FilterState> {
   currentRoute: string;
-  filters: any;
+  courseFilters: any;
+  articleFilters: any;
 
   constructor() {
     super({ trackStateHistory: true, logStateChanges: true });
@@ -34,7 +36,7 @@ export class FilterStore extends ObservableStore<FilterState> {
       category_options.push(key);
     }
 
-    this.filters = [
+    this.courseFilters = [
       {
         id: 1,
         name: 'public_admitted',
@@ -123,18 +125,36 @@ export class FilterStore extends ObservableStore<FilterState> {
         })
       }
     ];
+    this.articleFilters = [
+      {
+        id: 1,
+        name: 'category',
+        label: 'Catégorie',
+        isOpen: false,
+        options: category_options.map((category) => {
+          return {
+            value: category,
+            label: category,
+            isChecked: false
+          };
+        })
+      }
+    ];
     this.setState(
-      { filters: this.filters },
+      {
+        courseFilters: this.courseFilters,
+        articleFilters: this.articleFilters
+      },
       FilterStoreActions.InitializeFilters
     );
   }
 
   getFiltersObservable() {
-    return of(this.getState().filters);
+    return of(this.getState());
   }
 
   getFilters() {
-    return this.getState().filters;
+    return this.getState();
   }
 
   addFilter(filter: Filter) {
@@ -144,12 +164,24 @@ export class FilterStore extends ObservableStore<FilterState> {
   updateFiltersByUrl(url: string) {
     if (url === '') {
       this.setState({
-        filters: []
+        courseFilters: [],
+        articleFilters: []
       });
     } else {
       this.setState(
         {
-          filters: this.filters.map((f) => {
+          courseFilters: this.courseFilters.map((f) => {
+            return {
+              ...f,
+              options: f.options.map((option) => {
+                return {
+                  ...option,
+                  isChecked: url.includes(option.value)
+                };
+              })
+            };
+          }),
+          articleFilters: this.articleFilters.map((f) => {
             return {
               ...f,
               options: f.options.map((option) => {

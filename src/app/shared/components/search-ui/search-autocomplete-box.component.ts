@@ -30,7 +30,7 @@ import TypesenseConfig from '@vendors/typesense/typesense.config';
   template: ` <input
       autocomplete="off"
       name="search"
-      placeholder="Where?"
+      placeholder="Où ?"
       [class.selectedValue]="isSelected"
       class="h-14 shadow block w-full bg-white py-2 pl-10 lg:w-full lg:border-0 text-sm placeholder-gray-500 focus:outline-none focus:text-gray-900 focus:placeholder-gray-400 sm:text-sm mt-1 lg:mt-0"
       id="search"

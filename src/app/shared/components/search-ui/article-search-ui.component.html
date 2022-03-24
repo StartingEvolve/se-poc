@@ -7,15 +7,15 @@
     }"
   >
   </ais-configure>
-  <se-searchbox></se-searchbox>
+  <se-searchbox filterType="article" [hasLocation]="hasLocation"></se-searchbox>
   <div>
     <ais-hits>
       <ng-template let-hits="hits">
         <div class="w-full flex flex-col items-center justify-center space-y-2">
-          <se-course-card
+          <se-article-card
             *ngFor="let hit of hits"
             [data]="hit"
-          ></se-course-card>
+          ></se-article-card>
         </div>
       </ng-template>
     </ais-hits>

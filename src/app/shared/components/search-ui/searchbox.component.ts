@@ -11,7 +11,8 @@ import {
   TemplateRef,
   AfterViewInit,
   ViewRef,
-  EventEmitter
+  EventEmitter,
+  Input
 } from '@angular/core';
 import {
   NgAisInstantSearch,
@@ -82,43 +83,54 @@ const parseNumberInput = (input?: number | string): number => {
             <input
               autocomplete="off"
               name="search"
-              placeholder="What are you looking for?"
+              placeholder="Que recherchez-vous ?"
               class="h-14 shadow block w-full bg-white py-2 pl-10 text-sm placeholder-gray-500 focus:outline-none focus:text-gray-900 focus:placeholder-gray-400 sm:text-sm"
               type="text"
               #input
               (keyup)="this.state.refine(input.value)"
               [value]="this.state.query"
             />
+            <ng-container *ngIf="!hasLocation">
+              <div
+                (click)="toggleIsFiltersMobile()"
+                class="absolute md:right-5 sm:right-4 top-3 right-4 inset-y-0 lg:hidden"
+              >
+                <mat-icon class="text-2xl">filter_alt</mat-icon>
+              </div>
+            </ng-container>
           </div>
-          <div
-            class="relative w-full lg:w-[30%] bg-white lg:border-l-2 lg:border-t-0 border-t-2"
-          >
+          <ng-container *ngIf="hasLocation">
             <div
-              class="pointer-events-none absolute inset-y-0 left-0 pl-3 flex items-center"
+              class="relative w-full lg:w-[30%] bg-white lg:border-l-2 lg:border-t-0 border-t-2"
             >
-              <img
-                src="/assets/icons/location.svg"
-                class="h-5 w-5"
-                alt=""
-                srcset=""
-              />
-            </div>
+              <div
+                class="pointer-events-none absolute inset-y-0 left-0 pl-3 flex items-center"
+              >
+                <img
+                  src="/assets/icons/location.svg"
+                  class="h-5 w-5"
+                  alt=""
+                  srcset=""
+                />
+              </div>
 
-            <se-headless-refinement [RefineEvent]="RefineParentEvent">
-              <ng-template>
-                <se-search-auto-box
-                  [clearRefinementEvent]="clearRefinementParentEvent"
-                  (RefineEvent)="forwardEvent($event)"
-                ></se-search-auto-box>
-              </ng-template>
-            </se-headless-refinement>
-            <div
-              (click)="toggleIsFiltersMobile()"
-              class="absolute md:right-5 sm:right-4 top-3 right-4 inset-y-0 lg:hidden"
-            >
-              <mat-icon class="text-2xl">filter_alt</mat-icon>
+              <se-headless-refinement [RefineEvent]="RefineParentEvent">
+                <ng-template>
+                  <se-search-auto-box
+                    [clearRefinementEvent]="clearRefinementParentEvent"
+                    (RefineEvent)="forwardEvent($event)"
+                  ></se-search-auto-box>
+                </ng-template>
+              </se-headless-refinement>
+
+              <div
+                (click)="toggleIsFiltersMobile()"
+                class="absolute md:right-5 sm:right-4 top-3 right-4 inset-y-0 lg:hidden"
+              >
+                <mat-icon class="text-2xl">filter_alt</mat-icon>
+              </div>
             </div>
-          </div>
+          </ng-container>
         </div>
         <div
           class="w-full bg-white relative h-12 hidden lg:flex justify-start p-4 items-center space-x-4"
@@ -209,6 +221,8 @@ export class SearchBoxComponent
   extends TypedBaseWidget<SearchBoxWidgetDescription, SearchBoxConnectorParams>
   implements OnInit, AfterViewInit
 {
+  @Input() hasLocation: boolean;
+  @Input() filterType: string;
   @ViewChildren('Filter') filtersList: QueryList<RefinementListComponent>;
   containerKillSwtich: any[] = [];
   public state: SearchBoxWidgetDescription['renderState'] = {
@@ -253,7 +267,12 @@ export class SearchBoxComponent
         this.filterStore.updateFiltersByUrl(decodeURI(this.currentRoute));
       });
     this.filterStore.stateChanged.subscribe((state) => {
-      this.filters = state.filters;
+      if (this.filterType === 'course') {
+        this.filters = state.courseFilters;
+      } else if (this.filterType === 'article') {
+        this.filters = state.articleFilters;
+      }
+
       this.currentOptions = [];
       this.filters.forEach((f) => {
         f.options.forEach((option) => {
