@@ -24,9 +24,6 @@ export class ChatbotService {
       return false;
     };
     this.onBotSearchRequest();
-    // setTimeout(() => {
-    //   this.changeLanguage();
-    // }, 5000);
   }
 
   onBotSearchRequest(reload = false) {
@@ -48,11 +45,6 @@ export class ChatbotService {
     this.bp.client.sendEvent({
       type: this.bp.webchatOpen ? 'hide' : 'show'
     });
-  }
-
-  //Todo(zack) fix language change bug
-  changeLanguage() {
-    this.bp.changeLanguage('fr');
   }
 
   buildRefinementUrl(domain: string, params: any) {
