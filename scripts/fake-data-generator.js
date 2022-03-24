@@ -141,7 +141,7 @@ const generateCourseProviderReferences = (
       category: course.category,
       image: course.image,
       public_admitted: course.overview.public_admitted,
-      price: course.overview.price,
+      price: course.overview.price.value,
       location: course.overview.location.address,
       learning_mode: course.overview.learning_mode,
       eligibility: course.overview.eligibility,
@@ -229,7 +229,11 @@ const generateArticleContent = () => {
   )}</p>`;
 };
 
-const generateEditorArticleReferences = (scraped_articles, number) => {
+const generateEditorArticleReferences = (
+  categories,
+  scraped_articles,
+  number
+) => {
   let editors = [];
   let articles = [];
   let articlePreviews = [];
@@ -239,6 +243,7 @@ const generateEditorArticleReferences = (scraped_articles, number) => {
     let article = {
       id: articleId,
       title: scraped_articles[number]['title'],
+      image: categories[randomArrayValue(cat)],
       description: scraped_articles[number]['description'],
       content: scraped_articles[number]['content'],
       category: randomArrayValue(cat),
@@ -250,6 +255,7 @@ const generateEditorArticleReferences = (scraped_articles, number) => {
     let articlePreview = {
       id: articleId,
       title: article.title,
+      image: article.image,
       description: article.description,
       category: article.category,
       createdAt: article.createdAt
@@ -286,7 +292,7 @@ const generateEditorArticleReferences = (scraped_articles, number) => {
       }
     }
     articles.push(article);
-    articlePreviews.push(articlePreview);
+    articlePreviews.push(flattenObject(articlePreview));
     number--;
   }
 
@@ -333,15 +339,15 @@ fs.readFile('data/banner_links.json', 'utf-8', (err, _categories) => {
   });
 
   //Article generator
-  fs.readFile('data/scraped_articles.json', 'utf-8', (err, _articles) => {
-    if (err) {
-      throw err;
-    }
-
-    let scraped_articles = JSON.parse(_articles.toString());
-
-    generateEditorArticleReferences(scraped_articles, 30);
-  });
+  // fs.readFile('data/scraped_articles.json', 'utf-8', (err, _articles) => {
+  //   if (err) {
+  //     throw err;
+  //   }
+  //
+  //   let scraped_articles = JSON.parse(_articles.toString());
+  //
+  //   generateEditorArticleReferences(categories, scraped_articles, 30);
+  // });
 });
 
 let cat = [
@@ -380,3 +386,5 @@ let cat = [
   'Tourisme, Loisirs',
   'Transport, Permis'
 ];
+
+//Todo (zack): Information request dummy data

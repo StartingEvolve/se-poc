@@ -4,6 +4,7 @@ export interface Article {
   id: string;
   title: string;
   description: string;
+  image: string;
   content: string; //html content of the article
   category: string;
   editorId: string;
