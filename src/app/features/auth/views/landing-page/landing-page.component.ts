@@ -17,7 +17,7 @@ export class LandingPageComponent implements OnInit {
     this.dropDownItems = [
       {
         name: 'ARTICLES',
-        route: 'article',
+        route: 'articles',
         icon: 'article.svg'
       },
       {
