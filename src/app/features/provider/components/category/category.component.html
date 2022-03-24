@@ -1,7 +1,7 @@
 <form
   [formGroup]="categoryForm"
   (ngSubmit)="goNext()"
-  class="w-3/5 md:w-1/3 mx-auto"
+  class="w-full md:w-1/2 mx-auto"
 >
   <div class="overflow-hidden">
     <div class="px-4 py-5 bg-white sm:p-6">
@@ -16,7 +16,7 @@
         formControlName="category"
         onchange="this.size=0;"
         onblur="this.size=0;"
-        class="form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-green-600 focus:outline-none"
+        class="form-select sm:w-full mx-auto appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-green-600 focus:outline-none"
       >
         <option
           *ngFor="let category of categoryOptions"
@@ -26,21 +26,21 @@
           {{ category }}
         </option>
       </select>
+      <div class="px-2 py-2 text-right sm:px-6 space-x-4">
+        <button
+          type="button"
+          (click)="goBack()"
+          class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+        >
+          Précédent
+        </button>
+        <button
+          type="submit"
+          class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+        >
+          Suivant
+        </button>
+      </div>
     </div>
-  </div>
-  <div class="px-4 py-3 text-right sm:px-6 space-x-4">
-    <button
-      type="button"
-      (click)="goBack()"
-      class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
-    >
-      Précédent
-    </button>
-    <button
-      type="submit"
-      class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
-    >
-      Suivant
-    </button>
   </div>
 </form>
