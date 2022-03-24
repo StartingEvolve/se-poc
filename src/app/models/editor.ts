@@ -3,6 +3,7 @@ export interface Editor {
   id: string; //provider uuid
   firstName: string;
   lastName: string;
+  nickname: string;
   image: string; //Avatar
   email: string;
   articleId: string[];

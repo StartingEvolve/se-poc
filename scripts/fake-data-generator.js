@@ -36,7 +36,40 @@ function flattenObject(ob) {
   return toReturn;
 }
 
-const generateReferences = (categories, scraped_courses, number) => {
+const generateCourseProviderReferences = (
+  categories,
+  scraped_courses,
+  number
+) => {
+  const generateReviews = (times) => {
+    let reviews = [];
+    while (times >= 0) {
+      reviews.push({
+        id: faker.datatype.uuid(),
+        full_name: faker.name.findName(),
+        score: randomNumber(2, 5),
+        review: faker.hacker.phrase()
+      });
+      times--;
+    }
+    return reviews;
+  };
+
+  const generateInstructors = (times) => {
+    let instructors = [];
+    while (times >= 0) {
+      instructors.push({
+        id: faker.datatype.uuid(),
+        full_name: faker.name.findName(),
+        image: faker.image.avatar(),
+        top_instructor: randomArrayValue([true, false]),
+        role_description: faker.company.bs()
+      });
+      times--;
+    }
+    return instructors;
+  };
+
   let providers = [];
   let courses = [];
   let coursePreviews = [];
@@ -117,6 +150,7 @@ const generateReferences = (categories, scraped_courses, number) => {
     let provider = providers.find(
       (p) => p.name === scraped_courses[number]['organisation']['name']
     );
+
     if (!provider) {
       let providerId = faker.datatype.uuid();
       course.providerId = providerId;
@@ -136,12 +170,17 @@ const generateReferences = (categories, scraped_courses, number) => {
         description: scraped_courses[number]['organisation']['description'],
         accountType: 'organisation'
       };
+      providers.push(provider);
     } else {
       course.providerId = provider.id;
       coursePreview.providerId = provider.id;
       provider.courseId.push(courseId);
+      for (let i = 0; i < providers.length; i++) {
+        if (providers[i].id === provider.id) {
+          providers[i] = provider;
+        }
+      }
     }
-    providers.push(provider);
     courses.push(course);
     coursePreviews.push(coursePreview);
     number--;
@@ -173,35 +212,6 @@ const generateReferences = (categories, scraped_courses, number) => {
   );
 };
 
-const generateReviews = (times) => {
-  let reviews = [];
-  while (times >= 0) {
-    reviews.push({
-      id: faker.datatype.uuid(),
-      full_name: faker.name.findName(),
-      score: randomNumber(2, 5),
-      review: faker.hacker.phrase()
-    });
-    times--;
-  }
-  return reviews;
-};
-
-const generateInstructors = (times) => {
-  let instructors = [];
-  while (times >= 0) {
-    instructors.push({
-      id: faker.datatype.uuid(),
-      full_name: faker.name.findName(),
-      image: faker.image.avatar(),
-      top_instructor: randomArrayValue([true, false]),
-      role_description: faker.company.bs()
-    });
-    times--;
-  }
-  return instructors;
-};
-
 const generateArticleContent = () => {
   return `<h2 class="text-gray-800 text-2xl lg:text-3xl font-bold sm:text-left text-center mb-4 md:mb-6">${faker.commerce.productDescription()}</h2><p>${faker.lorem.paragraphs(
     2,
@@ -219,11 +229,98 @@ const generateArticleContent = () => {
   )}</p>`;
 };
 
+const generateEditorArticleReferences = (scraped_articles, number) => {
+  let editors = [];
+  let articles = [];
+  let articlePreviews = [];
+
+  while (number >= 0) {
+    let articleId = faker.datatype.uuid();
+    let article = {
+      id: articleId,
+      title: scraped_articles[number]['title'],
+      description: scraped_articles[number]['description'],
+      content: scraped_articles[number]['content'],
+      category: randomArrayValue(cat),
+      createdAt: {
+        value: null,
+        formatted: scraped_articles[number]['createdAt']
+      }
+    };
+    let articlePreview = {
+      id: articleId,
+      title: article.title,
+      description: article.description,
+      category: article.category,
+      createdAt: article.createdAt
+    };
+
+    let editor = editors.find(
+      (e) => e.nickname === scraped_articles[number]['editor']
+    );
+    if (!editor) {
+      let editorId = faker.datatype.uuid();
+      article.editorId = editorId;
+      articlePreview.editorId = editorId;
+      editor = {
+        id: editorId,
+        firtName: faker.name.firstName(),
+        lastName: faker.name.lastName(),
+        nickname: scraped_articles[number]['editor'],
+        image: faker.image.avatar(),
+        email:
+          scraped_articles[number]['editor'].replace(' ', '').toLowerCase() +
+          '@gmail.com',
+        articleId: [articleId],
+        accountType: 'editor'
+      };
+      editors.push(editor);
+    } else {
+      article.editorId = editor.id;
+      articlePreview.editorId = editor.id;
+      editor.articleId.push(articleId);
+      for (let i = 0; i < editors.length; i++) {
+        if (editors[i].id === editor.id) {
+          editors[i] = editor;
+        }
+      }
+    }
+    articles.push(article);
+    articlePreviews.push(articlePreview);
+    number--;
+  }
+
+  fs.writeFile('data/seed-articles.json', JSON.stringify(articles), (e) => {
+    if (e) {
+      throw e;
+    }
+    console.log("Articles' info data is saved");
+  });
+
+  fs.writeFile(
+    'data/seed-articles-preview.json',
+    JSON.stringify(articlePreviews),
+    (e) => {
+      if (e) {
+        throw e;
+      }
+      console.log("Article Preview' info data is saved");
+    }
+  );
+
+  fs.writeFile('data/seed-editors.json', JSON.stringify(editors), (e) => {
+    if (e) {
+      throw e;
+    }
+    console.log('Editor  data is saved');
+  });
+};
+
 fs.readFile('data/banner_links.json', 'utf-8', (err, _categories) => {
   if (err) {
     throw err;
   }
-  // parse JSON object
+  // Course generator
   let categories = JSON.parse(_categories.toString());
   fs.readFile('data/scraped_courses.json', 'utf-8', (err, _courses) => {
     if (err) {
@@ -231,9 +328,55 @@ fs.readFile('data/banner_links.json', 'utf-8', (err, _categories) => {
     }
 
     let scraped_courses = JSON.parse(_courses.toString());
-    // print JSON object
-    // console.log(cities);
 
-    generateReferences(categories, scraped_courses, 100);
+    generateCourseProviderReferences(categories, scraped_courses, 100);
+  });
+
+  //Article generator
+  fs.readFile('data/scraped_articles.json', 'utf-8', (err, _articles) => {
+    if (err) {
+      throw err;
+    }
+
+    let scraped_articles = JSON.parse(_articles.toString());
+
+    generateEditorArticleReferences(scraped_articles, 30);
   });
 });
+
+let cat = [
+  'Achat, Logistique',
+  'Animaux, Nature',
+  'Art, Design, Décoration',
+  'Artisanat, Petit Commerce',
+  'Banque, Finance, Assurance',
+  'Bien-Être, Relaxation',
+  'Bilan De Compétences, VAE',
+  'BTP, Travaux, Architecture',
+  'Bureautique, Office',
+  'Commerce, Marketing',
+  'Communication, Événementiel',
+  'Comptabilité, Gestion',
+  'Défense, Sécurité, Secourisme',
+  'Développement Personnel, Épanouissement',
+  'Digital, Internet',
+  'Enseignement, Coaching',
+  'Esthétique, Coiffure',
+  'Fonction Publique, Citoyenneté, Droit',
+  'Hôtellerie, Restauration, Cuisine',
+  'Immobilier, Urbanisme',
+  'Industrie, Matériaux, Énergie',
+  'Informatique, DATA, SIG',
+  'Langues',
+  'Management, Direction',
+  'Petite Enfance, Puériculture',
+  'Qualité Hygiène Sécurité Environnement',
+  'Réseaux, Telecom',
+  'Ressources Humaines, Paie',
+  'Santé, Médecine',
+  'Sciences',
+  'Secrétariat, Accueil',
+  'Social, Services à la Personne',
+  'Tourisme, Loisirs',
+  'Transport, Permis'
+];

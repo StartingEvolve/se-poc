@@ -3,10 +3,18 @@
 export interface Article {
   id: string;
   title: string;
+  description: string;
   content: string; //html content of the article
+  category: string;
   editorId: string;
-  createdAt: string;
-  modifiedAt: string;
+  createdAt: {
+    value: string; // date format
+    formatted: string;
+  };
+  modifiedAt: {
+    value: string; // date format
+    formatted: string;
+  };
 }
 
 //For the time being only an editor can work on an article
