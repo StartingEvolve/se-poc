@@ -43,7 +43,7 @@ export class GeneralInformationsComponent implements OnInit {
     this.isOpen = false;
     this.aundienceItems = [
       'Entreprise',
-      'Etudiant',
+      'Étudiant',
       'Salarié en poste',
       "Demandeur d'emploi"
     ];
@@ -80,7 +80,7 @@ export class GeneralInformationsComponent implements OnInit {
     this.learningModeOptions = [
       'En entreprise',
       'En alternance',
-      'A distance',
+      'À distance',
       'En centre'
     ];
   }
@@ -135,12 +135,12 @@ export class GeneralInformationsComponent implements OnInit {
         ),
         cpf: new FormControl(
           this.generalInfosData?.eligibility &&
-            this.generalInfosData.eligibility.includes('CPF'),
+            this.generalInfosData.eligibility.includes('Éligible CPF'),
           []
         ),
         vae: new FormControl(
           this.generalInfosData?.eligibility &&
-            this.generalInfosData.eligibility.includes('VAE'),
+            this.generalInfosData.eligibility.includes('Éligible VAE'),
           []
         )
       },
@@ -189,15 +189,15 @@ export class GeneralInformationsComponent implements OnInit {
       learning_mode: this.generalInformationsForm.value.learning_mode,
       ...(this.generalInformationsForm.value.cpf != false &&
         this.generalInformationsForm.value.vae != false && {
-          eligibility: [...['CPF', 'VAE']]
+          eligibility: [...['Éligible CPF', 'Éligible VAE']]
         }),
       ...(this.generalInformationsForm.value.vae != false &&
         this.generalInformationsForm.value.cpf == false && {
-          eligibility: [...['VAE']]
+          eligibility: [...['Éligible VAE']]
         }),
       ...(this.generalInformationsForm.value.vae == false &&
         this.generalInformationsForm.value.cpf != false && {
-          eligibility: [...['CPF']]
+          eligibility: [...['Éligible CPF']]
         })
     };
     this.generalInfosEvent.emit(object);

@@ -47,7 +47,7 @@ export class DetailsComponent {
     } else if (this.activeDiv2 == 'div7') {
       this.outputData.mode = 'En alternance';
     } else if (this.activeDiv2 == 'div8') {
-      this.outputData.mode = 'A distance';
+      this.outputData.mode = 'À distance';
     }
   }
   isActive2(divName) {
