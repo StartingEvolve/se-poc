@@ -10,3 +10,13 @@
 //     #fff calc(78% + 1px)
 //   );
 // }
+.error {
+  @apply focus:outline-none ring-red-500 border-red-500;
+}
+
+.disabled {
+  @apply bg-green-300 focus:ring-0 cursor-not-allowed;
+}
+.check {
+  @apply text-red-500;
+}

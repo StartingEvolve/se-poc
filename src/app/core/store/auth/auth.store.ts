@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { ObservableStore } from '@codewithdan/observable-store';
 import { UserDocument } from '@se/shared/types/user-document';
-import { Subscription } from 'rxjs';
+import { of, Subscription } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 export interface UserInterface {
@@ -48,7 +48,6 @@ export class AuthStore extends ObservableStore<UserInterface> {
           isLoggedIn: false,
           user: null
         };
-
         this.setState(initialState, AuthStoreActions.InitialState);
       }
     });

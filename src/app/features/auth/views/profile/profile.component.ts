@@ -22,6 +22,7 @@ export class ProfileComponent {
   imageURL: string;
   userState: UserDocument;
   isLoading: boolean;
+  initialValues: any;
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -52,6 +53,7 @@ export class ProfileComponent {
       language: new FormControl(['']),
       photoURL: new FormControl([''])
     });
+    this.initialValues = this.accountForm.value;
 
     this.aStore.stateChanged.subscribe((state) => {
       if (state) {
@@ -86,6 +88,7 @@ export class ProfileComponent {
         if (this.userState?.country) {
           this.accountForm.controls['country'].setValue(this.userState.country);
         }
+        this.initialValues = this.accountForm.value;
       }
     });
   }
@@ -170,6 +173,9 @@ export class ProfileComponent {
         }
       );
     }
+  }
+  cancel() {
+    this.accountForm.reset(this.initialValues);
   }
   trim(name: string): string {
     return name.trim();
