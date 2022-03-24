@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ArticleComponent } from './features/article/article.component';
 import { ArticleprototypeComponent } from './prototype/articleprototype/articleprototype.component';
 import { Example1Component } from './prototype/example1/example1.component';
 import { Example2Component } from './prototype/example2/example2.component';
@@ -20,8 +19,6 @@ const routes: Routes = [
   // { path: 'prototype/search', component: CourseSearchUiComponent },
   { path: 'prototype/articleproto', component: ArticleprototypeComponent },
   { path: 'prototype/multisearch', component: MultiSearchBoxComponent },
-  { path: 'article', component: ArticleComponent },
-  { path: 'article/:articleId', component: ArticleComponent },
   {
     path: 'test',
     loadChildren: () =>

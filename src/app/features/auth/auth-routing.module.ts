@@ -13,6 +13,7 @@ import { SigninComponent } from './views/signin/signin.component';
 import { SignupComponent } from './views/signup/signup.component';
 import { VerifyEmailComponent } from './views/verify-email/verify-email.component';
 import { ArticlesComponent } from '@se/features/auth/views/articles/articles.component';
+import { ArticleComponent } from '@se/features/auth/views/article/article.component';
 
 const routes: Routes = [
   {
@@ -44,6 +45,10 @@ const routes: Routes = [
         path: 'course/:uuid',
         component: CourseComponent,
         canActivate: [AuthGuard]
+      },
+      {
+        path: 'article/:uuid',
+        component: ArticleComponent
       }
     ]
   },
