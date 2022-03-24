@@ -12,7 +12,8 @@ export interface CourseState {
   providedIn: 'root'
 })
 export class CourseStore extends ObservableStore<CourseState> {
-  private storeSub: Subscription;
+  private courseSub: Subscription;
+  private providerSub: Subscription;
 
   constructor(private courseService: CourseService) {
     super({ trackStateHistory: true, logStateChanges: true });
@@ -24,12 +25,22 @@ export class CourseStore extends ObservableStore<CourseState> {
 
   getCourseById(id: string) {
     //Todo (zack): Handle cashed courses in the store
-    this.storeSub = this.courseService.getCourseById(id).subscribe((course) => {
-      console.log(course);
-      this.setState({ course }, CourseStoreActions.AddCourse);
-      //Getting Data only once
-      this.storeSub.unsubscribe();
-    });
+    this.courseSub = this.courseService
+      .getCourseById(id)
+      .subscribe((course) => {
+        console.log(course);
+        this.providerSub = this.courseService
+          .getProviderById(course.providerId)
+          .subscribe((provider) => {
+            this.setState(
+              { ...course, organisation: { ...provider } },
+              CourseStoreActions.AddCourse
+            );
+            this.providerSub.unsubscribe();
+          });
+        //Getting Data only once
+        this.courseSub.unsubscribe();
+      });
   }
 
   updateCourse(course: CourseInfo) {

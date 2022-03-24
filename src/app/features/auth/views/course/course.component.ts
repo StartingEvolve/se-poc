@@ -23,7 +23,7 @@ export class CourseComponent implements OnInit, OnDestroy {
   activeTabId: number = 1;
   tabs: Tab[];
   isOpen: boolean;
-  courseInfo: CourseInfo;
+  courseInfo: any;
   dummyCourse: CourseInfo;
   subs: Subscription[] = []; // You must initiate array in order to push
   leadingForm: FormGroup;
@@ -77,11 +77,11 @@ export class CourseComponent implements OnInit, OnDestroy {
         title: 'Programme',
         image: 'program.svg'
       },
-      {
-        id: 5,
-        title: 'Instructeurs',
-        image: 'instructors.svg'
-      },
+      // {
+      //   id: 5,
+      //   title: 'Instructeurs',
+      //   image: 'instructors.svg'
+      // },
       {
         id: 6,
         title: 'Certifications',
@@ -123,7 +123,7 @@ export class CourseComponent implements OnInit, OnDestroy {
         this.subs.push(
           this.courseStore.stateChanged.subscribe((value) => {
             console.log(value);
-            this.courseInfo = value.course;
+            this.courseInfo = value;
           })
         );
       })
