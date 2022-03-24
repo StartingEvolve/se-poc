@@ -78,6 +78,8 @@ export class CoursesComponent {
   sendGeneralInfosData(object: generalInformationsObject) {
     this.currentObject.general = Object.assign(object);
     this.sideBarItems[0].checked = true;
+    console.log(this.currentObject);
+    this.activeId = 2;
   }
   toggleSidebar() {
     this.isWide = !this.isWide;
