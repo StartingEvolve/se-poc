@@ -57,9 +57,9 @@ interface Highlighted {
               </p>
             </div>
           </div>
-          <p *ngIf="data?.description" class="mb-4 text-grey-dark text-sm">
-            <ais-highlight attribute="description" [hit]="data"></ais-highlight>
-          </p>
+          <!--          <p *ngIf="data?.description" class="mb-4 text-grey-dark text-sm">-->
+          <!--            <ais-highlight attribute="description" [hit]="data"></ais-highlight>-->
+          <!--          </p>-->
           <div class="pt-1 md:pt-4 sm:flex sm:justify-between">
             <div class="flex flex-wrap sm:w-[70%] space-x-2 gap-2 -m-1">
               <p
