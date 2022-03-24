@@ -33,7 +33,8 @@
     ],
     "typeRoots": [ "node_modules/@types" ],
     "types": [ "node" ],
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "esModuleInterop" : true
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

@@ -386,3 +386,6 @@ let cat = [
   'Tourisme, Loisirs',
   'Transport, Permis'
 ];
+
+//Todo (zack): Information request dummy data
+
