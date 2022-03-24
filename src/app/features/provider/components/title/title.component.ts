@@ -27,7 +27,7 @@ export class TitleComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.data);
     this.titleForm = new FormGroup({
-      title: new FormControl(this.data ? this.data['title'] : '', [
+      title: new FormControl(this.data ? this.data : '', [
         Validators.required,
         Validators.minLength(4)
       ])

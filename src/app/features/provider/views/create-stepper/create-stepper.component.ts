@@ -40,17 +40,12 @@ export class CreateStepperComponent {
       }
     });
     window.scrollTo(0, 0);
-    console.log(this.currentObject);
   }
   goBack(value) {
-    console.log(this.currentStep);
     if (this.currentStep == 1) {
       this.router.navigate(['provider']);
     } else {
       this.currentStep--;
     }
-  }
-  logObject() {
-    console.log(this.currentObject);
   }
 }

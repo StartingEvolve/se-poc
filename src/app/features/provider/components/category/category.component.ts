@@ -48,9 +48,7 @@ export class CategoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.categoryForm = new FormGroup({
-      category: new FormControl(
-        this.data ? this.data['category'] : this.categoryOptions[0]
-      )
+      category: new FormControl(this.data ? this.data : this.categoryOptions[0])
     });
   }
   goNext(): void {

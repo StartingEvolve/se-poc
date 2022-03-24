@@ -57,7 +57,7 @@ export class DetailsComponent {
     this.goBackEvent.emit(null);
   }
   goNext() {
-    if (this.outputData.pub.length == 0 && this.outputData.mode == '') {
+    if (this.outputData.pub.length == 0 || this.outputData.mode == '') {
       this.showError = true;
       return;
     }
