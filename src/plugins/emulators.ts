@@ -13,7 +13,7 @@ export const emulatorProviders = [
   },
   {
     provide: USE_FIRESTORE_EMULATOR,
-    useValue: environment.useEmulators ? ['localhost', 8081] : undefined
+    useValue: environment.useEmulators ? ['localhost', 8082] : undefined
   },
   {
     provide: USE_FUNCTIONS_EMULATOR,
