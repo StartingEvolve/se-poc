@@ -17,6 +17,7 @@ app.get('/', (req, res) => res.status(200).send('Hey there!'));
 //Course routes
 app.get('/courses', course.getAllCourses);
 app.get('/courses/:courseId', course.getCourseById);
+app.get('/courses/status/:status', course.getCourseByStatus);
 app.patch('/courses/approve/:courseId', course.approveCourseById);
 app.delete('/courses/:courseId', course.deleteCourseById);
 

@@ -1,5 +1,6 @@
 import { db } from './config/firebase';
 
+//Todo (zack) Implement pagination later
 const getAllCourses = async (req: any, res: any) => {
   try {
     const courses: any = [];
@@ -22,6 +23,26 @@ const getCourseById = async (req: any, res: any) => {
     const course = await db.collection('courses_info').doc(id.toString()).get();
     //Filtering out metadata
     return res.status(200).json(course.data());
+  } catch (error) {
+    if (error instanceof Error) {
+      return res.status(500).json(error.message);
+    }
+  }
+};
+
+const getCourseByStatus = async (req: any, res: any) => {
+  try {
+    const status = req.params.status;
+    let courses: any = [];
+    const querySnapshot = await db
+      .collection('courses_info')
+      .where('status', '==', status)
+      .get();
+    //Filtering out metadata
+    querySnapshot.forEach((doc: any) =>
+      courses.push({ ...doc.data(), id: doc._ref._path.segments[1] })
+    );
+    return res.status(200).json(courses);
   } catch (error) {
     if (error instanceof Error) {
       return res.status(500).json(error.message);
@@ -108,4 +129,10 @@ const deleteCourseById = async (req: any, res: any) => {
   }
 };
 
-export { getAllCourses, getCourseById, approveCourseById, deleteCourseById };
+export {
+  getAllCourses,
+  getCourseById,
+  getCourseByStatus,
+  approveCourseById,
+  deleteCourseById
+};
