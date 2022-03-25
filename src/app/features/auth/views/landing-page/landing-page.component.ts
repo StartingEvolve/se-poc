@@ -24,12 +24,12 @@ export class LandingPageComponent implements OnInit {
         name: 'FORMATIONS',
         route: 'courses',
         icon: 'formation.svg'
-      },
-      {
-        name: 'ADVICES',
-        route: 'advices',
-        icon: 'advice.svg'
       }
+      // {
+      //   name: 'ADVICES',
+      //   route: 'advices',
+      //   icon: 'advice.svg'
+      // }
     ];
     this.carouselItems = [
       {
