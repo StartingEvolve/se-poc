@@ -9,7 +9,10 @@ export interface Course {
   prerequisites: string[]; //course prerequisite array
   program: string[]; // course program array
   category: string;
-  status: string; // can be draft | approved | rejected
+  status: string; // can be draft | accepted | rejected | pending
+  createdAt: string;
+  submittedAt: string;
+  rejectionReason: string;
   // certifications: {
   //   // certificateId: string; // Certification uuid
   //   image: string; // Certification image
