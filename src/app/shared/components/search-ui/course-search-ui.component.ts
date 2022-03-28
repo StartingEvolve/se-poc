@@ -14,7 +14,7 @@ const typesenseInstantsearchAdapter = new TypesenseInstantSearchAdapter({
       {
         host: environment.typesense.host,
         port: environment.typesense.port,
-        protocol: environment.typesense.protocol
+        protocol: 'https'
       }
     ]
   },
