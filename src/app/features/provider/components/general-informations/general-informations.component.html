@@ -208,22 +208,36 @@
           <label
             for="address"
             class="inline-flex items-end text-sm font-medium text-gray-700"
-            ><span>Adresse complete</span
+            ><span>Nom de commune</span
             ><img class="w-3 h-fit" src="/assets/img/star2.png" alt="star"
           /></label>
-          <div class="mt-1">
+          <div class="mt-1 relative">
             <input
               type="text"
               [formControlName]="'address'"
+              [class.selectedValue]="isSelected"
               name="address"
               id="address"
               [class.error]="
                 specialError && generalInformationsForm.value.address === ''
               "
               autocomplete="address-level1"
-              placeholder="Ex : 87 rue des 4 coins , Paris"
+              placeholder="Ex : Paris"
               class="form-input mt-1 focus:ring-green-500 focus:border-green-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+              #locationInput
             />
+            <ul
+              *ngIf="searchLoaded"
+              class="origin-top-right shadow absolute right-0 z-50 bg-white border border-gray-100 w-full lg:mt-0"
+            >
+              <li
+                *ngFor="let item of franceItems"
+                (click)="setSearchValue(item)"
+                class="pl-8 pr-2 py-1 border-b-2 border-gray-100 relative cursor-pointer hover:bg-gray-50 hover:text-gray-900"
+              >
+                <span [innerHTML]="item"></span>
+              </li>
+            </ul>
             <p
               *ngIf="
                 specialError && generalInformationsForm.value.address === ''
