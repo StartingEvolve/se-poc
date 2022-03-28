@@ -9,5 +9,14 @@ export const environment = {
     messagingSenderId: process.env.SE_MESSAGING_SENDER_ID,
     appId: process.env.SE_APP_ID,
     measurementId: process.env.SE_MEASUREMENT_ID
+  },
+  typesense: {
+    apiKey: '8SCbUB6OwcorefYh114fsK1PtTn9OO50',
+    host: 'search.startingevolve.tech',
+    protocol: 'https',
+    port: '443'
+  },
+  adminAPI: {
+    BASE_URL: 'https://us-central1-angular-fire-e40b7.cloudfunctions.net/api'
   }
 };
