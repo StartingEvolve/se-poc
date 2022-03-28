@@ -2,7 +2,20 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-export const environment = {
+export interface Environment {
+  production: boolean;
+  useEmulators: boolean;
+  firebase: any;
+  typesense: {
+    apiKey: string;
+    host: string;
+    protocol: 'http' | 'https';
+    port: string;
+  };
+  adminAPI: any;
+}
+
+export const environment: Environment = {
   production: false,
   useEmulators: false,
   firebase: {
@@ -13,6 +26,15 @@ export const environment = {
     messagingSenderId: '71305995040',
     appId: '1:71305995040:web:d40f052ff72ad77f99ed45',
     measurementId: 'G-TKQGYQVF4S'
+  },
+  typesense: {
+    apiKey: '8SCbUB6OwcorefYh114fsK1PtTn9OO50',
+    host: 'search.startingevolve.tech',
+    protocol: 'https',
+    port: '443'
+  },
+  adminAPI: {
+    BASE_URL: 'https://us-central1-angular-fire-e40b7.cloudfunctions.net/api'
   }
 };
 
