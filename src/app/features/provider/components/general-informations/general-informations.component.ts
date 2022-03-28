@@ -1,7 +1,30 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+  ViewChild
+} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { VendorService } from '@se/core/services/vendor.service';
+import {
+  Config,
+  OnVendorChangeConfig
+} from '@se/core/store/vendor/vendor.store';
+import { fromEvent, Subscription } from 'rxjs';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  filter,
+  tap
+} from 'rxjs/operators';
 import { CustomDateValidator } from '../../../../shared/helpers/CustomDateValidor';
 import { sideBarItem } from '../../views/course/course.component';
+import TypesenseConfig from '@vendors/typesense/typesense.config';
 
 export interface generalInformationsObject {
   title: string;
@@ -15,7 +38,7 @@ export interface generalInformationsObject {
   date_start?: string;
   date_end?: string;
   learning_mode?: string;
-  address?: string;
+  address?: string[];
   eligibility?: string[];
 }
 @Component({
@@ -23,7 +46,9 @@ export interface generalInformationsObject {
   templateUrl: './general-informations.component.html',
   styleUrls: ['./general-informations.component.scss']
 })
-export class GeneralInformationsComponent implements OnInit {
+export class GeneralInformationsComponent
+  implements OnInit, AfterViewInit, OnVendorChangeConfig, OnDestroy
+{
   isOpen: boolean;
   showErrors: boolean;
   aundienceItems: string[];
@@ -33,14 +58,30 @@ export class GeneralInformationsComponent implements OnInit {
   isLoading: boolean;
   specialError: boolean;
   initialValues: any;
+  searchLoaded: boolean;
+  franceItems: string[];
   @Output() generalInfosEvent = new EventEmitter<generalInformationsObject>();
   @Input() generalInfosData: generalInformationsObject;
   @Input() data: sideBarItem;
   generalInformationsForm: FormGroup;
-  constructor() {
+  EventSubscription: Subscription;
+  configurations: Config;
+  private storeSub: Subscription;
+  @ViewChild('locationInput') locationInput: ElementRef;
+  isSelected: boolean = false;
+  private readonly libraries: string[];
+  constructor(private venService: VendorService) {
+    this.libraries = ['typesense'];
+    this.venService.getConfigObjects(this.libraries).then((config) => {
+      this.configurations = config;
+    });
+    this.isSelected = false;
+    this.searchLoaded = false;
     this.showErrors = false;
     this.specialError = false;
     this.isOpen = false;
+    this.searchLoaded = false;
+    this.franceItems = [];
     this.aundienceItems = [
       'Entreprise',
       'Étudiant',
@@ -84,7 +125,13 @@ export class GeneralInformationsComponent implements OnInit {
       'En centre'
     ];
   }
+  seOnVendorChangeConfig() {
+    const configMap = new Map();
+    configMap.set('typesense', [new TypesenseConfig()]);
+    return configMap;
+  }
   ngOnInit(): void {
+    this.venService.use(this.libraries);
     this.generalInformationsForm = new FormGroup(
       {
         title: new FormControl(
@@ -130,7 +177,9 @@ export class GeneralInformationsComponent implements OnInit {
           [Validators.required]
         ),
         address: new FormControl(
-          this.generalInfosData?.address ? this.generalInfosData.address : '',
+          this.generalInfosData?.address
+            ? this.generalInfosData.address[0]
+            : '',
           []
         ),
         cpf: new FormControl(
@@ -150,6 +199,66 @@ export class GeneralInformationsComponent implements OnInit {
     );
     this.audienceActiveItems = this.generalInfosData.audience;
     this.initialValues = this.generalInformationsForm.value;
+  }
+  ngAfterViewInit(): void {
+    this.storeSub = this.venService.watchVendorChanges(
+      this,
+      this.libraries,
+      this.seOnVendorChangeConfig
+    );
+
+    this.EventSubscription = fromEvent(
+      this.locationInput.nativeElement,
+      'keyup'
+    )
+      .pipe(
+        filter(Boolean),
+        debounceTime(200),
+        distinctUntilChanged(),
+        tap((text) => {
+          if (this.locationInput.nativeElement.value === '') {
+            this.franceItems = [];
+            this.searchLoaded = false;
+            this.isSelected = false;
+          } else {
+            let search = {
+              q: this.locationInput.nativeElement.value,
+              query_by: 'Nom_commune,Code_postal',
+              per_page: 5
+            };
+            this.configurations
+              .get('typesense')[0]
+              .getClient()
+              .collections('france')
+              .documents()
+              .search(search)
+              .then((searchResults) => {
+                console.log(searchResults.hits);
+                if (searchResults.hits.length === 0) {
+                  this.franceItems = [];
+                  this.searchLoaded = false;
+                  this.isSelected = false;
+                } else {
+                  this.franceItems = [];
+                  searchResults?.hits.forEach((hit) => {
+                    this.franceItems.push(hit.document.Nom_commune);
+                  });
+                  this.searchLoaded = true;
+                  this.isSelected = false;
+                }
+                console.log(this.franceItems);
+              });
+          }
+        })
+      )
+      .subscribe();
+  }
+  setSearchValue(value: string) {
+    console.log(value);
+    this.generalInformationsForm.patchValue({ address: value });
+    this.locationInput.nativeElement.blur();
+    this.searchLoaded = false;
+    this.isSelected = true;
   }
   submitForm() {
     if (
@@ -174,6 +283,10 @@ export class GeneralInformationsComponent implements OnInit {
       description: this.trim(this.generalInformationsForm.value.description),
       category: this.generalInformationsForm.value.category,
       audience: this.audienceActiveItems,
+      ...(this.generalInformationsForm.value.learning_mode === 'En centre' &&
+        this.generalInformationsForm.value.address !== '' && {
+          address: [this.generalInformationsForm.value.address]
+        }),
       ...(this.generalInformationsForm.value.price !== '' && {
         price: {
           currency: this.generalInformationsForm.value.currency,
@@ -239,6 +352,9 @@ export class GeneralInformationsComponent implements OnInit {
   trimAndCapitalize(name: string): string {
     const namex = this.trim(name);
     return namex.substring(0, 1).toUpperCase() + namex.substring(1);
+  }
+  ngOnDestroy(): void {
+    this.EventSubscription.unsubscribe();
   }
 }
 export function remove(...forDeletion) {

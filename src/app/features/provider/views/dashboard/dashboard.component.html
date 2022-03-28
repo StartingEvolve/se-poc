@@ -80,6 +80,7 @@
               *ngFor="let item of sidebarItems"
               [class.bg-green-300]="item.id === activeId"
               [class.text-white]="item.id === activeId"
+              (click)="selectItem(item.id)"
               class="text-gray-600 hover:text-gray-900 hover:bg-green-300 group flex items-center px-2 py-2 text-base leading-5 font-medium rounded-md"
             >
               <!-- Heroicon name: outline/view-list -->
