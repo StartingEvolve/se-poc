@@ -4,6 +4,9 @@ import { accountInfosObject } from '../../components/account_informations/accoun
 import { organisationInfosObject } from '../../components/organisation-informations/organisation-informations.component';
 import { professionalInfosObject } from '../../components/professional-informations/professional-informations.component';
 import { profileInfoObject } from '../../components/profile-informations/profile-informations.component';
+import { ProviderService } from '@core/services/provider.service';
+
+//Todo (zack) clean up object later
 export interface completeObject {
   account?: accountInfosObject;
   profile?: profileInfoObject;
@@ -21,7 +24,12 @@ export class StepperComponent {
   steps: string[];
   currentStep: number = 1;
   currentObject: completeObject;
-  constructor(private router: Router, private route: ActivatedRoute) {
+
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private providerService: ProviderService
+  ) {
     this.currentObject = {};
     this.route.queryParams.subscribe((params) => {
       this.isOrganisation = params.isOrganisation === 'true';
@@ -36,24 +44,30 @@ export class StepperComponent {
         : '';
     });
   }
+
   onAccountInfosChanged(value: accountInfosObject) {
     this.currentObject.account = Object.assign(value);
     console.log(this.currentObject);
     this.currentStep = 2;
   }
+
   onProfileInfosChanged(value: profileInfoObject) {
     this.currentObject.profile = Object.assign(value);
     this.currentStep = 3;
   }
+
   onProfessionalInfosChanged(value: professionalInfosObject) {
     this.currentObject.professional = Object.assign(value);
     console.log(this.currentObject);
+    this.providerService.addProvider(this.currentObject, this.isOrganisation);
     this.router.navigate(['provider', 'verify']);
   }
+
   onOrganisationInfosChanged(value: organisationInfosObject) {
     this.currentObject.organisation = Object.assign(value);
     this.currentStep = 3;
   }
+
   goBack(value) {
     if (this.currentStep == 1) {
       this.router.navigate(['provider']);
