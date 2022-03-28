@@ -5,30 +5,14 @@ export interface DropdownItem {
   to: string;
 }
 export interface SidebarItem {
+  id: number;
   name: string;
-  active: boolean;
   icon: string;
-  to: string;
 }
 
 const ProfileDropItems: DropdownItem[] = [
   { name: 'Profile', to: '/profile' },
   { name: 'Paramètres', to: '/settings' }
-];
-const SidebarItems: SidebarItem[] = [
-  {
-    name: 'Mes prestations',
-    active: true,
-    icon: 'work_outline',
-    to: '/prestation'
-  },
-  { name: 'Contacts', active: false, icon: 'mail_outline', to: '/contact' },
-  {
-    name: 'Statistiques',
-    active: false,
-    icon: 'signal_cellular_alt',
-    to: '/stats'
-  }
 ];
 
 @Component({
@@ -39,21 +23,26 @@ const SidebarItems: SidebarItem[] = [
 export class DashboardComponent {
   showProfileDropdown: boolean = false;
   profileDrop: DropdownItem[] = ProfileDropItems;
-  sidebarItems: SidebarItem[] = SidebarItems;
-  openOptions: boolean = false;
+  sidebarItems: SidebarItem[];
   mobileSideShow: boolean = false;
   mobileProfileDrop: boolean = false;
-  courseDropdown: boolean = false;
-  courseDropdown2: boolean = false;
+  activeId: number;
+  constructor() {
+    this.activeId = 1;
+    this.sidebarItems = [
+      {
+        id: 1,
+        name: 'Mes formations',
+        icon: 'formation.svg'
+      },
+      {
+        id: 2,
+        name: 'Mes contacts',
+        icon: 'contact.svg'
+      }
+    ];
+  }
 
-  toggleCourseDropdown(): void {
-    this.courseDropdown = !this.courseDropdown;
-    this.courseDropdown2 = false;
-  }
-  toggleCourseDropdown2(): void {
-    this.courseDropdown2 = !this.courseDropdown2;
-    this.courseDropdown = false;
-  }
   toggleMobileProfileDrop(): void {
     this.mobileProfileDrop = !this.mobileProfileDrop;
   }
@@ -63,13 +52,14 @@ export class DashboardComponent {
   toggleProfileDropdown(): void {
     this.showProfileDropdown = !this.showProfileDropdown;
   }
-  toggleOptions(): void {
-    this.openOptions = !this.openOptions;
-  }
+
   closeDrop(): void {
     this.showProfileDropdown = false;
   }
   logout(): void {
     console.log('later');
+  }
+  selectItem(id: number): void {
+    this.activeId = id;
   }
 }
