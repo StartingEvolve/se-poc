@@ -37,6 +37,7 @@ import { ArticleprototypeComponent } from './prototype/articleprototype/articlep
 import { CarouselComponent } from './prototype/carousel/carousel.component';
 import { MultiSearchBoxComponent } from './prototype/multi-search-box/multi-search-box.component';
 import { QuillModule } from 'ngx-quill';
+import { ArticlewriterComponent } from './features/articlewriter/articlewriter.component';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');

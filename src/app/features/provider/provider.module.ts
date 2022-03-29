@@ -24,6 +24,8 @@ import { NavbarProviderConnectedComponent } from './components/navbar-provider-c
 import { TitleComponent } from './components/title/title.component';
 import { CategoryComponent } from './components/category/category.component';
 import { DetailsComponent } from './components/details/details.component';
+import { LandingComponent } from './views/landing/landing.component';
+import { FooterComponent } from '@se/layout/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,8 @@ import { DetailsComponent } from './components/details/details.component';
     NavbarProviderConnectedComponent,
     TitleComponent,
     CategoryComponent,
-    DetailsComponent
+    DetailsComponent,
+    LandingComponent
   ],
   imports: [
     CommonModule,
