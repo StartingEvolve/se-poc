@@ -37,7 +37,7 @@ export class ArticletableComponent implements OnInit {
           this.articles.push({
             id: doc.id,
             category: doc.data()['category'],
-            createdAt: '1',
+            createdAt: doc.data()['createdAt.formatted'],
             description: doc.data()['description'],
             editorId: doc.data()['editorId'],
             image: doc.data()['image'],
