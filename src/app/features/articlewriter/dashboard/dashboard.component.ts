@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '@se/core/services/auth.service';
 import { AuthStore, UserInterface } from '@se/core/store/auth/auth.store';
-import { Router } from '@angular/router';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 export interface DropdownItem {
   name: string;
@@ -44,16 +44,23 @@ export class DashboardComponent {
   courseDropdown2: boolean = false;
   currentPage: number = 1;
   userState: UserInterface;
+  editorId: string;
 
   constructor(
     private as: AuthService,
     private aStore: AuthStore,
-    private router: Router
+    private db: AngularFirestore
   ) {
+    //getting current user
+    // then searching editors collection for his ID by comparing emails
     this.aStore.stateChanged.subscribe((state) => {
       if (state) {
         this.userState = state;
-        console.log(state);
+        db.collection('editors', (ref) =>
+          ref.where('email', '==', state.user.email_lower)
+        )
+          .get()
+          .subscribe((d) => d.docs.forEach((doc) => (this.editorId = doc.id)));
       }
     });
   }
