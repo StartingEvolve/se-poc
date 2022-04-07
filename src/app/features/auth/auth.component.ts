@@ -13,11 +13,8 @@ export class AuthComponent {
       case '/articles':
         this.activeId = 1;
         break;
-      case '/advices':
+      case '/become_provider':
         this.activeId = 3;
-        break;
-      case '/start_partnership':
-        this.activeId = 4;
         break;
       default:
         this.activeId = -1;

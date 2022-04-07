@@ -27,6 +27,7 @@ import { SearchUiModule } from '@shared/components/search-ui/search-ui.module';
 import { ProfileComponent } from './views/profile/profile.component';
 import { ArticlesComponent } from './views/articles/articles.component';
 import { ArticleComponent } from '@se/features/auth/views/article/article.component';
+import { ProviderComponent } from './components/provider/provider.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { ArticleComponent } from '@se/features/auth/views/article/article.compon
     CertificationsComponent,
     ProfileComponent,
     ArticlesComponent,
-    ArticleComponent
+    ArticleComponent,
+    ProviderComponent
   ],
   imports: [
     CommonModule,
