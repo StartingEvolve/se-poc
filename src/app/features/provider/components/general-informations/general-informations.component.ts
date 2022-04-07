@@ -22,9 +22,10 @@ import {
   filter,
   tap
 } from 'rxjs/operators';
-import { CustomDateValidator } from '../../../../shared/helpers/CustomDateValidor';
+import { CustomDateValidator } from '@shared/helpers/CustomDateValidor';
 import { sideBarItem } from '../../views/course/course.component';
 import TypesenseConfig from '@vendors/typesense/typesense.config';
+import { CourseStore } from '@core/store/provider/course.store';
 
 export interface generalInformationsObject {
   title: string;
@@ -41,6 +42,7 @@ export interface generalInformationsObject {
   address?: string[];
   eligibility?: string[];
 }
+
 @Component({
   selector: 'se-general-informations',
   templateUrl: './general-informations.component.html',
@@ -67,10 +69,14 @@ export class GeneralInformationsComponent
   EventSubscription: Subscription;
   configurations: Config;
   private storeSub: Subscription;
-  @ViewChild('locationInput') locationInput: ElementRef;
+  @ViewChild('locationInput', { read: ElementRef }) locationInput: ElementRef;
   isSelected: boolean = false;
   private readonly libraries: string[];
-  constructor(private venService: VendorService) {
+
+  constructor(
+    private venService: VendorService,
+    private courseStore: CourseStore
+  ) {
     this.libraries = ['typesense'];
     this.venService.getConfigObjects(this.libraries).then((config) => {
       this.configurations = config;
@@ -125,11 +131,13 @@ export class GeneralInformationsComponent
       'En centre'
     ];
   }
+
   seOnVendorChangeConfig() {
     const configMap = new Map();
     configMap.set('typesense', [new TypesenseConfig()]);
     return configMap;
   }
+
   ngOnInit(): void {
     this.venService.use(this.libraries);
     this.generalInformationsForm = new FormGroup(
@@ -200,6 +208,7 @@ export class GeneralInformationsComponent
     this.audienceActiveItems = this.generalInfosData.audience;
     this.initialValues = this.generalInformationsForm.value;
   }
+
   ngAfterViewInit(): void {
     this.storeSub = this.venService.watchVendorChanges(
       this,
@@ -207,52 +216,10 @@ export class GeneralInformationsComponent
       this.seOnVendorChangeConfig
     );
 
-    this.EventSubscription = fromEvent(
-      this.locationInput.nativeElement,
-      'keyup'
-    )
-      .pipe(
-        filter(Boolean),
-        debounceTime(200),
-        distinctUntilChanged(),
-        tap((text) => {
-          if (this.locationInput.nativeElement.value === '') {
-            this.franceItems = [];
-            this.searchLoaded = false;
-            this.isSelected = false;
-          } else {
-            let search = {
-              q: this.locationInput.nativeElement.value,
-              query_by: 'Nom_commune,Code_postal',
-              per_page: 5
-            };
-            this.configurations
-              .get('typesense')[0]
-              .getClient()
-              .collections('france')
-              .documents()
-              .search(search)
-              .then((searchResults) => {
-                console.log(searchResults.hits);
-                if (searchResults.hits.length === 0) {
-                  this.franceItems = [];
-                  this.searchLoaded = false;
-                  this.isSelected = false;
-                } else {
-                  this.franceItems = [];
-                  searchResults?.hits.forEach((hit) => {
-                    this.franceItems.push(hit.document.Nom_commune);
-                  });
-                  this.searchLoaded = true;
-                  this.isSelected = false;
-                }
-                console.log(this.franceItems);
-              });
-          }
-        })
-      )
-      .subscribe();
+    //Todo (zack) ngIf controls component rendering
+    this.subscribeToLocationInput();
   }
+
   setSearchValue(value: string) {
     console.log(value);
     this.generalInformationsForm.patchValue({ address: value });
@@ -260,6 +227,59 @@ export class GeneralInformationsComponent
     this.searchLoaded = false;
     this.isSelected = true;
   }
+
+  subscribeToLocationInput() {
+    //Bug (zack) : selecting different options in the location dropdown makes the search stale (value frozen)
+    if (this.generalInformationsForm.value.learning_mode === 'En centre') {
+      this.EventSubscription = fromEvent(
+        this.locationInput.nativeElement,
+        'keyup'
+      )
+        .pipe(
+          filter(Boolean),
+          debounceTime(200),
+          distinctUntilChanged(),
+          tap((text) => {
+            if (this.locationInput.nativeElement.value === '') {
+              this.franceItems = [];
+              this.searchLoaded = false;
+              this.isSelected = false;
+            } else {
+              let search = {
+                q: this.locationInput.nativeElement.value,
+                query_by: 'Nom_commune,Code_postal',
+                per_page: 5
+              };
+              this.configurations
+                .get('typesense')[0]
+                .getClient()
+                .collections('france')
+                .documents()
+                .search(search)
+                .then((searchResults) => {
+                  console.log(searchResults.hits);
+                  if (searchResults.hits.length === 0) {
+                    this.franceItems = [];
+                    this.searchLoaded = false;
+                    this.isSelected = false;
+                  } else {
+                    this.franceItems = [];
+                    searchResults?.hits.forEach((hit) => {
+                      this.franceItems.push(hit.document.Nom_commune);
+                    });
+                    this.searchLoaded = true;
+                    this.isSelected = false;
+                  }
+                  console.log(this.franceItems);
+                });
+            }
+            this.EventSubscription.unsubscribe();
+          })
+        )
+        .subscribe();
+    }
+  }
+
   submitForm() {
     if (
       this.generalInformationsForm.invalid ||
@@ -316,24 +336,30 @@ export class GeneralInformationsComponent
     this.generalInfosEvent.emit(object);
     this.isLoading = false;
   }
+
   checkError(name: string): boolean {
     return this.showErrors && this.generalInformationsForm.get(name).invalid;
   }
+
   getTitleErrors() {
     return 'Le titre de la formation est requis';
   }
+
   getDescriptionErrors() {
     return 'La description de la formation est requis';
   }
+
   getDateEndErrors() {
     if (this.generalInformationsForm.hasError('fromToDate')) {
       return 'La date de la fin de la formation doit etre superieur à la date de début';
     }
     return '';
   }
+
   toggleDropdown() {
     this.isOpen = !this.isOpen;
   }
+
   addOrRemove(item: string) {
     if (this.audienceActiveItems.includes(item)) {
       this.audienceActiveItems = this.audienceActiveItems.filter(
@@ -343,20 +369,29 @@ export class GeneralInformationsComponent
       this.audienceActiveItems.push(item);
     }
   }
+
   cancelChanges() {
     this.generalInformationsForm.reset(this.initialValues);
   }
+
   trim(name: string): string {
     return name.trim();
   }
+
   trimAndCapitalize(name: string): string {
     const namex = this.trim(name);
     return namex.substring(0, 1).toUpperCase() + namex.substring(1);
   }
+
+  backup() {
+    this.courseStore.backup(this.generalInfosData);
+  }
+
   ngOnDestroy(): void {
     this.EventSubscription.unsubscribe();
   }
 }
+
 export function remove(...forDeletion) {
   return this.filter((item) => !forDeletion.includes(item));
 }

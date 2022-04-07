@@ -30,6 +30,11 @@ const getCourseById = async (req: any, res: any) => {
   }
 };
 
+// const getCourseByProvider = async (req: any, res: any) => {
+//   try {
+//   } catch (error) {}
+// };
+
 const getCourseByStatus = async (req: any, res: any) => {
   try {
     const status = req.params.status;

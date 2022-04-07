@@ -9,36 +9,36 @@ import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { CreateStepperComponent } from './views/create-stepper/create-stepper.component';
 
 const routes: Routes = [
-  // {
-  //   path: '',
-  //   component: ProviderComponent,
-  //   children: [
-  //     {
-  //       path: '',
-  //       component: IdentityComponent
-  //     },
-  //     {
-  //       path: 'stepper',
-  //       component: StepperComponent
-  //     },
-  //     {
-  //       path: 'create',
-  //       component: CreateStepperComponent
-  //     },
-  //     {
-  //       path: 'course',
-  //       component: CoursesComponent
-  //     },
-  //     {
-  //       path: 'verify',
-  //       component: VerifyEmailComponent
-  //     },
-  //     {
-  //       path: 'dashboard',
-  //       component: DashboardComponent
-  //     }
-  //   ]
-  // }
+  {
+    path: '',
+    component: ProviderComponent,
+    children: [
+      {
+        path: '',
+        component: IdentityComponent
+      },
+      {
+        path: 'stepper',
+        component: StepperComponent
+      },
+      {
+        path: 'create',
+        component: CreateStepperComponent
+      },
+      {
+        path: 'course',
+        component: CoursesComponent
+      },
+      {
+        path: 'verify',
+        component: VerifyEmailComponent
+      },
+      {
+        path: 'dashboard',
+        component: DashboardComponent
+      }
+    ]
+  }
 ];
 
 @NgModule({
