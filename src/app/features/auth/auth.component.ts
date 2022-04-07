@@ -10,6 +10,9 @@ export class AuthComponent {
   activeId: number = 0;
   constructor(private router: Router) {
     switch (this.router.url) {
+      case '/':
+        this.activeId = 0;
+        break;
       case '/articles':
         this.activeId = 1;
         break;
