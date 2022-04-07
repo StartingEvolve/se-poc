@@ -83,6 +83,17 @@ export class CourseStore extends ObservableStore<CourseState> {
     this.setState(initialState, CourseStoreActions.InitializeCourses);
   }
 
+  backup(courseChunk: any) {
+    let course = this.getState();
+    for (let [key, _] of Object.entries(course)) {
+      if (key in courseChunk) {
+        course[key] = courseChunk[key];
+      }
+    }
+    console.log(course);
+    this.setState(course, CourseStoreActions.UpdateCourse);
+  }
+
   getCourseById(id: string) {
     //Todo (zack): Handle cashed courses in the store
     this.courseSub = this.courseService

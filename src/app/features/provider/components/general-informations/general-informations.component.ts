@@ -25,6 +25,7 @@ import {
 import { CustomDateValidator } from '@shared/helpers/CustomDateValidor';
 import { sideBarItem } from '../../views/course/course.component';
 import TypesenseConfig from '@vendors/typesense/typesense.config';
+import { CourseStore } from '@core/store/provider/course.store';
 
 export interface generalInformationsObject {
   title: string;
@@ -72,7 +73,10 @@ export class GeneralInformationsComponent
   isSelected: boolean = false;
   private readonly libraries: string[];
 
-  constructor(private venService: VendorService) {
+  constructor(
+    private venService: VendorService,
+    private courseStore: CourseStore
+  ) {
     this.libraries = ['typesense'];
     this.venService.getConfigObjects(this.libraries).then((config) => {
       this.configurations = config;
@@ -379,7 +383,10 @@ export class GeneralInformationsComponent
     return namex.substring(0, 1).toUpperCase() + namex.substring(1);
   }
 
-  backup() {}
+  backup() {
+    this.courseStore.backup(this.generalInfosData);
+  }
+
   ngOnDestroy(): void {
     this.EventSubscription.unsubscribe();
   }
