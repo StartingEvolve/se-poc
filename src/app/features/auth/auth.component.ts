@@ -10,14 +10,14 @@ export class AuthComponent {
   activeId: number = 0;
   constructor(private router: Router) {
     switch (this.router.url) {
+      case '/':
+        this.activeId = 0;
+        break;
       case '/articles':
         this.activeId = 1;
         break;
-      case '/advices':
+      case '/become_provider':
         this.activeId = 3;
-        break;
-      case '/start_partnership':
-        this.activeId = 4;
         break;
       default:
         this.activeId = -1;

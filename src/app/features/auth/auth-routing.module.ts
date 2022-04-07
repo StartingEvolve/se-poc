@@ -14,6 +14,7 @@ import { SignupComponent } from './views/signup/signup.component';
 import { VerifyEmailComponent } from './views/verify-email/verify-email.component';
 import { ArticlesComponent } from '@se/features/auth/views/articles/articles.component';
 import { ArticleComponent } from '@se/features/auth/views/article/article.component';
+import { ProviderComponent } from './components/provider/provider.component';
 
 const routes: Routes = [
   {
@@ -49,6 +50,10 @@ const routes: Routes = [
       {
         path: 'article/:uuid',
         component: ArticleComponent
+      },
+      {
+        path: 'become_provider',
+        component: ProviderComponent
       }
     ]
   },

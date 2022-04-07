@@ -86,14 +86,9 @@ export class NavbarComponent implements OnInit {
         to: '/courses'
       },
       {
-        name: 'ADVICES',
-        active: this.activeId == 3,
-        to: '/advices'
-      },
-      {
         name: 'BECOME_PARTNER',
-        active: this.activeId == 4,
-        to: '/start_partnership'
+        active: this.activeId == 3,
+        to: '/become_provider'
       }
     ];
     this.profileItems = [
