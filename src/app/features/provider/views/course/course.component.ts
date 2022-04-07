@@ -3,15 +3,18 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { throws } from 'assert';
 import { generalInformationsObject } from '../../components/general-informations/general-informations.component';
+
 export interface sideBarItem {
   id: number;
   name: string;
   description: string;
   checked: boolean;
 }
+
 export interface currentObject {
   general?: generalInformationsObject;
 }
+
 @Component({
   selector: 'se-course',
   templateUrl: './course.component.html',
@@ -22,6 +25,7 @@ export class CoursesComponent {
   activeId: number = 1;
   currentObject: currentObject;
   sideBarItems: sideBarItem[];
+
   constructor(private route: ActivatedRoute) {
     this.currentObject = {};
     this.currentObject.general = Object.assign({
@@ -49,22 +53,22 @@ export class CoursesComponent {
         description: 'Description du progamme couvert dans cette formation',
         checked: false
       },
+      // {
+      //   id: 4,
+      //   name: 'Formateurs',
+      //   description:
+      //     'Ajouter les instructeurs de cette formation avec une photo professionnelle avec un fond blanc',
+      //   checked: false
+      // },
+      // {
+      //   id: 5,
+      //   name: 'Certificats',
+      //   description:
+      //     "Ajouter s'il existe des certificats à la fin de cette formation",
+      //   checked: false
+      // },
       {
         id: 4,
-        name: 'Formateurs',
-        description:
-          'Ajouter les instructeurs de cette formation avec une photo professionnelle avec un fond blanc',
-        checked: false
-      },
-      {
-        id: 5,
-        name: 'Certificats',
-        description:
-          "Ajouter s'il existe des certificats à la fin de cette formation",
-        checked: false
-      },
-      {
-        id: 6,
         name: 'Aperçu',
         description:
           'Un petit résumé de tout ce qui est mentionné dans les autres sections,ça sera dans la première page de la formation',
@@ -75,15 +79,18 @@ export class CoursesComponent {
       this.currentObject.general = Object.assign(params);
     });
   }
+
   sendGeneralInfosData(object: generalInformationsObject) {
     this.currentObject.general = Object.assign(object);
     this.sideBarItems[0].checked = true;
     console.log(this.currentObject);
     this.activeId = 2;
   }
+
   toggleSidebar() {
     this.isWide = !this.isWide;
   }
+
   selectActiveItem(id: number) {
     this.activeId = id;
   }

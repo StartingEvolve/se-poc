@@ -146,7 +146,7 @@
             <div role="none">
               <!--
                                                                                           Active: "bg-gray-100", Not Active: ""
-                                                                       
+
                                                                                           Selected: "font-medium text-gray-900", Not Selected: "text-gray-500"
                                                                                         -->
               <div
@@ -279,6 +279,7 @@
               <select
                 id="currency"
                 name="currency"
+                (change)="subscribeToLocationInput()"
                 [formControlName]="'currency'"
                 class="cursor-pointer form-select focus:ring-green-500 focus:border-green-500 h-full py-0 pl-2 pr-7 border-transparent bg-transparent text-gray-500 sm:text-sm rounded-tr-md rounded-tb-md"
               >
