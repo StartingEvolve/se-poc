@@ -22,15 +22,14 @@ export interface Article {
   templateUrl: './articletable.component.html',
   styleUrls: ['./articletable.component.scss']
 })
-export class ArticletableComponent implements OnInit, OnChanges {
+export class ArticletableComponent implements OnChanges {
   articles: Article[] = [];
   @Input() editorId: string;
 
   constructor(private db: AngularFirestore) {}
 
-  ngOnInit(): void {
+  ngOnChanges(): void {
     this.articles = [];
-    console.log(this.articles);
     this.db
       .collection('articles', (ref) =>
         ref.where('editorId', '==', this.editorId)
@@ -60,9 +59,5 @@ export class ArticletableComponent implements OnInit, OnChanges {
     //     image: doc.data()["image"],
     //     title: doc.data()["title"]
     //   }))));
-  }
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log(this.articles);
-    this.ngOnInit();
   }
 }
