@@ -56,7 +56,7 @@ export class SignupComponent implements OnInit {
     this.as.stateChanged.subscribe((state) => {
       this.userState = state;
       if (this.userState?.isLoggedIn) {
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/profile']);
       }
     });
   }
