@@ -19,7 +19,7 @@ export class VerifyEmailComponent {
     this.as.stateChanged.subscribe((state) => {
       this.userState = state;
       if (this.userState?.isLoggedIn && this.userState?.isEmailVerified) {
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/profile']);
       }
     });
   }

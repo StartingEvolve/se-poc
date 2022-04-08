@@ -71,8 +71,7 @@ export class SigninComponent implements OnInit {
           }
         );
     };
-    this.returnUrl =
-      this.route.snapshot.queryParams['returnUrl'] || '/dashboard';
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/profile';
     this.as.stateChanged.subscribe((state) => {
       this.userState = state;
       if (this.userState?.isLoggedIn) {
