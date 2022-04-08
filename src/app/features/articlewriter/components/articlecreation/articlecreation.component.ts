@@ -45,7 +45,6 @@ export class ArticlecreationComponent implements OnInit {
   blurred = false;
   testControl: FormControl;
   focused = false;
-  modules = {};
   newArticle: Article;
   newArticleInfo: ArticleInfo;
   file: File;
@@ -67,23 +66,6 @@ export class ArticlecreationComponent implements OnInit {
   ) {
     this.articleInfoCollection = db.collection<ArticleInfo>('articles_info');
     this.articleCollection = db.collection<Article>('articles');
-    this.articleContent = '';
-    this.modules = {
-      blotFormatter: {
-        // empty object for default behaviour.
-      },
-      toolbar: {
-        container: [
-          ['bold', 'italic', 'underline'], // toggled buttons // custom button values
-          [{ list: 'ordered' }, { list: 'bullet' }],
-          [{ header: [1, 2, 3, 4, 5, 6, false] }],
-          [{ font: [] }],
-          [{ align: [] }],
-          ['image']
-        ],
-        handlers: { emoji: function () {} }
-      }
-    };
     this.showErrors = false;
   }
 
@@ -149,7 +131,6 @@ export class ArticlecreationComponent implements OnInit {
 
   changedEditor(event: any) {
     this.articleContent = event?.html;
-    console.log(this.articleContent);
   }
 
   focus($event) {
