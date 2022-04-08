@@ -1,4 +1,4 @@
-<div class="hidden mt-8 sm:block">
+<div class="mt-8 sm:block">
   <div class="align-middle inline-block min-w-full border-b border-gray-200">
     <table class="min-w-full">
       <thead>
@@ -18,16 +18,6 @@
           >
             Date de création
           </th>
-          <th
-            class="pr-6 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"
-          >
-            Modifier
-          </th>
-          <th
-            class="pr-6 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"
-          >
-            Supprimer
-          </th>
         </tr>
       </thead>
       <tbody class="bg-white divide-y divide-gray-100">
@@ -36,11 +26,7 @@
             class="px-6 py-3 max-w-0 w-full whitespace-nowrap text-sm font-medium text-gray-900"
           >
             <div class="flex items-center space-x-3 lg:pl-2">
-              <div
-                class="flex-shrink-0 w-2.5 h-2.5 rounded-full bg-green-600"
-                aria-hidden="true"
-              ></div>
-              <span class="ml-5">{{ article.title }}</span>
+              {{ article.title }}
             </div>
           </td>
           <td
@@ -52,34 +38,6 @@
             class="hidden md:table-cell px-6 py-3 whitespace-nowrap text-sm text-gray-500 text-right"
           >
             {{ article.createdAt }}
-          </td>
-          <td class="pr-6">
-            <div class="relative flex justify-end items-center">
-              <button
-                type="button"
-                class="w-8 h-8 bg-white inline-flex items-center justify-center text-green-600 rounded-full hover:text-gray-500 focus:outline-none"
-                id="project-options-menu-0-button"
-                aria-expanded="false"
-                aria-haspopup="true"
-                (click)="editArticle(article.id)"
-              >
-                <span class="material-icons"> edit </span>
-              </button>
-            </div>
-          </td>
-          <td class="pr-6">
-            <div class="relative flex justify-end items-center">
-              <button
-                type="button"
-                class="w-8 h-8 bg-white inline-flex items-center justify-center text-green-600 rounded-full hover:text-gray-500 focus:outline-none"
-                id="project-options-menu-0-button"
-                aria-expanded="false"
-                aria-haspopup="true"
-                (click)="deleteArticle(article.id)"
-              >
-                <span class="material-icons"> delete </span>
-              </button>
-            </div>
           </td>
         </tr>
 

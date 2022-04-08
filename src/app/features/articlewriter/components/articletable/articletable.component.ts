@@ -1,4 +1,10 @@
-import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges
+} from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AuthStore } from '@se/core/store/auth/auth.store';
 
@@ -16,17 +22,15 @@ export interface Article {
   templateUrl: './articletable.component.html',
   styleUrls: ['./articletable.component.scss']
 })
-export class ArticletableComponent implements OnInit {
-  courseDropdown: boolean = false;
-  courseDropdown2: boolean = false;
+export class ArticletableComponent implements OnInit, OnChanges {
   articles: Article[] = [];
   @Input() editorId: string;
 
-  // Temporarily population with all articles
-
-  constructor(private db: AngularFirestore, private aStore: AuthStore) {}
+  constructor(private db: AngularFirestore) {}
 
   ngOnInit(): void {
+    this.articles = [];
+    console.log(this.articles);
     this.db
       .collection('articles', (ref) =>
         ref.where('editorId', '==', this.editorId)
@@ -58,33 +62,7 @@ export class ArticletableComponent implements OnInit {
     //   }))));
   }
   ngOnChanges(changes: SimpleChanges): void {
+    console.log(this.articles);
     this.ngOnInit();
-  }
-
-  deleteArticle(id) {
-    console.log(`Article to be deleted: ${id}`);
-    // this.articleStore.getArticleById(id);
-    // this.db.collection('articles').where.get().subscribe((snapshot) => console.log(snapshot.docs.forEach((doc) =>
-    //     this.articles.push({
-    //       id: doc.id,
-    //       category: doc.data()["category"],
-    //       createdAt: "1",
-    //       description: doc.data()["description"],
-    //       editorId: doc.data()["editorId"],
-    //       image: doc.data()["image"],
-    //       title: doc.data()["title"],
-    //     }))));
-  }
-
-  editArticle(id) {
-    console.log(`Article to be edited: ${id}`);
-  }
-
-  toggleCourseDropdown(): void {
-    this.courseDropdown = !this.courseDropdown;
-    console.table(this.articles);
-  }
-  delete(id): void {
-    this.courseDropdown2 = !this.courseDropdown2;
   }
 }

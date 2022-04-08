@@ -28,6 +28,14 @@ const SidebarItems: SidebarItem[] = [
   { name: 'Création', active: false, icon: 'edit', to: 2 }
 ];
 
+export interface FormElements {
+  title: string;
+  description: string;
+  image: string;
+  category: string;
+  content: string;
+}
+
 @Component({
   selector: 'se-dashboard2',
   templateUrl: './dashboard.component.html',
