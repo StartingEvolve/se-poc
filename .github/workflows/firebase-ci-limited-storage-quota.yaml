@@ -36,10 +36,14 @@ jobs:
         run: npm run format && npm run lint
       - name: Build
         run: npm run build
+      - name: Setting hosting target
+        uses: w9jds/firebase-action@master
+        with:
+          args: "target:apply hosting main angular-fire-e40b7"
       - name: Deploy to Staging Env Firebase
         uses: w9jds/firebase-action@master
         with:
-          args: deploy --only hosting
+          args: "deploy --only hosting:main"
     env:
       SE_API_KEY: ${{ secrets.STAGE_API_KEY }}
       SE_AUTH_DOMAIN: ${{ secrets.STAGE_AUTH_DOMAIN }}
