@@ -72,7 +72,9 @@ export class DashboardComponent {
       }
     });
   }
-
+  handleArticleUploaded($event) {
+    this.currentPage = 1;
+  }
   toggleCourseDropdown(): void {
     this.courseDropdown = !this.courseDropdown;
     this.courseDropdown2 = false;

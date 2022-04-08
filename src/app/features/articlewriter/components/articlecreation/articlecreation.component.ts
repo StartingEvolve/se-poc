@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { EditorChangeContent, EditorChangeSelection } from 'ngx-quill';
 import Quill from 'quill';
 import { v4 as uuidv4 } from 'uuid';
@@ -54,6 +54,7 @@ export class ArticlecreationComponent implements OnInit {
   message: string = '';
   @Input() data: FormElements;
   @Input() editorId: string;
+  @Output() articleUploaded: EventEmitter<any> = new EventEmitter<any>();
   private articleInfoCollection: AngularFirestoreCollection<ArticleInfo>;
   private articleCollection: AngularFirestoreCollection<Article>;
 
@@ -182,6 +183,12 @@ export class ArticlecreationComponent implements OnInit {
   }
 
   logIt() {
+    for (const [key, value] of Object.entries(this.articleForm.value)) {
+      if (value == '') {
+        this.showErrors = true;
+        return;
+      }
+    }
     let currentTime = new Date();
     const monthNames = [
       'Janvier',
@@ -237,6 +244,7 @@ export class ArticlecreationComponent implements OnInit {
     this.uploadImage();
     this.articleInfoCollection.doc(id).set(newArticleInfo);
     this.articleCollection.doc(id).set(newArticle);
+    this.articleUploaded.emit();
   }
 
   uploadImage() {

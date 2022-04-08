@@ -345,7 +345,11 @@
       <div [ngSwitch]="currentPage">
         <se-articletable *ngSwitchCase="1" [editorId]="editorId">
         </se-articletable>
-        <se-articlecreation *ngSwitchCase="2" [editorId]="editorId">
+        <se-articlecreation
+          *ngSwitchCase="2"
+          [editorId]="editorId"
+          (articleUploaded)="handleArticleUploaded($event)"
+        >
         </se-articlecreation>
       </div>
     </main>
