@@ -46,6 +46,8 @@ export class ArticlecreationComponent implements OnInit {
   testControl: FormControl;
   focused = false;
   modules = {};
+  newArticle: Article;
+  newArticleInfo: ArticleInfo;
   file: File;
   url: string | ArrayBuffer = '';
   fb;
@@ -145,12 +147,9 @@ export class ArticlecreationComponent implements OnInit {
     console.log('editor-created', event);
   }
 
-  openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action);
-  }
-
-  changedEditor(event: EditorChangeContent | EditorChangeSelection) {
-    this.articleContent = event['html'];
+  changedEditor(event: any) {
+    this.articleContent = event?.html;
+    console.log(this.articleContent);
   }
 
   focus($event) {
@@ -189,65 +188,10 @@ export class ArticlecreationComponent implements OnInit {
         return;
       }
     }
-    let currentTime = new Date();
-    const monthNames = [
-      'Janvier',
-      'Février',
-      'Mars',
-      'Avril',
-      'Mai',
-      'Juin',
-      'Juillet',
-      'Aout',
-      'Septembre',
-      'Octobre',
-      'Novembre',
-      'Décembre'
-    ];
-    const newArticleInfo: ArticleInfo = {
-      ...this.articleForm.value,
-      content: this.articleContent,
-      editorId: this.editorId,
-      createdAt: {
-        formatted: `Publié le ${currentTime.getDate()} ${
-          monthNames[currentTime.getMonth()]
-        } ${currentTime.getFullYear()} à ${
-          currentTime.getHours() < 10
-            ? '0' + currentTime.getHours()
-            : currentTime.getHours()
-        }:${
-          currentTime.getMinutes() < 10
-            ? '0' + currentTime.getMinutes()
-            : currentTime.getMinutes()
-        }`,
-        value: Date.now()
-      }
-    };
-    const newArticle: Article = {
-      ...this.articleForm.value,
-      content: this.articleContent,
-      editorId: this.editorId,
-      'createdAt.formatted': `Publié le ${currentTime.getDate()} ${
-        monthNames[currentTime.getMonth()]
-      } ${currentTime.getFullYear()} à ${
-        currentTime.getHours() < 10
-          ? '0' + currentTime.getHours()
-          : currentTime.getHours()
-      }:${
-        currentTime.getMinutes() < 10
-          ? '0' + currentTime.getMinutes()
-          : currentTime.getMinutes()
-      }`,
-      'createdAt.value': Date.now()
-    };
-    const id = uuidv4();
-    this.uploadImage();
-    this.articleInfoCollection.doc(id).set(newArticleInfo);
-    this.articleCollection.doc(id).set(newArticle);
-    this.articleUploaded.emit();
+    this.upload();
   }
 
-  uploadImage() {
+  upload() {
     // file = this.articleForm.value.image
     const filePath = `ArticleImages/${Date.now()}`;
     const fileRef = this.storage.ref(filePath);
@@ -259,7 +203,62 @@ export class ArticlecreationComponent implements OnInit {
           this.downloadURL = fileRef.getDownloadURL();
           this.downloadURL.subscribe((url) => {
             if (url) {
+              let currentTime = new Date();
+              const monthNames = [
+                'Janvier',
+                'Février',
+                'Mars',
+                'Avril',
+                'Mai',
+                'Juin',
+                'Juillet',
+                'Aout',
+                'Septembre',
+                'Octobre',
+                'Novembre',
+                'Décembre'
+              ];
               this.articleForm.value.image = url;
+              this.newArticleInfo = {
+                ...this.articleForm.value,
+                content: this.articleContent,
+                editorId: this.editorId,
+                createdAt: {
+                  formatted: `Publié le ${currentTime.getDate()} ${
+                    monthNames[currentTime.getMonth()]
+                  } ${currentTime.getFullYear()} à ${
+                    currentTime.getHours() < 10
+                      ? '0' + currentTime.getHours()
+                      : currentTime.getHours()
+                  }:${
+                    currentTime.getMinutes() < 10
+                      ? '0' + currentTime.getMinutes()
+                      : currentTime.getMinutes()
+                  }`,
+                  value: String(Date.now())
+                }
+              };
+              this.newArticle = {
+                ...this.articleForm.value,
+                content: this.articleContent,
+                editorId: this.editorId,
+                'createdAt.formatted': `Publié le ${currentTime.getDate()} ${
+                  monthNames[currentTime.getMonth()]
+                } ${currentTime.getFullYear()} à ${
+                  currentTime.getHours() < 10
+                    ? '0' + currentTime.getHours()
+                    : currentTime.getHours()
+                }:${
+                  currentTime.getMinutes() < 10
+                    ? '0' + currentTime.getMinutes()
+                    : currentTime.getMinutes()
+                }`,
+                'createdAt.value': String(Date.now())
+              };
+              const id = uuidv4();
+              this.articleInfoCollection.doc(id).set(this.newArticleInfo);
+              this.articleCollection.doc(id).set(this.newArticle);
+              this.articleUploaded.emit();
             }
           });
         })
