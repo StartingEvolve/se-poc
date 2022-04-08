@@ -30,6 +30,11 @@ const getCourseById = async (req: any, res: any) => {
   }
 };
 
+// const getCourseByProvider = async (req: any, res: any) => {
+//   try {
+//   } catch (error) {}
+// };
+
 const getCourseByStatus = async (req: any, res: any) => {
   try {
     const status = req.params.status;
@@ -50,7 +55,7 @@ const getCourseByStatus = async (req: any, res: any) => {
   }
 };
 
-const approveCourseById = async (req: any, res: any) => {
+const updateCourseStatusById = async (req: any, res: any) => {
   //Todo (zack) handle errors later
   try {
     const patch = {
@@ -133,6 +138,6 @@ export {
   getAllCourses,
   getCourseById,
   getCourseByStatus,
-  approveCourseById,
+  updateCourseStatusById,
   deleteCourseById
 };

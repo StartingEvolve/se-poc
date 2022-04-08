@@ -7,3 +7,6 @@
 .error {
   @apply focus:outline-none ring-red-500 border-red-500;
 }
+.selectedValue {
+  @apply text-indigo-600 font-bold text-lg;
+}

@@ -36,12 +36,26 @@ const updateEditorById = async (req: any, res: any) => {
     const patch = req.body;
     const id = req.params.editorId;
     const editor = db.collection('editors').doc(id);
-    const editorData = (await editor.get()).data() || {};
+    let editorData = (await editor.get()).data() || {};
+    let user: any = {};
 
     for (const [key, _] of Object.entries(editorData)) {
       if (key in patch) {
         editorData[key] = patch[key];
       }
+    }
+
+    //Creating user object
+    for (const [key, _] of Object.entries(editorData)) {
+      if (['email', 'phoneNumber'].includes(key)) {
+        user[key] = editorData[key];
+      }
+    }
+    if (user !== {}) {
+      await auth.updateUser(id, {
+        email: editorData.email,
+        phoneNumber: editorData.phoneNumber
+      });
     }
 
     console.log(editorData);
@@ -68,25 +82,28 @@ const updateEditorById = async (req: any, res: any) => {
 const addEditor = async (req: any, res: any) => {
   try {
     const newEditor = req.body;
+    const uid = uuidv4();
 
     await auth.createUser({
+      uid,
       ...newEditor,
       emailVerified: true,
       disabled: false
     });
 
     const editorData = {
-      firtName: newEditor.firtName,
-      lastName: newEditor.lastName,
-      image: newEditor.photoUrl,
+      firtName: newEditor.firtName ? newEditor.firtName : '',
+      lastName: newEditor.lastName ? newEditor.lastName : '',
+      image: newEditor.photoUrl ? newEditor.photoUrl : '',
       email: newEditor.email,
+      phoneNumber: newEditor.phoneNumber ? newEditor.phoneNumber : '',
       articleId: [],
       accountType: 'editor'
     };
 
     await db
       .collection('editors')
-      .doc(uuidv4())
+      .doc(uid)
       .set(editorData)
       .catch((error) => {
         return res.status(400).json({

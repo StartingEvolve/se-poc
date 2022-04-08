@@ -1,18 +1,18 @@
-import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import TypesenseInstantSearchAdapter from 'typesense-instantsearch-adapter';
 import {
   CurrentOption,
-  Filter,
-  LocationSearchResult
+  Filter
 } from '@shared/components/search/search.component';
+import { environment } from '@environments/environment';
 
 const typesenseInstantsearchAdapter = new TypesenseInstantSearchAdapter({
   server: {
-    apiKey: 'VDmo2Lkl9YzuFuPbhRcHpRZhOeSwWzr5', // Be sure to use an API key that only allows search operations
+    apiKey: environment.typesense.apiKey, // Be sure to use an API key that only allows search operations
     nodes: [
       {
-        host: 'ulz2oqrx4ist0bayp-1.a1.typesense.net',
-        port: '443',
+        host: environment.typesense.host,
+        port: environment.typesense.port,
         protocol: 'https'
       }
     ]

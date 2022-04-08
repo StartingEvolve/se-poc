@@ -1,5 +1,7 @@
 import * as functions from 'firebase-functions';
 import express from 'express';
+
+const cors = require('cors');
 import * as bodyParser from 'body-parser';
 import * as provider from './provider';
 import * as course from './course';
@@ -10,6 +12,11 @@ import * as editor from './editor';
 //Api Endpoints for Admin tasks
 const app = express();
 app.use(bodyParser.json());
+app.use(
+  cors({
+    origin: '*'
+  })
+);
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get('/', (req, res) => res.status(200).send('Hey there!'));
@@ -18,13 +25,15 @@ app.get('/', (req, res) => res.status(200).send('Hey there!'));
 app.get('/courses', course.getAllCourses);
 app.get('/courses/:courseId', course.getCourseById);
 app.get('/courses/status/:status', course.getCourseByStatus);
-app.patch('/courses/approve/:courseId', course.approveCourseById);
+app.patch('/courses/action/:courseId', course.updateCourseStatusById);
 app.delete('/courses/:courseId', course.deleteCourseById);
 
 //Provider routes
 app.get('/providers', provider.getAllProviders);
 app.get('/providers/:providerId', provider.getProviderById);
 app.get('/providers/:providerName', provider.getProviderByName);
+app.patch('/providers/:providerId', provider.updateProviderById);
+app.post('/providers', provider.addProvider);
 
 //Editor routes
 app.post('/editors', editor.addEditor);

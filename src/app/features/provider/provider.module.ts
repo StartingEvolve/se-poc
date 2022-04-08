@@ -26,6 +26,8 @@ import { CategoryComponent } from './components/category/category.component';
 import { DetailsComponent } from './components/details/details.component';
 import { LandingComponent } from './views/landing/landing.component';
 import { FooterComponent } from '@se/layout/footer/footer.component';
+import { PrestationsComponent } from './components/prestations/prestations.component';
+import { ContactsComponent } from './components/contacts/contacts.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,9 @@ import { FooterComponent } from '@se/layout/footer/footer.component';
     TitleComponent,
     CategoryComponent,
     DetailsComponent,
-    LandingComponent
+    LandingComponent,
+    PrestationsComponent,
+    ContactsComponent
   ],
   imports: [
     CommonModule,
