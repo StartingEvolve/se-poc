@@ -70,6 +70,7 @@ export class SignupComponent implements OnInit {
     await this.aService
       .verifyEmailExistence(this.signupForm.value.email)
       .then((res: any) => {
+        console.log(res);
         if (res.deliverability != 'DELIVERABLE') {
           this.validateError = true;
           flag = true;
@@ -81,7 +82,7 @@ export class SignupComponent implements OnInit {
           return;
         }
       });
-    console.log(flag);
+
     if (flag) return;
     this.isLoading = true;
     const fullName =

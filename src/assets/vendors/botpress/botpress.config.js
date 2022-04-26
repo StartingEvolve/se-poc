@@ -7,7 +7,7 @@ export default class BotpressConfig {
   init() {
     this.config = {
       host: 'https://chatbot.startingevolve.tech',
-      botId: 'starting-evolve-chatbot',
+      botId: 'se-chatbot',
       hideWidget: true,
       enableReset: false,
       enableTranscriptDownload: false,
