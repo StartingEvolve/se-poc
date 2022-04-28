@@ -7,12 +7,12 @@ export default class TypesenseConfig {
     return new window.Typesense.Client({
       nodes: [
         {
-          host: 'search.startingevolve.tech', // where xxx is the ClusterID of your Typesense Cloud cluster
+          host: '6ve2qm9cwxt7ka0hp-1.a1.typesense.net', // where xxx is the ClusterID of your Typesense Cloud cluster
           port: '443',
           protocol: 'https'
         }
       ],
-      apiKey: '8SCbUB6OwcorefYh114fsK1PtTn9OO50',
+      apiKey: 'NaHIHgn2g1D9PtUTIEG6L5qNs6tsfwBK',
       connectionTimeoutSeconds: 10,
       retryIntervalSeconds: 0.1,
       healthcheckIntervalSeconds: 2

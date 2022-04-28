@@ -28,8 +28,8 @@ export const environment: Environment = {
     measurementId: 'G-TKQGYQVF4S'
   },
   typesense: {
-    apiKey: '8SCbUB6OwcorefYh114fsK1PtTn9OO50',
-    host: 'search.startingevolve.tech',
+    apiKey: 'NaHIHgn2g1D9PtUTIEG6L5qNs6tsfwBK',
+    host: '6ve2qm9cwxt7ka0hp-1.a1.typesense.net',
     protocol: 'https',
     port: '443'
   },
