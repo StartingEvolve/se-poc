@@ -1,0 +1,12 @@
+.angular
+.firebase
+data
+legacy
+functions
+migrations
+node_modules
+secrets
+commands.md
+firebase-export-metadata.json
+firestore-debug.log
+ui-debug.log
