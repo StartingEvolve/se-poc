@@ -14,7 +14,7 @@ on:
     # by skipping push runs coming from merged pull requests
     #Todo (zack) : Research on the internals of Git workflow builders
     #https://github.community/t/trigger-workflow-only-on-pull-request-merge/17359
-    branches: [SET-66-migrate-to-angular-13, develop-v13]
+    branches: [SET-66-migrate-to-angular-13]
   pull_request:
     branches: [develop, develop-v13]
 jobs:
