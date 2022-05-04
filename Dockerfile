@@ -1,8 +1,7 @@
-FROM ghcr.io/openfaas/of-watchdog:0.9.2 AS watchdog
-
+FROM ghcr.io/openfaas/of-watchdog:0.9.2 as watchdog
 
 # Use official node image as the base image
-FROM node:latest as build
+FROM node:16-alpine3.12 as build
 
 # Set the working directory
 WORKDIR /usr/local/app
@@ -17,12 +16,12 @@ ENV NPM_CONFIG_LOGLEVEL warn
 RUN npm install
 
 # Generate the build of the application
-RUN npm run build
+RUN npm run build-fn
 
 
 RUN find dist/
 
-FROM alpine:3.14 AS runtime
+FROM alpine:3.12 AS runtime
 WORKDIR /home/app/
 RUN addgroup -S -g 1000 app && adduser -S -u 1000 -g app app
 

@@ -7,6 +7,7 @@
     "emulate": "firebase emulators:start --import migrations",
     "start": "ng serve -o",
     "build": "node scripts/build.config.js && ng build",
+    "build-fn": "node scripts/build.config.js && ng build --base-href /function/startingevolve/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "npx eslint \"src/**/*.{js,jsx,ts,tsx,html}\" --quiet --fix",
