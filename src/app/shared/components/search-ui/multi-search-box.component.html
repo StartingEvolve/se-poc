@@ -51,13 +51,13 @@
         <img
           *ngIf="flagDropdown"
           class="-mr-1 ml-2 h-5 w-5"
-          src="/assets/icons/chevron-up.svg"
+          src="assets/icons/chevron-up.svg"
           alt=""
         />
         <img
           *ngIf="!flagDropdown"
           class="-mr-1 ml-2 h-5 w-5"
-          src="/assets/icons/chevron-down.svg"
+          src="assets/icons/chevron-down.svg"
           alt=""
         />
       </button>
@@ -81,7 +81,7 @@
         >
           <img
             class="mr-3 h-5 w-5 text-gray-400 group-hover:text-gray-500"
-            src="{{ '/assets/icons/' + item.icon }}"
+            src="{{ 'assets/icons/' + item.icon }}"
           />
           {{ 'AUTH.' + item.name | translate }}
         </div>

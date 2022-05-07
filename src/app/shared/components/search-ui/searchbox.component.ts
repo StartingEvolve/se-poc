@@ -107,7 +107,7 @@ const parseNumberInput = (input?: number | string): number => {
                 class="pointer-events-none absolute inset-y-0 left-0 pl-3 flex items-center"
               >
                 <img
-                  src="/assets/icons/location.svg"
+                  src="assets/icons/location.svg"
                   class="h-5 w-5"
                   alt=""
                   srcset=""

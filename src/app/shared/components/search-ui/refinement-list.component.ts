@@ -48,7 +48,7 @@ import { Filter } from '@core/store/filter/filter.store';
               *ngIf="!filter.isOpen && !number"
               (click)="toggleDropdown(filter.id)"
               class="flex-shrink-0 -mr-1 ml-1 h-5 w-5 text-gray-400 group-hover:text-gray-500"
-              src="/assets/icons/chevron-down.svg"
+              src="assets/icons/chevron-down.svg"
               alt=""
               srcset=""
             />
@@ -56,7 +56,7 @@ import { Filter } from '@core/store/filter/filter.store';
               *ngIf="filter.isOpen && !number"
               (click)="toggleDropdown(filter.id)"
               class="flex-shrink-0 -mr-1 ml-1 h-5 w-5 text-gray-400 group-hover:text-gray-500"
-              src="/assets/icons/chevron-up.svg"
+              src="assets/icons/chevron-up.svg"
               alt=""
               srcset=""
             />
@@ -88,7 +88,7 @@ import { Filter } from '@core/store/filter/filter.store';
                 *ngIf="option.isRefined"
                 class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none"
               >
-                <img src="/assets/icons/check.svg" alt="" srcset="" />
+                <img src="assets/icons/check.svg" alt="" srcset="" />
               </span>
             </div>
           </div>
@@ -110,14 +110,14 @@ import { Filter } from '@core/store/filter/filter.store';
             <img
               *ngIf="!filter.isOpen"
               class="flex-shrink-0 -mr-1 ml-1 h-5 w-5 text-gray-400 group-hover:text-gray-500"
-              src="/assets/icons/chevron-down.svg"
+              src="assets/icons/chevron-down.svg"
               alt=""
               srcset=""
             />
             <img
               *ngIf="filter.isOpen"
               class="flex-shrink-0 -mr-1 ml-1 h-5 w-5 text-gray-400 group-hover:text-gray-500"
-              src="/assets/icons/chevron-up.svg"
+              src="assets/icons/chevron-up.svg"
               alt=""
               srcset=""
             />

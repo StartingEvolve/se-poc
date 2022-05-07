@@ -106,7 +106,7 @@ interface Highlighted {
               >
                 <img
                   class="flex-shrink-0 mr-1.5 h-5 w-5"
-                  src="/assets/icons/schedule.svg"
+                  src="assets/icons/schedule.svg"
                   alt="Schedule"
                 />
                 {{ data.duration }}

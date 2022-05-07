@@ -3,12 +3,12 @@ export const vendors = [
     name: 'tiny-slider',
     resources: {
       script: {
-        scriptUrl: '../../assets/vendors/tiny-slider/tiny-slider.js',
+        scriptUrl: 'assets/vendors/tiny-slider/tiny-slider.js',
         isLoaded: false
       },
-      style: '../../assets/vendors/tiny-slider/tiny-slider.min.css',
+      style: 'assets/vendors/tiny-slider/tiny-slider.min.css',
       config: {
-        configUrl: '../../assets/vendors/tiny-slider/tiny-slider.config.js',
+        configUrl: 'assets/vendors/tiny-slider/tiny-slider.config.js',
         configObjects: []
       }
     }
@@ -17,12 +17,12 @@ export const vendors = [
     name: 'typesense',
     resources: {
       script: {
-        scriptUrl: '../../assets/vendors/typesense/typesense.min.js',
+        scriptUrl: 'assets/vendors/typesense/typesense.min.js',
         isLoaded: false
       },
       style: '',
       config: {
-        configUrl: '../../assets/vendors/typesense/typesense.config.js',
+        configUrl: 'assets/vendors/typesense/typesense.config.js',
         configObjects: []
       }
     }
@@ -36,7 +36,7 @@ export const vendors = [
       },
       style: '',
       config: {
-        configUrl: '../../assets/vendors/botpress/botpress.config.js',
+        configUrl: 'assets/vendors/botpress/botpress.config.js',
         configObjects: []
       }
     }

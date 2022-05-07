@@ -19,12 +19,12 @@ export class LanguagePickerWebComponent {
     this.lgItems = [
       {
         name: 'fr',
-        path: '/assets/flags/fr.png',
+        path: 'assets/flags/fr.png',
         active: this.ts.getDefaultLang() == 'fr'
       },
       {
         name: 'en',
-        path: '/assets/flags/en.png',
+        path: 'assets/flags/en.png',
         active: this.ts.getDefaultLang() == 'en'
       }
     ];
