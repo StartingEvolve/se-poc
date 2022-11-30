@@ -1,0 +1,357 @@
+<div class="h-screen flex overflow-hidden bg-white">
+  <div
+    *ngIf="mobileSideShow"
+    class="fixed inset-0 flex z-40 lg:hidden"
+    role="dialog"
+    aria-modal="true"
+  >
+    <div
+      class="fixed inset-0 bg-gray-600 bg-opacity-75"
+      aria-hidden="true"
+    ></div>
+    <div
+      class="relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-green-100"
+    >
+      <div class="absolute top-0 right-0 -mr-12 pt-2">
+        <button
+          class="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+          (click)="toggleMobileSide()"
+        >
+          <span class="sr-only">Close sidebar</span>
+          <svg
+            class="h-6 w-6 text-white"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+      </div>
+
+      <div class="flex-shrink-0 flex items-center px-4">
+        <img
+          class="h-8 w-auto"
+          src="/assets/img/Logo-small.svg"
+          alt="Workflow"
+        />
+      </div>
+      <div class="mt-5 flex-1 h-0 overflow-y-auto">
+        <nav class="px-2">
+          <div class="space-y-1">
+            <a
+              *ngFor="let item of sidebarItems"
+              (click)="togglePage(item.to)"
+              class="text-gray-600 hover:text-gray-900 hover:bg-green-300 group flex items-center px-2 py-2 text-base leading-5 font-medium rounded-md"
+            >
+              <span
+                class="material-icons text-green-600 group-hover:text-gray-500 mr-3 flex-shrink-0 h-6 w-6"
+                >{{ item.icon }}</span
+              >
+              {{ item.name }}
+            </a>
+          </div>
+        </nav>
+      </div>
+    </div>
+
+    <div class="flex-shrink-0 w-14" aria-hidden="true"></div>
+  </div>
+
+  <div class="hidden lg:flex lg:flex-shrink-0">
+    <div
+      class="flex flex-col w-64 border-r border-gray-200 pt-5 pb-4 bg-green-100"
+    >
+      <div class="flex items-center flex-shrink-0 px-6">
+        <img class="h-8 w-auto" src="/assets/img/Logo.png" alt="Workflow" />
+      </div>
+      <div class="h-0 flex-1 flex flex-col overflow-y-auto">
+        <div class="px-3 mt-6 relative inline-block text-left">
+          <div>
+            <button
+              type="button"
+              class="group w-full bg-green-100 rounded-md px-3.5 py-2 text-sm text-left font-medium text-gray-700 hover:bg-green-200 focus:outline-none"
+              id="options-menu-button"
+              aria-expanded="false"
+              aria-haspopup="true"
+              (click)="toggleProfileDropdown()"
+            >
+              <span class="flex w-full justify-between items-center">
+                <span
+                  class="flex min-w-0 items-center justify-between space-x-3"
+                >
+                  <img
+                    class="w-10 h-10 bg-gray-300 rounded-full flex-shrink-0"
+                    src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-1.2.1&ixqx=7qwKjEp7Xv&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80"
+                    alt=""
+                  />
+                  <span class="flex-1 flex flex-col min-w-0">
+                    <span class="text-gray-900 text-sm font-medium truncate">{{
+                      userState.user.displayName
+                    }}</span>
+                    <span class="text-gray-500 text-sm truncate">{{
+                      userState.user.email_lower
+                    }}</span>
+                  </span>
+                </span>
+                <svg
+                  class="flex-shrink-0 h-5 w-5 text-green-600 group-hover:text-gray-500"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414 7.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3zm-3.707 9.293a1 1 0 011.414 0L10 14.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </span>
+            </button>
+          </div>
+          <div
+            class="z-10 mx-3 origin-top absolute right-0 left-0 mt-1 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-200 focus:outline-none"
+            role="menu"
+            aria-orientation="vertical"
+            aria-labelledby="options-menu-button"
+            tabindex="-1"
+            *ngIf="showProfileDropdown"
+          >
+            <div class="py-1" role="none">
+              <a
+                *ngFor="let item of profileDrop"
+                href="{{ item.to }}"
+                class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-200"
+                role="menuitem"
+                tabindex="-1"
+                id="options-menu-item-0"
+                >{{ item.name }}</a
+              >
+            </div>
+            <div class="py-1" role="none">
+              <a
+                href="#"
+                (click)="logout()"
+                class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-200"
+                role="menuitem"
+                tabindex="-1"
+                id="options-menu-item-5"
+                >Se déconnecter</a
+              >
+            </div>
+          </div>
+        </div>
+        <!-- Navigation -->
+        <nav class="px-3 mt-6">
+          <div class="space-y-1">
+            <a
+              *ngFor="let item of sidebarItems"
+              (click)="togglePage(item.to)"
+              class="{{
+                item.active
+                  ? 'bg-green-200 text-gray-900 group flex items-center px-2 py-2 leading-5 font-medium rounded-md'
+                  : 'text-green-700 hover:text-green-900 hover:bg-green-300 group flex items-center px-2 py-2 text-sm font-medium rounded-md'
+              }}"
+            >
+              <span
+                class="{{
+                  item.active
+                    ? 'text-black material-icons group-hover:text-black mr-3 flex-shrink-0 h-6 w-6'
+                    : 'text-green-700 material-icons group-hover:text-black mr-3 flex-shrink-0 h-6 w-6 '
+                }}"
+                >{{ item.icon }}</span
+              >
+              {{ item.name }}
+            </a>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <!-- Main column -->
+  <div class="flex flex-col w-0 flex-1 overflow-hidden">
+    <div
+      class="relative z-10 flex-shrink-0 flex h-16 bg-white border-b border-gray-200 lg:hidden"
+    >
+      <!-- Sidebar toggle, controls the 'sidebarOpen' sidebar state. -->
+      <button
+        class="px-4 border-r border-gray-200 text-gray-500 focus:outline-none lg:hidden"
+        (click)="toggleMobileSide()"
+      >
+        <span class="sr-only">Open sidebar</span>
+        <!-- Heroicon name: outline/menu-alt-1 -->
+        <svg
+          class="h-6 w-6"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h8m-8 6h16"
+          />
+        </svg>
+      </button>
+      <div class="flex-1 flex justify-between px-4 sm:px-6 lg:px-8">
+        <div class="flex-1 flex">
+          <form class="w-full flex md:ml-0" action="#" method="GET">
+            <label for="search_field" class="sr-only">Recherche</label>
+            <div
+              class="relative w-full text-green-600 focus-within:text-gray-600"
+            >
+              <div
+                class="absolute inset-y-0 left-0 flex items-center pointer-events-none"
+              >
+                <!-- Heroicon name: solid/search -->
+                <svg
+                  class="h-5 w-5"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </div>
+              <input
+                id="search_field"
+                name="search_field"
+                class="block w-full h-full pl-8 pr-3 py-2 border-transparent text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-0 focus:border-transparent focus:placeholder-gray-400 sm:text-sm"
+                placeholder="Recherche"
+                type="search"
+              />
+            </div>
+          </form>
+        </div>
+        <div class="flex items-center">
+          <!-- Profile dropdown -->
+          <div class="ml-3 relative">
+            <div>
+              <button
+                type="button"
+                class="max-w-xs bg-white flex items-center text-sm rounded-full focus:outline-none"
+                id="user-menu-button"
+                aria-expanded="false"
+                aria-haspopup="true"
+                (click)="toggleMobileProfileDrop()"
+              >
+                <span class="sr-only">Open user menu</span>
+                <img
+                  class="h-8 w-8 rounded-full"
+                  src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-1.2.1&ixqx=7qwKjEp7Xv&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                  alt=""
+                />
+              </button>
+            </div>
+
+            <div
+              class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-200 focus:outline-none"
+              role="menu"
+              aria-orientation="vertical"
+              aria-labelledby="user-menu-button"
+              tabindex="-1"
+              *ngIf="mobileProfileDrop"
+            >
+              <div class="py-1" role="none">
+                <!-- Active: "bg-green-100 text-gray-900", Not Active: "text-gray-700" -->
+                <a
+                  href="#"
+                  class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-200"
+                  role="menuitem"
+                  tabindex="-1"
+                  id="user-menu-item-0"
+                  >View profileee</a
+                >
+                <a
+                  href="#"
+                  class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-200"
+                  role="menuitem"
+                  tabindex="-1"
+                  id="user-menu-item-1"
+                  >Settings</a
+                >
+                <a
+                  href="#"
+                  class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-200"
+                  role="menuitem"
+                  tabindex="-1"
+                  id="user-menu-item-2"
+                  >Notifications</a
+                >
+              </div>
+              <div class="py-1" role="none">
+                <a
+                  href="#"
+                  class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-200"
+                  role="menuitem"
+                  tabindex="-1"
+                  id="user-menu-item-3"
+                  >Get desktop app</a
+                >
+                <a
+                  href="#"
+                  class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-200"
+                  role="menuitem"
+                  tabindex="-1"
+                  id="user-menu-item-4"
+                  >Support</a
+                >
+              </div>
+              <div class="py-1" role="none">
+                <a
+                  href="#"
+                  class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-200"
+                  role="menuitem"
+                  tabindex="-1"
+                  id="user-menu-item-5"
+                  >Logout</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <main class="flex-1 relative z-0 overflow-y-auto focus:outline-none">
+      <!-- Page title & actions -->
+      <div
+        class="border-b border-gray-200 px-4 py-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8"
+      >
+        <div class="flex-1 min-w-0">
+          <h1 class="text-lg font-medium leading-6 text-gray-900 sm:truncate">
+            Gestion d'articles
+          </h1>
+        </div>
+      </div>
+
+      <!-- Projects list (only on smallest breakpoint) -->
+
+      <div [ngSwitch]="currentPage">
+        <se-articletable *ngSwitchCase="1" [editorId]="editorId">
+        </se-articletable>
+        <se-articlecreation
+          *ngSwitchCase="2"
+          [editorId]="editorId"
+          (articleUploaded)="handleArticleUploaded($event)"
+        >
+        </se-articlecreation>
+      </div>
+    </main>
+  </div>
+</div>

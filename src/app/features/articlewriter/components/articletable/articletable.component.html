@@ -1,0 +1,48 @@
+<div class="mt-8 sm:block">
+  <div class="align-middle inline-block min-w-full border-b border-gray-200">
+    <table class="min-w-full">
+      <thead>
+        <tr class="border-t border-gray-200">
+          <th
+            class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+          >
+            <span class="lg:pl-2">Titre</span>
+          </th>
+          <th
+            class="hidden md:table-cell px-6 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"
+          >
+            Catégorie
+          </th>
+          <th
+            class="hidden md:table-cell px-6 py-3 border-b border-gray-200 bg-gray-50 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"
+          >
+            Date de création
+          </th>
+        </tr>
+      </thead>
+      <tbody class="bg-white divide-y divide-gray-100">
+        <tr *ngFor="let article of articles">
+          <td
+            class="px-6 py-3 max-w-0 w-full whitespace-nowrap text-sm font-medium text-gray-900"
+          >
+            <div class="flex items-center space-x-3 lg:pl-2">
+              {{ article.title }}
+            </div>
+          </td>
+          <td
+            class="hidden md:table-cell px-6 py-3 whitespace-nowrap text-sm text-gray-500 text-right"
+          >
+            {{ article.category }}
+          </td>
+          <td
+            class="hidden md:table-cell px-6 py-3 whitespace-nowrap text-sm text-gray-500 text-right"
+          >
+            {{ article.createdAt }}
+          </td>
+        </tr>
+
+        <!-- More projects... -->
+      </tbody>
+    </table>
+  </div>
+</div>

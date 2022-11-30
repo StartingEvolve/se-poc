@@ -37,6 +37,8 @@ import { ArticleprototypeComponent } from './prototype/articleprototype/articlep
 import { CarouselComponent } from './prototype/carousel/carousel.component';
 import { MultiSearchBoxComponent } from './prototype/multi-search-box/multi-search-box.component';
 import { QuillModule } from 'ngx-quill';
+import { ArticlewriterComponent } from './features/articlewriter/articlewriter.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -60,6 +62,7 @@ export function createTranslateLoader(http: HttpClient) {
     CoreModule,
     LayoutModule,
     MatTableModule,
+    MatSnackBarModule,
     //Todo (zack): Migrate to AngularFire v7 with modular API
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,

@@ -7,6 +7,7 @@ import { CoursesComponent } from './views/course/course.component';
 import { VerifyEmailComponent } from './views/verify-email/verify-email.component';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { CreateStepperComponent } from './views/create-stepper/create-stepper.component';
+import { LandingComponent } from './views/landing/landing.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,10 @@ const routes: Routes = [
       {
         path: 'dashboard',
         component: DashboardComponent
+      },
+      {
+        path: 'landing',
+        component: LandingComponent
       }
     ]
   }

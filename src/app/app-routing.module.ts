@@ -34,6 +34,13 @@ const routes: Routes = [
       )
   },
   {
+    path: 'articlewriter',
+    loadChildren: () =>
+      import('./features/articlewriter/articlewriter.module').then(
+        (m) => m.ArticlewriterModule
+      )
+  },
+  {
     path: '',
     loadChildren: () =>
       import('./features/auth/auth.module').then((m) => m.AuthModule)
